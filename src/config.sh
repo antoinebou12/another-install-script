@@ -2,7 +2,7 @@
 
 
 # https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
-function init-config(){
+function init_config(){
     typeset -A config # init array
     config=( # set default values in config array
         [username]="root"

@@ -9,7 +9,7 @@
 # @noargs
 # @exitcode 0  If successfull.
 # @exitcode 1 On failure
-function check-args(){
+function check_args(){
     if [[ "$#" -eq 0 ]]; then
         return 1;
     fi
@@ -21,7 +21,7 @@ function check-args(){
 # @arg $1 a bash command 
 # @exitcode 0  If successfull.
 # @exitcode 1 On failure
-function check-root(){
+function check_root(){
     if [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
         if (( $EUID != 0 )); then
@@ -39,7 +39,7 @@ function check-root(){
 # @arg $1 a bash command 
 # @exitcode 0  If successfull.
 # @exitcode 1 On failure
-function check-root-func(){
+function check_root_func(){
     if  [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
         if (( $EUID != 0 )); then
@@ -51,3 +51,30 @@ function check-root-func(){
     return 1
 
 }
+
+
+# @description check if the user is root then execute the bash func 
+# warning: assumes that the passed file exists
+# @arg $1 file
+# @exitcode 0  If successfull.
+# @exitcode 1 On failure
+function get_mimetype(){
+  file --mime-type "$1" | sed 's/.*: //' 
+  return 0
+}
+
+function send_email() {}
+from="sender@example.com"
+to="recipient@example.org"
+subject="Some fancy title"
+body="This is the body of our email"
+declare -a attachments
+attachments=( "foo.pdf" "bar.jpg" "archive.zip" )
+ 
+declare -a attargs
+for att in "${attachments[@]}"; do
+  attargs+=( "-a"  "$att" )  
+done
+ 
+mail -s "$subject" -r "$from" "${attargs[@]}" "$to" <<< "$body"
+return 0

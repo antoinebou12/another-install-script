@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
-source ../etc/config.conf
-source ../src/utils.sh
+source etc/config.conf
+source src/utils.sh
 
 CONFIG=init-config
 
@@ -14,20 +14,26 @@ if check-args; then 0; else echo 1; fi
 }
 
 @test "check-root-noroot" {
-    check-root apt-get update
+    run check-root apt-get update
+    [ "$status" -eq 0 ]
 }
 
 @test "check-root-root" {
-  echo ${CONFIG[password]} | sudo -S
+  skip "make better config parser"
+  run echo ${CONFIG[password]} | sudo -S
+  [ "$status" -eq 0 ]
   check-root apt-get update
 }
 
 @test "check-root-func-noroot" {
-  check-root-func test-func
+  run check-root-func test-func
+  [ "$status" -eq 0 ]
 }
 
 @test "check-root-func-root" {
-  echo ${CONFIG[password]} | sudo -S
+  skip "make better config parser"
+  run echo ${CONFIG[password]} | sudo -S
+  [ "$status" -eq 0 ]
   check-root-func test-func
 }
 
