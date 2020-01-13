@@ -5,6 +5,7 @@
 
 
 function install-basic(){
-    apt-get update
-    apt-get install bat nnn nmap wget curl bats mlocate
+    set -e
+    apt-get -q update
+    apt-get -q install bat nnn nmap wget curl bats mlocate
 }

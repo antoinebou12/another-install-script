@@ -1,37 +1,34 @@
 #!/usr/bin/env bats
 
+source ../etc/config.conf
 source ../src/utils.sh
 
+CONFIG=init-config
+
 @test "check-args-noargs" {
-  result="$(check-args)"
-  [ "$result" -eq 1 ]
+  if check-args; then 1; else echo 0; fi
 }
 
 @test "check-args-args" {
-  result="$(check-args 1)"
-  [ "$result" -eq 0 ]
+if check-args; then 0; else echo 1; fi
 }
 
 @test "check-root-noroot" {
-  result="$(apt-get update)"
-  [ "$result" -eq 1 ]
+    check-root apt-get update
 }
 
 @test "check-root-root" {
-  su root
-  result="$(apt-get update)"
-  [ "$result" -eq 1 ]
+  echo ${CONFIG[password]} | sudo -S
+  check-root apt-get update
 }
 
 @test "check-root-func-noroot" {
-  result="$(test-func)"
-  [ "$result" -eq 0 ]
+  check-root-func test-func
 }
 
 @test "check-root-func-root" {
-  su root
-  result="$(test-func)"
-  [ "$result" -eq 0 ]
+  echo ${CONFIG[password]} | sudo -S
+  check-root-func test-func
 }
 
 function test-func(){

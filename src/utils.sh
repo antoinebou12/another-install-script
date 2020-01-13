@@ -10,7 +10,7 @@
 # @exitcode 0  If successfull.
 # @exitcode 1 On failure
 function check-args(){
-    if [ "$#" -ne 1 ]; then
+    if [[ "$#" -eq 0 ]]; then
         return 1;
     fi
     return 0;
@@ -22,7 +22,7 @@ function check-args(){
 # @exitcode 0  If successfull.
 # @exitcode 1 On failure
 function check-root(){
-    if check-required-args $#; then
+    if [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
         if (( $EUID != 0 )); then
             SUDO='sudo'
@@ -40,7 +40,7 @@ function check-root(){
 # @exitcode 0  If successfull.
 # @exitcode 1 On failure
 function check-root-func(){
-    if check-required-args $#; then
+    if  [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
         if (( $EUID != 0 )); then
             SUDO='sudo'
