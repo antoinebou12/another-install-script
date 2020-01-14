@@ -1,11 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
-# @file Title of file script
-# @brief Small description of the script.
+# @file docker.sh
+# @brief to install docker docker compose on ubuntu18.04
 
 # import 
-source func-lib.sh
-
+source ../utils.sh
 
 # @description install the docker
 #
@@ -15,9 +14,9 @@ function install_docker(){
     apt-get remove -y docker docker-engine docker.io containerd runc
     apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo apt-key fingerprint 0EBFCD88
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    sudo apt-get update -qq -y
+    apt-key fingerprint 0EBFCD88
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    aptupdate
     sudo apt-get install docker-ce docker-ce-cli containerd.io
 }
 
@@ -26,9 +25,9 @@ function install_docker(){
 #
 # @noargs
 function create_docker_user(){
-
+    useradd docker
+    usermod -aG docker docker
 }
-
 
 
 # @description install the docker compose
@@ -46,6 +45,6 @@ function install-docker_compose(){
 #
 # @noargs
 function install_docker_extra(){
-    curl -sSf https://moncho.github.io/dry/dryup.sh |  sh
+    curl -sSf https://moncho.github.io/dry/dryup.sh | sh
 }
 

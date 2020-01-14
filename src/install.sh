@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
-# @file Install bac
-# @brief Small description of the script.
+# @file install.sh
+# @brief install my favirote packages for ubuntu18.04 and tested 
 
+# import
+source utils.sh
 
 function install_basic(){
     # apt-get ubuntu 18.04
@@ -13,7 +15,8 @@ function install_basic(){
     snap install hub
 }
 
-# @description install the cockpit 
+# @description install the cockpit to web 
+# See your server in a web browser and perform system tasks with a mouse. It’s easy to start containers, administer storage, configure networks, and inspect logs.
 # https://cockpit-project.org/
 # @noargs
 function install_cockpit(){
