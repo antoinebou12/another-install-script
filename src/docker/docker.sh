@@ -18,7 +18,17 @@ function install_docker(){
     sudo apt-key fingerprint 0EBFCD88
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     sudo apt-get update -qq -y
+    sudo apt-get install docker-ce docker-ce-cli containerd.io
 }
+
+
+# @description create docker user and current user in the group and create dir
+#
+# @noargs
+function create_docker_user(){
+
+}
+
 
 
 # @description install the docker compose
