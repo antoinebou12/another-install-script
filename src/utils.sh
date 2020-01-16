@@ -4,6 +4,27 @@
 # @brief file containing the utils function for the project and other
 
 
+# @description change the source.list with template in /etc 
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function generate_apt_list_ubuntu(){
+    cat ../etc/source.list | tee /etc/apt/source.list
+    return 0
+}
+
+# @description check if the system is a WSL
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function checkWSL() {
+    if [ ! -z "$WSL_DISTRO_NAME" ]; then
+        return 0
+    fi
+    return 1
+}
+
+
 # @description check if the packages exist
 #
 # @args $1 package name
@@ -116,15 +137,9 @@ function send_email() {
     to="$2"
     subject="$3"
     body="$4"
-    declare -a attachments
-    attachments=( $5 )
- 
-    declare -a attargs
-    for att in "${attachments[@]}"; do
-        attargs+=( "-a"  "$att" )  
-    done
-    
-    mail -s "$subject" -r "$from" "${attargs[@]}" "$to" <<< "$body"
+    attachment=$5
+
+    echo $body | mutt -s $subject -a $attachment $to 
     return 0
 }
 
@@ -149,32 +164,23 @@ function multiline_string_newline_to_array(){
     return 0
 }
 
-# @description change the source.list with template in /etc 
-#
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-function generate_apt_list_ubuntu(){
-    cat ../etc/source.list | tee /etc/apt/source.list
-    return 0
-}
-
 # @description read config file
 # https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
 # @arg $1 the config fiel path
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-config_read_file() {
+function config_read_file() {
     (grep -E "^${2}=" -m 1 "${1}" 2>/dev/null || echo "VAR=__UNDEFINED__") | head -n 1 | cut -d '=' -f 2-;
     return 0
 }
 
-# @description change the source.list with template in /etc 
+# @description get config var from a spefic file
 # https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
 # @arg $1 the config file path
 # @arg $2 the config file var
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-config_get() {
+function config_get() {
     val="$(config_read_file $1 "${2}")";
     if [ "${val}" = "__UNDEFINED__" ]; then
         val="$(config_read_file config.cfg.defaults "${2}")";

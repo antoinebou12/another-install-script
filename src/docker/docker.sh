@@ -18,6 +18,7 @@ function install_docker(){
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     aptupdate
     sudo apt-get install docker-ce docker-ce-cli containerd.io
+    return 0 
 }
 
 
@@ -27,6 +28,7 @@ function install_docker(){
 function create_docker_user(){
     useradd docker
     usermod -aG docker docker
+    return 0 
 }
 
 
@@ -38,6 +40,7 @@ function install-docker_compose(){
     curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
     ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    return 0 
 }
 
 
@@ -46,5 +49,6 @@ function install-docker_compose(){
 # @noargs
 function install_docker_extra(){
     curl -sSf https://moncho.github.io/dry/dryup.sh | sh
+    return 0 
 }
 

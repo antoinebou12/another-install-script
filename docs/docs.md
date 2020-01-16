@@ -2,6 +2,8 @@
 
 file containing the utils function for the project and other
 
+* [generate_apt_list_ubuntu()](#generateaptlistubuntu)
+* [checkWSL()](#checkwsl)
 * [check_packages_install()](#checkpackagesinstall)
 * [aptupdate()](#aptupdate)
 * [aptupgrade()](#aptupgrade)
@@ -12,8 +14,27 @@ file containing the utils function for the project and other
 * [get_mimetype()](#getmimetype)
 * [send_email()](#sendemail)
 * [multiline_string_newline_to_array()](#multilinestringnewlinetoarray)
-* [generate_apt_list_ubuntu()](#generateaptlistubuntu)
+* [config_read_file()](#configreadfile)
+* [config_get()](#configget)
 
+
+## generate_apt_list_ubuntu()
+
+change the source.list with template in /etc 
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## checkWSL()
+
+check if the system is a WSL
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 ## check_packages_install()
 
@@ -143,9 +164,29 @@ multiline string echo on each line with line number
 * **0**: If successfull.
 * **1**: On failure
 
-## generate_apt_list_ubuntu()
+## config_read_file()
 
-change the source.list with template in /etc 
+read config file
+https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
+
+### Arguments
+
+* **$1** (the): config fiel path
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## config_get()
+
+get config var from a spefic file
+https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
+
+### Arguments
+
+* **$1** (the): config file path
+* **$2** (the): config file var
 
 ### Exit codes
 

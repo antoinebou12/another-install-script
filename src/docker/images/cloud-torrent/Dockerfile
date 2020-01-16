@@ -1,4 +1,7 @@
 # https://github.com/jpillora/cloud-torrent
+ARG PORT_WEB=6889
+ARG USERNAME="admin"
+ARG PASSWORD="password"
 FROM alpine:edge
 LABEL maintainer="dev@jpillora.com"
 # prepare go env
@@ -44,4 +47,4 @@ RUN set -ex \
 	&& rm -rf /no-pic.patch $GOPATH /usr/local/go
 #run!
 #change with config.ini
-ENTRYPOINT ["cloud-torrent", "--auth" "admin:password"]
+ENTRYPOINT ["cloud-torrent", "--auth" "${USERNAME}:${PASSWORD}"]

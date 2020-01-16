@@ -6,11 +6,11 @@ services:
     image: linuxserver/heimdall:latest
     restart: unless-stopped
     volumes:
-    - ./config:/config
+    - ${PATH_CONFIG}:/config
     ports:
-    - 8080:80
-    # - 8443:443
-    environment:
-    - PUID=1000
-    - PGID=1000
-    - TZ=America/New York
+    - ${PORT_WEB}:80
+    # # - ${PORT_WEB_HTTPS}:443
+    # environment:
+    # - PUID=1000
+    # - PGID=1000
+    # - TZ=America/New York

@@ -2,5 +2,4 @@
 #
 # @file tests.sh
 # @brief run bats tests
-PROJECTDIRSETUP="$(dirname "$0")"
-bats tests
+bats tests/utils.bats
