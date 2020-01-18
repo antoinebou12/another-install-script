@@ -3,8 +3,7 @@
 
 # JupyterHub docker-compose configuration file
 # https://github.com/jupyterhub/jupyterhub-deploy-docker
-version: "3"
-
+version: '3.3'
 services:
   hub-db:
     image: postgres:9.5

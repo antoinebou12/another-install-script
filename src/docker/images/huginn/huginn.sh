@@ -4,6 +4,12 @@
 # @brief to install docker huginn
 
 
-fucntion create_docker_huginn(){
+
+# @description create docker huginn
+#
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function create_docker_huginn(){
     
 }

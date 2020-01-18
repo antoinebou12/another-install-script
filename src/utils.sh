@@ -188,3 +188,41 @@ function config_get() {
     printf -- "%s" "${val}";
     return 0
 }
+
+
+# @description get timezone
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function get_timezones() {
+
+	env_file=$1
+	TZ=$(cat /etc/timezone)
+
+	#test for TZ=
+	[ $(grep -c "TZ=" $env_file) -ne 0 ] && sed -i "/TZ=/c\TZ=$TZ" $env_file
+    return 0 
+
+}
+
+# @description check if the port is used
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function check_command_exist() {
+	command -v "$@" >/dev/null 2>&1
+    return 0 
+}
+
+
+function check_port(){
+    if lsof -Pi :8080 -sTCP:LISTEN -t >/dev/null ; then
+        echo "running"
+        return 0
+    else
+        echo "not running"
+        return 1
+    fi
+}

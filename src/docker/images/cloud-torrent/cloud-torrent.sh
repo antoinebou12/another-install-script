@@ -13,6 +13,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function create_docker_cloud-torrent(){
+    pushd /home/docker/
     PORT_WEB=${1:-"6889"}
     USERNAME=${2:-"admin"}
     PASSWORD=${3:-"password"}

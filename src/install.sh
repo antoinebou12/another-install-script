@@ -12,8 +12,8 @@ source utils.sh
 # @exitcode 1 On failure
 function install_basic(){
     # apt-get ubuntu 18.04
-    apt-get update -qq
-    apt-get install -y bat nnn nmap wget curl bats mlocate mutt python3 python3-pip
+    apt-get update -qq 
+    apt-get install -y bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git lsof
     
     if [[ "$(checkWSL arg)" != "0" ]]; then
         # snap package

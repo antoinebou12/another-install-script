@@ -16,6 +16,8 @@ file containing the utils function for the project and other
 * [multiline_string_newline_to_array()](#multilinestringnewlinetoarray)
 * [config_read_file()](#configreadfile)
 * [config_get()](#configget)
+* [get_timezones()](#gettimezones)
+* [check_command_exist()](#checkcommandexist)
 
 
 ## generate_apt_list_ubuntu()
@@ -187,6 +189,28 @@ https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-scr
 
 * **$1** (the): config file path
 * **$2** (the): config file var
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## get_timezones()
+
+get timezone
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## check_command_exist()
+
+check if the port is used
+
+_Function has no arguments._
 
 ### Exit codes
 

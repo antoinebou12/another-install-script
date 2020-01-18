@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+    cloud-torrent:
+        container_name: cloud-torrent
+        ports:
+            - '3000:3000'
+        volumes:
+            - '/downloads:/downloads'
+        image: jpillora/cloud-torrent

@@ -15,6 +15,6 @@ function create_docker_heimdall(){
     PATH_CONFIG=${1:-:"/home/docker/heimdall/config"}
     PORT_WEB=${2:-:8080}
     PORT_WEB_HTTPS=${3:-:8443}
-    docker-compose up -d
+    docker-compose -f heimdall up -d 
     return 0
 }

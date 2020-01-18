@@ -28,6 +28,7 @@ function install_docker(){
 function create_docker_user(){
     useradd docker
     usermod -aG docker docker
+    pushd /home/docker/
     return 0 
 }
 
@@ -52,3 +53,48 @@ function install_docker_extra(){
     return 0 
 }
 
+# @description prune all the volumes and images
+#
+# @noargs
+function prune_images_volumes(){
+    docker image prune -a
+    docker system prune --volumes
+}
+
+# @description stop all container
+#
+# @noargs
+function stop_all(){
+    docker container stop $(docker container ls -aq)
+}
+
+
+# @description stop all container
+#
+# @noargs
+function update_docker_compose(){
+    echo "Stopping containers"
+    docker-compose down
+    echo "Downloading latest images from docker hub ... this can take a long time"
+    docker-compose pull
+    echo "Building images if needed"
+    docker-compose build
+    echo "Starting stack up again"
+    docker-compose up -d
+    echo "Consider running prune-images to free up space"
+}
+
+
+
+# @description stop all container
+# this function creates the volumes, services and backup directories. It then assisgns the current user to the ACL to give full read write access
+# @noargs
+function docker_setfacl() {
+	[ -d /home/docker/services ] || mkdir /home/docker/services
+	[ -d /home/docker/volumes ] || mkdir /home/docker/volumes
+	[ -d /home/docker/backups ] || mkdir /home/docker/backups
+
+	#give current user rwx on the volumes and backups
+	[ $(getfacl /home/docker/volumes | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/volumes
+	[ $(getfacl /home/docker/backups | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/backups
+}
