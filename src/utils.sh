@@ -6,6 +6,7 @@
 
 # @description change the source.list with template in /etc 
 #
+# @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function generate_apt_list_ubuntu(){

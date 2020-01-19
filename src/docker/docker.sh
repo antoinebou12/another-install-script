@@ -33,7 +33,7 @@ function install-docker_compose(){
 }
 
 
-# @description install the docker extra utils
+# @description install the docker extra utils dry
 #
 # @noargs
 function install_docker_extra(){
@@ -76,9 +76,17 @@ function create_docker_user(){
     useradd docker
     passwd docker
     usermod -aG docker docker
-    su - docker
+    
+    login_docker_user
     docker_setfacl
     return 0 
+}
+
+# @description login as the docker user
+#
+# @noargs
+function login_docker_user(){
+    su - docker
 }
 
 # @description create tar for running docker for a local backup

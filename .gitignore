@@ -160,4 +160,5 @@ zsdoc/data
 # End of https://www.gitignore.io/api/ssh,zsh,linux,python
 
 
-coverage
+/tests/coverage
+/tests/bin

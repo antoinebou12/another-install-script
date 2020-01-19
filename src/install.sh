@@ -6,7 +6,8 @@
 # import
 source utils.sh
 
-# @description install the basic package to ubuntu i personnally like
+# @description install the basic package to ubuntu I personnally like
+#
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure

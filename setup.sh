@@ -1,13 +1,15 @@
 #!/bin/bash
 #
-# @file config.sh
-# @brief config file parser in bash
+# @file setup.sh
+# @brief setup project
 
-
-# import
 PROJECTDIRSETUP="$(dirname "$0")"
 
-
+# @description create setup menu
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 function create_setup_menu(){
     
     setup_menu=$(whiptail --title "Main Menu" --menu --notags "" 20 78 12 -- \
@@ -35,7 +37,6 @@ case $setup_menu in
     "exit")
 
     ;;
-
-
-
+    esac
+    return 0
 }

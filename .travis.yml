@@ -1,8 +1,12 @@
-sudo: false
-
 language: bash
-env: PATH=${PATH}:${HOME}/kcov
 dist: bionic
+
+before_cache:
+  - bash coverage.sh
+cache:
+  directories:
+    - tests/bin
+    - tests/coverage
 
 addons:
   apt:

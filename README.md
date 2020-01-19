@@ -1,8 +1,10 @@
 # personal-vps
 
-
-
-
+[![Build Status](https://travis-ci.com/antoinebou13/personal-vps.svg?token=MUq69udyyqAR24bsXgRq&branch=master)](https://travis-ci.com/antoinebou13/personal-vps)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/personal-vps?style=flat)
+![Codecov](https://img.shields.io/codecov/c/github/antoinebou13/personal-vps?style=flat&token=FcTtxpEGhF)
+![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/personal-vps?style=flat)
+![GitHub](https://img.shields.io/github/license/antoinebou13/personal-vps?style=flat)
 
 ## How to install 
 
