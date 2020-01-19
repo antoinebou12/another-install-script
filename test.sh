@@ -1,5 +1,5 @@
 #!/bin/bash
 #
-# @file tests.sh
-# @brief run bats tests
-bats tests/utils.bats
+# @file test.sh
+# @brief run bats test
+bats tests/bats/utils.bats

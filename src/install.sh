@@ -13,7 +13,7 @@ source utils.sh
 function install_basic(){
     # apt-get ubuntu 18.04
     apt-get update -qq 
-    apt-get install -y bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git lsof
+    apt-get install -y bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential
     
     if [[ "$(checkWSL arg)" != "0" ]]; then
         # snap package
@@ -21,6 +21,7 @@ function install_basic(){
     fi
     return 0
 }
+
 
 # @description install the cockpit to web 
 # See your server in a web browser and perform system tasks with a mouse. It’s easy to start containers, administer storage, configure networks, and inspect logs.
@@ -35,4 +36,14 @@ function install_cockpit(){
         systemctl restart cockpit
     fi
     return 0
+}
+
+# @description install the cockpit to web
+# 
+# https://github.com/mrowa44/emojify
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function install_emojify(){
+    sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
 }

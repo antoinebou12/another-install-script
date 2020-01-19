@@ -19,6 +19,7 @@ git submodule update --remote
 
 ```bash 
 cd docs
+chmod +x generate_docs.sh
 bash generate_docs.sh docs.md
 
 ```

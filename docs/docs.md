@@ -18,6 +18,12 @@ file containing the utils function for the project and other
 * [config_get()](#configget)
 * [get_timezones()](#gettimezones)
 * [check_command_exist()](#checkcommandexist)
+* [check_port()](#checkport)
+* [add_sudo()](#addsudo)
+* [download_scp()](#downloadscp)
+* [upload_scp()](#uploadscp)
+* [chmod_sh_all()](#chmodshall)
+* [check_debian_or_ubuntu()](#checkdebianorubuntu)
 
 
 ## generate_apt_list_ubuntu()
@@ -210,7 +216,89 @@ _Function has no arguments._
 
 check if the port is used
 
-_Function has no arguments._
+### Arguments
+
+* # @args $1 the command
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## check_port()
+
+check if the port is used
+
+### Arguments
+
+* # @args $1 port number
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## add_sudo()
+
+check if the port is used
+
+### Arguments
+
+* # @args $# username of the user you want to add
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## download_scp()
+
+simple scp for downloading file for a remote dir scp/ssh
+
+### Arguments
+
+* # @args $1 username@ip
+* # @args $2 file path on remote device
+* # @args $3 file path for the local device
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## upload_scp()
+
+simple scp for downloading file for a remote dir scp/ssh
+
+### Arguments
+
+* # @args $1 file path for the local device
+* # @args $2 username@ip
+* # @args $3 file path on remote device
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## chmod_sh_all()
+
+simple scp for downloading file for a remote dir scp/ssh
+
+### Arguments
+
+* # @args $1 file path for the local device
+* # @args $2 username@ip
+* # @args $3 file path on remote device
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## check_debian_or_ubuntu()
+
+check if the os is debian or ubuntu
 
 ### Exit codes
 

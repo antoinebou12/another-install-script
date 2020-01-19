@@ -21,18 +21,6 @@ function install_docker(){
     return 0 
 }
 
-
-# @description create docker user and current user in the group and create dir
-#
-# @noargs
-function create_docker_user(){
-    useradd docker
-    usermod -aG docker docker
-    pushd /home/docker/
-    return 0 
-}
-
-
 # @description install the docker compose
 #
 # @noargs
@@ -68,33 +56,72 @@ function stop_all(){
     docker container stop $(docker container ls -aq)
 }
 
-
-# @description stop all container
-#
-# @noargs
-function update_docker_compose(){
-    echo "Stopping containers"
-    docker-compose down
-    echo "Downloading latest images from docker hub ... this can take a long time"
-    docker-compose pull
-    echo "Building images if needed"
-    docker-compose build
-    echo "Starting stack up again"
-    docker-compose up -d
-    echo "Consider running prune-images to free up space"
-}
-
-
-
-# @description stop all container
-# this function creates the volumes, services and backup directories. It then assisgns the current user to the ACL to give full read write access
+# @description this function creates the volumes, services and backup directories. It then assisgns the current user to the ACL to give full read write access
+# 
 # @noargs
 function docker_setfacl() {
 	[ -d /home/docker/services ] || mkdir /home/docker/services
 	[ -d /home/docker/volumes ] || mkdir /home/docker/volumes
 	[ -d /home/docker/backups ] || mkdir /home/docker/backups
 
-	#give current user rwx on the volumes and backups
+	# give current user rwx on the volumes and backups
 	[ $(getfacl /home/docker/volumes | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/volumes
 	[ $(getfacl /home/docker/backups | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/backups
+}
+
+# @description create docker user and current user in the group and create dir
+#
+# @noargs
+function create_docker_user(){
+    useradd docker
+    passwd docker
+    usermod -aG docker docker
+    su - docker
+    docker_setfacl
+    return 0 
+}
+
+# @description create tar for running docker for a local backup
+#
+# @args $1 docker id
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function create_docker_id_backup(){
+    if [ ! "$(docker ps -a | grep $1)" ]; then
+        container_name=docker ps | grep $1 | awk '{ print $2 }'
+        date_id=$(date +'%m/%d/%Y_%s')
+        container_backup="${container_name}_${date_id}_backup"
+        docker commit -p  $1 $container_backup
+        docker save -o /home/docker/backups/$container_backup.tar $container_backup
+    fi
+    return 0
+}
+
+# @description create tar for running docker for a local backup
+#
+# @args $1 docker container name
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function create_docker_name_backup(){
+    if [ ! "$(docker ps -a | grep $1)" ]; then
+        container_name=docker ps | grep $1 | awk '{ print $1 }'
+        date_id=$(date +'%m/%d/%Y_%s')
+        container_backup="${container_name}_${date_id}_backup"
+        docker commit -p  $1 $container_backup
+        docker save -o /home/docker/backups/$container_backup.tar $container_backup
+    fi
+    return 0
+}
+
+# @description check if the port is used
+#
+# @args $# the backup of all the container names
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function create_docker_backup_all(){
+    while [[ -n $1 ]]; do
+        create_docker_name_backup $1
+        shift # shift all parameters;
+    done
+    return 0
 }

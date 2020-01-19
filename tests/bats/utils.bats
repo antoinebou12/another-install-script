@@ -2,6 +2,10 @@
 
 source src/utils.sh
 
+function test-func(){
+    apt-get update
+}
+
 @test "check_packages_install" {
   if check_packages_install; then return 0; else echo 1; fi
 }
@@ -33,15 +37,15 @@ source src/utils.sh
 }
 
 @test "config_read_file" {
-  if [[ "$(config_read_file config_test.cfg)" = "__UNDEFINED__" ]]; then echo 0; else return 1; fi
+  if [[ "$(config_read_file config_test.cfg)" == "__UNDEFINED__" ]]; then echo 0; else return 1; fi
   if config_read_file config_test.cfg; then return 0; else echo 1; fi
   [ "$status" -eq 0 ]
 }
 
 @test "config_get" {
-  if [[ "$(config_read_file config_test.cfg email)" = "test@test.com" ]]; then return 0; else return 1; fi
+  if [[ "$(config_read_file config_test.cfg email)" == "test@test.com" ]]; then return 0; else return 1; fi
   [ "$status" -eq 0 ]
-}\
+}
 
 @test "check_args-noargs" {
   if check_args; then echo 1; else return 0; fi
@@ -79,8 +83,4 @@ source src/utils.sh
   run echo $(get_config config_test.cfg password) | sudo -S
   check-root-func test-func
   [ "$status" -eq 0 ]
-}
-
-function test-func(){
-    apt-get update
 }

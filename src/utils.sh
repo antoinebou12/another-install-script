@@ -62,7 +62,7 @@ function aptupgrade(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function aptclean(){
-    apt-get -q install -f && apt-get -q autoclean 
+    apt-get -q install -f && apt-get -q autoclean && sudo apt-get -y -q autoremove
     return 0
 }
 
@@ -86,7 +86,7 @@ function check_args(){
 function check_root(){
     if [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
-        if (( $EUID != 0 )); then
+        if [[ "$UID" -gt 0  ]]; then
             SUDO='sudo'
         fi
         $SUDO $1
@@ -104,7 +104,7 @@ function check_root(){
 function check_root_func(){
     if  [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
-        if (( $EUID != 0 )); then
+        if  [[ "$UID" -gt 0 ]]; then
             SUDO='sudo'
         fi
         $SUDO bash -c "$(declare -f $1); $1"
@@ -196,14 +196,9 @@ function config_get() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function get_timezones() {
-
-	env_file=$1
-	TZ=$(cat /etc/timezone)
-
-	#test for TZ=
-	[ $(grep -c "TZ=" $env_file) -ne 0 ] && sed -i "/TZ=/c\TZ=$TZ" $env_file
+	export TZ=$(cat /etc/timezone)
+    echo $(cat /etc/timezone)
     return 0 
-
 }
 
 # @description check if the port is used
@@ -217,12 +212,82 @@ function check_command_exist() {
 }
 
 
+# @description check if the port is used
+#
+# @args $1 port number
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 function check_port(){
-    if lsof -Pi :8080 -sTCP:LISTEN -t >/dev/null ; then
-        echo "running"
+    if lsof -i:$1 -P -n -t >/dev/null ; then
         return 0
     else
-        echo "not running"
+        return 1
+    fi
+}
+
+# @description check if the port is used
+#
+# @args $# username of the user you want to add
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function add_sudo(){
+    while [[ -n $1 ]]; do
+        usermod -aG sudo $1
+        echo "$1    ALL=(ALL:ALL) ALL" >> /etc/sudoers;
+        shift # shift all parameters;
+    done
+    return 0
+}
+
+# @description simple scp for downloading file for a remote dir scp/ssh
+#
+# @args $1 username@ip
+# @args $2 file path on remote device
+# @args $3 file path for the local device
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function download_scp(){
+    scp $1:$2 $3
+    return 0
+}
+
+# @description simple scp for downloading file for a remote dir scp/ssh
+#
+# @args $1 file path for the local device
+# @args $2 username@ip
+# @args $3 file path on remote device
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function upload_scp(){
+    scp $1 $2:$3
+    return 0
+}
+
+# @description simple scp for downloading file for a remote dir scp/ssh
+#
+# @args $1 file path for the local device
+# @args $2 username@ip
+# @args $3 file path on remote device
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function chmod_sh_all(){
+    echo "Please use this project on an Ubuntu or Debian system tested on (Ubuntu18.04)"
+}
+
+
+# @description check if the os is debian or ubuntu
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function check_debian(){
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        source /etc/os-release
+        if [[ $ID_LIKE == "debian" ]]; then
+            return 0 
+        fi
+        return 1
+    else
+        echo "Please use this project on an Ubuntu or Debian system tested on (Ubuntu18.04)"
         return 1
     fi
 }
