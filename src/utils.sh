@@ -207,8 +207,11 @@ function get_timezones() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function check_command_exist() {
-	command -v "$@" >/dev/null 2>&1
-    return 0 
+	if [[ $(command -v "$@") ]]; then
+        return 0 
+    else
+        return 1
+    fi
 }
 
 

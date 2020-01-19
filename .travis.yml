@@ -1,7 +1,7 @@
 sudo: false
 
 language: bash
-env: PATH=${PATH}:/usr/local/bin/kcov
+env: PATH=${PATH}:${HOME}/kcov
 dist: bionic
 
 addons:
@@ -27,28 +27,16 @@ before_install:
   - git pull --recurse-submodules
   - git submodule update --remote
 
-install:
-  # install kcov
-  - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-  - tar xzf master.tar.gz
-  - cd kcov-master
-  - mkdir build
-  - cd build
-  - cmake ..
-  - make
-  - make install
-  - cd ../..
-  - rm -rf kcov-master
-  - mkdir -p coverage
-
 script:
-  - kcov --exclude-pattern=docs/,etc/,tests/,*.yml,coverage,/usr,/tmp,.git,.*,*.md,.*.yml coverage test.sh
+  - cd tests
+  - bash coverage.sh
+  - cd ..
   - cd docs
   - bash generate_docs.sh docs.sh
   - cd ..
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+# after_success:
+  # - bash <(curl -s https://codecov.io/bash)
 
 notifications:
     email: false
