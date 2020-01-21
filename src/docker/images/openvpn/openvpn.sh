@@ -14,10 +14,10 @@ function create_docker_openvpn(){
     set -e
     mkdir /home/docker/openvpn
     cd /home/docker/openvpn
-    docker-compose run --rm openvpn ovpn_genconfig -u udp://$1
+    docker-compose run --rm openvpn ovpn_genconfig -u udp://"$1"
     docker-compose run --rm openvpn ovpn_initpki
-    docker-compose run --rm openvpn easyrsa build-client-full $2 nopass
-    docker-compose run --rm openvpn ovpn_getclient $2 > $2.ovpn
+    docker-compose run --rm openvpn easyrsa build-client-full "$2" nopass
+    docker-compose run --rm openvpn ovpn_getclient "$2" > "$2".ovpn
     docker-compose up -d openvpn
     return 0
 }

@@ -18,7 +18,7 @@ function create_docker_cloud-torrent(){
     USERNAME=${2:-"admin"}
     PASSWORD=${3:-"password"}
     PATH_DOWNLOAD=${4:-"/home/docker/cloud-torrent/download"}
-    docker build --build-arg USERNAME=$USERNAME PASSWORD=$PASSWORD
-    docker run -d -p $PORT_WEB:3000 -v $PATH_DOWNLOAD:/downloads jpillora/cloud-torrent
+    docker build --build-arg USERNAME="$USERNAME" PASSWORD="$PASSWORD"
+    docker run -d -p "$PORT_WEB":3000 -v "$PATH_DOWNLOAD":/downloads jpillora/cloud-torrent
     return 0
 }

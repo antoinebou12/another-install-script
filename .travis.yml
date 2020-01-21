@@ -32,15 +32,13 @@ before_install:
   - git submodule update --remote
 
 script:
-  - cd tests
-  - bash coverage.sh
+  - cd tests 
+  - bash linter.sh # linter shellcheck
+  - bash coverage.sh # coverage kcov
   - cd ..
   - cd docs
-  - bash generate_docs.sh docs.sh
+  - bash generate_docs.sh docs.sh # documentation shdoc
   - cd ..
-
-# after_success:
-  # - bash <(curl -s https://codecov.io/bash)
 
 notifications:
     email: false

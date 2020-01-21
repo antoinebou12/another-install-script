@@ -11,10 +11,10 @@
 # @args $1 the path to jenkins data volume
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-fucntion create_docker_jenkins(){
-    local port_web=${1:-8080}
-    local port_jenkins=${2:-25565}
-    local jenkins_data=${3:-25565}
-    docker run -p $port_web:8080 -p $port_jenkins:50000 -v $jenkins_data:/var/jenkins_home jenkins/jenkins:lts
+function create_docker_jenkins(){
+    local PORT_WEB=${1:-8080}
+    local PORT_JENKINS=${2:-25565}
+    local JENKINS_DATA=${3:"/home/docker/jenkins"}
+    docker run -p "$PORT_WEB":8080 -p "$PORT_JENKINS":50000 -v "$JENKINS_DATA":/var/jenkins_home jenkins/jenkins:lts
     return 0
 }

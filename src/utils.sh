@@ -10,7 +10,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function generate_apt_list_ubuntu(){
-    cat ../etc/source.list | tee /etc/apt/source.list
+    ../etc/source.list | tee /etc/apt/source.list
     return 0
 }
 
@@ -32,7 +32,8 @@ function checkWSL() {
 # @exitcode 0 If installed
 # @exitcode 1 if not installed
 function check_packages_install(){
-    return dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -q -P '^install ok installed$'; echo $?
+    output=$(dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$'; echo "$?")
+    return "$output"
 }
 
 # @description apt-get update
@@ -90,7 +91,7 @@ function check_root(){
         if [[ "$UID" -gt 0  ]]; then
             SUDO='sudo'
         fi
-        $SUDO $1
+        "$SUDO" "$1"
         return 0
     fi
     return 1
@@ -108,7 +109,8 @@ function check_root_func(){
         if  [[ "$UID" -gt 0 ]]; then
             SUDO='sudo'
         fi
-        $SUDO bash -c "$(declare -f $1); $1"
+        # shellcheck disable=SC2086
+        $SUDO bash -c "$(declare -f ${1}); ${1}"
         return 0
     fi
     return 1
@@ -134,13 +136,13 @@ function get_mimetype(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function send_email() {
-    from="$1"
+    # from="$1"
     to="$2"
     subject="$3"
     body="$4"
     attachment=$5
 
-    echo $body | mutt -s $subject -a $attachment $to 
+    echo "$body" | mutt -s "$subject" -a "$attachment" "$to" 
     return 0
 }
 
@@ -182,9 +184,11 @@ function config_read_file() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function config_get() {
-    val="$(config_read_file $1 "${2}")";
+    # shellcheck disable=SC2086
+    val="$(config_read_file ${1} ${2})";
     if [ "${val}" = "__UNDEFINED__" ]; then
-        val="$(config_read_file config.cfg.defaults "${2}")";
+        # shellcheck disable=SC2086
+        val="$(config_read_file config.cfg.defaults ${2})";
     fi
     printf -- "%s" "${val}";
     return 0
@@ -197,8 +201,8 @@ function config_get() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function get_timezones() {
-	export TZ=$(cat /etc/timezone)
-    echo $(cat /etc/timezone)
+	TZ="$(cat /etc/timezone)"
+    echo TZ
     return 0 
 }
 
@@ -222,7 +226,7 @@ function check_command_exist() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function check_port(){
-    if lsof -i:$1 -P -n -t >/dev/null ; then
+    if lsof -i:"$1" -P -n -t >/dev/null ; then
         return 0
     else
         return 1
@@ -236,7 +240,7 @@ function check_port(){
 # @exitcode 1 On failure
 function add_sudo(){
     while [[ -n $1 ]]; do
-        usermod -aG sudo $1
+        usermod -aG sudo "$1"
         echo "$1    ALL=(ALL:ALL) ALL" >> /etc/sudoers;
         shift # shift all parameters;
     done
@@ -251,7 +255,7 @@ function add_sudo(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function download_scp(){
-    scp $1:$2 $3
+    scp "$1":"$2" "$3"
     return 0
 }
 
@@ -263,7 +267,7 @@ function download_scp(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function upload_scp(){
-    scp $1 $2:$3
+    scp "$1" "$2":"$3"
     return 0
 }
 
@@ -275,7 +279,7 @@ function upload_scp(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function chmod_sh_all(){
-    echo "Please use this project on an Ubuntu or Debian system tested on (Ubuntu18.04)"
+    echo "not implemented yet"
 }
 
 
@@ -285,6 +289,8 @@ function chmod_sh_all(){
 # @exitcode 1 On failure
 function check_debian(){
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        # shellcheck source=/etc/os-release
+        # shellcheck disable=SC1091
         source /etc/os-release
         if [[ $ID_LIKE == "debian" ]]; then
             return 0 

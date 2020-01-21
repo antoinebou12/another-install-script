@@ -3,7 +3,9 @@
 # @file docker.sh
 # @brief to install docker docker compose on ubuntu18.04
 
-# import 
+# import
+# shellcheck source=../utils.sh
+# shellcheck disable=SC1091
 source ../utils.sh
 
 # @description install the docker
@@ -53,7 +55,7 @@ function prune_images_volumes(){
 #
 # @noargs
 function stop_all(){
-    docker container stop $(docker container ls -aq)
+    docker container stop "$(docker container ls -aq)"
 }
 
 # @description this function creates the volumes, services and backup directories. It then assisgns the current user to the ACL to give full read write access
@@ -65,8 +67,10 @@ function docker_setfacl() {
 	[ -d /home/docker/backups ] || mkdir /home/docker/backups
 
 	# give current user rwx on the volumes and backups
-	[ $(getfacl /home/docker/volumes | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/volumes
-	[ $(getfacl /home/docker/backups | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/backups
+    # shellcheck disable=SC2086
+	[ "$(getfacl /home/docker/volumes | grep -c "default:user:$USER")" -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/volumes
+	# shellcheck disable=SC2086
+    [ "$(getfacl /home/docker/backups | grep -c "default:user:$USER")" -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/backups
 }
 
 # @description create docker user and current user in the group and create dir
@@ -95,12 +99,13 @@ function login_docker_user(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function create_docker_id_backup(){
+    # shellcheck disable=SC2086,SC2143
     if [ ! "$(docker ps -a | grep $1)" ]; then
-        container_name=docker ps | grep $1 | awk '{ print $2 }'
-        date_id=$(date +'%m/%d/%Y_%s')
+        container_name="$(docker ps | grep $1 | awk '{ print $2 }')"
+        date_id="$(date +'%m/%d/%Y_%s')"
         container_backup="${container_name}_${date_id}_backup"
-        docker commit -p  $1 $container_backup
-        docker save -o /home/docker/backups/$container_backup.tar $container_backup
+        docker commit -p  "$1" "$container_backup"
+        docker save -o /home/docker/backups/"$container_backup".tar "$container_backup"
     fi
     return 0
 }
@@ -111,12 +116,14 @@ function create_docker_id_backup(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function create_docker_name_backup(){
+    # shellcheck disable=SC2086,SC2143
     if [ ! "$(docker ps -a | grep $1)" ]; then
-        container_name=docker ps | grep $1 | awk '{ print $1 }'
+        # shellcheck disable=SC2086
+        container_name="$(docker ps | grep $1 | awk '{ print $1 }')"
         date_id=$(date +'%m/%d/%Y_%s')
         container_backup="${container_name}_${date_id}_backup"
-        docker commit -p  $1 $container_backup
-        docker save -o /home/docker/backups/$container_backup.tar $container_backup
+        docker commit -p  "$1" "$container_backup"
+        docker save -o /home/docker/backups/"$container_backup".tar "$container_backup"
     fi
     return 0
 }
@@ -128,7 +135,7 @@ function create_docker_name_backup(){
 # @exitcode 1 On failure
 function create_docker_backup_all(){
     while [[ -n $1 ]]; do
-        create_docker_name_backup $1
+        create_docker_name_backup "$1"
         shift # shift all parameters;
     done
     return 0

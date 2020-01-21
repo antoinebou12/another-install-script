@@ -10,7 +10,7 @@
 # @args $3 PORT_WEB
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-fucntion create_docker_pyload(){
+function create_docker_pyload(){
     mkdir /home/docker/pyload
     PATH_CONFIG=${1:-"/home/docker/pyload/config"}
     PATH_DOWNLOAD=${2:-"/home/docker/pyload/download"}

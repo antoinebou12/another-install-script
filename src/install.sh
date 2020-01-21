@@ -4,6 +4,9 @@
 # @brief install my favirote packages for ubuntu18.04 and tested 
 
 # import
+
+# shellcheck source=utils.sh
+# shellcheck disable=SC1091
 source utils.sh
 
 # @description install the basic package to ubuntu I personnally like

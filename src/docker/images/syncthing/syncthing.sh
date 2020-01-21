@@ -16,6 +16,6 @@ function create_docker_syncthing(){
     PORT_WEB=${1:-"6889"}
     PORT_SYNC=${2:-"6889"}
     PATH_SYNC=${3:-"/home/docker/syncthing/"}
-    docker run -p $PORT_WEB:8384 -p $PORT_SYNC:22000 -v $PATH_SYNC:/var/syncthing syncthing/syncthing:latest
+    docker run -p "$PORT_WEB":8384 -p "$PORT_SYNC":22000 -v "$PATH_SYNC":/var/syncthing syncthing/syncthing:latest
     return 0
 }

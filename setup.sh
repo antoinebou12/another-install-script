@@ -3,7 +3,7 @@
 # @file setup.sh
 # @brief setup project
 
-PROJECTDIRSETUP="$(dirname "$0")"
+# PROJECTDIRSETUP="$(dirname "$0")"
 
 # @description create setup menu
 #

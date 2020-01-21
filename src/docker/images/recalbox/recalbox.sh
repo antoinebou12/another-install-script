@@ -12,6 +12,6 @@
 function create_docker_recalbox(){
     mkdir /home/docker/recalbox/
     PATH_RECALBOX=${1:-"/home/docker/recalbox"}
-    docker run -t -v $PATH_RECALBOX:/usr/share/recalbox/build/ recalbox/recalbox-docker-build
+    docker run -t -v "$PATH_RECALBOX":/usr/share/recalbox/build/ recalbox/recalbox-docker-build
     return 0
 }
