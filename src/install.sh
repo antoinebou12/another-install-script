@@ -9,6 +9,17 @@
 # shellcheck disable=SC1091
 source utils.sh
 
+
+# @description change the source.list with template in /etc 
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function generate_apt_list_ubuntu(){
+    ../etc/source.list | tee /etc/apt/source.list
+    return 0
+}
+
 # @description install the basic package to ubuntu I personnally like
 #
 # @noargs

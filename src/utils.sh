@@ -4,16 +4,6 @@
 # @brief file containing the utils function for the project and other
 
 
-# @description change the source.list with template in /etc 
-#
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-function generate_apt_list_ubuntu(){
-    ../etc/source.list | tee /etc/apt/source.list
-    return 0
-}
-
 # @description check if the system is a WSL
 #
 # @exitcode 0 If successfull.
@@ -146,27 +136,6 @@ function send_email() {
     return 0
 }
 
-# @description multiline string echo on each line with line number
-#
-# @arg $1 multiline string
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-function multiline_string_newline_to_array(){
-    names="$1"
-
-    SAVEIFS=$IFS   # Save current IFS
-    IFS=$'\n'      # Change IFS to new line
-    names=($names) # split to array $names
-    IFS=$SAVEIFS   # Restore IFS
-
-    for (( i=0; i<${#names[@]}; i++ ))
-    do
-        echo "$i: ${names[$i]}"
-    done
-
-    return 0
-}
-
 # @description read config file
 # https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
 # @arg $1 the config fiel path
@@ -203,6 +172,7 @@ function config_get() {
 function get_timezones() {
 	TZ="$(cat /etc/timezone)"
     echo TZ
+    export TZ
     return 0 
 }
 
@@ -273,13 +243,20 @@ function upload_scp(){
 
 # @description simple scp for downloading file for a remote dir scp/ssh
 #
-# @args $1 file path for the local device
-# @args $2 username@ip
-# @args $3 file path on remote device
+# @args $1 path to folder
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function chmod_sh_all(){
-    echo "not implemented yet"
+    names=$(find $1 -iname "*.sh")
+
+    SAVEIFS=$IFS   # Save current IFS
+    IFS=$'\n'      # Change IFS to new line
+    names=($names) # split to array $names
+    IFS=$SAVEIFS   # Restore IFS
+
+    for (( i=0; i<${#names[@]}; i++ )); do
+        chmod +x ${names[$i]}
+    done
 }
 
 
