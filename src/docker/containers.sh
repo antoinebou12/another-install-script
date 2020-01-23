@@ -3,7 +3,7 @@
 # @file container.sh
 # @brief list of container and other info
 
-declare -A container_name_array=(
+declare -A CONTAINER_NAME_ARRAY=(
 	[cloud_torrent]="cloud_torrent"
 	[heimdall]="heimdall"
 	[huginn]="huginn"
@@ -20,5 +20,3 @@ declare -A container_name_array=(
 	[syncthing]="syncthing"
 	[teamspeak]="teamspeak"
 )
-
-echo "${container_name_array['cloud_torrent']}"

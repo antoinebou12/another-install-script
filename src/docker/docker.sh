@@ -92,6 +92,7 @@ function create_docker_user(){
 # @noargs
 function login_docker_user(){
     su - docker
+    return 0
 }
 
 # @description create tar for running docker for a local backup

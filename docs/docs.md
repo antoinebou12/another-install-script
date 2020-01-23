@@ -62,23 +62,11 @@ install vagrant and more
 
 
 
-# setup.sh
+# .sh
 
-setup project
-
-* [create_setup_menu()](#createsetupmenu)
+file containing the utils function for the project and other
 
 
-## create_setup_menu()
-
-create setup menu
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
 
 # container.sh
 
@@ -524,10 +512,22 @@ _Function has no arguments._
 
 install my favirote packages for ubuntu18.04 and tested 
 
+* [generate_apt_list_ubuntu()](#generateaptlistubuntu)
 * [install_basic()](#installbasic)
 * [install_cockpit()](#installcockpit)
 * [install_emojify()](#installemojify)
 
+
+## generate_apt_list_ubuntu()
+
+change the source.list with template in /etc 
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 ## install_basic()
 
@@ -566,11 +566,78 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
+# menu.sh
+
+setup menu and logic
+
+* [password_dialog()](#passworddialog)
+* [install_simple_setup_menu()](#installsimplesetupmenu)
+* [install_custom_setup_menu()](#installcustomsetupmenu)
+* [install_no_docker_setup_menu()](#installnodockersetupmenu)
+* [help_setup_menu()](#helpsetupmenu)
+* [main_setup_menu()](#mainsetupmenu)
+
+
+## password_dialog()
+
+whiptails password dialog
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_simple_setup_menu()
+
+whiptail install simple setup menu
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_custom_setup_menu()
+
+whiptails install custom setup menu
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_no_docker_setup_menu()
+
+whiptails install no docker setup menu
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## help_setup_menu()
+
+show help for the setup script
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## main_setup_menu()
+
+whiptail create setup main menu
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # utils.sh
 
 file containing the utils function for the project and other
 
-* [generate_apt_list_ubuntu()](#generateaptlistubuntu)
 * [checkWSL()](#checkwsl)
 * [check_packages_install()](#checkpackagesinstall)
 * [aptupdate()](#aptupdate)
@@ -581,7 +648,6 @@ file containing the utils function for the project and other
 * [check_root_func()](#checkrootfunc)
 * [get_mimetype()](#getmimetype)
 * [send_email()](#sendemail)
-* [multiline_string_newline_to_array()](#multilinestringnewlinetoarray)
 * [config_read_file()](#configreadfile)
 * [config_get()](#configget)
 * [get_timezones()](#gettimezones)
@@ -593,17 +659,6 @@ file containing the utils function for the project and other
 * [chmod_sh_all()](#chmodshall)
 * [check_debian()](#checkdebian)
 
-
-## generate_apt_list_ubuntu()
-
-change the source.list with template in /etc 
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
 
 ## checkWSL()
 
@@ -729,19 +784,6 @@ send mail locally with heirloom-mailx
 * **0**: If successfull.
 * **1**: On failure
 
-## multiline_string_newline_to_array()
-
-multiline string echo on each line with line number
-
-### Arguments
-
-* **$1** (multiline): string
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 ## config_read_file()
 
 read config file
@@ -855,9 +897,7 @@ simple scp for downloading file for a remote dir scp/ssh
 
 ### Arguments
 
-* # @args $1 file path for the local device
-* # @args $2 username@ip
-* # @args $3 file path on remote device
+* # @args $1 path to folder
 
 ### Exit codes
 
