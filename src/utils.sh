@@ -19,7 +19,7 @@ function generate_apt_list_ubuntu(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function checkWSL() {
-    if [ ! -z "$WSL_DISTRO_NAME" ]; then
+    if [ -n "$WSL_DISTRO_NAME" ]; then
         return 0
     fi
     return 1

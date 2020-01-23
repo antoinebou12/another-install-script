@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-source ../src/utils.sh
+source ../../src/utils.sh
 
 function test-func(){
     apt-get update

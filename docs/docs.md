@@ -1,3 +1,67 @@
+# ansible.sh
+
+to use ansible with vagrant for testing installation or make install with ansible playbook
+
+* [install_ansible()](#installansible)
+
+
+## install_ansible()
+
+install ansible
+
+_Function has no arguments._
+
+# qemu.sh
+
+to use qemu with ansible and vagrant for testing installation
+
+* [install_qemu()](#installqemu)
+* [create_qemu_img()](#createqemuimg)
+* [install_qemu_32vm()](#installqemu32vm)
+* [run_qemu_32vm()](#runqemu32vm)
+
+
+## install_qemu()
+
+install the quemu 
+
+_Function has no arguments._
+
+## create_qemu_img()
+
+qemu create a image for qemu
+
+### Arguments
+
+* # @args $1 img of the os
+* # @args $2 the num of gb for img
+
+## install_qemu_32vm()
+
+install the os on the image first time qemu
+
+### Arguments
+
+* # @args $1 img of the os
+* # @args $2 the iso of the os
+* # @args $3 boot cd
+* # @args $4 mem for the os
+
+## run_qemu_32vm()
+
+run 32 bits vm with qemu
+
+### Arguments
+
+* # @args $1 img of the os
+* # @args $1 img of the os
+
+# vagrant.sh
+
+install vagrant and more
+
+
+
 # setup.sh
 
 setup project
@@ -16,6 +80,9 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
+# container.sh
+
+list of container and other info
 
 
 
@@ -30,6 +97,7 @@ to install docker docker compose on ubuntu18.04
 * [stop_all()](#stopall)
 * [docker_setfacl()](#dockersetfacl)
 * [create_docker_user()](#createdockeruser)
+* [login_docker_user()](#logindockeruser)
 * [create_docker_id_backup()](#createdockeridbackup)
 * [create_docker_name_backup()](#createdockernamebackup)
 * [create_docker_backup_all()](#createdockerbackupall)
@@ -49,7 +117,7 @@ _Function has no arguments._
 
 ## install_docker_extra()
 
-install the docker extra utils
+install the docker extra utils dry
 
 _Function has no arguments._
 
@@ -74,6 +142,12 @@ _Function has no arguments._
 ## create_docker_user()
 
 create docker user and current user in the group and create dir
+
+_Function has no arguments._
+
+## login_docker_user()
+
+login as the docker user
 
 _Function has no arguments._
 
@@ -209,7 +283,24 @@ https://github.com/linuxserver/docker-jellyfin
 
 to install docker jenkins
 
+* [create_docker_jenkins()](#createdockerjenkins)
 
+
+## create_docker_jenkins()
+
+create docker jenkins
+https://github.com/jenkinsci/docker
+
+### Arguments
+
+* # @args $1 port number for the web server
+* # @args $1 port number for jenkins server
+* # @args $1 the path to jenkins data volume
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # jupyterhub.sh
 
@@ -236,7 +327,21 @@ https://github.com/jupyterhub/jupyterhub-deploy-docker
 
 to install dockermailcow
 
+* [create_docker_mailcow()](#createdockermailcow)
 
+
+## create_docker_mailcow()
+
+create docker mailcow
+https://github.com/mailcow/mailcow-dockerized
+https://mailcow.github.io/mailcow-dockerized-docs/i_u_m_install/
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # mcmyadmin.sh
 
@@ -266,7 +371,24 @@ https://github.com/linuxserver-archive/docker-mcmyadmin2
 
 to install docker medusa
 
+* [create_docker_medusa()](#createdockermedusa)
 
+
+## create_docker_medusa()
+
+create docker medusa
+https://github.com/linuxserver/docker-medusa
+
+### Arguments
+
+* # @args $1 PATH_CONFIG
+* # @args $2 PATH_DOWNLOAD
+* # @args $3 PORT_WEB
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # openvpn.sh
 
@@ -294,7 +416,24 @@ https://github.com/kylemanna/docker-openvpn
 
 to install docker pyload
 
+* [create_docker_pyload()](#createdockerpyload)
 
+
+## create_docker_pyload()
+
+create docker syncthing
+https://github.com/linuxserver/docker-pyload/issues/3
+
+### Arguments
+
+* # @args $1 PATH_CONFIG
+* # @args $2 PATH_DOWNLOAD
+* # @args $3 PORT_WEB
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # recalbox.sh
 
@@ -380,12 +519,6 @@ _Function has no arguments._
 
 * **0**: If successfull.
 * **1**: On failure
-
-# up.sh
-
-run and create all the selected docker container
-
-
 
 # install.sh
 
@@ -745,11 +878,66 @@ check if the os is debian or ubuntu
 file generate the code coverage for bats/bash
 
 * [use_kcov()](#usekcov)
+* [install_kcov()](#installkcov)
+* [bash_codecov()](#bashcodecov)
 
 
 ## use_kcov()
 
-download the bi of kcov and generate coverage
+generate coverage
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_kcov()
+
+download the bin of kcov
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## bash_codecov()
+
+send to codecov coverage
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# linter.sh
+
+shellcheck for all the bash script
+
+* [use_shellcheck()](#useshellcheck)
+* [install_shellcheck()](#installshellcheck)
+
+
+## use_shellcheck()
+
+use shellcheck on all bash script in project
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_shellcheck()
+
+install shellcheck
+https://github.com/koalaman/shellcheck
 
 _Function has no arguments._
 

@@ -10,5 +10,6 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function uninstall(){
+    echo "not implemeted yet"
     return 0
 }

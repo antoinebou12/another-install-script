@@ -3,4 +3,8 @@
 # @file test.sh
 # @brief run bats test
 
-bats utils.bats
+source ../src/utils.sh
+source ../src/docker.sh
+
+bats bats/utils.bats
+bats bats/docker.bats

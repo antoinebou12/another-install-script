@@ -13,11 +13,14 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function create_docker_cloud-torrent(){
-    pushd /home/docker/
+    cd /home/docker/ || return 1
     PORT_WEB=${1:-"6889"}
     USERNAME=${2:-"admin"}
     PASSWORD=${3:-"password"}
     PATH_DOWNLOAD=${4:-"/home/docker/cloud-torrent/download"}
+
+    mkdir -p "$PATH_DOWNLOAD"
+
     docker build --build-arg USERNAME="$USERNAME" PASSWORD="$PASSWORD"
     docker run -d -p "$PORT_WEB":3000 -v "$PATH_DOWNLOAD":/downloads jpillora/cloud-torrent
     return 0

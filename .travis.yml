@@ -1,8 +1,6 @@
 language: bash
 dist: bionic
 
-before_cache:
-  - bash coverage.sh
 cache:
   directories:
     - tests/bin
@@ -25,20 +23,16 @@ addons:
       - bats
       - bc
       
-before_install:
-  # install all the submodules
-  - git submodule update --init --recursive
-  - git pull --recurse-submodules
-  - git submodule update --remote
+# before_install:
 
 script:
-  - cd tests 
+  - cd tests || exit 1
   - bash linter.sh # linter shellcheck
   - bash coverage.sh # coverage kcov
-  - cd ..
-  - cd docs
+  - cd .. || exit 1
+  - cd docs || exit 1
   - bash generate_docs.sh docs.sh # documentation shdoc
-  - cd ..
+  - cd .. || exit 1
 
 notifications:
     email: false
