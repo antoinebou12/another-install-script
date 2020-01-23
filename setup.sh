@@ -3,7 +3,11 @@
 # @file setup.sh
 # @brief setup project
 
-# PROJECTDIRSETUP="$(dirname "$0")"
+# import
+source src/utils.sh
+source src/install.sh
+source src/containers.sh
+source src/docker.sh
 
 # @description create setup menu
 #
@@ -12,7 +16,12 @@
 # @exitcode 1 On failure
 function create_setup_menu(){
     
-    setup_menu=$(whiptail --title "Main Menu" --menu --notags "" 20 78 12 -- \
+    WHIPTAIL_TEXT=$(( $(tput lines) - 4 ))
+    WHIPTAIL_HEIGHT=$(($(tput cols) - 24))
+    WHIPTAIL_WIDTH=$(($(tput lines) - 12))
+
+
+    SETUP_MENU=$(whiptail --title "Main Menu" --menu --notags "" 20 78 12 -- \
 	"install_simple" "Simple Installation" \
 	"install_custom" "Custom Installation" \
 	"install_no_docker" "No Docker Installation" \
@@ -20,13 +29,13 @@ function create_setup_menu(){
     "exit" "Exit" \
 	3>&1 1>&2 2>&3)
 
-case $setup_menu in
+case SETUP_MENU in
 
     "install_simple")
 
     ;;
     "install_custom")
-
+        
     ;;
     "install_no_docker")
 

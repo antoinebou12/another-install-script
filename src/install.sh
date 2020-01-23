@@ -7,7 +7,8 @@
 
 # shellcheck source=utils.sh
 # shellcheck disable=SC1091
-source utils.sh
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source "$DIR"/utils.sh
 
 
 # @description change the source.list with template in /etc 

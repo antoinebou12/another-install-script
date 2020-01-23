@@ -30,7 +30,7 @@ function use_shellcheck(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 function install_shellcheck(){
-    if [[ $(command -v shellcheck) ]]; then
+    if [[ ! $(command -v shellcheck) ]]; then
         if  [[ "$UID" -gt 0 ]]; then
             sudo apt-get install shellcheck
         else
