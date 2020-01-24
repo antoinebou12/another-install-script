@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+    guacamole:
+        image: guacamole
+        container_name: guacamole
+        ports:
+            - '8057:8080'
+        # environment:
+        #     - 'EXTENSIONS=auth-ldap,auth-duo'
+        volumes:
+            - '/home/docker/guacamole/config:/configoznu/guacamole'
