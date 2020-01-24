@@ -3,6 +3,40 @@
 # @file utils.sh
 # @brief file containing the utils  for the project and other
 
+
+# @description check if the os is debian or ubuntu
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+show_project_name() {
+    cat <<EOF
+
+    ___                   __   __               
+   /   |   ____   ____   / /_ / /_   ___   _____
+  / /| |  / __ \ / __ \ / __// __ \ / _ \ / ___/
+ / ___ | / / / // /_/ // /_ / / / //  __// /    
+/_/  |_|/_/ /_/ \____/ \__//_/ /_/ \___//_/     
+                                                
+
+    ____              __          __ __
+   /  _/____   _____ / /_ ____ _ / // /
+   / / / __ \ / ___// __// __  // // / 
+ _/ / / / / /(__  )/ /_ / /_/ // // /  
+/___//_/ /_//____/ \__/ \____//_//_/   
+
+
+   _____              _         __ 
+  / ___/ _____ _____ (_)____   / /_
+  \__ \ / ___// ___// // __ \ / __/
+ ___/ // /__ / /   / // /_/ // /_  
+/____/ \___//_/   /_// ____/ \__/  
+                    /_/            
+
+EOF
+    return 0
+}
+
 # @description check if the system is a WSL
 #
 # @exitcode 0 If successfull.
@@ -126,10 +160,10 @@ get_mimetype() {
 # @exitcode 1 On failure
 send_email() {
     # from="$1"
-    to="$2"
-    subject="$3"
-    body="$4"
-    attachment=$5
+    local to="$2"
+    local subject="$3"
+    local body="$4"
+    local attachment=$5
 
     echo "$body" | mutt -s "$subject" -a "$attachment" "$to"
     return 0
@@ -244,16 +278,30 @@ upload_scp() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 chmod_sh_all() {
-    names=$(find $1 -iname "*.sh")
+    find $1 -name "*.sh" -execdir chmod u+x {} +
+}
 
-    SAVEIFS=$IFS   # Save current IFS
-    IFS=$'\n'      # Change IFS to new line
-    names=($names) # split to array $names
-    IFS=$SAVEIFS   # Restore IFS
+# @description loop find files func
+#
+# @args $1 path to folder
+# @args $2 regex of files
+# @args $3 func
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+loop_files_func() {
+    local names=$(find "$1" -name "$2" )
 
-    for ((i = 0; i < ${#names[@]}; i++)); do
-        chmod +x ${names[$i]}
+    local SAVEIFS="$IFS"   # Save current IFS
+    local IFS=$'\n'      # Change IFS to new line
+    local names=($names) # split to array $names
+    local IFS="$SAVEIFS"   # Restore IFS
+
+    for (( i=0; i<${#names[@]}; i++ )); do
+        echo "$i: ${names[$i]}"
+        "$3" "${names[$i]}"
     done
+
+    return 0
 }
 
 # @description check if the os is debian or ubuntu
@@ -274,39 +322,6 @@ check_debian() {
         echo "Please use this project on an Ubuntu or Debian system tested on (Ubuntu18.04)"
         return 1
     fi
-}
-
-# @description check if the os is debian or ubuntu
-#
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-show_project_name() {
-    cat <<EOF
-
-    ___                   __   __               
-   /   |   ____   ____   / /_ / /_   ___   _____
-  / /| |  / __ \ / __ \ / __// __ \ / _ \ / ___/
- / ___ | / / / // /_/ // /_ / / / //  __// /    
-/_/  |_|/_/ /_/ \____/ \__//_/ /_/ \___//_/     
-                                                
-
-    ____              __          __ __
-   /  _/____   _____ / /_ ____ _ / // /
-   / / / __ \ / ___// __// __  // // / 
- _/ / / / / /(__  )/ /_ / /_/ // // /  
-/___//_/ /_//____/ \__/ \____//_//_/   
-
-
-   _____              _         __ 
-  / ___/ _____ _____ (_)____   / /_
-  \__ \ / ___// ___// // __ \ / __/
- ___/ // /__ / /   / // /_/ // /_  
-/____/ \___//_/   /_// ____/ \__/  
-                    /_/            
-
-EOF
-    return 0
 }
 
 # @description check the ip of the server

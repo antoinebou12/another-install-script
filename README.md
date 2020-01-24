@@ -39,6 +39,8 @@ Some services/server cannot be installed at the same time
 | [firefly-iii](https://github.com/firefly-iii/firefly-iii)                 | ✔️     |                    |         |            |         |
 | [gitea](https://github.com/go-gitea/gitea)                                | ✔️     |                    |         |            |         |
 | [gitlab](https://docs.gitlab.com/ee/install/docker.html)                  | ✔️     |                    |         |            |         |
+| [grafana](https://github.com/grafana/grafana)                             | ✔️     |                    |         |            |         |
+| [hlsxmltv](https://github.com/deanochips/HLS-XMLTV-Docker)                | ✔️     |                    |         |            |         |
 | [heimdall](https://github.com/linuxserver/docker-heimdall)                | ✔️     |                    |         | :8080      | ✔️      |
 | [huginn](https://github.com/huginn/huginn)                                | ✔️     |                    |         |            |         |
 | [jackett](https://github.com/Jackett/Jackett)                             | ✔️     |                    |         |            |         |
@@ -60,6 +62,7 @@ Some services/server cannot be installed at the same time
 | [nextcloud](https://nextcloud.com/)                                       | ✔️     |                    |         |            |         |
 | [openvpn](https://github.com/kylemanna/docker-openvpn)                    | ✔️     |                    |         |            | ✔️      |
 | [paperless](https://github.com/the-paperless-project/paperless)           | ✔️     |                    |         |            |         |
+| [pihole](https://pi-hole.net/)                                            | ✔️     |                    |         |            |         |
 | [pyload](https://pyload.net/)                                             | ✔️     | 8000,7227          |         |            |         |
 | [qbittorrent-vpn](https://github.com/MarkusMcNugen/docker-qBittorrentvpn) | ✔️     |                    |         |            |         |
 | [radarr](https://github.com/Radarr/Radarr)                                | ✔️     |                    |         |            |         |

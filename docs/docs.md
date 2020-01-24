@@ -62,9 +62,9 @@ install vagrant and more
 
 
 
-# .sh
+# install.sh
 
-file containing the utils function for the project and other
+file containing the utils  for the project and other
 
 
 
@@ -123,7 +123,7 @@ _Function has no arguments._
 
 ## docker_setfacl()
 
-this function creates the volumes, services and backup directories. It then assisgns the current user to the ACL to give full read write access
+this  creates the volumes, services and backup directories. It then assisgns the current user to the ACL to give full read write access
 
 _Function has no arguments._
 
@@ -178,6 +178,9 @@ check if the port is used
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
 # cloud-torrent.sh
 
 to install docker cloud-torrent
@@ -202,6 +205,43 @@ https://github.com/jpillora/cloud-torrent
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
+# firefly-iii.sh
+
+to install docker firefly-iii
+
+* [create_docker_firefly-iii()](#createdockerfirefly-iii)
+
+
+## create_docker_firefly-iii()
+
+create docker firefly-iii
+https://github.com/firefly-iii/docker
+
+### Arguments
+
+* # @args $1 PORT_WEB
+* # @args $2 PATH_DB
+* # @args $3 PATH_EXPORT
+* # @args $4 PATH_UPLOAD
+* # @args $4 POSTGRES_PASSWORD
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+
+
+
+
+
+
+
+
+
 # heimdall.sh
 
 to install docker heimdall
@@ -225,6 +265,9 @@ https://hub.docker.com/r/linuxserver/heimdall/
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
 # huginn.sh
 
 to install docker huginn
@@ -241,6 +284,9 @@ create docker huginn
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 # jellyfin.sh
 
@@ -311,6 +357,18 @@ https://github.com/jupyterhub/jupyterhub-deploy-docker
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
+
+
+
+
+
+
+
+
+
 # mailcow.sh
 
 to install dockermailcow
@@ -378,6 +436,49 @@ https://github.com/linuxserver/docker-medusa
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# firefly-iii.sh
+
+to install docker firefly-iii
+
+* [create_docker_firefly-iii()](#createdockerfirefly-iii)
+
+
+## create_docker_firefly-iii()
+
+create docker firefly-iii
+https://github.com/firefly-iii/docker
+
+### Arguments
+
+* # @args $1 PORT_WEB
+* # @args $2 PATH_DB
+* # @args $3 PATH_EXPORT
+* # @args $4 PATH_UPLOAD
+* # @args $4 POSTGRES_PASSWORD
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # openvpn.sh
 
 to install docker openvpn
@@ -399,6 +500,12 @@ https://github.com/kylemanna/docker-openvpn
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
+
+
+
 
 # pyload.sh
 
@@ -423,6 +530,12 @@ https://github.com/linuxserver/docker-pyload/issues/3
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
+
+
+
 # recalbox.sh
 
 to install docker recalbox
@@ -443,6 +556,15 @@ https://github.com/recalbox/recalbox-docker-build
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
+
+
+
+
+
+
 
 # statping.sh
 
@@ -489,6 +611,12 @@ https://github.com/syncthing/syncthing
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
+
+
+
 # teamspeak.sh
 
 to install docker teamspeak
@@ -508,19 +636,27 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
+
+
+
 # install.sh
 
-install my favirote packages for ubuntu18.04 and tested 
+install my favirote packages for ubuntu18.04 and tested
 
 * [generate_apt_list_ubuntu()](#generateaptlistubuntu)
 * [install_basic()](#installbasic)
 * [install_cockpit()](#installcockpit)
 * [install_emojify()](#installemojify)
+* [install_signal_cli()](#installsignalcli)
+* [install_signal_ssh_text()](#installsignalsshtext)
 
 
 ## generate_apt_list_ubuntu()
 
-change the source.list with template in /etc 
+change the source.list with template in /etc
 
 _Function has no arguments._
 
@@ -542,7 +678,7 @@ _Function has no arguments._
 
 ## install_cockpit()
 
-install the cockpit to web 
+install the cockpit to web
 See your server in a web browser and perform system tasks with a mouse. It’s easy to start containers, administer storage, configure networks, and inspect logs.
 https://cockpit-project.org/
 
@@ -560,6 +696,35 @@ install the cockpit to web
 https://github.com/mrowa44/emojify
 
 _Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_signal_cli()
+
+install the cockpit to web
+https://github.com/AsamK/signal-cli
+
+### Arguments
+
+* # @args $1 username
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_signal_ssh_text()
+
+install the cockpit to web
+https://8192.one/post/ssh_login_notification_signal/
+
+### Arguments
+
+* # @args $1 phone number senders phone
+* # @args $2 phone number recipient
 
 ### Exit codes
 
@@ -636,8 +801,9 @@ _Function has no arguments._
 
 # utils.sh
 
-file containing the utils function for the project and other
+file containing the utils  for the project and other
 
+* [show_project_name()](#showprojectname)
 * [checkWSL()](#checkwsl)
 * [check_packages_install()](#checkpackagesinstall)
 * [aptupdate()](#aptupdate)
@@ -657,8 +823,22 @@ file containing the utils function for the project and other
 * [download_scp()](#downloadscp)
 * [upload_scp()](#uploadscp)
 * [chmod_sh_all()](#chmodshall)
+* [loop_files_func()](#loopfilesfunc)
 * [check_debian()](#checkdebian)
+* [get_current_ip()](#getcurrentip)
+* [get_geolocation()](#getgeolocation)
 
+
+## show_project_name()
+
+check if the os is debian or ubuntu
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 ## checkWSL()
 
@@ -717,7 +897,7 @@ _Function has no arguments._
 
 ## check_args()
 
-check for args for a function
+check for args for a
 
 ### Arguments
 
@@ -730,11 +910,11 @@ check for args for a function
 
 ## check_root()
 
-check if the user is root then execute the command 
+check if the user is root then execute the command
 
 ### Arguments
 
-* **$1** (a): bash command 
+* **$1** (a): bash command
 
 ### Exit codes
 
@@ -743,7 +923,7 @@ check if the user is root then execute the command
 
 ## check_root_func()
 
-check if the user is root then execute the bash func 
+check if the user is root then execute the bash func
 
 ### Arguments
 
@@ -904,9 +1084,49 @@ simple scp for downloading file for a remote dir scp/ssh
 * **0**: If successfull.
 * **1**: On failure
 
+## loop_files_func()
+
+loop find files func
+
+### Arguments
+
+* # @args $1 path to folder
+* # @args $2 regex of files
+* # @args $3 func
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 ## check_debian()
 
 check if the os is debian or ubuntu
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## get_current_ip()
+
+check the ip of the server
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## get_geolocation()
+
+check the geolocation based on ip of the server
+https://www.howtogeek.com/405088/how-to-get-your-systems-geographic-location-from-a-bash-script/
+
+_Function has no arguments._
 
 ### Exit codes
 

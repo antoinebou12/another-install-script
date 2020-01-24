@@ -3,6 +3,7 @@
 # @file uninstall.sh
 # @brief uninstall the project
 
+source src/menu.sh
 
 # @description uninstall
 #

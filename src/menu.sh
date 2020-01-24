@@ -65,11 +65,11 @@ install_simple_setup_menu(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_custom_setup_menu(){
-    declare -a CONTAINER_NAME_MENU=("cloud_torrent" "cloud_torrent" "ON" "heimdall" "heimdall" "ON" "huginn" "huginn" "OFF" "jellyfin" "jellyfin" "ON" "jenkins" "jenkins" "OFF" "jupyterhub" "jupyterhub" "OFF" "mailcow" "mailcow" "ON" "mcmyadmin" "mcmyadmin" "OFF" "medusa" "medusa" "OFF" "openvpn" "openvpn" "ON" "pyload" "pyload" "ON" "recalBox" "recalBox" "OFF" "statping" "statping" "ON" "syncthing" "syncthing" "ON" "teamspeak" "teamspeak" "OFF" )
-    SETUP_CONTAINER_MENU=$(whiptail --title "Container List" --checklist "Navigate with arrow and select with space" "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "$((${#CONTAINER_NAME_MENU[@]}/3))" "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
+    declare -a CONTAINER_NAME_MENU=("0-test-image" "0-test-image" "ON" "1-test-image" "1-test-image" "ON" "cloud_torrent" "cloud_torrent" "OFF" "heimdall" "heimdall" "OFF" "huginn" "huginn" "OFF" "jellyfin" "jellyfin" "OFF" "jenkins" "jenkins" "OFF" "jupyterhub" "jupyterhub" "OFF" "mailcow" "mailcow" "OFF" "mcmyadmin" "mcmyadmin" "OFF" "medusa" "medusa" "OFF" "openvpn" "openvpn" "OFF" "pyload" "pyload" "OFF" "recalBox" "recalBox" "OFF" "statping" "statping" "OFF" "syncthing" "syncthing" "OFF" "teamspeak" "teamspeak" "OFF" )
+    SETUP_CONTAINER_MENU=$(whiptail --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "$((${#CONTAINER_NAME_MENU[@]}/3))" -- "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
     if [[ $? == 0 ]] && [[ ! -z "$SETUP_CONTAINER_MENU" ]]; then
-        echo $SETUP_CONTAINER_MENU
-        return
+        manage_exec_containers_list
+        return 0
     else
         echo "Error"
         return 1
@@ -133,6 +133,3 @@ main_setup_menu(){
     *) ;;
     esac
 }
-
-
-main_setup_menu

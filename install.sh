@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# @file .sh
+# @file install.sh
 # @brief file containing the utils  for the project and other
 
 source src/menu.sh
