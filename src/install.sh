@@ -16,7 +16,7 @@ source "$DIR"/utils.sh
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function generate_apt_list_ubuntu(){
+ generate_apt_list_ubuntu(){
     ../etc/source.list | tee /etc/apt/source.list
     return 0
 }
@@ -26,7 +26,7 @@ function generate_apt_list_ubuntu(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function install_basic(){
+ install_basic(){
     # apt-get ubuntu 18.04
     apt-get update -qq 
     apt-get install snapd
@@ -46,7 +46,7 @@ function install_basic(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function install_cockpit(){
+ install_cockpit(){
     apt-get -qq update
     apt-get -q -y install cockpit cockpit-docker cockpit-machines cockpit-packagekit
     if [[ "$(checkWSL arg)" != "0" ]]; then
@@ -61,6 +61,6 @@ function install_cockpit(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function install_emojify(){
+ install_emojify(){
     sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
 }

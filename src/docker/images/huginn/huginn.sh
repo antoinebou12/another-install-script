@@ -10,6 +10,6 @@
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_huginn(){
+ create_docker_huginn(){
     echo "not implemented yet"
 }

@@ -1,13 +1,12 @@
 # another-install-script
 
-
 [![Build Status](https://travis-ci.com/antoinebou13/another-install-script.svg?token=MUq69udyyqAR24bsXgRq&branch=master)](https://travis-ci.com/antoinebou13/another-install-script)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/another-install-script?style=flat)
 ![Codecov](https://img.shields.io/codecov/c/github/antoinebou13/another-install-script?style=flat&token=FcTtxpEGhF)
 ![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/another-install-script?style=flat)
 ![GitHub](https://img.shields.io/github/license/antoinebou13/another-install-script?style=flat)
 
-
+Another install Script is a W.I.P project/script to install docker container for my personal server
 
 ## The story behind the project
 
@@ -16,27 +15,17 @@ After navigating r/selfhosting, I saw the multiple of several services/servers t
 After learning a bit about docker. Also, I found so GitHub repo that tries to do the same thing with their favorite container.
 I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall app in this app.
 
+## How to install 
 
-## Project Structure
+For now only work on ubuntu and only tested on ubuntu18.04
+
+```bash 
+git clone --recursive https://github.com/antoinebou13/personal-vps.git
+cd personal-vps
+bash setup.sh
 ```
-+-- _config.yml
-+-- _drafts
-|   +-- begin-with-the-crazy-ideas.textile
-|   +-- on-simplicity-in-technology.markdown
-+-- _includes
-|   +-- footer.html
-|   +-- header.html
-+-- _layouts
-|   +-- default.html
-|   +-- post.html
-+-- _posts
-|   +-- 2007-10-29-why-every-programmer-should-play-nethack.textile
-|   +-- 2009-04-26-barcamp-boston-4-roundup.textile
-+-- _data
-|   +-- members.yml
-+-- _site
-+-- uninstall.sh
-``
+
+
 
 ## List of the services/server
 
@@ -88,15 +77,47 @@ I am trying to do with this project is to make a simple, extensible and customiz
     - [dry](https://github.com/moncho/dry)
     - [emojify](https://github.com/mrowa44/emojify)
 
-## How to install 
+## Project Structure
 
-For now only work on ubuntu and only tested on ubuntu18.04
+A simple project overview to with the explaination of each important file
 
-```bash 
-git clone --recursive https://github.com/antoinebou13/personal-vps.git
-cd personal-vps
-bash setup.sh
 ```
++-- ansible
+|   +-- vagrant
+|       +-- ...
+|   +-- ansible.sh
++-- docs
+|   +-- vendor
+|       +-- ...
+|   +-- docs.md
+|   +-- generate_docs.md
++-- etc
+|   +-- ...
++-- src
+|   +-- docker
+|   |   +-- images
+|   |   |   +-- $container_name
+|   |   |   |    +-- docker-compose.yml
+|   |   |   |    +-- $container_name.sh
+|   |   |   |    +-- ...
+|   |   +-- docker.sh
+|   |   +-- container.sh
+|   +-- install.sh
+|   +-- menu.sh
+|   +-- utils.sh
++-- setup.sh
++-- uninstall.sh
+```
+
+| Path                       |                            Explanation                           |
+|----------------------------|:----------------------------------------------------------------:|
+| ansible                    |  Ansible playbook script to install the project and for testing  |
+| ansible/vagrant            |             Vagrant to test the ansible installation             |
+| docs                       | The directory for the documentation for the code and the project |
+| docs/vendor                |         The vendor program to generate the documentation         |
+| src                        |               The path for the code for the project              |
+| src/docker                 |              The path for all docker related script              |
+| src/docker/$container_name |  The path for docker container with a script and docker-compose  |
 
 
 ## How to run coverage and tests

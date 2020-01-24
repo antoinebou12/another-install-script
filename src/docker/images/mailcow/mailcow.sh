@@ -9,7 +9,7 @@
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_mailcow(){
+ create_docker_mailcow(){
     set -e
     mkdir /home/docker/mailcow
     cd /home/docker/mailcow || return 1

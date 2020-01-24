@@ -10,7 +10,7 @@
 # @args $3 PORT_WEB
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_medusa(){
+ create_docker_medusa(){
     mkdir /home/docker/medusa
     PATH_CONFIG=${1:-"/home/docker/medusa/config"}
     PATH_DOWNLOAD=${2:-"/home/docker/medusa/download"}

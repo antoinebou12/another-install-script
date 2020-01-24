@@ -11,7 +11,7 @@
 # @args $1 the path to jenkins data volume
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_jenkins(){
+ create_docker_jenkins(){
     local PORT_WEB=${1:-8080}
     local PORT_JENKINS=${2:-25565}
     local JENKINS_DATA=${3:"/home/docker/jenkins"}

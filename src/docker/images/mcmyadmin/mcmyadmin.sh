@@ -12,7 +12,7 @@
 # @args $4 port for the minecraft server
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_mcmyadmin(){
+ create_docker_mcmyadmin(){
     mkdir /home/docker/mcmydocker
     name=${1:-"mcmyadmin"}
     path_data=${2:-"/home/docker/minecraft"}

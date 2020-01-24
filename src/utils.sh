@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 #
 # @file utils.sh
-# @brief file containing the utils function for the project and other
+# @brief file containing the utils  for the project and other
 
 
 # @description check if the system is a WSL
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function checkWSL() {
+ checkWSL() {
     if [ -n "$WSL_DISTRO_NAME" ]; then
         return 0
     fi
@@ -21,7 +21,7 @@ function checkWSL() {
 # @args $1 package name
 # @exitcode 0 If installed
 # @exitcode 1 if not installed
-function check_packages_install(){
+ check_packages_install(){
     output=$(dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$'; echo "$?")
     return "$output"
 }
@@ -31,7 +31,7 @@ function check_packages_install(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function aptupdate(){
+ aptupdate(){
     apt-get -qq update & apt-get install -f && apt-get autoclean
     return 0
 }
@@ -42,7 +42,7 @@ function aptupdate(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function aptupgrade(){
+ aptupgrade(){
     apt-get -qq update && apt-get -q upgrade && apt-get -q dist-upgrade && apt-get -q install -f && apt-get -q autoclean
     return 0
 }
@@ -53,17 +53,17 @@ function aptupgrade(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function aptclean(){
+ aptclean(){
     apt-get -q install -f && apt-get -q autoclean && sudo apt-get -y -q autoremove
     return 0
 }
 
-# @description check for args for a function
+# @description check for args for a 
 #
 # @args $@ args
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function check_args(){
+ check_args(){
     if [[ "$#" -eq 0 ]]; then
         return 1;
     fi
@@ -75,7 +75,7 @@ function check_args(){
 # @arg $1 a bash command 
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function check_root(){
+ check_root(){
     if [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
         if [[ "$UID" -gt 0  ]]; then
@@ -93,7 +93,7 @@ function check_root(){
 # @arg $1 a bash func
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function check_root_func(){
+ check_root_func(){
     if  [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
         if  [[ "$UID" -gt 0 ]]; then
@@ -112,7 +112,7 @@ function check_root_func(){
 # @arg $1 file
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function get_mimetype(){
+ get_mimetype(){
   file --mime-type "$1" | sed 's/.*: //' 
   return 0
 }
@@ -125,7 +125,7 @@ function get_mimetype(){
 # @arg $5 email attachement file
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function send_email() {
+ send_email() {
     # from="$1"
     to="$2"
     subject="$3"
@@ -141,7 +141,7 @@ function send_email() {
 # @arg $1 the config fiel path
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function config_read_file() {
+ config_read_file() {
     (grep -E "^${2}=" -m 1 "${1}" 2>/dev/null || echo "VAR=__UNDEFINED__") | head -n 1 | cut -d '=' -f 2-;
     return 0
 }
@@ -152,7 +152,7 @@ function config_read_file() {
 # @arg $2 the config file var
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function config_get() {
+ config_get() {
     # shellcheck disable=SC2086
     val="$(config_read_file ${1} ${2})";
     if [ "${val}" = "__UNDEFINED__" ]; then
@@ -169,7 +169,7 @@ function config_get() {
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function get_timezones() {
+ get_timezones() {
 	TZ="$(cat /etc/timezone)"
     echo TZ
     export TZ
@@ -181,7 +181,7 @@ function get_timezones() {
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function check_command_exist() {
+ check_command_exist() {
 	if [[ $(command -v "$@") ]]; then
         return 0 
     else
@@ -195,7 +195,7 @@ function check_command_exist() {
 # @args $1 port number
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function check_port(){
+ check_port(){
     if lsof -i:"$1" -P -n -t >/dev/null ; then
         return 0
     else
@@ -208,7 +208,7 @@ function check_port(){
 # @args $# username of the user you want to add
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function add_sudo(){
+ add_sudo(){
     while [[ -n $1 ]]; do
         usermod -aG sudo "$1"
         echo "$1    ALL=(ALL:ALL) ALL" >> /etc/sudoers;
@@ -224,7 +224,7 @@ function add_sudo(){
 # @args $3 file path for the local device
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function download_scp(){
+ download_scp(){
     scp "$1":"$2" "$3"
     return 0
 }
@@ -236,7 +236,7 @@ function download_scp(){
 # @args $3 file path on remote device
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function upload_scp(){
+ upload_scp(){
     scp "$1" "$2":"$3"
     return 0
 }
@@ -246,7 +246,7 @@ function upload_scp(){
 # @args $1 path to folder
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function chmod_sh_all(){
+ chmod_sh_all(){
     names=$(find $1 -iname "*.sh")
 
     SAVEIFS=$IFS   # Save current IFS
@@ -264,7 +264,7 @@ function chmod_sh_all(){
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function check_debian(){
+ check_debian(){
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
         # shellcheck source=/etc/os-release
         # shellcheck disable=SC1091
@@ -277,4 +277,31 @@ function check_debian(){
         echo "Please use this project on an Ubuntu or Debian system tested on (Ubuntu18.04)"
         return 1
     fi
+}
+
+ show_project_name(){
+    cat << EOF
+
+    ___                   __   __               
+   /   |   ____   ____   / /_ / /_   ___   _____
+  / /| |  / __ \ / __ \ / __// __ \ / _ \ / ___/
+ / ___ | / / / // /_/ // /_ / / / //  __// /    
+/_/  |_|/_/ /_/ \____/ \__//_/ /_/ \___//_/     
+                                                
+
+    ____              __          __ __
+   /  _/____   _____ / /_ ____ _ / // /
+   / / / __ \ / ___// __// __  // // / 
+ _/ / / / / /(__  )/ /_ / /_/ // // /  
+/___//_/ /_//____/ \__/ \____//_//_/   
+
+
+   _____              _         __ 
+  / ___/ _____ _____ (_)____   / /_
+  \__ \ / ___// ___// // __ \ / __/
+ ___/ // /__ / /   / // /_/ // /_  
+/____/ \___//_/   /_// ____/ \__/  
+                    /_/            
+
+EOF
 }

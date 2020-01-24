@@ -9,7 +9,7 @@
 # @args $2 PATH_STATPING
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_statping(){
+ create_docker_statping(){
     mkdir /home/docker/statping/
     PORT_WEB=${1:-"8084"}
     PATH_STATPING=${2:-"/home/docker/statping/"}

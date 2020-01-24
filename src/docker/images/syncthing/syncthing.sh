@@ -11,7 +11,7 @@
 # @args $3 PATH_SYNC
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_syncthing(){
+ create_docker_syncthing(){
     mkdir /home/docker/syncthing/
     PORT_WEB=${1:-"6889"}
     PORT_SYNC=${2:-"6889"}

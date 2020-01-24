@@ -9,7 +9,7 @@
 # @args $1 port number for the web server
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_jupyter_hub(){
+ create_docker_jupyter_hub(){
     JUPYTERHUB_PORT=$1 docker-compose up -d
     return 0
 }

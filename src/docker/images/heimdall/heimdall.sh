@@ -11,7 +11,7 @@
 # @args $3 PORT_WEB_HTTPS
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_heimdall(){
+ create_docker_heimdall(){
     PATH_CONFIG=${1:-:"/home/docker/heimdall/config"}
     PORT_WEB=${2:-:8080}
     PORT_WEB_HTTPS=${3:-:8443}

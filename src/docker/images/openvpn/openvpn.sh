@@ -10,7 +10,7 @@
 # @args $2 clientname that use the openvpn
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_openvpn(){
+ create_docker_openvpn(){
     set -e
     mkdir /home/docker/openvpn
     cd /home/docker/openvpn

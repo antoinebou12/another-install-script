@@ -9,7 +9,7 @@ source "$DIR"/../src/utils.sh
 source "$DIR"/../src/docker/docker.sh
 
 
-function install_bats(){
+ install_bats(){
     if [[ ! $(command -v bats) ]]; then
         if  [[ "$UID" -gt 0 ]]; then
             sudo apt-get install bats
@@ -21,7 +21,7 @@ function install_bats(){
 }
 
 
-function run_tests(){
+ run_tests(){
     bats "$DIR"/bats/utils.bats
     bats "$DIR"/bats/docker.bats
 }

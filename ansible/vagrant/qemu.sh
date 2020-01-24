@@ -7,7 +7,7 @@
 # @description install the quemu 
 #
 # @noargs
-function install_qemu(){
+ install_qemu(){
     apt-get install qemu-kvm qemu virt-manager virt-viewer libvirt-bin
 }
 
@@ -15,7 +15,7 @@ function install_qemu(){
 #
 # @args $1 img of the os
 # @args $2 the num of gb for img
-function create_qemu_img(){
+ create_qemu_img(){
     qemu-img create -f qcow2 "$1" "$2"
 }
 
@@ -25,7 +25,7 @@ function create_qemu_img(){
 # @args $2 the iso of the os
 # @args $3 boot cd
 # @args $4 mem for the os
-function install_qemu_32vm(){
+ install_qemu_32vm(){
     qemu-system-xi386 -hda "$1" -boot d -cdrom "$2" "$3" -m "$4"
 }
 
@@ -33,6 +33,6 @@ function install_qemu_32vm(){
 #
 # @args $1 img of the os
 # @args $1 img of the os
-function run_qemu_32vm(){
+ run_qemu_32vm(){
     qemu -hda "$1" -m "$2"
 }

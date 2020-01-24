@@ -8,7 +8,7 @@
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function use_shellcheck(){
+ use_shellcheck(){
     names=$(find ../ -type d \( -path ../tests/coverage -o -path ../tests/bin -o -path ../etc -o -path /tmp -o -path ../docs/vendor \) -prune -o -iname "*.sh" -print)
 
     SAVEIFS=$IFS   # Save current IFS
@@ -29,7 +29,7 @@ function use_shellcheck(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function install_shellcheck(){
+ install_shellcheck(){
     if [[ ! $(command -v shellcheck) ]]; then
         if  [[ "$UID" -gt 0 ]]; then
             sudo apt-get install shellcheck

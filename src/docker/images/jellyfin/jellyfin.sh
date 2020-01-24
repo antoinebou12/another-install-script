@@ -13,7 +13,7 @@
 # @args $5 PORT_OTHER 8920
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_jellyfin(){
+ create_docker_jellyfin(){
     PATH_TO_LIBRARY=${1:-"/home/docker/jellyfin/config"}
     PATH_TO_TV=${2:-"/home/docker/jellyfin/tv"}
     PATH_TO_MOVIE=${3:-"/home/docker/jellyfin/movie"}

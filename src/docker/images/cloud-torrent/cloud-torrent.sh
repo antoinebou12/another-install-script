@@ -12,7 +12,7 @@
 # @args $4 PATH_DOWNLOAD
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function create_docker_cloud-torrent(){
+ create_docker_cloud-torrent(){
     cd /home/docker/ || return 1
     PORT_WEB=${1:-"6889"}
     USERNAME=${2:-"admin"}

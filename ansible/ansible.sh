@@ -7,7 +7,7 @@
 # @description install ansible
 #
 # @noargs
-function install_ansible(){
+ install_ansible(){
     if  [[ "$UID" -gt 0 ]]; then
         sudo apt-get install ansible
     else
