@@ -12,6 +12,8 @@ source "$DIR"/../utils.sh
 # @description install the docker
 #
 # @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 install_docker(){
     echo "Install Docker"
     # curl -sSL https://get.docker.com/ | CHANNEL=stable bash
@@ -28,8 +30,10 @@ install_docker(){
 # @description install the docker compose
 #
 # @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 install-docker_compose(){
-    echo "Install Docker"
+    echo "Install Docker Compose"
     curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
     ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
@@ -40,7 +44,10 @@ install-docker_compose(){
 # @description install the docker extra utils dry
 #
 # @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 install_docker_extra(){
+    echo "Install Docker Extra"
     curl -sSf https://moncho.github.io/dry/dryup.sh | sh
     return 0 
 }
@@ -48,22 +55,44 @@ install_docker_extra(){
 # @description prune all the volumes and images
 #
 # @noargs
-prune_images_volumes(){
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+prune_images_volumes_all(){
+    echo "Prune all Docker Images Volumes "
     docker image prune -a
     docker system prune --volumes
+    return 0
 }
 
 # @description stop all container
 #
 # @noargs
-stop_all(){
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+stop_containers_all(){
+    echo "Stop all Docker Containers"
     docker container stop "$(docker container ls -aq)"
+    return 0
+}
+
+# @description stop all container
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_containers_all(){
+    echo "Remove all Docker Containers"
+    docker rm $(docker ps -a -q)
+    return 0
 }
 
 # @description this  creates the volumes, services and backup directories. It then assisgns the current user to the ACL to give full read write access
 # 
 # @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 docker_setfacl() {
+    echo "Create Folder for Docker User"
 	[ -d /home/docker/services ] || mkdir /home/docker/services
 	[ -d /home/docker/volumes ] || mkdir /home/docker/volumes
 	[ -d /home/docker/backups ] || mkdir /home/docker/backups
@@ -73,12 +102,16 @@ docker_setfacl() {
 	[ "$(getfacl /home/docker/volumes | grep -c "default:user:$USER")" -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/volumes
 	# shellcheck disable=SC2086
     [ "$(getfacl /home/docker/backups | grep -c "default:user:$USER")" -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/backups
+    return 0
 }
 
 # @description create docker user and current user in the group and create dir
 #
 # @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 create_docker_user(){
+    echo "Create Docker User"
     useradd docker
     passwd docker
     usermod -aG docker docker
@@ -91,7 +124,10 @@ create_docker_user(){
 # @description login as the docker user
 #
 # @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 login_docker_user(){
+    echo "Login Docker User"
     su - docker
     return 0
 }
@@ -102,6 +138,7 @@ login_docker_user(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_id_backup(){
+    echo "Create Docker Container Backup $1"
     # shellcheck disable=SC2086,SC2143
     if [ ! "$(docker ps -a | grep $1)" ]; then
         container_name="$(docker ps | grep $1 | awk '{ print $2 }')"
@@ -119,6 +156,7 @@ create_docker_id_backup(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_name_backup(){
+    echo "Create Docker Container Backup $1"
     # shellcheck disable=SC2086,SC2143
     if [ ! "$(docker ps -a | grep $1)" ]; then
         # shellcheck disable=SC2086

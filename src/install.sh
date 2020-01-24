@@ -16,6 +16,7 @@ source "$DIR"/utils.sh
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 generate_apt_list_ubuntu() {
+    echo "Create Curated apt list"
     ../etc/source.list | tee /etc/apt/source.list
     return 0
 }
@@ -26,6 +27,7 @@ generate_apt_list_ubuntu() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_basic() {
+    echo "Install the basic packages"
     # apt-get ubuntu 18.04
     apt-get update -qq
     apt-get install snapd
@@ -45,6 +47,7 @@ install_basic() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_cockpit() {
+    echo "Install Cockpit"
     apt-get -qq update
     apt-get -q -y install cockpit cockpit-docker cockpit-machines cockpit-packagekit
     if [[ "$(checkWSL arg)" != "0" ]]; then
@@ -60,6 +63,7 @@ install_cockpit() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_emojify() {
+    echo "Install Emojify"
     sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
 }
 
@@ -71,6 +75,7 @@ install_emojify() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_signal_cli() {
+    echo "Install Signal cli"
     wget https://github.com/AsamK/signal-cli/releases/download/v0.6.5/signal-cli-0.6.5.tar.gz
     sudo tar xf signal-cli-0.6.5.tar.gz -C /opt
     sudo ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/
@@ -88,6 +93,7 @@ install_signal_cli() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_signal_ssh_text(){
+    echo "Install Signal on login ssh"
     local DATE_EXEC="$(date "+%d %b %Y %H:%M")"
     local TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
     if [ -n "$SSH_CLIENT" ] && [ -z "$TMUX" ]; then

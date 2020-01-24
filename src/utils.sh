@@ -3,13 +3,13 @@
 # @file utils.sh
 # @brief file containing the utils  for the project and other
 
-
 # @description check if the os is debian or ubuntu
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 show_project_name() {
+    printf "%0$(tput cols)d" 0 | tr '0' '='
     cat <<EOF
 
     ___                   __   __               
@@ -31,9 +31,9 @@ show_project_name() {
   \__ \ / ___// ___// // __ \ / __/
  ___/ // /__ / /   / // /_/ // /_  
 /____/ \___//_/   /_// ____/ \__/  
-                    /_/            
-
+                    /_/           
 EOF
+    printf "%0$(tput cols)d" 0 | tr '0' '='
     return 0
 }
 
@@ -289,14 +289,14 @@ chmod_sh_all() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 loop_files_func() {
-    local names=$(find "$1" -name "$2" )
+    local names=$(find "$1" -name "$2")
 
-    local SAVEIFS="$IFS"   # Save current IFS
+    local SAVEIFS="$IFS" # Save current IFS
     local IFS=$'\n'      # Change IFS to new line
     local names=($names) # split to array $names
-    local IFS="$SAVEIFS"   # Restore IFS
+    local IFS="$SAVEIFS" # Restore IFS
 
-    for (( i=0; i<${#names[@]}; i++ )); do
+    for ((i = 0; i < ${#names[@]}; i++)); do
         echo "$i: ${names[$i]}"
         "$3" "${names[$i]}"
     done

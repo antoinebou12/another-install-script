@@ -3,7 +3,7 @@
 # @file uninstall.sh
 # @brief uninstall the project
 
-source src/menu.sh
+source src/docker/docker.sh
 source src/utils.sh
 
 # @description uninstall everything
@@ -13,8 +13,9 @@ source src/utils.sh
 # @exitcode 1 On failure
 uninstall() {
 
-    stop_all
-    prune_images_volumes
+    stop_containers_all
+    prune_images_volumes_all
+    remove_containers_all
 
     aptupdate
     apt-get remove -y snapd bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq docker cockpit cockpit-docker cockpit-machines cockpit-packagekit docker-ce docker-ce-cli containerd.io
