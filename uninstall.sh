@@ -4,13 +4,30 @@
 # @brief uninstall the project
 
 source src/menu.sh
+source src/utils.sh
 
-# @description uninstall
+# @description uninstall everything
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- uninstall(){
-    echo "not implemeted yet"
+uninstall() {
+
+    stop_all
+    prune_images_volumes
+
+    aptupdate
+    apt-get remove -y snapd bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq docker cockpit cockpit-docker cockpit-machines cockpit-packagekit docker-ce docker-ce-cli containerd.io
+    aptclean
+
+    rm -rf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/
+    rm -rf /usr/local/bin/emojify
+    rm -rf /usr/local/bin/docker-compose
+    rm -rf /usr/bin/docker-compose
+
+    userdel -r docker
     return 0
 }
+
+uninstall
+exit 0

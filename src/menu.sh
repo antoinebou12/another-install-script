@@ -77,17 +77,6 @@ install_custom_setup_menu(){
     return 0
 }
 
-# @description whiptails install no docker setup menu
-#
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-install_no_docker_setup_menu(){
-    aptupdate
-    install_basic
-    install_cockpit
-    install_emojify
-    return 0
-}
 
 # @description show help for the setup script
 #
@@ -109,7 +98,6 @@ main_setup_menu(){
     SETUP_MENU=$(whiptail --title "Main Menu" --menu --notags "" 20 78 12 -- \
 	"install_simple" "Simple Installation" \
 	"install_custom" "Custom Installation" \
-	"install_no_docker" "No Docker Installation" \
 	"help" "Help" \
     "exit" "Exit" \
 	3>&1 1>&2 2>&3)
@@ -120,9 +108,6 @@ main_setup_menu(){
         ;;
     "install_custom")
         install_custom_setup_menu
-        ;;
-    "install_no_docker")
-        install_no_docker_setup_menu
         ;;
     "help")
         cat docs/help.txt

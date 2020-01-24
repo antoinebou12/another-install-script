@@ -82,32 +82,32 @@ Some services/server cannot be installed at the same time
 
 ## List of other installed program
 
-    - build-essential
-    - zip
-    - unzip
-    - git
-    - python3
-    - python3-pip
-    - alsa-utils
-    - wireless-tools
-    - wpasupplicant
-    - default-jre
-    - jq
-    - [vim](https://www.vim.org/)
-    - [snapd](https://snapcraft.io/)
-    - [bat](https://github.com/sharkdp/bat)
-    - [nnn](https://github.com/jarun/nnn)
-    - [nmap](https://nmap.org/)
-    - [wget](https://www.gnu.org/software/wget/)
-    - [curl](https://github.com/curl/curl)
-    - [bats](https://github.com/bats-core/bats-core)
-    - [mlocate](https://wiki.archlinux.org/index.php/Mlocate)
-    - [mutt](https://gitlab.com/muttmua/mutt)
-    - [cmake](https://cmake.org/)
-    - [docker](https://www.docker.com/)
-    - [docker-compose](https://docs.docker.com/compose/)
-    - [dry](https://github.com/moncho/dry)
-    - [emojify](https://github.com/mrowa44/emojify)
+* build-essential
+* zip
+* unzip
+* git
+* python3
+* python3-pip
+* alsa-utils
+* wireless-tools
+* wpasupplicant
+* default-jre
+* jq
+* [vim](https://www.vim.org/)
+* [snapd](https://snapcraft.io/)
+* [bat](https://github.com/sharkdp/bat)
+* [nnn](https://github.com/jarun/nnn)
+* [nmap](https://nmap.org/)
+* [wget](https://www.gnu.org/software/wget/)
+* [curl](https://github.com/curl/curl)
+* [bats](https://github.com/bats-core/bats-core)
+* [mlocate](https://wiki.archlinux.org/index.php/Mlocate)
+* [mutt](https://gitlab.com/muttmua/mutt)
+* [cmake](https://cmake.org/)
+* [docker](https://www.docker.com/)
+* [docker-compose](https://docs.docker.com/compose/)
+* [dry](https://github.com/moncho/dry)
+* [emojify](https://github.com/mrowa44/emojify)
 
 ## Project Structure
 
