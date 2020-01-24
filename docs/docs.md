@@ -181,6 +181,12 @@ check if the port is used
 
 
 
+
+
+
+
+
+
 # cloud-torrent.sh
 
 to install docker cloud-torrent
@@ -507,6 +513,9 @@ https://github.com/kylemanna/docker-openvpn
 
 
 
+
+
+
 # pyload.sh
 
 to install docker pyload
@@ -738,7 +747,6 @@ setup menu and logic
 * [password_dialog()](#passworddialog)
 * [install_simple_setup_menu()](#installsimplesetupmenu)
 * [install_custom_setup_menu()](#installcustomsetupmenu)
-* [install_no_docker_setup_menu()](#installnodockersetupmenu)
 * [help_setup_menu()](#helpsetupmenu)
 * [main_setup_menu()](#mainsetupmenu)
 
@@ -764,15 +772,6 @@ whiptail install simple setup menu
 ## install_custom_setup_menu()
 
 whiptails install custom setup menu
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## install_no_docker_setup_menu()
-
-whiptails install no docker setup menu
 
 ### Exit codes
 
@@ -1133,6 +1132,9 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
 # coverage.sh
 
 file generate the code coverage for bats/bash
@@ -1221,7 +1223,7 @@ uninstall the project
 
 ## uninstall()
 
-uninstall
+uninstall everything
 
 _Function has no arguments._
 

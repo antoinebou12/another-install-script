@@ -18,6 +18,7 @@ uninstall() {
 
     aptupdate
     apt-get remove -y snapd bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq docker cockpit cockpit-docker cockpit-machines cockpit-packagekit docker-ce docker-ce-cli containerd.io
+    snap remove hub
     aptclean
 
     rm -rf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/
