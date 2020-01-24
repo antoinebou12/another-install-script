@@ -4,12 +4,23 @@
 # @brief file containing the utils  for the project and other
 
 
-# @description check if the os is debian or ubuntu
+# @description print line ======
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+print_line(){
+    printf "%0$(tput cols)d" 0 | tr '0' '='
+    return 0
+}
+
+# @description print ascii art
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 show_project_name() {
+    print_line
     cat <<EOF
 
     ___                   __   __               
@@ -31,9 +42,9 @@ show_project_name() {
   \__ \ / ___// ___// // __ \ / __/
  ___/ // /__ / /   / // /_/ // /_  
 /____/ \___//_/   /_// ____/ \__/  
-                    /_/            
-
+                    /_/           
 EOF
+    print_line
     return 0
 }
 
@@ -46,6 +57,69 @@ checkWSL() {
         return 0
     fi
     return 1
+}
+
+# @description check for args for a
+#
+# @args $@ args
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+check_args() {
+    if [[ "$#" -eq 0 ]]; then
+        return 1
+    fi
+    return 0
+}
+
+# @description check root user
+#
+# @arg $1 a bash command
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+check_root() {
+    if [[ "$UID" -gt 0 ]]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+# @description check if the user is root then execute the command
+#
+# @arg $1 a bash command
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+exec_root() {
+    if [[ ! "$#" -eq 0 ]]; then
+        SUDO=''
+        if [[ "$UID" -gt 0 ]]; then
+            SUDO='sudo'
+        fi
+        echo "$SUDO $1"
+        $SUDO $1
+        return 0
+    fi
+    return 1
+
+}
+
+# @description check if the user is root then execute the bash func
+#
+# @arg $1 a bash func
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+exec_root_func() {
+    if [[ ! "$#" -eq 0 ]]; then
+        SUDO=''
+        if [[ "$UID" -gt 0 ]]; then
+            SUDO='sudo'
+        fi
+        # shellcheck disable=SC2086
+        $SUDO bash -c "$(declare -f ${1}); ${1}"
+        return 0
+    fi
+    return 1
+
 }
 
 # @description check if the packages exist
@@ -67,8 +141,10 @@ check_packages_install() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptupdate() {
-    apt-get -qq update &
-    apt-get install -f && apt-get autoclean
+    echo "apt update"
+    exec_root "apt-get -qq update" > /dev/null
+    exec_root "apt-get -qq install -f" > /dev/null
+    exec_root "apt-get -qq autoclean" > /dev/null
     return 0
 }
 
@@ -78,7 +154,36 @@ aptupdate() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptupgrade() {
-    apt-get -qq update && apt-get -q upgrade && apt-get -q dist-upgrade && apt-get -q install -f && apt-get -q autoclean
+    echo "apt upgrade"
+    exec_root "apt-get -qq update" > /dev/null
+    exec_root "apt-get -qq upgrade" > /dev/null
+    exec_root "apt-get -qq dist-upgrade"  > /dev/null
+    exec_root "apt-get -qq install -f"  > /dev/null
+    exec_root "apt-get -qq autoclean" > /dev/null
+    return 0
+}
+
+# @description apt-get install package
+#
+# @args $@ packages to install
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+aptinstall() {
+    echo "apt install"
+    aptupdate > /dev/null
+    exec_root "apt-get -qq install -y $@" > /dev/null
+    return 0
+}
+
+# @description apt-get install package
+#
+# @args $@ packages to remove
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+aptremove() {
+    echo "apt remove"
+    aptupdate > /dev/null
+    exec_root "apt-get -qq remove -y $@" > /dev/null
     return 0
 }
 
@@ -88,57 +193,11 @@ aptupgrade() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptclean() {
-    apt-get -q install -f && apt-get -q autoclean && sudo apt-get -y -q autoremove
+    echo "apt clean"
+    exec_root "apt-get -qq install -f" > /dev/null
+    exec_root "apt-get -qq autoclean -y" > /dev/null
+    exec_root "apt-get -qq autoremove -y" > /dev/null
     return 0
-}
-
-# @description check for args for a
-#
-# @args $@ args
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-check_args() {
-    if [[ "$#" -eq 0 ]]; then
-        return 1
-    fi
-    return 0
-}
-
-# @description check if the user is root then execute the command
-#
-# @arg $1 a bash command
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-check_root() {
-    if [[ "$(check-args $#)" -eq 0 ]]; then
-        SUDO=''
-        if [[ "$UID" -gt 0 ]]; then
-            SUDO='sudo'
-        fi
-        "$SUDO" "$1"
-        return 0
-    fi
-    return 1
-
-}
-
-# @description check if the user is root then execute the bash func
-#
-# @arg $1 a bash func
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-check_root_func() {
-    if [[ "$(check-args $#)" -eq 0 ]]; then
-        SUDO=''
-        if [[ "$UID" -gt 0 ]]; then
-            SUDO='sudo'
-        fi
-        # shellcheck disable=SC2086
-        $SUDO bash -c "$(declare -f ${1}); ${1}"
-        return 0
-    fi
-    return 1
-
 }
 
 # @description check mimetype of a file
@@ -227,7 +286,7 @@ check_command_exist() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 check_port() {
-    if lsof -i:"$1" -P -n -t >/dev/null; then
+    if exec_root "lsof -i:$1 -P -n -t >/dev/null"; then
         return 0
     else
         return 1
@@ -241,8 +300,8 @@ check_port() {
 # @exitcode 1 On failure
 add_sudo() {
     while [[ -n $1 ]]; do
-        usermod -aG sudo "$1"
-        echo "$1    ALL=(ALL:ALL) ALL" >>/etc/sudoers
+        exec_root "usermod -aG sudo $1"
+        exec_root "echo '$1    ALL=(ALL:ALL) ALL' >>/etc/sudoers"
         shift # shift all parameters;
     done
     return 0
@@ -289,16 +348,16 @@ chmod_sh_all() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 loop_files_func() {
-    local names=$(find "$1" -name "$2" )
+    local names=$(find "$1" -name "$2")
 
-    local SAVEIFS="$IFS"   # Save current IFS
+    local SAVEIFS="$IFS" # Save current IFS
     local IFS=$'\n'      # Change IFS to new line
     local names=($names) # split to array $names
-    local IFS="$SAVEIFS"   # Restore IFS
+    local IFS="$SAVEIFS" # Restore IFS
 
-    for (( i=0; i<${#names[@]}; i++ )); do
+    for ((i = 0; i < ${#names[@]}; i++)); do
         echo "$i: ${names[$i]}"
-        "$3" "${names[$i]}"
+        $3 "${names[$i]}"
     done
 
     return 0

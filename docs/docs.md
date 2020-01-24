@@ -72,7 +72,61 @@ file containing the utils  for the project and other
 
 list of container and other info
 
+* [import_all_sh()](#importallsh)
+* [manage_exec_containers_list()](#manageexeccontainerslist)
+* [list_container()](#listcontainer)
+* [list_src_images()](#listsrcimages)
 
+
+## import_all_sh()
+
+import all the /docker/images/.../*.sh based on selected
+
+### Arguments
+
+* # @args $1 path of root of docker images
+* # @args $2 name of the files
+* # @args $1
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## manage_exec_containers_list()
+
+manage exec containers sh in the images src
+
+### Arguments
+
+* # @args $1 SETUP_CONTAINER_MENU
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## list_container()
+
+list of the container
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## list_src_images()
+
+show the list of src images
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # docker.sh
 
@@ -81,11 +135,12 @@ to install docker docker compose on ubuntu18.04
 * [install_docker()](#installdocker)
 * [install-docker_compose()](#install-dockercompose)
 * [install_docker_extra()](#installdockerextra)
-* [prune_images_volumes()](#pruneimagesvolumes)
-* [stop_all()](#stopall)
+* [prune_images_volumes_all()](#pruneimagesvolumesall)
+* [stop_containers_all()](#stopcontainersall)
+* [remove_containers_all()](#removecontainersall)
 * [docker_setfacl()](#dockersetfacl)
 * [create_docker_user()](#createdockeruser)
-* [login_docker_user()](#logindockeruser)
+* [do_as_docker_user()](#doasdockeruser)
 * [create_docker_id_backup()](#createdockeridbackup)
 * [create_docker_name_backup()](#createdockernamebackup)
 * [create_docker_backup_all()](#createdockerbackupall)
@@ -97,11 +152,21 @@ install the docker
 
 _Function has no arguments._
 
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 ## install-docker_compose()
 
 install the docker compose
 
 _Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 ## install_docker_extra()
 
@@ -109,17 +174,43 @@ install the docker extra utils dry
 
 _Function has no arguments._
 
-## prune_images_volumes()
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## prune_images_volumes_all()
 
 prune all the volumes and images
 
 _Function has no arguments._
 
-## stop_all()
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## stop_containers_all()
 
 stop all container
 
 _Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_containers_all()
+
+stop all container
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 ## docker_setfacl()
 
@@ -127,17 +218,34 @@ this  creates the volumes, services and backup directories. It then assisgns the
 
 _Function has no arguments._
 
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 ## create_docker_user()
 
 create docker user and current user in the group and create dir
 
 _Function has no arguments._
 
-## login_docker_user()
+### Exit codes
 
-login as the docker user
+* **0**: If successfull.
+* **1**: On failure
 
-_Function has no arguments._
+## do_as_docker_user()
+
+do as the docker user
+
+### Arguments
+
+* # @args $1 command
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 ## create_docker_id_backup()
 
@@ -238,6 +346,9 @@ https://github.com/firefly-iii/docker
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 
 
@@ -484,6 +595,9 @@ https://github.com/firefly-iii/docker
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 # openvpn.sh
 
@@ -776,7 +890,7 @@ whiptails install custom setup menu
 ### Exit codes
 
 * **0**: If successfull.
-* **1**: On failure
+* **1**: On failur3
 
 ## help_setup_menu()
 
@@ -802,15 +916,19 @@ _Function has no arguments._
 
 file containing the utils  for the project and other
 
+* [print_line()](#printline)
 * [show_project_name()](#showprojectname)
 * [checkWSL()](#checkwsl)
+* [check_args()](#checkargs)
+* [check_root()](#checkroot)
+* [exec_root()](#execroot)
+* [exec_root_func()](#execrootfunc)
 * [check_packages_install()](#checkpackagesinstall)
 * [aptupdate()](#aptupdate)
 * [aptupgrade()](#aptupgrade)
+* [aptinstall()](#aptinstall)
+* [aptremove()](#aptremove)
 * [aptclean()](#aptclean)
-* [check_args()](#checkargs)
-* [check_root()](#checkroot)
-* [check_root_func()](#checkrootfunc)
 * [get_mimetype()](#getmimetype)
 * [send_email()](#sendemail)
 * [config_read_file()](#configreadfile)
@@ -828,9 +946,20 @@ file containing the utils  for the project and other
 * [get_geolocation()](#getgeolocation)
 
 
+## print_line()
+
+print line ======
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 ## show_project_name()
 
-check if the os is debian or ubuntu
+print ascii art
 
 _Function has no arguments._
 
@@ -842,6 +971,58 @@ _Function has no arguments._
 ## checkWSL()
 
 check if the system is a WSL
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## check_args()
+
+check for args for a
+
+### Arguments
+
+* # @args $@ args
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## check_root()
+
+check root user
+
+### Arguments
+
+* **$1** (a): bash command
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## exec_root()
+
+check if the user is root then execute the command
+
+### Arguments
+
+* **$1** (a): bash command
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## exec_root_func()
+
+check if the user is root then execute the bash func
+
+### Arguments
+
+* **$1** (a): bash func
 
 ### Exit codes
 
@@ -883,50 +1064,37 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
+## aptinstall()
+
+apt-get install package
+
+### Arguments
+
+* # @args $@ packages to install
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## aptremove()
+
+apt-get install package
+
+### Arguments
+
+* # @args $@ packages to remove
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 ## aptclean()
 
 apt-get autoclean
 
 _Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## check_args()
-
-check for args for a
-
-### Arguments
-
-* # @args $@ args
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## check_root()
-
-check if the user is root then execute the command
-
-### Arguments
-
-* **$1** (a): bash command
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## check_root_func()
-
-check if the user is root then execute the bash func
-
-### Arguments
-
-* **$1** (a): bash func
 
 ### Exit codes
 

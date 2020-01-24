@@ -6,194 +6,66 @@
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 FUNC_CREATE="create_docker"
 
-declare -A DOCKER_NAMES=(
-	[ansible]="ansible"
-	[cloud_torrent]="cloud_torrent"
-	[deluge]="deluge"
-	[firefly - iii]="firefly-iii"
-	[gitea]="gitea"
-	[gitlab]="gitlab"
-	[grafana]="grafana"
-	[heimdall]="heimdall"
-	[hlsxmltv]="hlsxmltv"
-	[huginn]="huginn"
-	[jackett]="jackett"
-	[jellyfin]="jellyfin"
-	[jenkins]="jenkins"
-	[jupyterhub]="jupyterhub"
-	[keycloak]="keycloak"
-	[komga]="komga"
-	[libresignage]="libresignage"
-	[lidarr]="lidarr"
-	[mailcow]="mailcow"
-	[mcmyadmin]="mcmyadmin"
-	[medusa]="medusa"
-	[monica]="monica"
-	[mopidy]="mopidy"
-	[neko]="neko"
-	[netdata]="netdata"
-	[olaris]="olaris"
-	[nextcloud]="nextcloud"
-	[openvpn]="openvpn"
-	[paperless]="paperless"
-	[pihole]="pihole"
-	[pyload]="pyload"
-	[qbittorrent - vpn]="qbittorrent-vpn"
-	[radarr]="radarr"
-	[recalbox]="recalbox"
-	[sabnzbd]="sabnzbd"
-	[shidori]="shidori"
-	[sonarr]="sonarr"
-	[statping]="statping"
-	[syncthing]="syncthing"
-	[tautulli]="tautulli"
-	[tdarrg]="tdarrg"
-	[teamspeak]="teamspeak"
-	[traefik]="traefik"
-	[wallabag]="wallabag"
+declare -a CONTAINER_NAME_MENU=(
+	"0-test-image" "0-test-image" "ON"
+	"1-test-image" "1-test-image" "ON"
+	"ansible" "ansible" "OFF"
+	"cloud-torrent" "cloud-torrent" "OFF"
+	"deluge" "cloud-torrent" "OFF"
+	"firefly-iii" "firefly-iii" "OFF"
+	"gitea" "gitea" "OFF"
+	"gitlab" "gitlab" "OFF"
+	"grafana" "grafana" "OFF"
+	"guacamole" "guacamole" "OFF"
+	"heimdall" "heimdall" "OFF"
+	"hlsxmltv" "hlsxmltv" "OFF"
+	"huginn" "huginn" "OFF"
+	"jackett" "jackett" "OFF"
+	"jellyfin" "jellyfin" "OFF"
+	"jenkins" "jenkins" "OFF"
+	"jupyterhub" "jupyterhub" "OFF"
+	"keycloak" "keycloak" "OFF"
+	"komga" "komga" "OFF"
+	"libresignage" "libresignage" "OFF"
+	"lidarr" "lidarr" "OFF"
+	"mailcow" "mailcow" "OFF"
+	"mcmyadmin" "mcmyadmin" "OFF"
+	"medusa" "medusa" "OFF"
+	"monica" "monica" "OFF"
+	"mopidy" "mopidy" "OFF"
+	"neko" "neko" "OFF"
+	"netdata" "netdata" "OFF"
+	"nextcloud" "nextcloud" "OFF"
+	"olaris" "olaris" "OFF"
+	"openldap" "openldap" "OFF"
+	"openvpn" "openvpn" "OFF"
+	"paperless" "paperless" "OFF"
+	"pihole" "pihole" "OFF"
+	"plex" "plex" "OFF"
+	"pyload" "pyload" "OFF"
+	"qbittorent-vpn" "qbittorent-vpn" "OFF"
+	"radarr" "radarr" "OFF"
+	"recalbox" "recalbox" "OFF"
+	"sabnzbd" "sabnzbd" "OFF"
+	"shidori" "shidori" "OFF"
+	"sonarr" "sonarr" "OFF"
+	"statping" "statping" "OFF"
+	"syncthing" "syncthing" "OFF"
+	"tautulli" "tautulli" "OFF"
+	"tdarr" "tdarr" "OFF"
+	"teamspeak" "teamspeak" "OFF"
+	"traefik" "traefik" "OFF"
+	"wallabag" "wallabag" "OFF"
 )
 
-declare -A CONTAINER_NAMES=(
-	[ansible]="ansible"
-	[cloud_torrent]="cloud_torrent"
-	[deluge]="deluge"
-	[firefly - iii]="firefly-iii"
-	[gitea]="gitea"
-	[gitlab]="gitlab"
-	[grafana]="grafana"
-	[heimdall]="heimdall"
-	[hlsxmltv]="hlsxmltv"
-	[huginn]="huginn"
-	[jackett]="jackett"
-	[jellyfin]="jellyfin"
-	[jenkins]="jenkins"
-	[jupyterhub]="jupyterhub"
-	[keycloak]="keycloak"
-	[komga]="komga"
-	[libresignage]="libresignage"
-	[lidarr]="lidarr"
-	[mailcow]="mailcow"
-	[mcmyadmin]="mcmyadmin"
-	[medusa]="medusa"
-	[monica]="monica"
-	[mopidy]="mopidy"
-	[neko]="neko"
-	[netdata]="netdata"
-	[olaris]="olaris"
-	[nextcloud]="nextcloud"
-	[openvpn]="openvpn"
-	[paperless]="paperless"
-	[pihole]="pihole"
-	[pyload]="pyload"
-	[qbittorrent - vpn]="qbittorrent-vpn"
-	[radarr]="radarr"
-	[recalbox]="recalbox"
-	[sabnzbd]="sabnzbd"
-	[shidori]="shidori"
-	[sonarr]="sonarr"
-	[statping]="statping"
-	[syncthing]="syncthing"
-	[tautulli]="tautulli"
-	[tdarrg]="tdarrg"
-	[teamspeak]="teamspeak"
-	[traefik]="traefik"
-	[wallabag]="wallabag"
-)
 
-declare -A CONTAINER_DESCRIPTION=(
-	[ansible]="ansible"
-	[cloud_torrent]="cloud_torrent"
-	[deluge]="deluge"
-	[firefly - iii]="firefly-iii"
-	[gitea]="gitea"
-	[gitlab]="gitlab"
-	[grafana]="grafana"
-	[heimdall]="heimdall"
-	[hlsxmltv]="hlsxmltv"
-	[huginn]="huginn"
-	[jackett]="jackett"
-	[jellyfin]="jellyfin"
-	[jenkins]="jenkins"
-	[jupyterhub]="jupyterhub"
-	[keycloak]="keycloak"
-	[komga]="komga"
-	[libresignage]="libresignage"
-	[lidarr]="lidarr"
-	[mailcow]="mailcow"
-	[mcmyadmin]="mcmyadmin"
-	[medusa]="medusa"
-	[monica]="monica"
-	[mopidy]="mopidy"
-	[neko]="neko"
-	[netdata]="netdata"
-	[olaris]="olaris"
-	[nextcloud]="nextcloud"
-	[openvpn]="openvpn"
-	[paperless]="paperless"
-	[pihole]="pihole"
-	[pyload]="pyload"
-	[qbittorrent - vpn]="qbittorrent-vpn"
-	[radarr]="radarr"
-	[recalbox]="recalbox"
-	[sabnzbd]="sabnzbd"
-	[shidori]="shidori"
-	[sonarr]="sonarr"
-	[statping]="statping"
-	[syncthing]="syncthing"
-	[tautulli]="tautulli"
-	[tdarrg]="tdarrg"
-	[teamspeak]="teamspeak"
-	[traefik]="traefik"
-	[wallabag]="wallabag"
-)
-
-declare -A CONTAINER_WEBPORT=(
-	[ansible]="ansible"
-	[cloud_torrent]="cloud_torrent"
-	[deluge]="deluge"
-	[firefly - iii]="firefly-iii"
-	[gitea]="gitea"
-	[gitlab]="gitlab"
-	[grafana]="grafana"
-	[heimdall]="heimdall"
-	[hlsxmltv]="hlsxmltv"
-	[huginn]="huginn"
-	[jackett]="jackett"
-	[jellyfin]="jellyfin"
-	[jenkins]="jenkins"
-	[jupyterhub]="jupyterhub"
-	[keycloak]="keycloak"
-	[komga]="komga"
-	[libresignage]="libresignage"
-	[lidarr]="lidarr"
-	[mailcow]="mailcow"
-	[mcmyadmin]="mcmyadmin"
-	[medusa]="medusa"
-	[monica]="monica"
-	[mopidy]="mopidy"
-	[neko]="neko"
-	[netdata]="netdata"
-	[olaris]="olaris"
-	[nextcloud]="nextcloud"
-	[openvpn]="openvpn"
-	[paperless]="paperless"
-	[pihole]="pihole"
-	[pyload]="pyload"
-	[qbittorrent - vpn]="qbittorrent-vpn"
-	[radarr]="radarr"
-	[recalbox]="recalbox"
-	[sabnzbd]="sabnzbd"
-	[shidori]="shidori"
-	[sonarr]="sonarr"
-	[statping]="statping"
-	[syncthing]="syncthing"
-	[tautulli]="tautulli"
-	[tdarrg]="tdarrg"
-	[teamspeak]="teamspeak"
-	[traefik]="traefik"
-	[wallabag]="wallabag"
-)
-
+# @description import all the /docker/images/.../*.sh based on selected
+#
+# @args $1 path of root of docker images
+# @args $2 name of the files
+# @args $1
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 import_all_sh() {
 	find "$DIR/images" -name "*.sh" -execdir chmod u+x {} +
 	local names=$(find "$1" -name "$2")
@@ -211,20 +83,40 @@ import_all_sh() {
 	return 0
 }
 
+# @description manage exec containers sh in the images src
+#
+# @args $1 SETUP_CONTAINER_MENU
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
 manage_exec_containers_list() {
-	echo "$SETUP_CONTAINER_MENU"
+	echo "$1"
 	touch /tmp/containers.txt
 	containers=()
-	mapfile -t containers <<<"$SETUP_CONTAINER_MENU"
+	mapfile -t containers <<<"$1"
 	for container_name in "${containers[@]}"; do
 		echo "$container_name" >>/tmp/containers.txt
-		echo "src/docker/images/$container_name/$container_name.sh"
 		source "src/docker/images/$container_name/$container_name.sh"
-		echo "create_docker_$container_name"
 		"create_docker_$container_name"
 	done
+	return 0
 }
 
-generate_list_container_install() {
+# @description list of the container
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+list_container() {
+	echo docker inspect --format='{{.Name}}' $(exec_root "docker ps -aq --no-trunc") | cut -c2-
+	return 0
+}
+
+# @description show the list of src images
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+list_src_images() {
+	echo ls -a1 images
 	return 0
 }

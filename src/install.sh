@@ -16,7 +16,10 @@ source "$DIR"/utils.sh
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 generate_apt_list_ubuntu() {
-    ../etc/source.list | tee /etc/apt/source.list
+    echo "Create Curated apt list"
+    print_line
+
+    ../etc/source.list | tee /etc/apt/source.list 
     return 0
 }
 
@@ -26,14 +29,16 @@ generate_apt_list_ubuntu() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_basic() {
-    # apt-get ubuntu 18.04
-    apt-get update -qq
-    apt-get install snapd
-    apt-get install -y bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq
+    echo "Install the basic packages"
+    print_line
+
+    aptupdate
+    aptupgrade
+    aptinstall bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq snapd
 
     if [[ "$(checkWSL arg)" != "0" ]]; then
         # snap package
-        snap install hub
+        # exec_root "snap install hub" > /dev/null
     fi
     return 0
 }
@@ -45,10 +50,13 @@ install_basic() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_cockpit() {
-    apt-get -qq update
-    apt-get -q -y install cockpit cockpit-docker cockpit-machines cockpit-packagekit
+    echo "Install Cockpit"
+    print_line
+
+    aptupdate
+    aptinstall cockpit cockpit-docker cockpit-machines cockpit-packagekit
     if [[ "$(checkWSL arg)" != "0" ]]; then
-        systemctl restart cockpit
+        exec_root "systemctl restart cockpit"
     fi
     return 0
 }
@@ -60,7 +68,10 @@ install_cockpit() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_emojify() {
-    sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
+    echo "Install Emojify"
+    print_line
+
+    sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify" > /dev/null
 }
 
 
@@ -71,9 +82,13 @@ install_emojify() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_signal_cli() {
-    wget https://github.com/AsamK/signal-cli/releases/download/v0.6.5/signal-cli-0.6.5.tar.gz
-    sudo tar xf signal-cli-0.6.5.tar.gz -C /opt
-    sudo ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/
+    echo "Install Signal cli"
+    print_line
+
+    wget https://github.com/AsamK/signal-cli/releases/download/v0.6.5/signal-cli-0.6.5.tar.gz > /dev/null
+    sudo tar xf signal-cli-0.6.5.tar.gz -C /opt > /dev/null
+    sudo ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/ > /dev/null
+    rm -rf signal-cli-0.6.5.tar.gz > /dev/null
     signal-cli -u $1 register
     read CODE
     signal-cli -u $1 verify $CODE
@@ -88,6 +103,9 @@ install_signal_cli() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_signal_ssh_text(){
+    echo "Install Signal on login ssh"
+    print_line
+
     local DATE_EXEC="$(date "+%d %b %Y %H:%M")"
     local TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
     if [ -n "$SSH_CLIENT" ] && [ -z "$TMUX" ]; then
