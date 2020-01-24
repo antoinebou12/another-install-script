@@ -104,18 +104,32 @@ check_args() {
     return 0
 }
 
-# @description check if the user is root then execute the command
+# @description check root user
 #
 # @arg $1 a bash command
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 check_root() {
-    if [[ "$(check-args $#)" -eq 0 ]]; then
+    if [[ "$UID" -gt 0 ]]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+# @description check if the user is root then execute the command
+#
+# @arg $1 a bash command
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+exec_root() {
+    if [[ ! "$#" -eq 0 ]]; then
         SUDO=''
         if [[ "$UID" -gt 0 ]]; then
             SUDO='sudo'
         fi
-        "$SUDO" "$1"
+        echo "$SUDO $1"
+        $SUDO $1
         return 0
     fi
     return 1
@@ -127,8 +141,8 @@ check_root() {
 # @arg $1 a bash func
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-check_root_func() {
-    if [[ "$(check-args $#)" -eq 0 ]]; then
+exec_root_func() {
+    if [[ ! "$#" -eq 0 ]]; then
         SUDO=''
         if [[ "$UID" -gt 0 ]]; then
             SUDO='sudo'

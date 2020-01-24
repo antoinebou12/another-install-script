@@ -75,7 +75,13 @@ install_custom_setup_menu() {
     SETUP_CONTAINER_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}"  -- "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
     if [[ $? == 0 ]] && [[ ! -z "$SETUP_CONTAINER_MENU" ]]; then
         show_project_name
-        manage_exec_containers_list
+        # aptupdate
+        # aptupgrade
+        # install_basic
+        # install_cockpit
+        # install_emojify
+        # install_docker
+        manage_exec_containers_list "$SETUP_CONTAINER_MENU"
         return 0
     else
         echo "Error"

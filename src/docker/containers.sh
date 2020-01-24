@@ -100,14 +100,14 @@ import_all_sh() {
 
 # @description manage exec containers sh in the images src
 #
-# @noargs
+# @args $1 SETUP_CONTAINER_MENU
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 manage_exec_containers_list() {
-	echo "$SETUP_CONTAINER_MENU"
+	echo "$1"
 	touch /tmp/containers.txt
 	containers=()
-	mapfile -t containers <<<"$SETUP_CONTAINER_MENU"
+	mapfile -t containers <<<"$1"
 	for container_name in "${containers[@]}"; do
 		echo "$container_name" >>/tmp/containers.txt
 		source "src/docker/images/$container_name/$container_name.sh"
