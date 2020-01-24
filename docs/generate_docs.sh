@@ -1,6 +1,6 @@
 #!/bin/bash
 
- install_shdoc(){
+install_shdoc(){
     cd .. || return 1
     git submodule update --init --recursive
     git pull --recurse-submodules
@@ -8,7 +8,7 @@
 }
 
 
- use_shdoc(){
+use_shdoc(){
     names=$(find ../ -type d \( -path ../tests/coverage -o -path ../tests/bin -o -path ../etc -o -path ../docs \) -prune -o -iname "*.sh" -print)
 
     SAVEIFS="$IFS"   # Save current IFS

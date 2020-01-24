@@ -1,0 +1,38 @@
+# https://github.com/firefly-iii/docker
+---
+networks: 
+  firefly_iii_net: 
+    driver: bridge
+services: 
+  firefly_iii_app: 
+    image: jc5x/firefly-iii:latest
+    depends_on:
+      - firefly_iii_db
+    networks: 
+      - firefly_iii_net
+    ports: 
+      - "${PORT_WEB}:80"
+    env_file: .env
+    volumes: 
+      - 
+        source: firefly_iii_export
+        target: ${PATH_EXPORT}
+        type: volume
+      - 
+        source: firefly_iii_upload
+        target: ${PATH_UPLOAD}
+        type: volume
+  firefly_iii_db: 
+    image: "postgres:10"
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=firefly
+    networks: 
+      - firefly_iii_net
+    volumes: 
+      - firefly_iii_db:/var/lib/postgresql/data
+version: "3.2"
+volumes: 
+  firefly_iii_db: ~
+  firefly_iii_export: ~
+  firefly_iii_upload: ~

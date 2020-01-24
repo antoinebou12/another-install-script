@@ -19,7 +19,7 @@ WHIPTAIL_WIDTH=$(( $(tput lines) - 12 ))
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- password_dialog() {
+password_dialog() {
 	while [[ "$passphrase" != "$passphrase_repeat" || ${#passphrase} -lt 8 ]]; do
         local passphrase_invalid_message=""
 		local passphrase=$(whiptail --passwordbox "${passphrase_invalid_message}Please enter the passphrase (8 chars min.):" 20 78 3>&1 1>&2 2>&3)
@@ -47,7 +47,7 @@ WHIPTAIL_WIDTH=$(( $(tput lines) - 12 ))
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- install_simple_setup_menu(){
+install_simple_setup_menu(){
     generate_apt_list_ubuntu
     aptupdate
     aptupgrade
@@ -64,7 +64,7 @@ WHIPTAIL_WIDTH=$(( $(tput lines) - 12 ))
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- install_custom_setup_menu(){
+install_custom_setup_menu(){
     declare -a CONTAINER_NAME_MENU=("cloud_torrent" "cloud_torrent" "ON" "heimdall" "heimdall" "ON" "huginn" "huginn" "OFF" "jellyfin" "jellyfin" "ON" "jenkins" "jenkins" "OFF" "jupyterhub" "jupyterhub" "OFF" "mailcow" "mailcow" "ON" "mcmyadmin" "mcmyadmin" "OFF" "medusa" "medusa" "OFF" "openvpn" "openvpn" "ON" "pyload" "pyload" "ON" "recalBox" "recalBox" "OFF" "statping" "statping" "ON" "syncthing" "syncthing" "ON" "teamspeak" "teamspeak" "OFF" )
     SETUP_CONTAINER_MENU=$(whiptail --title "Container List" --checklist "Navigate with arrow and select with space" "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "$((${#CONTAINER_NAME_MENU[@]}/3))" "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
     if [[ $? == 0 ]] && [[ ! -z "$SETUP_CONTAINER_MENU" ]]; then
@@ -81,7 +81,7 @@ WHIPTAIL_WIDTH=$(( $(tput lines) - 12 ))
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- install_no_docker_setup_menu(){
+install_no_docker_setup_menu(){
     aptupdate
     install_basic
     install_cockpit
@@ -93,7 +93,7 @@ WHIPTAIL_WIDTH=$(( $(tput lines) - 12 ))
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- help_setup_menu(){
+help_setup_menu(){
     cat docs/help.txt
     return 0
 }
@@ -104,7 +104,7 @@ WHIPTAIL_WIDTH=$(( $(tput lines) - 12 ))
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- main_setup_menu(){
+main_setup_menu(){
 
     SETUP_MENU=$(whiptail --title "Main Menu" --menu --notags "" 20 78 12 -- \
 	"install_simple" "Simple Installation" \

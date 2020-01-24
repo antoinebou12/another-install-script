@@ -11,7 +11,7 @@ Another install Script is a W.I.P project/script to install docker container for
 ## The story behind the project
 
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.
-After navigating r/selfhosting, I saw the multiple of several services/servers that can be simply installed with docker.
+After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker.
 After learning a bit about docker. Also, I found so GitHub repo that tries to do the same thing with their favorite container.
 I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall app in this app.
 
@@ -29,25 +29,52 @@ bash setup.sh
 
 ## List of the services/server
 
+Some services/server cannot be installed at the same time
 
-| Name                                                                  | Docker | Ports              | Volumes | Web server | Default |
-|-----------------------------------------------------------------------|--------|--------------------|---------|------------|---------|
-| [cloud_torrent](https://github.com/jpillora/cloud-torrent)            |    ✔️   |                    |         | :6889      |         |
-| [heimdall](https://github.com/linuxserver/docker-heimdall)            |    ✔️   |                    |         | :8080      |    ✔️    |
-| [huginn](https://github.com/huginn/huginn)                            |    ✔️   |                    |         | :          |         |
-| [jellyfin](https://github.com/linuxserver/docker-jellyfin)            |    ✔️   |                    |         | :8096      |    ✔️    |
-| [jenkins](https://github.com/jenkinsci/docker)                        |    ✔️   | 8001,25566         |         | :8001      |         |
-| [jupyterhub](https://github.com/jupyterhub/jupyterhub)                |    ✔️   |                    |         | :9000      |         |
-| [mailcow](https://github.com/mailcow/mailcow-dockerized)              |    ✔️   |                    |         |            |    ✔️    |
-| [mcmyadmin](https://github.com/linuxserver-archive/docker-mcmyadmin2) |    ✔️   | 8065, 25565        |         | :8065      |         |
-| [medusa](https://github.com/linuxserver/docker-medusa)                |    ✔️   |                    |         | :8081      |    ✔️    |
-| [openvpn](https://github.com/kylemanna/docker-openvpn)                |    ✔️   |                    |         |            |    ✔️    |
-| [pyload](https://github.com/linuxserver/docker-pyload)                |    ✔️   | 8000,7227          |         |            |         |
-| [recalBox](https://github.com/recalbox/recalbox-docker-build)         |    ✔️   |                    |         |            |         |
-| [statping](https://github.com/hunterlong/statping)                    |    ✔️   | 8084               |         | :8084      |    ✔️    |
-| [syncthing](https://github.com/syncthing/syncthing)                   |    ✔️   | 8384,22000, 21027  |         | :8384      |    ✔️    |
-| [teamspeak](https://github.com/solidnerd/docker-teamspeak)            |    ✔️   | 9987, 10011, 30033 |         |            |         |
-| [cockpit](https://cockpit-project.org/)                               |    ❌   | 9090               |         | :9090      |    ✔️    |
+| Name                                                                      | Docker | Ports              | Volumes | Web server | Default |
+| ------------------------------------------------------------------------- | ------ | ------------------ | ------- | ---------- | ------- |
+| [ansible](https://github.com/ansible/ansible)                             | ✔️     |                    |         |            |         |
+| [cloud_torrent](https://github.com/jpillora/cloud-torrent)                | ✔️     |                    |         | :6889      |         |
+| [deluge](https://github.com/linuxserver/docker-deluge)                    | ✔️     |                    |         |            |         |
+| [firefly-iii](https://github.com/firefly-iii/firefly-iii)                 | ✔️     |                    |         |            |         |
+| [gitea](https://github.com/go-gitea/gitea)                                | ✔️     |                    |         |            |         |
+| [gitlab](https://docs.gitlab.com/ee/install/docker.html)                  | ✔️     |                    |         |            |         |
+| [heimdall](https://github.com/linuxserver/docker-heimdall)                | ✔️     |                    |         | :8080      | ✔️      |
+| [huginn](https://github.com/huginn/huginn)                                | ✔️     |                    |         |            |         |
+| [jackett](https://github.com/Jackett/Jackett)                             | ✔️     |                    |         |            |         |
+| [jellyfin](https://github.com/linuxserver/docker-jellyfin)                | ✔️     |                    |         | :8096      | ✔️      |
+| [jenkins](https://github.com/jenkinsci/docker)                            | ✔️     | 8001,25566         |         | :8001      |         |
+| [jupyterhub](https://github.com/jupyterhub/jupyterhub)                    | ✔️     |                    |         | :9000      |         |
+| [keycloak](https://hub.docker.com/r/jboss/keycloak)                       | ✔️     |                    |         |            |         |
+| [komga](https://github.com/gotson/komga)                                  | ✔️     |                    |         |            |         |
+| [libresignage](https://github.com/eerotal/LibreSignage)                   | ✔️     |                    |         |            |         |
+| [lidarr](https://lidarr.audio/)                                           | ✔️     |                    |         |            |         |
+| [mailcow](https://github.com/mailcow/mailcow-dockerized)                  | ✔️     |                    |         |            | ✔️      |
+| [mcmyadmin](https://github.com/linuxserver-archive/docker-mcmyadmin2)     | ✔️     | 8065, 25565        |         | :8065      |         |
+| [medusa](https://github.com/linuxserver/docker-medusa)                    | ✔️     |                    |         | :8081      | ✔️      |
+| [monica](https://github.com/monicahq/monica)                              | ✔️     |                    |         |            |         |
+| [mopidy](https://mopidy.com/)                                             | ✔️     |                    |         |            |         |
+| [neko](https://github.com/nurdism/neko)                                   | ✔️     |                    |         |            |         |
+| [netdata](https://github.com/netdata/netdata)                             | ✔️     |                    |         |            |         |
+| [olaris](https://gitlab.com/olaris/olaris-server)                         | ✔️     |                    |         |            |         |
+| [nextcloud](https://nextcloud.com/)                                       | ✔️     |                    |         |            |         |
+| [openvpn](https://github.com/kylemanna/docker-openvpn)                    | ✔️     |                    |         |            | ✔️      |
+| [paperless](https://github.com/the-paperless-project/paperless)           | ✔️     |                    |         |            |         |
+| [pyload](https://pyload.net/)                                             | ✔️     | 8000,7227          |         |            |         |
+| [qbittorrent-vpn](https://github.com/MarkusMcNugen/docker-qBittorrentvpn) | ✔️     |                    |         |            |         |
+| [radarr](https://github.com/Radarr/Radarr)                                | ✔️     |                    |         |            |         |
+| [recalBox](https://github.com/recalbox/recalbox-docker-build)             | ✔️     |                    |         |            |         |
+| [sabnzbd](https://sabnzbd.org/)                                           | ✔️     |                    |         |            |         |
+| [shidori](https://github.com/go-shiori/shiori)                            | ✔️     |                    |         |            |         |
+| [sonarr](https://sonarr.tv/)                                              | ✔️     |                    |         |            |         |
+| [statping](https://github.com/hunterlong/statping)                        | ✔️     | 8084               |         | :8084      | ✔️      |
+| [syncthing](https://github.com/syncthing/syncthing)                       | ✔️     | 8384,22000, 21027  |         | :8384      | ✔️      |
+| [tautulli](https://github.com/Tautulli/Tautulli)                          | ✔️     |                    |         |            |         |
+| [tdarr](https://github.com/HaveAGitGat/Tdarr)                             | ✔️     |                    |         |            |         |
+| [teamspeak](https://github.com/solidnerd/docker-teamspeak)                | ✔️     | 9987, 10011, 30033 |         |            |         |
+| [traefik](https://github.com/containous/traefik)                          | ✔️     |                    |         |            |         |
+| [wallabag](https://github.com/wallabag/wallabag)                          | ✔️     |                    |         |            |         |
+| [cockpit](https://cockpit-project.org/)                                   | ❌      | 9090               |         | :9090      | ✔️      |
 
 
 ## List of other installed program
@@ -61,6 +88,8 @@ bash setup.sh
     - alsa-utils
     - wireless-tools
     - wpasupplicant
+    - default-jre
+    - jq
     - [vim](https://www.vim.org/)
     - [snapd](https://snapcraft.io/)
     - [bat](https://github.com/sharkdp/bat)
@@ -109,13 +138,13 @@ A simple project overview to with the explaination of each important file
 +-- uninstall.sh
 ```
 
-| Path                       |                            Explanation                           |
-|----------------------------|:----------------------------------------------------------------:|
+| Path                       |                           Explanation                            |
+| -------------------------- | :--------------------------------------------------------------: |
 | ansible                    |  Ansible playbook script to install the project and for testing  |
 | ansible/vagrant            |             Vagrant to test the ansible installation             |
 | docs                       | The directory for the documentation for the code and the project |
 | docs/vendor                |         The vendor program to generate the documentation         |
-| src                        |               The path for the code for the project              |
+| src                        |              The path for the code for the project               |
 | src/docker                 |              The path for all docker related script              |
 | src/docker/$container_name |  The path for docker container with a script and docker-compose  |
 

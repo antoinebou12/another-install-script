@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+    sonarr:
+        container_name: sonarr
+        image: linuxserver/sonarr:preview
+        ports:
+            - 8989:8989
+        volumes:
+            - ./sonarr:/config
+            - ./media/TV:/tv

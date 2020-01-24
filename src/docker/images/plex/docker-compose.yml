@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+    plex:
+        container_name: plex
+        image: plexinc/pms-docker:latest
+        restart: unless-stopped
+        # environment:
+        #     - TZ=America/New_York
+        volumes:
+            - ./plex/config:/config
+            - ./plex/transcode:/transcode
+            - ./media:/data

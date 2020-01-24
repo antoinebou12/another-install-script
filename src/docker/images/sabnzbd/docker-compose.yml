@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  sabnzbd:
+    image: linuxserver/sabnzbd
+    container_name: sabnzbd
+    # environment:
+    #   - PUID=1000
+    #   - PGID=1000
+    #   - TZ=Europe/London
+    volumes:
+      - <path to data>:/config
+      - <path to downloads>:/downloads
+      - <path to incomplete downloads>:/incomplete-downloads #optional
+    ports:
+      - 8080:8080
+      - 9090:9090
+    restart: unless-stopped

@@ -12,8 +12,9 @@ source "$DIR"/../utils.sh
 # @description install the docker
 #
 # @noargs
- install_docker(){
+install_docker(){
     echo "Install Docker"
+    # curl -sSL https://get.docker.com/ | CHANNEL=stable bash
     apt-get remove -y docker docker-engine docker.io containerd runc
     apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -27,7 +28,7 @@ source "$DIR"/../utils.sh
 # @description install the docker compose
 #
 # @noargs
- install-docker_compose(){
+install-docker_compose(){
     echo "Install Docker"
     curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
@@ -39,7 +40,7 @@ source "$DIR"/../utils.sh
 # @description install the docker extra utils dry
 #
 # @noargs
- install_docker_extra(){
+install_docker_extra(){
     curl -sSf https://moncho.github.io/dry/dryup.sh | sh
     return 0 
 }
@@ -47,7 +48,7 @@ source "$DIR"/../utils.sh
 # @description prune all the volumes and images
 #
 # @noargs
- prune_images_volumes(){
+prune_images_volumes(){
     docker image prune -a
     docker system prune --volumes
 }
@@ -55,14 +56,14 @@ source "$DIR"/../utils.sh
 # @description stop all container
 #
 # @noargs
- stop_all(){
+stop_all(){
     docker container stop "$(docker container ls -aq)"
 }
 
 # @description this  creates the volumes, services and backup directories. It then assisgns the current user to the ACL to give full read write access
 # 
 # @noargs
- docker_setfacl() {
+docker_setfacl() {
 	[ -d /home/docker/services ] || mkdir /home/docker/services
 	[ -d /home/docker/volumes ] || mkdir /home/docker/volumes
 	[ -d /home/docker/backups ] || mkdir /home/docker/backups
@@ -77,7 +78,7 @@ source "$DIR"/../utils.sh
 # @description create docker user and current user in the group and create dir
 #
 # @noargs
- create_docker_user(){
+create_docker_user(){
     useradd docker
     passwd docker
     usermod -aG docker docker
@@ -90,7 +91,7 @@ source "$DIR"/../utils.sh
 # @description login as the docker user
 #
 # @noargs
- login_docker_user(){
+login_docker_user(){
     su - docker
     return 0
 }
@@ -100,7 +101,7 @@ source "$DIR"/../utils.sh
 # @args $1 docker id
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- create_docker_id_backup(){
+create_docker_id_backup(){
     # shellcheck disable=SC2086,SC2143
     if [ ! "$(docker ps -a | grep $1)" ]; then
         container_name="$(docker ps | grep $1 | awk '{ print $2 }')"
@@ -117,7 +118,7 @@ source "$DIR"/../utils.sh
 # @args $1 docker container name
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- create_docker_name_backup(){
+create_docker_name_backup(){
     # shellcheck disable=SC2086,SC2143
     if [ ! "$(docker ps -a | grep $1)" ]; then
         # shellcheck disable=SC2086
@@ -135,7 +136,7 @@ source "$DIR"/../utils.sh
 # @args $# the backup of all the container names
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- create_docker_backup_all(){
+create_docker_backup_all(){
     while [[ -n $1 ]]; do
         create_docker_name_backup "$1"
         shift # shift all parameters;

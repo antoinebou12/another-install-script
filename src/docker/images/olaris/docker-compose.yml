@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+    olaris-server:
+        image: olaristv/olaris-server
+        name: olaris-server
+        ports:
+            - '8090:8080'
+        environment:
+            - 'OLARIS_UID=$(id -u)'
+            - 'OLARIS_GID=$(id -g)'
+
+        volumes:
+            - /home/docker/olaris:/var/media
+            - home/docker/olaris/config:/home/olaris/.config/olaris
+            - home/docker/olaris/config/rclone:/home/olaris/.config/rclone

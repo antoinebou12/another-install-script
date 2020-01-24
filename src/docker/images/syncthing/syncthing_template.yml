@@ -1,9 +1,0 @@
-version: '3.3'
-services:
-    syncthing:
-        ports:
-            - '$PORT_WEB:8384'
-            - '$PORT_SYNC:22000'
-        volumes:
-            - '$PATH_SYNC:/var/syncthing'
-        image: 'syncthing/syncthing:latest'

@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+    libresignage:               
+        image: 'eerotal/libresignage:latest'
+        container_name: libresignage
+        ports:
+            - '8030:80'
+        volumes:
+            - '/home/docker/libresignage:/var/www/html/data'

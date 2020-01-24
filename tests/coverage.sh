@@ -9,7 +9,7 @@
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- use_kcov(){
+use_kcov(){
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     install_kcov
     [[ -d coverage ]] || mkdir coverage
@@ -22,7 +22,7 @@
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- install_kcov(){
+install_kcov(){
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     if [[ -f  "${DIR}"/bin/kcov ]]; then
         return 0
@@ -62,7 +62,7 @@
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- bash_codecov(){
+bash_codecov(){
     bash <(curl -s https://codecov.io/bash)
     return 0 
 }

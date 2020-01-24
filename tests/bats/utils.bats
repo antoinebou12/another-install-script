@@ -2,7 +2,7 @@
 
 source $(dirname "$0")/../../src/utils.sh
 
- test-func(){
+test-func(){
     apt-get update
 }
 

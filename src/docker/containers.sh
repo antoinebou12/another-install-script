@@ -20,3 +20,5 @@ declare -A CONTAINER_NAME_ARRAY=(
 	[syncthing]="syncthing"
 	[teamspeak]="teamspeak"
 )
+
+

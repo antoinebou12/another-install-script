@@ -3,26 +3,27 @@
 # @file utils.sh
 # @brief file containing the utils  for the project and other
 
-
 # @description check if the system is a WSL
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- checkWSL() {
+checkWSL() {
     if [ -n "$WSL_DISTRO_NAME" ]; then
         return 0
     fi
     return 1
 }
 
-
 # @description check if the packages exist
 #
 # @args $1 package name
 # @exitcode 0 If installed
 # @exitcode 1 if not installed
- check_packages_install(){
-    output=$(dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$'; echo "$?")
+check_packages_install() {
+    output=$(
+        dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$'
+        echo "$?"
+    )
     return "$output"
 }
 
@@ -31,54 +32,53 @@
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- aptupdate(){
-    apt-get -qq update & apt-get install -f && apt-get autoclean
+aptupdate() {
+    apt-get -qq update &
+    apt-get install -f && apt-get autoclean
     return 0
 }
-
 
 # @description apt-get upgrade all
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- aptupgrade(){
+aptupgrade() {
     apt-get -qq update && apt-get -q upgrade && apt-get -q dist-upgrade && apt-get -q install -f && apt-get -q autoclean
     return 0
 }
-
 
 # @description apt-get autoclean
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- aptclean(){
+aptclean() {
     apt-get -q install -f && apt-get -q autoclean && sudo apt-get -y -q autoremove
     return 0
 }
 
-# @description check for args for a 
+# @description check for args for a
 #
 # @args $@ args
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- check_args(){
+check_args() {
     if [[ "$#" -eq 0 ]]; then
-        return 1;
+        return 1
     fi
-    return 0;
+    return 0
 }
 
-# @description check if the user is root then execute the command 
+# @description check if the user is root then execute the command
 #
-# @arg $1 a bash command 
+# @arg $1 a bash command
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- check_root(){
+check_root() {
     if [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
-        if [[ "$UID" -gt 0  ]]; then
+        if [[ "$UID" -gt 0 ]]; then
             SUDO='sudo'
         fi
         "$SUDO" "$1"
@@ -88,15 +88,15 @@
 
 }
 
-# @description check if the user is root then execute the bash func 
+# @description check if the user is root then execute the bash func
 #
 # @arg $1 a bash func
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- check_root_func(){
-    if  [[ "$(check-args $#)" -eq 0 ]]; then
+check_root_func() {
+    if [[ "$(check-args $#)" -eq 0 ]]; then
         SUDO=''
-        if  [[ "$UID" -gt 0 ]]; then
+        if [[ "$UID" -gt 0 ]]; then
             SUDO='sudo'
         fi
         # shellcheck disable=SC2086
@@ -107,14 +107,13 @@
 
 }
 
-
 # @description check mimetype of a file
 # @arg $1 file
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- get_mimetype(){
-  file --mime-type "$1" | sed 's/.*: //' 
-  return 0
+get_mimetype() {
+    file --mime-type "$1" | sed 's/.*: //'
+    return 0
 }
 
 # @description send mail locally with heirloom-mailx
@@ -125,14 +124,14 @@
 # @arg $5 email attachement file
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- send_email() {
+send_email() {
     # from="$1"
     to="$2"
     subject="$3"
     body="$4"
     attachment=$5
 
-    echo "$body" | mutt -s "$subject" -a "$attachment" "$to" 
+    echo "$body" | mutt -s "$subject" -a "$attachment" "$to"
     return 0
 }
 
@@ -141,8 +140,8 @@
 # @arg $1 the config fiel path
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- config_read_file() {
-    (grep -E "^${2}=" -m 1 "${1}" 2>/dev/null || echo "VAR=__UNDEFINED__") | head -n 1 | cut -d '=' -f 2-;
+config_read_file() {
+    (grep -E "^${2}=" -m 1 "${1}" 2>/dev/null || echo "VAR=__UNDEFINED__") | head -n 1 | cut -d '=' -f 2-
     return 0
 }
 
@@ -152,28 +151,27 @@
 # @arg $2 the config file var
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- config_get() {
+config_get() {
     # shellcheck disable=SC2086
-    val="$(config_read_file ${1} ${2})";
+    val="$(config_read_file ${1} ${2})"
     if [ "${val}" = "__UNDEFINED__" ]; then
         # shellcheck disable=SC2086
-        val="$(config_read_file config.cfg.defaults ${2})";
+        val="$(config_read_file config.cfg.defaults ${2})"
     fi
-    printf -- "%s" "${val}";
+    printf -- "%s" "${val}"
     return 0
 }
-
 
 # @description get timezone
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- get_timezones() {
-	TZ="$(cat /etc/timezone)"
+get_timezones() {
+    TZ="$(cat /etc/timezone)"
     echo TZ
     export TZ
-    return 0 
+    return 0
 }
 
 # @description check if the port is used
@@ -181,22 +179,21 @@
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- check_command_exist() {
-	if [[ $(command -v "$@") ]]; then
-        return 0 
+check_command_exist() {
+    if [[ $(command -v "$@") ]]; then
+        return 0
     else
         return 1
     fi
 }
-
 
 # @description check if the port is used
 #
 # @args $1 port number
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- check_port(){
-    if lsof -i:"$1" -P -n -t >/dev/null ; then
+check_port() {
+    if lsof -i:"$1" -P -n -t >/dev/null; then
         return 0
     else
         return 1
@@ -208,10 +205,10 @@
 # @args $# username of the user you want to add
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- add_sudo(){
+add_sudo() {
     while [[ -n $1 ]]; do
         usermod -aG sudo "$1"
-        echo "$1    ALL=(ALL:ALL) ALL" >> /etc/sudoers;
+        echo "$1    ALL=(ALL:ALL) ALL" >>/etc/sudoers
         shift # shift all parameters;
     done
     return 0
@@ -224,7 +221,7 @@
 # @args $3 file path for the local device
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- download_scp(){
+download_scp() {
     scp "$1":"$2" "$3"
     return 0
 }
@@ -236,7 +233,7 @@
 # @args $3 file path on remote device
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- upload_scp(){
+upload_scp() {
     scp "$1" "$2":"$3"
     return 0
 }
@@ -246,7 +243,7 @@
 # @args $1 path to folder
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- chmod_sh_all(){
+chmod_sh_all() {
     names=$(find $1 -iname "*.sh")
 
     SAVEIFS=$IFS   # Save current IFS
@@ -254,23 +251,23 @@
     names=($names) # split to array $names
     IFS=$SAVEIFS   # Restore IFS
 
-    for (( i=0; i<${#names[@]}; i++ )); do
+    for ((i = 0; i < ${#names[@]}; i++)); do
         chmod +x ${names[$i]}
     done
 }
 
-
 # @description check if the os is debian or ubuntu
 #
+# @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- check_debian(){
+check_debian() {
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
         # shellcheck source=/etc/os-release
         # shellcheck disable=SC1091
         source /etc/os-release
         if [[ $ID_LIKE == "debian" ]]; then
-            return 0 
+            return 0
         fi
         return 1
     else
@@ -279,8 +276,13 @@
     fi
 }
 
- show_project_name(){
-    cat << EOF
+# @description check if the os is debian or ubuntu
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+show_project_name() {
+    cat <<EOF
 
     ___                   __   __               
    /   |   ____   ____   / /_ / /_   ___   _____
@@ -304,4 +306,34 @@
                     /_/            
 
 EOF
+    return 0
+}
+
+# @description check the ip of the server
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+get_current_ip() {
+    PUBLIC_IP=$(curl -s https://ipinfo.io/ip)
+    export PUBLIC_IP
+    echo $PUBLIC_IP
+}
+
+# @description check the geolocation based on ip of the server
+# https://www.howtogeek.com/405088/how-to-get-your-systems-geographic-location-from-a-bash-script/
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+get_geolocation() {
+    get_current_ip
+    curl -s https://ipvigilante.com/${PUBLIC_IP} | jq '.data.latitude, .data.longitude, .data.city_name, .data.country_name' |
+        while read -r LATITUDE; do
+            read -r LONGITUDE
+            read -r CITY
+            read -r COUNTRY
+            echo "${LATITUDE},${LONGITUDE},${CITY},${COUNTRY}" | tr --delete \" /etc/server_geolocation.txt
+        done
+
+    #cp geolocate.sh /etc/cron.daily
 }
