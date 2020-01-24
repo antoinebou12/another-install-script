@@ -1,12 +1,11 @@
-# personal-vps
+# another-install-script
 
 
-
-[![Build Status](https://travis-ci.com/antoinebou13/personal-vps.svg?token=MUq69udyyqAR24bsXgRq&branch=master)](https://travis-ci.com/antoinebou13/personal-vps)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/personal-vps?style=flat)
-![Codecov](https://img.shields.io/codecov/c/github/antoinebou13/personal-vps?style=flat&token=FcTtxpEGhF)
-![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/personal-vps?style=flat)
-![GitHub](https://img.shields.io/github/license/antoinebou13/personal-vps?style=flat)
+[![Build Status](https://travis-ci.com/antoinebou13/another-install-script.svg?token=MUq69udyyqAR24bsXgRq&branch=master)](https://travis-ci.com/antoinebou13/another-install-script)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/another-install-script?style=flat)
+![Codecov](https://img.shields.io/codecov/c/github/antoinebou13/another-install-script?style=flat&token=FcTtxpEGhF)
+![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/another-install-script?style=flat)
+![GitHub](https://img.shields.io/github/license/antoinebou13/another-install-script?style=flat)
 
 
 
@@ -15,10 +14,31 @@
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.
 After navigating r/selfhosting, I saw the multiple of several services/servers that can be simply installed with docker.
 After learning a bit about docker. Also, I found so GitHub repo that tries to do the same thing with their favorite container.
-I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall app in this app
+I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall app in this app.
+
+
+## Project Structure
+```
++-- _config.yml
++-- _drafts
+|   +-- begin-with-the-crazy-ideas.textile
+|   +-- on-simplicity-in-technology.markdown
++-- _includes
+|   +-- footer.html
+|   +-- header.html
++-- _layouts
+|   +-- default.html
+|   +-- post.html
++-- _posts
+|   +-- 2007-10-29-why-every-programmer-should-play-nethack.textile
+|   +-- 2009-04-26-barcamp-boston-4-roundup.textile
++-- _data
+|   +-- members.yml
++-- _site
++-- uninstall.sh
+``
 
 ## List of the services/server
-
 
 
 | Name                                                                  | Docker | Ports              | Volumes | Web server | Default |
@@ -42,6 +62,31 @@ I am trying to do with this project is to make a simple, extensible and customiz
 
 
 ## List of other installed program
+
+    - build-essential
+    - zip
+    - unzip
+    - git
+    - python3
+    - python3-pip
+    - alsa-utils
+    - wireless-tools
+    - wpasupplicant
+    - [vim](https://www.vim.org/)
+    - [snapd](https://snapcraft.io/)
+    - [bat](https://github.com/sharkdp/bat)
+    - [nnn](https://github.com/jarun/nnn)
+    - [nmap](https://nmap.org/)
+    - [wget](https://www.gnu.org/software/wget/)
+    - [curl](https://github.com/curl/curl)
+    - [bats](https://github.com/bats-core/bats-core)
+    - [mlocate](https://wiki.archlinux.org/index.php/Mlocate)
+    - [mutt](https://gitlab.com/muttmua/mutt)
+    - [cmake](https://cmake.org/)
+    - [docker](https://www.docker.com/)
+    - [docker-compose](https://docs.docker.com/compose/)
+    - [dry](https://github.com/moncho/dry)
+    - [emojify](https://github.com/mrowa44/emojify)
 
 ## How to install 
 
@@ -72,7 +117,9 @@ use_kcov
 
 
 ## How to generate the documentation
-for running and generate the documentation with [shdoc](https://github.com/reconquest/shdoc)
+
+For running and generate the documentation with [shdoc](https://github.com/reconquest/shdoc)
+
 ```bash 
 git submodule update --init --recursive
 git pull --recurse-submodules
@@ -80,7 +127,22 @@ git submodule update --remote
 cd docs
 chmod +x generate_docs.sh
 bash generate_docs.sh docs.md
-
 ```
 
-## Contribute
+Go to [docs](docs/docs.md)
+
+## Code of Conduct
+
+Go to [Code of Conduct](.github/CODE_OF_CONDUCT.md)
+
+## Contributing
+
+Go to [Contributing](.github/CONTRIBUTING.md)
+
+## Changelog
+
+Go to [Changelog](docs/CHANGELOG.md)
+
+## License
+
+Go to [License](License.md)

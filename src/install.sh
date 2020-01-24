@@ -29,6 +29,7 @@ function generate_apt_list_ubuntu(){
 function install_basic(){
     # apt-get ubuntu 18.04
     apt-get update -qq 
+    apt-get install snapd
     apt-get install -y bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential
     
     if [[ "$(checkWSL arg)" != "0" ]]; then
