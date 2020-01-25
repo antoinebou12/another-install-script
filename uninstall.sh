@@ -13,9 +13,11 @@ source src/utils.sh
 # @exitcode 1 On failure
 uninstall() {
 
-    stop_containers_all
-    prune_images_volumes_all
-    remove_containers_all
+    if check_packages_install docker; then
+        stop_containers_all
+        prune_images_volumes_all
+        remove_containers_all
+    fi
 
     aptupdate
     aptremove snapd
@@ -47,7 +49,7 @@ uninstall() {
     aptremove docker-ce
     aptremove docker-ce-cli
     aptremove containerd.io
-    snap remove hub > /dev/null  
+    # snap remove hub > /dev/null  
     aptclean
 
     rm -rf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/
