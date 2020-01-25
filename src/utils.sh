@@ -84,7 +84,6 @@ exec_root() {
         if [[ "$UID" -gt 0 ]]; then
             SUDO='sudo'
         fi
-        echo "$SUDO $1"
         $SUDO $1
         return 0
     fi
@@ -130,7 +129,9 @@ check_packages_install() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptupdate() {
-    exec_root "apt-get -qq update > /dev/null && apt-get -qq install -f > /dev/null && apt-get -qq autoclean > /dev/null"
+    exec_root "apt-get -qq update > /dev/null"
+    exec_root "apt-get -qq install -f > /dev/null" 
+    exec_root "apt-get -qq autoclean > /dev/null"
     return 0
 }
 
@@ -140,7 +141,11 @@ aptupdate() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptupgrade() {
-    exec_root "apt-get -qq update > /dev/null && apt-get -qq upgrade > /dev/null && apt-get -qq dist-upgrade > /dev/null && apt-get -qq install -f > /dev/null && apt-get -qq autoclean > /dev/null"
+    exec_root "apt-get -qq update > /dev/null"
+    exec_root "apt-get -qq upgrade > /dev/null"
+    exec_root "apt-get -qq dist-upgrade > /dev/null"
+    exec_root "apt-get -qq install -f > /dev/null"
+    exec_root "apt-get -qq autoclean > /dev/null"
     return 0
 }
 
@@ -150,7 +155,8 @@ aptupgrade() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptinstall() {
-    exec_root "apt-get -qq update && apt-get -qq install -y $@ > /dev/null"
+    aptupdate
+    exec_root "apt-get -qq install -y $@ > /dev/null"
     return 0
 }
 
@@ -160,7 +166,8 @@ aptinstall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptremove() {
-    exec_root "apt-get -qq update && apt-get -qq remove -y $@ > /dev/null"
+    aptupdate
+    exec_root "apt-get -qq remove -y $@ > /dev/null"
     return 0
 }
 
@@ -170,7 +177,9 @@ aptremove() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptclean() {
-    exec_root "apt-get -qq install -f > /dev/null && apt-get -qq autoclean -y > /dev/null && sudo apt-get -qq autoremove -y > /dev/null"
+    exec_root "apt-get -qq install -f > /dev/null"
+    exec_root "apt-get -qq autoclean -y > /dev/null"
+    exec_root "apt-get -qq autoremove -y > /dev/null"
     return 0
 }
 
