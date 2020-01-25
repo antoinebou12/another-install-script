@@ -84,6 +84,7 @@ exec_root() {
         if [[ "$UID" -gt 0 ]]; then
             SUDO='sudo'
         fi
+        echo "$SUDO $1"
         $SUDO $1
         return 0
     fi
