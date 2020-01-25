@@ -6,7 +6,7 @@
 # import
 # shellcheck source=../utils.sh
 # shellcheck disable=SC1091
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null 2>&1 && pwd )"
 source "$DIR"/../utils.sh
 
 # @description install the docker
@@ -16,12 +16,14 @@ source "$DIR"/../utils.sh
 # @exitcode 1 On failure
 install_docker(){
     echo "Install Docker"
+    print_line
+
     # curl -sSL https://get.docker.com/ | CHANNEL=stable bash
     aptremove docker docker-engine docker.io containerd runc
     aptinstall apt-transport-https ca-certificates curl gnupg-agent software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root "apt-key add -"
-    exec_root "apt-key fingerprint 0EBFCD88"
-    exec_root "add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'"
+    exec_root "apt-key fingerprint 0EBFCD88" >/dev/null
+    exec_root '"add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"' 
     aptupdate
     aptinstall docker-ce docker-ce-cli containerd.io
     aptclean
@@ -35,6 +37,8 @@ install_docker(){
 # @exitcode 1 On failure
 install-docker_compose(){
     echo "Install Docker Compose"
+    print_line
+
     curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
     ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
@@ -49,6 +53,8 @@ install-docker_compose(){
 # @exitcode 1 On failure
 install_docker_extra(){
     echo "Install Docker Extra"
+    print_line
+
     curl -sSf https://moncho.github.io/dry/dryup.sh | sh
     return 0 
 }
@@ -59,7 +65,9 @@ install_docker_extra(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 prune_images_volumes_all(){
-    echo "Prune all Docker Images Volumes "
+    echo "Prune all Docker Images Volumes"
+    print_line
+
     docker image prune -a
     docker system prune --volumes
     return 0
@@ -72,6 +80,8 @@ prune_images_volumes_all(){
 # @exitcode 1 On failure
 stop_containers_all(){
     echo "Stop all Docker Containers"
+    print_line
+
     docker container stop "$(docker container ls -aq)"
     return 0
 }
@@ -83,6 +93,8 @@ stop_containers_all(){
 # @exitcode 1 On failure
 remove_containers_all(){
     echo "Remove all Docker Containers"
+    print_line
+    
     docker rm $(docker ps -a -q)
     return 0
 }
@@ -94,6 +106,8 @@ remove_containers_all(){
 # @exitcode 1 On failure
 docker_setfacl() {
     echo "Create Folder for Docker User"
+    print_line
+
 	[ -d /home/docker/services ] || mkdir /home/docker/services
 	[ -d /home/docker/volumes ] || mkdir /home/docker/volumes
 	[ -d /home/docker/backups ] || mkdir /home/docker/backups
@@ -113,7 +127,9 @@ docker_setfacl() {
 # @exitcode 1 On failure
 create_docker_user(){
     echo "Create Docker User"
-    exec_root "useradd docker"
+    print_line
+
+    exec_root "useradd -m docker"
     exec_root "passwd docker"
     exec_root "usermod -aG docker docker"
     add_sudo "docker"
@@ -130,6 +146,8 @@ create_docker_user(){
 # @exitcode 1 On failure
 login_docker_user(){
     echo "Login Docker User"
+    print_line
+
     su - docker
     return 0
 }
@@ -141,6 +159,8 @@ login_docker_user(){
 # @exitcode 1 On failure
 create_docker_id_backup(){
     echo "Create Docker Container Backup $1"
+    print_line
+
     # shellcheck disable=SC2086,SC2143
     if [ ! "$(docker ps -a | grep $1)" ]; then
         container_name="$(docker ps | grep $1 | awk '{ print $2 }')"
@@ -159,6 +179,8 @@ create_docker_id_backup(){
 # @exitcode 1 On failure
 create_docker_name_backup(){
     echo "Create Docker Container Backup $1"
+    print_line
+    
     # shellcheck disable=SC2086,SC2143
     if [ ! "$(docker ps -a | grep $1)" ]; then
         # shellcheck disable=SC2086

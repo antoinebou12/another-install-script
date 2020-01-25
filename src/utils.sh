@@ -3,13 +3,24 @@
 # @file utils.sh
 # @brief file containing the utils  for the project and other
 
-# @description check if the os is debian or ubuntu
+
+# @description print line ======
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+print_line(){
+    printf "%0$(tput cols)d" 0 | tr '0' '='
+    return 0
+}
+
+# @description print ascii art
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 show_project_name() {
-    printf "%0$(tput cols)d" 0 | tr '0' '='
+    print_line
     cat <<EOF
 
     ___                   __   __               
@@ -33,7 +44,7 @@ show_project_name() {
 /____/ \___//_/   /_// ____/ \__/  
                     /_/           
 EOF
-    printf "%0$(tput cols)d" 0 | tr '0' '='
+    print_line
     return 0
 }
 

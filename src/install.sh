@@ -17,6 +17,8 @@ source "$DIR"/utils.sh
 # @exitcode 1 On failure
 generate_apt_list_ubuntu() {
     echo "Create Curated apt list"
+    print_line
+
     ../etc/source.list | tee /etc/apt/source.list 
     return 0
 }
@@ -28,7 +30,8 @@ generate_apt_list_ubuntu() {
 # @exitcode 1 On failure
 install_basic() {
     echo "Install the basic packages"
-    # apt-get ubuntu 18.04
+    print_line
+
     aptupdate
     aptupgrade
     aptinstall bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq snapd
@@ -48,10 +51,12 @@ install_basic() {
 # @exitcode 1 On failure
 install_cockpit() {
     echo "Install Cockpit"
+    print_line
+
     aptupdate
     aptinstall cockpit cockpit-docker cockpit-machines cockpit-packagekit > /dev/null
     if [[ "$(checkWSL arg)" != "0" ]]; then
-        systemctl restart cockpit 
+        exec_root "systemctl restart cockpit"
     fi
     return 0
 }
@@ -64,6 +69,8 @@ install_cockpit() {
 # @exitcode 1 On failure
 install_emojify() {
     echo "Install Emojify"
+    print_line
+
     sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify" > /dev/null
 }
 
@@ -76,6 +83,8 @@ install_emojify() {
 # @exitcode 1 On failure
 install_signal_cli() {
     echo "Install Signal cli"
+    print_line
+
     wget https://github.com/AsamK/signal-cli/releases/download/v0.6.5/signal-cli-0.6.5.tar.gz > /dev/null
     sudo tar xf signal-cli-0.6.5.tar.gz -C /opt > /dev/null
     sudo ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/ > /dev/null
@@ -95,6 +104,8 @@ install_signal_cli() {
 # @exitcode 1 On failure
 install_signal_ssh_text(){
     echo "Install Signal on login ssh"
+    print_line
+
     local DATE_EXEC="$(date "+%d %b %Y %H:%M")"
     local TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
     if [ -n "$SSH_CLIENT" ] && [ -z "$TMUX" ]; then
