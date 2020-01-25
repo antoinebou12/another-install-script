@@ -18,12 +18,28 @@ install_docker() {
     print_line
 
     # curl -sSL https://get.docker.com/ | CHANNEL=stable bash
-    aptremove docker docker-engine docker.io containerd runc
+    aptremove docker
+    aptremove docker-engine
+    aptremove docker.io
+    aptremove containerd
+    aptremove runc
     aptinstall apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root "apt-key add -"
-    exec_root "apt-key fingerprint 0EBFCD88"
-    dqt='"'
-    exec_root "add-apt-repository ${dqt}deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable${dqt}"
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add -
+    exec_root apt-key fingerprint 0EBFCD88
+    if [[ "$(lsb_release -cs)" == "eoan" ]]; then
+        if [[ "$UID" -gt 0 ]]; then
+            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
+        else
+            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
+        fi
+    else
+        if [[ "$UID" -gt 0 ]]; then
+            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        else
+            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        fi
+    fi
+
     aptupdate
     aptinstall docker-ce docker-ce-cli containerd.io
     aptclean
@@ -58,7 +74,7 @@ install_docker_extra() {
     echo "Install Docker Extra"
     print_line
 
-    curl -sSf https://moncho.github.io/dry/dryup.sh | exec_root "sh"
+    curl -sSf https://moncho.github.io/dry/dryup.sh | exec_root sh
 
     print_line
     return 0
@@ -125,9 +141,9 @@ docker_setfacl() {
 
     # give current user rwx on the volumes and backups
     # shellcheck disable=SC2086
-    [ "$(getfacl /home/docker/volumes | grep -c "default:user:$USER")" -eq 0 ] && exec_root "setfacl -Rdm u:$USER:rwx /home/docker/volumes"
+    [ "$(getfacl /home/docker/volumes | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx /home/docker/volumes
     # shellcheck disable=SC2086
-    [ "$(getfacl /home/docker/backups | grep -c "default:user:$USER")" -eq 0 ] && exec_root "setfacl -Rdm u:$USER:rwx /home/docker/backups"
+    [ "$(getfacl /home/docker/backups | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx /home/docker/backups
 
     print_line
     return 0
@@ -142,9 +158,9 @@ create_docker_user() {
     echo "Create Docker User"
     print_line
 
-    exec_root "useradd -m -d /home/docker docker"
-    exec_root "passwd docker"
-    exec_root "usermod -aG docker docker"
+    exec_root useradd -m udocker
+    exec_root passwd docker
+    exec_root usermod -aG docker udocker
     add_sudo "docker"
 
     do_as_docker_user "docker_setfacl"
@@ -161,9 +177,10 @@ create_docker_user() {
 do_as_docker_user() {
     if typeset -f "$1" > /dev/null; then
         FUNC=$(declare -f $1)
-        sudo -u docker FUNC
+        sudo -u udocker FUNC
     else
-        sudo -u docker $1
+        local command="$*"
+        sudo -u docker $command
     fi
     return 0
 }

@@ -89,13 +89,15 @@ check_root() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 exec_root() {
+    local command="$*"
     if [[ ! "$#" -eq 0 ]]; then
-        SUDO=''
         if [[ "$UID" -gt 0 ]]; then
-            SUDO='sudo'
+            echo "sudo $command"
+            sudo $command
+        else
+            echo "$command"
+            $command
         fi
-        echo "$SUDO $1"
-        exec "$SUDO" "$1"
         return 0
     fi
     return 1
@@ -108,13 +110,15 @@ exec_root() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 exec_root_func() {
+    local func="$*"
     if [[ ! "$#" -eq 0 ]]; then
-        SUDO=''
         if [[ "$UID" -gt 0 ]]; then
-            SUDO='sudo'
+            sudo bash -c "$(declare -f ${func}); ${func}"
+        else 
+            bash -c "$(declare -f ${func}); ${func}"
         fi
         # shellcheck disable=SC2086
-        exec $SUDO bash -c "$(declare -f ${1}); ${1}"
+        
         return 0
     fi
     return 1
@@ -168,7 +172,7 @@ aptupgrade() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptinstall() {
-    echo "apt install"
+    echo "apt install $@"
     aptupdate >/dev/null
     for var in "$@"; do
         exec_root "apt-get -qq install -y $var" >/dev/null
@@ -182,7 +186,7 @@ aptinstall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptremove() {
-    echo "apt remove"
+    echo "apt remove $@"
     aptupdate >/dev/null
     for var in "$@"; do
         exec_root "apt-get -qq remove -y $var" >/dev/null

@@ -18,7 +18,7 @@ generate_apt_list_ubuntu() {
     echo "Create Curated apt list"
     print_line
 
-    ../etc/source.list | tee /etc/apt/source.list 
+    ../etc/source.list | tee /etc/apt/source.list
 
     print_line
     return 0
@@ -39,8 +39,7 @@ install_basic() {
 
     if [[ "$(checkWSL arg)" != "0" ]]; then
         # snap package
-        echo "not implemented"
-        # exec_root "snap install hub" > /dev/null
+        exec_root "snap install hub --classic" > /dev/null
     fi
 
     print_line
@@ -60,7 +59,7 @@ install_cockpit() {
     aptupdate
     aptinstall cockpit cockpit-docker cockpit-machines cockpit-packagekit
     if [[ "$(checkWSL arg)" != "0" ]]; then
-        exec_root "systemctl restart cockpit"
+        exec_root systemctl restart cockpit
     fi
 
     print_line
@@ -76,13 +75,14 @@ install_cockpit() {
 install_emojify() {
     echo "Install Emojify"
     print_line
-
-    dqt='"'
-    exec_root "sh -c ${dqt}curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify${dqt}"
+    if [[ "$UID" -gt 0 ]]; then
+        sudo sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
+    else
+        sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
+    fi
     print_line
     return 0
 }
-
 
 # @description install the cockpit to web
 # https://github.com/AsamK/signal-cli
@@ -94,10 +94,10 @@ install_signal_cli() {
     echo "Install Signal cli"
     print_line
 
-    wget https://github.com/AsamK/signal-cli/releases/download/v0.6.5/signal-cli-0.6.5.tar.gz > /dev/null
-    sudo tar xf signal-cli-0.6.5.tar.gz -C /opt > /dev/null
-    sudo ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/ > /dev/null
-    rm -rf signal-cli-0.6.5.tar.gz > /dev/null
+    wget https://github.com/AsamK/signal-cli/releases/download/v0.6.5/signal-cli-0.6.5.tar.gz >/dev/null
+    exec_root "tar xf signal-cli-0.6.5.tar.gz -C /opt" >/dev/null
+    exec_root "ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/" >/dev/null
+    rm -rf signal-cli-0.6.5.tar.gz >/dev/null
     signal-cli -u $1 register
     read CODE
     signal-cli -u $1 verify $CODE
@@ -113,25 +113,25 @@ install_signal_cli() {
 # @args $2 phone number recipient
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-install_signal_ssh_text(){
+install_signal_ssh_text() {
     echo "Install Signal on login ssh"
     print_line
 
     local DATE_EXEC="$(date "+%d %b %Y %H:%M")"
     local TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
     if [ -n "$SSH_CLIENT" ] && [ -z "$TMUX" ]; then
-        local IP=$(echo $SSH_CLIENT | awk '{print $1}') 
-        local PORT=$(echo $SSH_CLIENT | awk '{print $3}') 
-        local HOSTNAME=$(hostname -f) 
+        local IP=$(echo $SSH_CLIENT | awk '{print $1}')
+        local PORT=$(echo $SSH_CLIENT | awk '{print $3}')
+        local HOSTNAME=$(hostname -f)
         local IPADDR=$(hostname -I | awk '{print $1}')
-        curl https://ipinfo.io/$IP -s -o $TMPFILE 
-        local CITY=$(cat $TMPFILE | sed -n 's/^  "city":[[:space:]]*//p' | sed 's/"//g') 
+        curl https://ipinfo.io/$IP -s -o $TMPFILE
+        local CITY=$(cat $TMPFILE | sed -n 's/^  "city":[[:space:]]*//p' | sed 's/"//g')
         local REGION=$(cat $TMPFILE | sed -n 's/^  "region":[[:space:]]*//p' | sed 's/"//g')
         local COUNTRY=$(cat $TMPFILE | sed -n 's/^  "country":[[:space:]]*//p' | sed 's/"//g')
         local ORG=$(cat $TMPFILE | sed -n 's/^  "org":[[:space:]]*//p' | sed 's/"//g')
         local TEXT="$DATE_EXEC: ${USER} logged in to $HOSTNAME ($IPADDR) from $IP - $ORG - $CITY, $REGION, $COUNTRY port $PORT"
-        signal-cli  -u +$1 send -m "$TEXT" +$2
-        rm $TMPFILE 
+        signal-cli -u +$1 send -m "$TEXT" +$2
+        rm $TMPFILE
     fi
 
     print_line
