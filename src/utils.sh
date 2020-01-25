@@ -171,6 +171,7 @@ aptupgrade() {
 aptinstall() {
     echo "apt install"
     aptupdate > /dev/null
+    echo "apt-get -qq install -y $@"
     exec_root "apt-get -qq install -y $@" > /dev/null
     return 0
 }

@@ -4,10 +4,10 @@
 # @brief setup menu and logic
 
 # import
-source `dirname "$BASH_SOURCE"`/utils.sh
-source `dirname "$BASH_SOURCE"`/install.sh
-source `dirname "$BASH_SOURCE"`/docker/containers.sh
-source `dirname "$BASH_SOURCE"`/docker/docker.sh
+source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/install.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/docker/containers.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/docker/docker.sh"
 
 #const
 WHIPTAIL_TEXT=$(($(tput lines) - 8))

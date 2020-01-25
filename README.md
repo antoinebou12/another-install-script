@@ -165,8 +165,7 @@ bash test.sh
 For running and generate with [kcov](https://github.com/SimonKagstrom/kcov)
 ```bash 
 cd tests
-source coverage.sh
-use_kcov
+bash coverage.sh
 ```
 
 
@@ -199,4 +198,4 @@ Go to [Changelog](docs/CHANGELOG.md)
 
 ## License
 
-Go to [License](.github/LICENSE.md)
+Go to [License](.github/LICENSE)

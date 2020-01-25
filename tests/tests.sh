@@ -4,9 +4,8 @@
 # @brief run bats test
 
 #import
-DIR=`dirname "$BASH_SOURCE"`
-source "$DIR"/../src/utils.sh
-source "$DIR"/../src/docker/docker.sh
+source "$(dirname "${BASH_SOURCE[0]}")/../src/utils.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../src/docker/docker.sh"
 
 
 install_bats(){
@@ -21,8 +20,8 @@ install_bats(){
 }
 
 run_tests(){
-    bats "$DIR"/bats/utils.bats
-    bats "$DIR"/bats/docker.bats
+    bats "$(dirname "${BASH_SOURCE[0]}")/bats/utils.bats"
+    bats "$(dirname "${BASH_SOURCE[0]}")/bats/docker.bats"
 }
 
 install_bats

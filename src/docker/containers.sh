@@ -94,7 +94,7 @@ manage_exec_containers_list() {
 	for container_name in "${containers[@]}"; do
 		echo "$container_name" >>/tmp/containers.txt
 		source "src/docker/images/$container_name/$container_name.sh"
-		"$FUNC_CREATE"_"$container_name"
+		do_as_docker_user "$FUNC_CREATE_$container_name"
 	done
 	return 0
 }

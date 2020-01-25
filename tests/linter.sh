@@ -15,7 +15,7 @@ use_shellcheck(){
     IFS=$'\n'      # Change IFS to new line
     names=($names) # split to array $names
     IFS=$SAVEIFS   # Restore IFS
-
+    install_shellcheck
     for (( i=0; i<${#names[@]}; i++ )); do
         echo "$i: ${names[$i]}"
         shellcheck "${names[$i]}"

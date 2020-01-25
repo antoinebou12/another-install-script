@@ -6,7 +6,7 @@
 # import
 # shellcheck source=../utils.sh
 # shellcheck disable=SC1091
-source `dirname "$BASH_SOURCE"`/../utils.sh
+source "$(dirname "${BASH_SOURCE[0]}")/../utils.sh"
 
 # @description install the docker
 #

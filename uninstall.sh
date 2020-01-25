@@ -3,8 +3,8 @@
 # @file uninstall.sh
 # @brief uninstall the project
 
-source `dirname "$BASH_SOURCE"`/src/docker/docker.sh
-source `dirname "$BASH_SOURCE"`/src/utils.sh
+source "$(dirname "${BASH_SOURCE[0]}")/src/docker/docker.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/src/utils.sh"
 
 # @description uninstall everything
 #
