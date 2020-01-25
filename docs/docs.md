@@ -132,9 +132,6 @@ _Function has no arguments._
 
 to install docker docker compose on ubuntu18.04
 
-* [install_docker()](#installdocker)
-* [install-docker_compose()](#install-dockercompose)
-* [install_docker_extra()](#installdockerextra)
 * [prune_images_volumes_all()](#pruneimagesvolumesall)
 * [stop_containers_all()](#stopcontainersall)
 * [remove_containers_all()](#removecontainersall)
@@ -145,39 +142,6 @@ to install docker docker compose on ubuntu18.04
 * [create_docker_name_backup()](#createdockernamebackup)
 * [create_docker_backup_all()](#createdockerbackupall)
 
-
-## install_docker()
-
-install the docker
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## install-docker_compose()
-
-install the docker compose
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## install_docker_extra()
-
-install the docker extra utils dry
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
 
 ## prune_images_volumes_all()
 
@@ -772,6 +736,9 @@ install my favirote packages for ubuntu18.04 and tested
 * [generate_apt_list_ubuntu()](#generateaptlistubuntu)
 * [install_basic()](#installbasic)
 * [install_cockpit()](#installcockpit)
+* [install_docker()](#installdocker)
+* [install-docker_compose()](#install-dockercompose)
+* [install_docker_extra()](#installdockerextra)
 * [install_emojify()](#installemojify)
 * [install_signal_cli()](#installsignalcli)
 * [install_signal_ssh_text()](#installsignalsshtext)
@@ -804,6 +771,39 @@ _Function has no arguments._
 install the cockpit to web
 See your server in a web browser and perform system tasks with a mouse. It’s easy to start containers, administer storage, configure networks, and inspect logs.
 https://cockpit-project.org/
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_docker()
+
+install the docker
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install-docker_compose()
+
+install the docker compose
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_docker_extra()
+
+install the docker extra utils dry
 
 _Function has no arguments._
 

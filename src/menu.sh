@@ -4,11 +4,10 @@
 # @brief setup menu and logic
 
 # import
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-source "$DIR"/utils.sh
-source "$DIR"/install.sh
-source "$DIR"/docker/containers.sh
-source "$DIR"/docker/docker.sh
+source `dirname "$BASH_SOURCE"`/utils.sh
+source `dirname "$BASH_SOURCE"`/install.sh
+source `dirname "$BASH_SOURCE"`/docker/containers.sh
+source `dirname "$BASH_SOURCE"`/docker/docker.sh
 
 #const
 WHIPTAIL_TEXT=$(($(tput lines) - 8))
@@ -74,7 +73,7 @@ install_custom_setup_menu() {
     else
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 3))"
     fi
-    SETUP_CONTAINER_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}"  -- "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
+    SETUP_CONTAINER_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
     if [[ $? == 0 ]] && [[ ! -z "$SETUP_CONTAINER_MENU" ]]; then
         show_project_name
         install_basic

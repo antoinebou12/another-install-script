@@ -6,8 +6,7 @@
 # import
 # shellcheck source=../utils.sh
 # shellcheck disable=SC1091
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-source "$DIR"/../utils.sh
+source `dirname "$BASH_SOURCE"`/../utils.sh
 
 # @description install the docker
 #
@@ -28,6 +27,8 @@ install_docker() {
     aptupdate
     aptinstall docker-ce docker-ce-cli containerd.io
     aptclean
+
+    print_line
     return 0
 }
 
@@ -43,6 +44,8 @@ install-docker_compose() {
     curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
     ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+    print_line
     return 0
 }
 
@@ -55,7 +58,9 @@ install_docker_extra() {
     echo "Install Docker Extra"
     print_line
 
-    curl -sSf https://moncho.github.io/dry/dryup.sh | sh
+    curl -sSf https://moncho.github.io/dry/dryup.sh | exec_root "sh"
+
+    print_line
     return 0
 }
 
@@ -70,6 +75,8 @@ prune_images_volumes_all() {
 
     docker image prune -a
     docker system prune --volumes
+
+    print_line
     return 0
 }
 
@@ -83,6 +90,8 @@ stop_containers_all() {
     print_line
 
     docker container stop "$(docker container ls -aq)"
+
+    print_line
     return 0
 }
 
@@ -96,6 +105,8 @@ remove_containers_all() {
     print_line
 
     docker rm $(docker ps -a -q)
+
+    print_line
     return 0
 }
 
@@ -117,6 +128,8 @@ docker_setfacl() {
     [ "$(getfacl /home/docker/volumes | grep -c "default:user:$USER")" -eq 0 ] && exec_root "setfacl -Rdm u:$USER:rwx /home/docker/volumes"
     # shellcheck disable=SC2086
     [ "$(getfacl /home/docker/backups | grep -c "default:user:$USER")" -eq 0 ] && exec_root "setfacl -Rdm u:$USER:rwx /home/docker/backups"
+
+    print_line
     return 0
 }
 
@@ -129,12 +142,14 @@ create_docker_user() {
     echo "Create Docker User"
     print_line
 
-    exec_root "useradd -m docker"
+    exec_root "useradd -m -d /home/docker docker"
     exec_root "passwd docker"
     exec_root "usermod -aG docker docker"
     add_sudo "docker"
 
     do_as_docker_user "docker_setfacl"
+
+    print_line
     return 0
 }
 
@@ -165,6 +180,8 @@ create_docker_id_backup() {
         docker commit -p "$1" "$container_backup"
         docker save -o /home/docker/backups/"$container_backup".tar "$container_backup"
     fi
+
+    print_line
     return 0
 }
 
@@ -186,6 +203,8 @@ create_docker_name_backup() {
         docker commit -p "$1" "$container_backup"
         docker save -o /home/docker/backups/"$container_backup".tar "$container_backup"
     fi
+
+    print_line
     return 0
 }
 

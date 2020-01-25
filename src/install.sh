@@ -7,8 +7,7 @@
 
 # shellcheck source=utils.sh
 # shellcheck disable=SC1091
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-source "$DIR"/utils.sh
+source `dirname "$BASH_SOURCE"`/utils.sh
 
 # @description change the source.list with template in /etc
 #
@@ -20,6 +19,8 @@ generate_apt_list_ubuntu() {
     print_line
 
     ../etc/source.list | tee /etc/apt/source.list 
+
+    print_line
     return 0
 }
 
@@ -38,8 +39,11 @@ install_basic() {
 
     if [[ "$(checkWSL arg)" != "0" ]]; then
         # snap package
+        echo "not implemented"
         # exec_root "snap install hub" > /dev/null
     fi
+
+    print_line
     return 0
 }
 
@@ -58,6 +62,8 @@ install_cockpit() {
     if [[ "$(checkWSL arg)" != "0" ]]; then
         exec_root "systemctl restart cockpit"
     fi
+
+    print_line
     return 0
 }
 
@@ -71,7 +77,10 @@ install_emojify() {
     echo "Install Emojify"
     print_line
 
-    sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify" > /dev/null
+    dqt='"'
+    exec_root "sh -c ${dqt}curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify${dqt}"
+    print_line
+    return 0
 }
 
 
@@ -92,6 +101,8 @@ install_signal_cli() {
     signal-cli -u $1 register
     read CODE
     signal-cli -u $1 verify $CODE
+
+    print_line
     return 0
 }
 
@@ -122,4 +133,7 @@ install_signal_ssh_text(){
         signal-cli  -u +$1 send -m "$TEXT" +$2
         rm $TMPFILE 
     fi
+
+    print_line
+    return 0
 }

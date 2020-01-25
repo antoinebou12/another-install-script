@@ -10,7 +10,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 use_kcov(){
-    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+    DIR=`dirname "$BASH_SOURCE"`
     install_kcov
     [[ -d coverage ]] || mkdir coverage
     "${DIR}"/bin/kcov --exclude-pattern=docs/,etc/,tests/,*.yml,coverage,/usr,/tmp,.git,.*,*.md,.*.yml coverage tests.sh
@@ -23,7 +23,7 @@ use_kcov(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_kcov(){
-    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+    DIR=`dirname "$BASH_SOURCE"`
     if [[ -f  "${DIR}"/bin/kcov ]]; then
         return 0
     else

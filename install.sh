@@ -3,5 +3,5 @@
 # @file install.sh
 # @brief file containing the utils  for the project and other
 
-source src/menu.sh
+source `dirname "$BASH_SOURCE"`/src/menu.sh
 main_setup_menu

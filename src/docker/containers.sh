@@ -3,7 +3,6 @@
 # @file container.sh
 # @brief list of container and other info
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 FUNC_CREATE="create_docker"
 
 declare -a CONTAINER_NAME_MENU=(
@@ -56,6 +55,7 @@ declare -a CONTAINER_NAME_MENU=(
 	"teamspeak" "teamspeak" "OFF"
 	"traefik" "traefik" "OFF"
 	"wallabag" "wallabag" "OFF"
+)
 
 # @description import all the /docker/images/.../*.sh based on selected
 #
@@ -94,7 +94,7 @@ manage_exec_containers_list() {
 	for container_name in "${containers[@]}"; do
 		echo "$container_name" >>/tmp/containers.txt
 		source "src/docker/images/$container_name/$container_name.sh"
-		"create_docker_$container_name"
+		"$FUNC_CREATE"_"$container_name"
 	done
 	return 0
 }

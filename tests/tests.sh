@@ -4,7 +4,7 @@
 # @brief run bats test
 
 #import
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR=`dirname "$BASH_SOURCE"`
 source "$DIR"/../src/utils.sh
 source "$DIR"/../src/docker/docker.sh
 
