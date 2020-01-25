@@ -108,6 +108,7 @@ Some services/server cannot be installed at the same time
 * [docker-compose](https://docs.docker.com/compose/)
 * [dry](https://github.com/moncho/dry)
 * [emojify](https://github.com/mrowa44/emojify)
+* [signal-cli](https://github.com/AsamK/signal-cli)
 
 ## Project Structure
 
@@ -198,4 +199,4 @@ Go to [Changelog](docs/CHANGELOG.md)
 
 ## License
 
-Go to [License](License.md)
+Go to [License](.github/LICENSE.md)

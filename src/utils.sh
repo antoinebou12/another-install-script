@@ -48,50 +48,6 @@ checkWSL() {
     return 1
 }
 
-# @description check if the packages exist
-#
-# @args $1 package name
-# @exitcode 0 If installed
-# @exitcode 1 if not installed
-check_packages_install() {
-    output=$(
-        dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$'
-        echo "$?"
-    )
-    return "$output"
-}
-
-# @description apt-get update
-#
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-aptupdate() {
-    apt-get -qq update &
-    apt-get install -f && apt-get autoclean
-    return 0
-}
-
-# @description apt-get upgrade all
-#
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-aptupgrade() {
-    apt-get -qq update && apt-get -q upgrade && apt-get -q dist-upgrade && apt-get -q install -f && apt-get -q autoclean
-    return 0
-}
-
-# @description apt-get autoclean
-#
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-aptclean() {
-    apt-get -q install -f && apt-get -q autoclean && sudo apt-get -y -q autoremove
-    return 0
-}
-
 # @description check for args for a
 #
 # @args $@ args
@@ -153,6 +109,69 @@ exec_root_func() {
     fi
     return 1
 
+}
+
+# @description check if the packages exist
+#
+# @args $1 package name
+# @exitcode 0 If installed
+# @exitcode 1 if not installed
+check_packages_install() {
+    output=$(
+        dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$'
+        echo "$?"
+    )
+    return "$output"
+}
+
+# @description apt-get update
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+aptupdate() {
+    exec_root "apt-get -qq update > /dev/null && apt-get -qq install -f > /dev/null && apt-get -qq autoclean > /dev/null"
+    return 0
+}
+
+# @description apt-get upgrade all
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+aptupgrade() {
+    exec_root "apt-get -qq update > /dev/null && apt-get -qq upgrade > /dev/null && apt-get -qq dist-upgrade > /dev/null && apt-get -qq install -f > /dev/null && apt-get -qq autoclean > /dev/null"
+    return 0
+}
+
+# @description apt-get install package
+#
+# @args $@ packages to install
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+aptinstall() {
+    exec_root "apt-get -qq update && apt-get -qq install -y $@ > /dev/null"
+    return 0
+}
+
+# @description apt-get install package
+#
+# @args $@ packages to remove
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+aptremove() {
+    exec_root "apt-get -qq update && apt-get -qq remove -y $@ > /dev/null"
+    return 0
+}
+
+# @description apt-get autoclean
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+aptclean() {
+    exec_root "apt-get -qq install -f > /dev/null && apt-get -qq autoclean -y > /dev/null && sudo apt-get -qq autoremove -y > /dev/null"
+    return 0
 }
 
 # @description check mimetype of a file
@@ -241,7 +260,7 @@ check_command_exist() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 check_port() {
-    if lsof -i:"$1" -P -n -t >/dev/null; then
+    if exec_root "lsof -i:$1 -P -n -t >/dev/null"; then
         return 0
     else
         return 1
@@ -255,8 +274,8 @@ check_port() {
 # @exitcode 1 On failure
 add_sudo() {
     while [[ -n $1 ]]; do
-        usermod -aG sudo "$1"
-        echo "$1    ALL=(ALL:ALL) ALL" >>/etc/sudoers
+        exec_root "usermod -aG sudo $1"
+        exec_root "echo '$1    ALL=(ALL:ALL) ALL' >>/etc/sudoers"
         shift # shift all parameters;
     done
     return 0
@@ -312,7 +331,7 @@ loop_files_func() {
 
     for ((i = 0; i < ${#names[@]}; i++)); do
         echo "$i: ${names[$i]}"
-        "$3" "${names[$i]}"
+        $3 "${names[$i]}"
     done
 
     return 0

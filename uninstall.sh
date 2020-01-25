@@ -18,8 +18,36 @@ uninstall() {
     remove_containers_all
 
     aptupdate
-    apt-get remove -y snapd bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq docker cockpit cockpit-docker cockpit-machines cockpit-packagekit docker-ce docker-ce-cli containerd.io
-    snap remove hub
+    aptremove snapd
+    aptremove bat 
+    aptremove nnn
+    aptremove nmap
+    aptremove wget
+    aptremove curl
+    aptremove bats
+    aptremove mlocate
+    aptremove mutt 
+    aptremove python3
+    aptremove python3-pip
+    aptremove alsa-utils
+    aptremove wireless-tools
+    aptremove wpasupplicant
+    aptremove zip
+    aptremove unzip
+    aptremove git
+    aptremove cmake 
+    aptremove build-essential
+    aptremove default-jre
+    aptremove jq
+    aptremove docker 
+    aptremove cockpit 
+    aptremove cockpit-docker
+    aptremove cockpit-machines
+    aptremove cockpit-packagekit
+    aptremove docker-ce
+    aptremove docker-ce-cli
+    aptremove containerd.io
+    snap remove hub > /dev/null  
     aptclean
 
     rm -rf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/
@@ -27,7 +55,7 @@ uninstall() {
     rm -rf /usr/local/bin/docker-compose
     rm -rf /usr/bin/docker-compose
 
-    userdel -r docker
+    exec_root "userdel -r docker" > /dev/null
     return 0
 }
 

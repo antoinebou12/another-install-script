@@ -17,13 +17,14 @@ source "$DIR"/../utils.sh
 install_docker(){
     echo "Install Docker"
     # curl -sSL https://get.docker.com/ | CHANNEL=stable bash
-    apt-get remove -y docker docker-engine docker.io containerd runc
-    apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    apt-key fingerprint 0EBFCD88
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    aptremove docker docker-engine docker.io containerd runc
+    aptinstall apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root "apt-key add -"
+    exec_root "apt-key fingerprint 0EBFCD88"
+    exec_root "add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'"
     aptupdate
-    sudo apt-get install docker-ce docker-ce-cli containerd.io
+    aptinstall docker-ce docker-ce-cli containerd.io
+    aptclean
     return 0 
 }
 
@@ -99,9 +100,9 @@ docker_setfacl() {
 
 	# give current user rwx on the volumes and backups
     # shellcheck disable=SC2086
-	[ "$(getfacl /home/docker/volumes | grep -c "default:user:$USER")" -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/volumes
+	[ "$(getfacl /home/docker/volumes | grep -c "default:user:$USER")" -eq 0 ] && exec_root "setfacl -Rdm u:$USER:rwx /home/docker/volumes"
 	# shellcheck disable=SC2086
-    [ "$(getfacl /home/docker/backups | grep -c "default:user:$USER")" -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /home/docker/backups
+    [ "$(getfacl /home/docker/backups | grep -c "default:user:$USER")" -eq 0 ] && exec_root "setfacl -Rdm u:$USER:rwx /home/docker/backups"
     return 0
 }
 
@@ -112,9 +113,10 @@ docker_setfacl() {
 # @exitcode 1 On failure
 create_docker_user(){
     echo "Create Docker User"
-    useradd docker
-    passwd docker
-    usermod -aG docker docker
+    exec_root "useradd docker"
+    exec_root "passwd docker"
+    exec_root "usermod -aG docker docker"
+    add_sudo "docker"
     
     login_docker_user
     docker_setfacl

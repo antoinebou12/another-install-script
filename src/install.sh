@@ -17,7 +17,7 @@ source "$DIR"/utils.sh
 # @exitcode 1 On failure
 generate_apt_list_ubuntu() {
     echo "Create Curated apt list"
-    ../etc/source.list | tee /etc/apt/source.list
+    ../etc/source.list | tee /etc/apt/source.list 
     return 0
 }
 
@@ -29,13 +29,13 @@ generate_apt_list_ubuntu() {
 install_basic() {
     echo "Install the basic packages"
     # apt-get ubuntu 18.04
-    apt-get update -qq
-    apt-get install snapd
-    apt-get install -y bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq
+    aptupdate
+    aptupgrade
+    aptinstall bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq snapd
 
     if [[ "$(checkWSL arg)" != "0" ]]; then
         # snap package
-        snap install hub
+        snap install hub > /dev/null
     fi
     return 0
 }
@@ -48,10 +48,10 @@ install_basic() {
 # @exitcode 1 On failure
 install_cockpit() {
     echo "Install Cockpit"
-    apt-get -qq update
-    apt-get -q -y install cockpit cockpit-docker cockpit-machines cockpit-packagekit
+    aptupdate
+    aptinstall cockpit cockpit-docker cockpit-machines cockpit-packagekit > /dev/null
     if [[ "$(checkWSL arg)" != "0" ]]; then
-        systemctl restart cockpit
+        systemctl restart cockpit 
     fi
     return 0
 }
@@ -64,7 +64,7 @@ install_cockpit() {
 # @exitcode 1 On failure
 install_emojify() {
     echo "Install Emojify"
-    sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
+    sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify" > /dev/null
 }
 
 
@@ -76,9 +76,10 @@ install_emojify() {
 # @exitcode 1 On failure
 install_signal_cli() {
     echo "Install Signal cli"
-    wget https://github.com/AsamK/signal-cli/releases/download/v0.6.5/signal-cli-0.6.5.tar.gz
-    sudo tar xf signal-cli-0.6.5.tar.gz -C /opt
-    sudo ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/
+    wget https://github.com/AsamK/signal-cli/releases/download/v0.6.5/signal-cli-0.6.5.tar.gz > /dev/null
+    sudo tar xf signal-cli-0.6.5.tar.gz -C /opt > /dev/null
+    sudo ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/ > /dev/null
+    rm -rf signal-cli-0.6.5.tar.gz > /dev/null
     signal-cli -u $1 register
     read CODE
     signal-cli -u $1 verify $CODE

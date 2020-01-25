@@ -51,6 +51,7 @@ install_simple_setup_menu() {
     generate_apt_list_ubuntu
     aptupdate
     aptupgrade
+    aptclean
     install_basic
     install_cockpit
     install_emojify
@@ -75,12 +76,11 @@ install_custom_setup_menu() {
     SETUP_CONTAINER_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}"  -- "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
     if [[ $? == 0 ]] && [[ ! -z "$SETUP_CONTAINER_MENU" ]]; then
         show_project_name
-        # aptupdate
-        # aptupgrade
-        # install_basic
-        # install_cockpit
-        # install_emojify
-        # install_docker
+        install_basic
+        install_cockpit
+        install_emojify
+        install_docker
+        create_docker_user
         manage_exec_containers_list "$SETUP_CONTAINER_MENU"
         return 0
     else
