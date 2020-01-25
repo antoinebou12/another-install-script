@@ -24,21 +24,15 @@ uninstall() {
     aptremove bat 
     aptremove nnn
     aptremove nmap
-    aptremove wget
-    aptremove curl
     aptremove bats
     aptremove mlocate
     aptremove mutt 
-    aptremove python3
-    aptremove python3-pip
     aptremove alsa-utils
     aptremove wireless-tools
     aptremove wpasupplicant
     aptremove zip
     aptremove unzip
-    aptremove git
     aptremove cmake 
-    aptremove build-essential
     aptremove default-jre
     aptremove jq
     aptremove docker 

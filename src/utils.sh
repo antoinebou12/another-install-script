@@ -3,13 +3,12 @@
 # @file utils.sh
 # @brief file containing the utils  for the project and other
 
-
 # @description print line ======
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-print_line(){
+print_line() {
     printf "%0$(tput cols)d" 0 | tr '0' '='
     return 0
 }
@@ -96,7 +95,7 @@ exec_root() {
             SUDO='sudo'
         fi
         echo "$SUDO $1"
-        $SUDO $1
+        exec "$SUDO" "$1"
         return 0
     fi
     return 1
@@ -115,7 +114,7 @@ exec_root_func() {
             SUDO='sudo'
         fi
         # shellcheck disable=SC2086
-        $SUDO bash -c "$(declare -f ${1}); ${1}"
+        exec $SUDO bash -c "$(declare -f ${1}); ${1}"
         return 0
     fi
     return 1
@@ -142,9 +141,9 @@ check_packages_install() {
 # @exitcode 1 On failure
 aptupdate() {
     echo "apt update"
-    exec_root "apt-get -qq update" > /dev/null
-    exec_root "apt-get -qq install -f" > /dev/null
-    exec_root "apt-get -qq autoclean" > /dev/null
+    exec_root "apt-get -qq update" >/dev/null
+    exec_root "apt-get -qq install -f" >/dev/null
+    exec_root "apt-get -qq autoclean" >/dev/null
     return 0
 }
 
@@ -155,11 +154,11 @@ aptupdate() {
 # @exitcode 1 On failure
 aptupgrade() {
     echo "apt upgrade"
-    exec_root "apt-get -qq update" > /dev/null
-    exec_root "apt-get -qq upgrade" > /dev/null
-    exec_root "apt-get -qq dist-upgrade"  > /dev/null
-    exec_root "apt-get -qq install -f"  > /dev/null
-    exec_root "apt-get -qq autoclean" > /dev/null
+    exec_root "apt-get -qq update" >/dev/null
+    exec_root "apt-get -qq upgrade" >/dev/null
+    exec_root "apt-get -qq dist-upgrade" >/dev/null
+    exec_root "apt-get -qq install -f" >/dev/null
+    exec_root "apt-get -qq autoclean" >/dev/null
     return 0
 }
 
@@ -170,9 +169,10 @@ aptupgrade() {
 # @exitcode 1 On failure
 aptinstall() {
     echo "apt install"
-    aptupdate > /dev/null
-    echo "apt-get -qq install -y $@"
-    exec_root "apt-get -qq install -y $@" > /dev/null
+    aptupdate >/dev/null
+    for var in "$@"; do
+        exec_root "apt-get -qq install -y $var" >/dev/null
+    done
     return 0
 }
 
@@ -182,8 +182,12 @@ aptinstall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptremove() {
-    aptupdate > /dev/null
-    exec_root "apt-get -qq remove -y $@" > /dev/null
+    echo "apt remove"
+    aptupdate >/dev/null
+    for var in "$@"; do
+        exec_root "apt-get -qq remove -y $var" >/dev/null
+    done
+    return 0
     return 0
 }
 
@@ -194,9 +198,9 @@ aptremove() {
 # @exitcode 1 On failure
 aptclean() {
     echo "apt clean"
-    exec_root "apt-get -qq install -f" > /dev/null
-    exec_root "apt-get -qq autoclean -y" > /dev/null
-    exec_root "apt-get -qq autoremove -y" > /dev/null
+    exec_root "apt-get -qq install -f" >/dev/null
+    exec_root "apt-get -qq autoclean -y" >/dev/null
+    exec_root "apt-get -qq autoremove -y" >/dev/null
     return 0
 }
 

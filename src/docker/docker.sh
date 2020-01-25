@@ -159,7 +159,12 @@ create_docker_user() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 do_as_docker_user() {
-    sudo -u docker $1
+    if typeset -f "$1" > /dev/null; then
+        FUNC=$(declare -f $1)
+        sudo -u docker FUNC
+    else
+        sudo -u docker $1
+    fi
     return 0
 }
 
