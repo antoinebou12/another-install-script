@@ -66,7 +66,7 @@ install_simple_setup_menu() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failur3
 install_custom_setup_menu() {
-    if [ $(tput lines) -lt 40 ]; then
+    if [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 9))"
     elif [ $(tput lines) -gt 50 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 6))"

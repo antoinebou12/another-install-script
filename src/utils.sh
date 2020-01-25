@@ -141,6 +141,7 @@ check_packages_install() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptupdate() {
+    echo "apt update"
     exec_root "apt-get -qq update" > /dev/null
     exec_root "apt-get -qq install -f" > /dev/null
     exec_root "apt-get -qq autoclean" > /dev/null
@@ -153,6 +154,7 @@ aptupdate() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptupgrade() {
+    echo "apt upgrade"
     exec_root "apt-get -qq update" > /dev/null
     exec_root "apt-get -qq upgrade" > /dev/null
     exec_root "apt-get -qq dist-upgrade"  > /dev/null
@@ -167,7 +169,8 @@ aptupgrade() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptinstall() {
-    aptupdate
+    echo "apt install"
+    aptupdate > /dev/null
     exec_root "apt-get -qq install -y $@" > /dev/null
     return 0
 }
@@ -178,7 +181,8 @@ aptinstall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptremove() {
-    aptupdate
+    echo "apt remove"
+    aptupdate > /dev/null
     exec_root "apt-get -qq remove -y $@" > /dev/null
     return 0
 }
@@ -189,6 +193,7 @@ aptremove() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptclean() {
+    echo "apt clean"
     exec_root "apt-get -qq install -f" > /dev/null
     exec_root "apt-get -qq autoclean -y" > /dev/null
     exec_root "apt-get -qq autoremove -y" > /dev/null

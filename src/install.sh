@@ -38,7 +38,7 @@ install_basic() {
 
     if [[ "$(checkWSL arg)" != "0" ]]; then
         # snap package
-        snap install hub > /dev/null
+        # exec_root "snap install hub" > /dev/null
     fi
     return 0
 }
@@ -54,7 +54,7 @@ install_cockpit() {
     print_line
 
     aptupdate
-    aptinstall cockpit cockpit-docker cockpit-machines cockpit-packagekit > /dev/null
+    aptinstall cockpit cockpit-docker cockpit-machines cockpit-packagekit
     if [[ "$(checkWSL arg)" != "0" ]]; then
         exec_root "systemctl restart cockpit"
     fi
