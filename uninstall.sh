@@ -52,10 +52,10 @@ uninstall() {
     # snap remove hub > /dev/null  
     aptclean
 
-    rm -rf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/
-    rm -rf /usr/local/bin/emojify
-    rm -rf /usr/local/bin/docker-compose
-    rm -rf /usr/bin/docker-compose
+    exec_root "rm -rf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/signal-cli"
+    exec_root "rm -rf /usr/local/bin/emojify"
+    exec_root "rm -rf /usr/local/bin/docker-compose"
+    exec_root "rm -rf /usr/bin/docker-compose"
 
     exec_root "userdel -r docker" > /dev/null
     return 0

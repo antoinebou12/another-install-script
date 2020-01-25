@@ -56,8 +56,6 @@ declare -a CONTAINER_NAME_MENU=(
 	"teamspeak" "teamspeak" "OFF"
 	"traefik" "traefik" "OFF"
 	"wallabag" "wallabag" "OFF"
-)
-
 
 # @description import all the /docker/images/.../*.sh based on selected
 #
@@ -110,6 +108,7 @@ list_container() {
 	echo docker inspect --format='{{.Name}}' $(exec_root "docker ps -aq --no-trunc") | cut -c2-
 	return 0
 }
+
 
 # @description show the list of src images
 #

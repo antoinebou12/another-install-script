@@ -181,7 +181,6 @@ aptinstall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptremove() {
-    echo "apt remove"
     aptupdate > /dev/null
     exec_root "apt-get -qq remove -y $@" > /dev/null
     return 0
