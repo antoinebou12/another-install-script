@@ -1,67 +1,3 @@
-# ansible.sh
-
-to use ansible with vagrant for testing installation or make install with ansible playbook
-
-* [install_ansible()](#installansible)
-
-
-## install_ansible()
-
-install ansible
-
-_Function has no arguments._
-
-# qemu.sh
-
-to use qemu with ansible and vagrant for testing installation
-
-* [install_qemu()](#installqemu)
-* [create_qemu_img()](#createqemuimg)
-* [install_qemu_32vm()](#installqemu32vm)
-* [run_qemu_32vm()](#runqemu32vm)
-
-
-## install_qemu()
-
-install the quemu 
-
-_Function has no arguments._
-
-## create_qemu_img()
-
-qemu create a image for qemu
-
-### Arguments
-
-* # @args $1 img of the os
-* # @args $2 the num of gb for img
-
-## install_qemu_32vm()
-
-install the os on the image first time qemu
-
-### Arguments
-
-* # @args $1 img of the os
-* # @args $2 the iso of the os
-* # @args $3 boot cd
-* # @args $4 mem for the os
-
-## run_qemu_32vm()
-
-run 32 bits vm with qemu
-
-### Arguments
-
-* # @args $1 img of the os
-* # @args $1 img of the os
-
-# vagrant.sh
-
-install vagrant and more
-
-
-
 # install.sh
 
 file containing the utils  for the project and other
@@ -861,6 +797,7 @@ setup menu and logic
 * [password_dialog()](#passworddialog)
 * [install_simple_setup_menu()](#installsimplesetupmenu)
 * [install_custom_setup_menu()](#installcustomsetupmenu)
+* [add_custom_extra_setup_menu()](#addcustomextrasetupmenu)
 * [help_setup_menu()](#helpsetupmenu)
 * [main_setup_menu()](#mainsetupmenu)
 
@@ -892,6 +829,15 @@ whiptails install custom setup menu
 * **0**: If successfull.
 * **1**: On failur3
 
+## add_custom_extra_setup_menu()
+
+whiptails install add custom setup menu
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failur3
+
 ## help_setup_menu()
 
 show help for the setup script
@@ -911,6 +857,51 @@ _Function has no arguments._
 
 * **0**: If successfull.
 * **1**: On failure
+
+# qemu.sh
+
+to use qemu with ansible and vagrant for testing installation
+
+* [install_qemu()](#installqemu)
+* [create_qemu_img()](#createqemuimg)
+* [install_qemu_32vm()](#installqemu32vm)
+* [run_qemu_32vm()](#runqemu32vm)
+
+
+## install_qemu()
+
+install the quemu 
+
+_Function has no arguments._
+
+## create_qemu_img()
+
+qemu create a image for qemu
+
+### Arguments
+
+* # @args $1 img of the os
+* # @args $2 the num of gb for img
+
+## install_qemu_32vm()
+
+install the os on the image first time qemu
+
+### Arguments
+
+* # @args $1 img of the os
+* # @args $2 the iso of the os
+* # @args $3 boot cd
+* # @args $4 mem for the os
+
+## run_qemu_32vm()
+
+run 32 bits vm with qemu
+
+### Arguments
+
+* # @args $1 img of the os
+* # @args $1 img of the os
 
 # utils.sh
 
