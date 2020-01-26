@@ -309,7 +309,7 @@ check_port() {
 add_sudo() {
     while [[ -n $1 ]]; do
         exec_root "usermod -aG sudo $1"
-        exec_root "echo '$1    ALL=(ALL:ALL) ALL' >>/etc/sudoers"
+        echo '$1 ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo
         shift # shift all parameters;
     done
     return 0

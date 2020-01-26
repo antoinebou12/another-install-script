@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-source $(dirname "$0")/../../src/utils.sh
+source "$(dirname "${BASH_SOURCE[0]}")"/../../src/utils.sh
 
 test-func(){
     apt-get update

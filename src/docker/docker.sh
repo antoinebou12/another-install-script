@@ -141,9 +141,9 @@ docker_setfacl() {
 
     # give current user rwx on the volumes and backups
     # shellcheck disable=SC2086
-    [ "$(getfacl /home/udocker/volumes | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx /home/udocker/volumes
+    [ "$(getfacl -p /home/udocker/volumes | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx -p /home/udocker/volumes
     # shellcheck disable=SC2086
-    [ "$(getfacl /home/udocker/backups | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx /home/udocker/backups
+    [ "$(getfacl -p /home/udocker/backups | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx -p /home/udocker/backups
 
     print_line
     return 0
@@ -163,7 +163,7 @@ create_docker_user() {
     exec_root usermod -aG docker udocker
     add_sudo "udocker"
 
-    do_as_docker_user "docker_setfacl"
+    do_as_udocker_user "docker_setfacl"
 
     print_line
     return 0
@@ -174,12 +174,14 @@ create_docker_user() {
 # @args $1 command
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-do_as_docker_user() {
+do_as_udocker_user() {
     if typeset -f "$1" > /dev/null; then
-        FUNC=$(declare -f $1)
-        sudo -u udocker FUNC
+        FUNC=$(declare -f $1) 
+        echo "sudo -u udocker bash -c '$FUNC; $1'"
+        sudo -u udocker bash -c "$FUNC; $1"
     else
         local command="$*"
+        echo "sudo -u udocker $command"
         sudo -u udocker $command
     fi
     return 0

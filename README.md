@@ -11,21 +11,17 @@ Another install Script is a W.I.P project/script to install docker container for
 ## The story behind the project
 
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.
-After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker.
-After learning a bit about docker. Also, I found so GitHub repo that tries to do the same thing with their favorite container.
-I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall app in this app.
+After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker.After learning more on docker and docker-compose to create bash project install script using Test-driven development and documented. Also, I found so GitHub repo that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack).I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall appand other selfhosted services/servers to easy to install with a simple cli menu.
 
-## How to install 
+## How to install
 
 For now only work on ubuntu and only tested on ubuntu18.04
 
-```bash 
+```bash
 git clone --recursive https://github.com/antoinebou13/personal-vps.git
 cd personal-vps
 bash setup.sh
 ```
-
-
 
 ## List of the services/server
 
@@ -79,7 +75,6 @@ Some services/server cannot be installed at the same time
 | [wallabag](https://github.com/wallabag/wallabag)                          | ✔️     |                    |         |            |         |
 | [cockpit](https://cockpit-project.org/)                                   | ❌      | 9090               |         | :9090      | ✔️      |
 
-
 ## List of other installed program
 
 * build-essential
@@ -114,11 +109,7 @@ Some services/server cannot be installed at the same time
 
 A simple project overview to with the explaination of each important file
 
-```
-+-- ansible
-|   +-- vagrant
-|       +-- ...
-|   +-- ansible.sh
+```bash
 +-- docs
 |   +-- vendor
 |       +-- ...
@@ -144,8 +135,6 @@ A simple project overview to with the explaination of each important file
 
 | Path                       |                           Explanation                            |
 | -------------------------- | :--------------------------------------------------------------: |
-| ansible                    |  Ansible playbook script to install the project and for testing  |
-| ansible/vagrant            |             Vagrant to test the ansible installation             |
 | docs                       | The directory for the documentation for the code and the project |
 | docs/vendor                |         The vendor program to generate the documentation         |
 | src                        |              The path for the code for the project               |
@@ -163,17 +152,17 @@ bash test.sh
 ```
 
 For running and generate with [kcov](https://github.com/SimonKagstrom/kcov)
-```bash 
+
+```bash
 cd tests
 bash coverage.sh
 ```
-
 
 ## How to generate the documentation
 
 For running and generate the documentation with [shdoc](https://github.com/reconquest/shdoc)
 
-```bash 
+```bash
 git submodule update --init --recursive
 git pull --recurse-submodules
 git submodule update --remote

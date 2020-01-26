@@ -4,6 +4,37 @@ file containing the utils  for the project and other
 
 
 
+# semver.sh
+
+semver https://semver.org/
+
+* [install_semver()](#installsemver)
+* [use_semver()](#usesemver)
+
+
+## install_semver()
+
+install semver
+https://github.com/fsaintjacques/semver-tool
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## use_semver()
+
+use semver ci
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # container.sh
 
 list of container and other info
@@ -31,7 +62,7 @@ import all the /docker/images/.../*.sh based on selected
 
 ## manage_exec_containers_list()
 
-manage exec containers sh in the images src
+manage exec containers sh in the images src do_as_docker_user
 
 ### Arguments
 
@@ -76,7 +107,7 @@ to install docker docker compose on ubuntu18.04
 * [remove_containers_all()](#removecontainersall)
 * [docker_setfacl()](#dockersetfacl)
 * [create_docker_user()](#createdockeruser)
-* [do_as_docker_user()](#doasdockeruser)
+* [do_as_udocker_user()](#doasudockeruser)
 * [create_docker_id_backup()](#createdockeridbackup)
 * [create_docker_name_backup()](#createdockernamebackup)
 * [create_docker_backup_all()](#createdockerbackupall)
@@ -170,7 +201,7 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-## do_as_docker_user()
+## do_as_udocker_user()
 
 do as the docker user
 
@@ -795,8 +826,8 @@ https://8192.one/post/ssh_login_notification_signal/
 setup menu and logic
 
 * [password_dialog()](#passworddialog)
-* [install_simple_setup_menu()](#installsimplesetupmenu)
 * [install_custom_setup_menu()](#installcustomsetupmenu)
+* [add_custom_extra_setup_menu()](#addcustomextrasetupmenu)
 * [add_custom_extra_setup_menu()](#addcustomextrasetupmenu)
 * [help_setup_menu()](#helpsetupmenu)
 * [main_setup_menu()](#mainsetupmenu)
@@ -811,15 +842,6 @@ whiptails password dialog
 * **0**: If successfull.
 * **1**: On failure
 
-## install_simple_setup_menu()
-
-whiptail install simple setup menu
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 ## install_custom_setup_menu()
 
 whiptails install custom setup menu
@@ -828,6 +850,15 @@ whiptails install custom setup menu
 
 * **0**: If successfull.
 * **1**: On failur3
+
+## add_custom_extra_setup_menu()
+
+whiptails install add custom setup menu
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 ## add_custom_extra_setup_menu()
 
@@ -857,51 +888,6 @@ _Function has no arguments._
 
 * **0**: If successfull.
 * **1**: On failure
-
-# qemu.sh
-
-to use qemu with ansible and vagrant for testing installation
-
-* [install_qemu()](#installqemu)
-* [create_qemu_img()](#createqemuimg)
-* [install_qemu_32vm()](#installqemu32vm)
-* [run_qemu_32vm()](#runqemu32vm)
-
-
-## install_qemu()
-
-install the quemu 
-
-_Function has no arguments._
-
-## create_qemu_img()
-
-qemu create a image for qemu
-
-### Arguments
-
-* # @args $1 img of the os
-* # @args $2 the num of gb for img
-
-## install_qemu_32vm()
-
-install the os on the image first time qemu
-
-### Arguments
-
-* # @args $1 img of the os
-* # @args $2 the iso of the os
-* # @args $3 boot cd
-* # @args $4 mem for the os
-
-## run_qemu_32vm()
-
-run 32 bits vm with qemu
-
-### Arguments
-
-* # @args $1 img of the os
-* # @args $1 img of the os
 
 # utils.sh
 
@@ -1290,9 +1276,6 @@ _Function has no arguments._
 
 * **0**: If successfull.
 * **1**: On failure
-
-
-
 
 # coverage.sh
 

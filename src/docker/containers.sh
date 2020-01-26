@@ -81,7 +81,7 @@ import_all_sh() {
 	return 0
 }
 
-# @description manage exec containers sh in the images src
+# @description manage exec containers sh in the images src do_as_docker_user
 #
 # @args $1 SETUP_CONTAINER_MENU
 # @exitcode 0 If successfull.
@@ -94,7 +94,8 @@ manage_exec_containers_list() {
 	for container_name in "${containers[@]}"; do
 		echo "$container_name" >>/tmp/containers.txt
 		source "src/docker/images/$container_name/$container_name.sh"
-		do_as_docker_user "$FUNC_CREATE_$container_name"
+		echo "$FUNC_CREATE_$container_name"
+		do_as_udocker_user "$FUNC_CREATE_$container_name"
 	done
 	return 0
 }
