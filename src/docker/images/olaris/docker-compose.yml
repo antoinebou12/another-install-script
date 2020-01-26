@@ -10,6 +10,6 @@ services:
             - 'OLARIS_GID=$(id -g)'
 
         volumes:
-            - /home/docker/olaris:/var/media
-            - home/docker/olaris/config:/home/olaris/.config/olaris
-            - home/docker/olaris/config/rclone:/home/olaris/.config/rclone
+            - /home/udocker/olaris:/var/media
+            - /home/udocker/olaris/config:/home/olaris/.config/olaris
+            - /home/udocker/olaris/config/rclone:/home/olaris/.config/rclone

@@ -10,8 +10,8 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_recalbox(){
-    mkdir /home/docker/recalbox/
-    PATH_RECALBOX=${1:-"/home/docker/recalbox"}
+    mkdir /home/udocker/recalbox/
+    PATH_RECALBOX=${1:-"/home/udocker/recalbox"}
     docker run -t -v "$PATH_RECALBOX":/usr/share/recalbox/build/ recalbox/recalbox-docker-build
     return 0
 }

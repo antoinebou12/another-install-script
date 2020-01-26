@@ -13,11 +13,11 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_cloud-torrent(){
-    cd /home/docker/ || return 1
+    cd /home/udocker/ || return 1
     PORT_WEB=${1:-"6889"}
     USERNAME=${2:-"admin"}
     PASSWORD=${3:-"password"}
-    PATH_DOWNLOAD=${4:-"/home/docker/cloud-torrent/download"}
+    PATH_DOWNLOAD=${4:-"/home/udocker/cloud-torrent/download"}
 
     mkdir -p "$PATH_DOWNLOAD"
 

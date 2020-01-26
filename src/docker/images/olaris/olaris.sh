@@ -14,6 +14,6 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_firefly-iii(){
-    docker run -p 8090:8080 --mount type=bind,source="/home/docker/olaris",target=/var/media --mount type=bind,source="home/docker/olaris/config",target=/home/olaris/.config/olaris --mount type=bind,source="home/docker/olaris/config/rclone",target="/home/olaris/.config/rclone" -e OLARIS_UID=$(id -u) -e OLARIS_GID=$(id -g) olaristv/olaris-server
+    docker run -p 8090:8080 --mount type=bind,source="/home/udocker/olaris",target=/var/media --mount type=bind,source="home/udocker/olaris/config",target=/home/olaris/.config/olaris --mount type=bind,source="home/udocker/olaris/config/rclone",target="/home/olaris/.config/rclone" -e OLARIS_UID=$(id -u) -e OLARIS_GID=$(id -g) olaristv/olaris-server
     return 0
  }

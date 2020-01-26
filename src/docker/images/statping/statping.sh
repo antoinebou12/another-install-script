@@ -10,9 +10,9 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_statping(){
-    mkdir /home/docker/statping/
+    mkdir /home/udocker/statping/
     PORT_WEB=${1:-"8084"}
-    PATH_STATPING=${2:-"/home/docker/statping/"}
+    PATH_STATPING=${2:-"/home/udocker/statping/"}
     docker run -d -p "$PORT_WEB":8080 -v "$PATH_STATPING":/app --restart always hunterlong/statping
     return 0
 }

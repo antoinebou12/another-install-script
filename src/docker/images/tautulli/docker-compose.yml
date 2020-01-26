@@ -8,8 +8,8 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - /home/docker/tautulli/config:/config
-      - /home/docker/plex/logs:/logs
+      - /home/udocker/tautulli/config:/config
+      - /home/udocker/plex/logs:/logs
     ports:
       - 8181:8181
     restart: unless-stopped

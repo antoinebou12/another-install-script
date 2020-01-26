@@ -13,9 +13,9 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_mcmyadmin(){
-    mkdir /home/docker/mcmydocker
+    mkdir /home/udocker/mcmydocker
     name=${1:-"mcmyadmin"}
-    path_data=${2:-"/home/docker/minecraft"}
+    path_data=${2:-"/home/udocker/minecraft"}
     port_web=${3:-8080}
     port_minecraft=${4:-25565}
 

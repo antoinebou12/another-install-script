@@ -6,4 +6,4 @@ services:
         ports:
             - '8030:80'
         volumes:
-            - '/home/docker/libresignage:/var/www/html/data'
+            - '/home/udocker/libresignage:/var/www/html/data'

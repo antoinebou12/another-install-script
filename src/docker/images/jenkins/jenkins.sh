@@ -14,7 +14,7 @@
  create_docker_jenkins(){
     local PORT_WEB=${1:-8080}
     local PORT_JENKINS=${2:-25565}
-    local JENKINS_DATA=${3:"/home/docker/jenkins"}
+    local JENKINS_DATA=${3:"/home/udocker/jenkins"}
     docker run -p "$PORT_WEB":8080 -p "$PORT_JENKINS":50000 -v "$JENKINS_DATA":/var/jenkins_home jenkins/jenkins:lts
     return 0
 }

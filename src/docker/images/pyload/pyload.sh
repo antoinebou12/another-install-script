@@ -11,9 +11,9 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_pyload(){
-    mkdir /home/docker/pyload
-    PATH_CONFIG=${1:-"/home/docker/pyload/config"}
-    PATH_DOWNLOAD=${2:-"/home/docker/pyload/download"}
+    mkdir /home/udocker/pyload
+    PATH_CONFIG=${1:-"/home/udocker/pyload/config"}
+    PATH_DOWNLOAD=${2:-"/home/udocker/pyload/download"}
     PORT_WEB=${3:-"8001"}
     PATH_CONFIG=$PATH_CONFIG PATH_DOWNLOAD=$PATH_DOWNLOAD PORT_WEB=$PORT_WEB docker-compose up -d
     return 0

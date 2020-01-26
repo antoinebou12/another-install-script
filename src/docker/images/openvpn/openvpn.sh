@@ -12,8 +12,8 @@
 # @exitcode 1 On failure
  create_docker_openvpn(){
     set -e
-    mkdir /home/docker/openvpn
-    cd /home/docker/openvpn
+    mkdir /home/udocker/openvpn
+    cd /home/udocker/openvpn
     docker-compose run --rm openvpn ovpn_genconfig -u udp://"$1"
     docker-compose run --rm openvpn ovpn_initpki
     docker-compose run --rm openvpn easyrsa build-client-full "$2" nopass

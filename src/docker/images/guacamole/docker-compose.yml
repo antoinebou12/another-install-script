@@ -8,4 +8,4 @@ services:
         # environment:
         #     - 'EXTENSIONS=auth-ldap,auth-duo'
         volumes:
-            - '/home/docker/guacamole/config:/configoznu/guacamole'
+            - '/home/udocker/guacamole/config:/configoznu/guacamole'

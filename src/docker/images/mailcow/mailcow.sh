@@ -11,8 +11,8 @@
 # @exitcode 1 On failure
  create_docker_mailcow(){
     set -e
-    mkdir /home/docker/mailcow
-    cd /home/docker/mailcow || return 1
+    mkdir /home/udocker/mailcow
+    cd /home/udocker/mailcow || return 1
     git clone https://github.com/mailcow/mailcow-dockerized
     cd mailcow-dockerized || return 1
     ./generate_config.sh

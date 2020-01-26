@@ -135,15 +135,15 @@ docker_setfacl() {
     echo "Create Folder for Docker User"
     print_line
 
-    [ -d /home/docker/services ] || mkdir /home/docker/services
-    [ -d /home/docker/volumes ] || mkdir /home/docker/volumes
-    [ -d /home/docker/backups ] || mkdir /home/docker/backups
+    [ -d /home/udocker/services ] || mkdir /home/udocker/services
+    [ -d /home/udocker/volumes ] || mkdir /home/udocker/volumes
+    [ -d /home/udocker/backups ] || mkdir /home/udocker/backups
 
     # give current user rwx on the volumes and backups
     # shellcheck disable=SC2086
-    [ "$(getfacl /home/docker/volumes | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx /home/docker/volumes
+    [ "$(getfacl /home/udocker/volumes | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx /home/udocker/volumes
     # shellcheck disable=SC2086
-    [ "$(getfacl /home/docker/backups | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx /home/docker/backups
+    [ "$(getfacl /home/udocker/backups | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx /home/udocker/backups
 
     print_line
     return 0
@@ -159,9 +159,9 @@ create_docker_user() {
     print_line
 
     exec_root useradd -m udocker
-    exec_root passwd docker
+    exec_root passwd udocker
     exec_root usermod -aG docker udocker
-    add_sudo "docker"
+    add_sudo "udocker"
 
     do_as_docker_user "docker_setfacl"
 
@@ -180,7 +180,7 @@ do_as_docker_user() {
         sudo -u udocker FUNC
     else
         local command="$*"
-        sudo -u docker $command
+        sudo -u udocker $command
     fi
     return 0
 }
@@ -200,7 +200,7 @@ create_docker_id_backup() {
         date_id="$(date +'%m/%d/%Y_%s')"
         container_backup="${container_name}_${date_id}_backup"
         docker commit -p "$1" "$container_backup"
-        docker save -o /home/docker/backups/"$container_backup".tar "$container_backup"
+        docker save -o /home/udocker/backups/"$container_backup".tar "$container_backup"
     fi
 
     print_line
@@ -223,7 +223,7 @@ create_docker_name_backup() {
         date_id=$(date +'%m/%d/%Y_%s')
         container_backup="${container_name}_${date_id}_backup"
         docker commit -p "$1" "$container_backup"
-        docker save -o /home/docker/backups/"$container_backup".tar "$container_backup"
+        docker save -o /home/udocker/backups/"$container_backup".tar "$container_backup"
     fi
 
     print_line
