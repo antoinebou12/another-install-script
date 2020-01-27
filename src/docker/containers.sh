@@ -97,7 +97,6 @@ manage_exec_containers_list() {
 		print_line
 		echo "$container_name" >>/tmp/containers.txt
 		source "src/docker/images/$container_name/$container_name.sh"
-		echo "$FUNC_CREATE_$container_name"
 		"$FUNC_CREATE""$container_name"
 	done
 	return 0
