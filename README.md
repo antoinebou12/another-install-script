@@ -88,6 +88,7 @@ Some services/server cannot be installed at the same time
 * wpasupplicant
 * default-jre
 * jq
+* net-tools
 * [vim](https://www.vim.org/)
 * [snapd](https://snapcraft.io/)
 * [bat](https://github.com/sharkdp/bat)
