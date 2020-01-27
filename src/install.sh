@@ -35,7 +35,7 @@ install_basic() {
 
     aptupdate
     aptupgrade
-    aptinstall bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq snapd net-tools
+    aptinstall bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq snapd acl net-tools
 
     if [[ "$(checkWSL arg)" != "0" ]]; then
         # snap package

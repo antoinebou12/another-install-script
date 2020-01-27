@@ -120,7 +120,7 @@ remove_containers_all() {
     echo "Remove all Docker Containers"
     print_line
 
-    docker rm $(docker ps -a -q)
+    docker rm "$(docker ps -a -q)"
 
     print_line
     return 0
@@ -131,19 +131,22 @@ remove_containers_all() {
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-docker_setfacl() {
+docker_create_dir() {
     echo "Create Folder for Docker User"
     print_line
 
-    [ -d /home/udocker/services ] || mkdir /home/udocker/services
-    [ -d /home/udocker/volumes ] || mkdir /home/udocker/volumes
-    [ -d /home/udocker/backups ] || mkdir /home/udocker/backups
+    [ -d /home/udocker/services ] || exec_root mkdir -p /home/udocker/services
+    [ -d /home/udocker/volumes ] || exec_root mkdir -p /home/udocker/volumes
+    [ -d /home/udocker/backups ] || exec_root mkdir -p /home/udocker/backups
 
     # give current user rwx on the volumes and backups
-    # shellcheck disable=SC2086
-    [ "$(getfacl -p /home/udocker/volumes | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx -p /home/udocker/volumes
-    # shellcheck disable=SC2086
-    [ "$(getfacl -p /home/udocker/backups | grep -c "default:user:$USER")" -eq 0 ] && exec_root setfacl -Rdm u:$USER:rwx -p /home/udocker/backups
+    exec_root chmod 755 /home/udocker/services
+    exec_root chmod 755 /home/udocker/volumes
+    exec_root chmod 755 /home/udocker/backups
+
+    exec_root chown udocker:udocker /home/udocker/services
+    exec_root chown udocker:udocker /home/udocker/volumes
+    exec_root chown udocker:udocker /home/udocker/backups
 
     print_line
     return 0
@@ -163,7 +166,7 @@ create_docker_user() {
     exec_root usermod -aG docker udocker
     add_sudo "udocker"
 
-    do_as_udocker_user "docker_setfacl"
+    docker_create_dir
 
     print_line
     return 0

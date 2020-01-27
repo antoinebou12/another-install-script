@@ -3,8 +3,6 @@
 # @file container.sh
 # @brief list of container and other info
 
-FUNC_CREATE="create_docker"
-
 declare -a CONTAINER_NAME_MENU=(
 	"0-test-image" "0-test-image" "ON"
 	"1-test-image" "1-test-image" "ON"
@@ -87,17 +85,23 @@ import_all_sh() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 manage_exec_containers_list() {
-	echo "$1"
+	echo "Containers"
+	print_line
+
+	FUNC_CREATE="create_docker"
 	touch /tmp/containers.txt
 	containers=()
 	mapfile -t containers <<<"$1"
 	for container_name in "${containers[@]}"; do
+		echo "$container_name"
+		print_line
 		echo "$container_name" >>/tmp/containers.txt
 		source "src/docker/images/$container_name/$container_name.sh"
 		echo "$FUNC_CREATE_$container_name"
-		do_as_udocker_user "$FUNC_CREATE_$container_name"
+		"$FUNC_CREATE_$container_name"
 	done
 	return 0
+	print_line
 }
 
 # @description list of the container

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#
+#!/usr/bin/env bash
 # @file jellyfin.sh
 # @brief to install docker jellyfin
 
