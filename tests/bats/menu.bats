@@ -1,3 +1,10 @@
 #!/usr/bin/env bats
 
-source "$(dirname "${BASH_SOURCE[0]}")"/../../src/menu.sh
+
+setup() {
+  source "$BATS_TEST_DIRNAME/../../src/menu.sh"
+}
+
+@test "menu" {
+    skip "check later"
+}

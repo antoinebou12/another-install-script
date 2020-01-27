@@ -3,11 +3,6 @@
 # @file test.sh
 # @brief run bats test
 
-#import
-source "$(dirname "${BASH_SOURCE[0]}")/../src/utils.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/../src/docker/docker.sh"
-
-
 install_bats(){
     if [[ ! $(command -v bats) ]]; then
         if  [[ "$UID" -gt 0 ]]; then
@@ -20,9 +15,15 @@ install_bats(){
 }
 
 run_tests(){
-    bats "$(dirname "${BASH_SOURCE[0]}")/bats/utils.bats"
-    bats "$(dirname "${BASH_SOURCE[0]}")/bats/docker.bats"
+    install_bats
+
+    bats "bats/utils.bats"
+    bats "bats/docker.bats"
+    bats "bats/containers.bats"
+    bats "bats/install.bats"
+    bats "bats/menu.bats"
+    unset CURRENT_DIR
+    return 0
 }
 
-install_bats
 run_tests

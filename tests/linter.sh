@@ -3,6 +3,24 @@
 # @file linter.sh
 # @brief shellcheck for all the bash script
 
+
+# @description install shellcheck
+# https://github.com/koalaman/shellcheck
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+install_shellcheck(){
+    if [[ ! $(command -v shellcheck) ]]; then
+        if  [[ "$UID" -gt 0 ]]; then
+            sudo apt-get install shellcheck
+        else
+            apt-get install shellcheck
+        fi
+    fi
+    return 0
+}
+
+
 # @description use shellcheck on all bash script in project
 #
 # @noargs
@@ -21,22 +39,6 @@ use_shellcheck(){
         shellcheck "${names[$i]}"
     done
 
-    return 0
-}
-
-# @description install shellcheck
-# https://github.com/koalaman/shellcheck
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-install_shellcheck(){
-    if [[ ! $(command -v shellcheck) ]]; then
-        if  [[ "$UID" -gt 0 ]]; then
-            sudo apt-get install shellcheck
-        else
-            apt-get install shellcheck
-        fi
-    fi
     return 0
 }
 

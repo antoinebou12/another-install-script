@@ -1323,13 +1323,14 @@ _Function has no arguments._
 
 shellcheck for all the bash script
 
-* [use_shellcheck()](#useshellcheck)
 * [install_shellcheck()](#installshellcheck)
+* [use_shellcheck()](#useshellcheck)
 
 
-## use_shellcheck()
+## install_shellcheck()
 
-use shellcheck on all bash script in project
+install shellcheck
+https://github.com/koalaman/shellcheck
 
 _Function has no arguments._
 
@@ -1338,10 +1339,9 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-## install_shellcheck()
+## use_shellcheck()
 
-install shellcheck
-https://github.com/koalaman/shellcheck
+use shellcheck on all bash script in project
 
 _Function has no arguments._
 
