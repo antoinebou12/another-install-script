@@ -88,7 +88,7 @@ manage_exec_containers_list() {
 	echo "Containers"
 	print_line
 
-	FUNC_CREATE="create_docker"
+	local FUNC_CREATE="create_docker_"
 	touch /tmp/containers.txt
 	containers=()
 	mapfile -t containers <<<"$1"
@@ -98,7 +98,7 @@ manage_exec_containers_list() {
 		echo "$container_name" >>/tmp/containers.txt
 		source "src/docker/images/$container_name/$container_name.sh"
 		echo "$FUNC_CREATE_$container_name"
-		"$FUNC_CREATE_$container_name"
+		"$FUNC_CREATE""$container_name"
 	done
 	return 0
 	print_line
