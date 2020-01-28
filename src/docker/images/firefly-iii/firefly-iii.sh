@@ -14,11 +14,11 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_firefly-iii(){
-    PORT_WEB=${1:-:"8087"}
-    PATH_DB=${2:-:"/home/udocker/volumes/firefly-iii/db"}
-    PATH_EXPORT=${3:-:"/home/udocker/volumes/firefly-iii/export"}
-    PATH_UPLOAD=${4:-:"/home/udocker/volumes/firefly-iii/upload"}
-    POSTGRES_PASSWORD=${5:-:"firefly"}
+    PORT_WEB=${1:-"8087"}
+    PATH_DB=${2:-"/home/udocker/volumes/firefly-iii/db"}
+    PATH_EXPORT=${3:-"/home/udocker/volumes/firefly-iii/export"}
+    PATH_UPLOAD=${4:-"/home/udocker/volumes/firefly-iii/upload"}
+    POSTGRES_PASSWORD=${5:-"firefly"}
 
     exec_root mkdir -p "$PATH_DB"
     exec_root chmod 755 "$PATH_DB"

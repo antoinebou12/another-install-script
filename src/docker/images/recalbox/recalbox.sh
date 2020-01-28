@@ -10,7 +10,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_recalbox(){
-    PATH_RECALBOX=${1:-"/home/udocker/recalbox"}
+    PATH_RECALBOX=${1:-"/home/udocker/volumes/recalbox"}
 
     exec_root mkdir -p "$PATH_RECALBOX"
     exec_root chmod 755 "$PATH_RECALBOX"
