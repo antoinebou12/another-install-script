@@ -171,6 +171,7 @@ cd docs
 chmod +x generate_docs.sh
 bash generate_docs.sh docs.md
 ```
+## Documentation
 
 Go to [docs](docs/docs.md)
 

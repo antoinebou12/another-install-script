@@ -10,8 +10,10 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_mailcow(){
-    set -e
-    mkdir /home/udocker/mailcow
+    exec_root mkdir -p /home/udocker/mailcow
+    exec_root chmod 755 /home/udocker/mailcow
+    exec_root chown udocker:udocker /home/udocker/mailcow
+
     cd /home/udocker/mailcow || return 1
     git clone https://github.com/mailcow/mailcow-dockerized
     cd mailcow-dockerized || return 1

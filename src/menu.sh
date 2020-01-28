@@ -98,7 +98,7 @@ add_custom_extra_setup_menu() {
 # @description whiptails install add custom setup menu
 #
 # @exitcode 0 If successfull.
-# @exitcode 1 On failur3
+# @exitcode 1 On failure
 add_custom_extra_setup_menu() {
     if [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 9))"
@@ -116,6 +116,14 @@ add_custom_extra_setup_menu() {
         return 1
     fi
     return 0
+}
+
+# @description uninstall the user and all
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+uninstall_custom_setup_menu() {
+    bash uninstall.sh
 }
 
 # @description show help for the setup script

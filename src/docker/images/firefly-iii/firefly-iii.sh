@@ -19,6 +19,19 @@ create_docker_firefly-iii(){
     PATH_EXPORT=${3:-:"/home/udocker/firefly-iii/export"}
     PATH_UPLOAD=${4:-:"/home/udocker/firefly-iii/upload"}
     POSTGRES_PASSWORD=${5:-:"firefly"}
+
+    exec_root mkdir -p "$PATH_DB"
+    exec_root chmod 755 "$PATH_DB"
+    exec_root chown udocker:udocker "$PATH_DB"
+
+    exec_root mkdir -p "$PATH_EXPORT"
+    exec_root chmod 755 "$PATH_EXPORT"
+    exec_root chown udocker:udocker "$PATH_EXPORT"
+
+    exec_root mkdir -p "$PATH_UPLOAD"
+    exec_root chmod 755 "$PATH_UPLOAD"
+    exec_root chown udocker:udocker "$PATH_PATH_UPLOAD"
+
     PORT_WEB="${PORT_WEB}" PATH_DB="${PATH_DB}" PATH_EXPORT="${PATH_DB}" PATH_UPLOAD="${PATH_UPLOAD}" POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" docker-compose up -d
     return 0
 }

@@ -11,8 +11,11 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_openvpn(){
-    set -e
-    mkdir /home/udocker/openvpn
+    
+    exec_root mkdir -p /home/udocker/openvpn
+    exec_root chmod 755 /home/udocker/openvpn
+    exec_root chown udocker:udocker /home/udocker/openvpn
+
     cd /home/udocker/openvpn
     docker-compose run --rm openvpn ovpn_genconfig -u udp://"$1"
     docker-compose run --rm openvpn ovpn_initpki
