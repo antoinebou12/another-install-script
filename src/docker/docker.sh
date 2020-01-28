@@ -131,7 +131,7 @@ remove_containers_all() {
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-docker_create_dir() {
+udocker_create_default_dir() {
     echo "Create Folder for Docker User"
     print_line
 
@@ -166,7 +166,7 @@ create_docker_user() {
     exec_root usermod -aG docker udocker
     add_sudo "udocker"
 
-    docker_create_dir
+    udocker_create_default_dir
 
     print_line
     return 0
@@ -190,12 +190,12 @@ do_as_udocker_user() {
     return 0
 }
 
-# @description do as the docker user
+# @description create udocker dir
 #
 # @args $1 directory path
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-create_dir_udocker() {
+udocker_create_dir() {
     exec_root mkdir -p "$1"
     exec_root chmod 755 "$1"
     exec_root chown udocker:udocker "$1"
