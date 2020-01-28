@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#!/usr/bin/env bash
 # @file jellyfin.sh
 # @brief to install docker jellyfin
 
@@ -19,6 +18,20 @@
     PATH_TO_MOVIE=${3:-"/home/udocker/jellyfin/movie"}
     PORT_WEB=${4:-8096}
     PORT_OTHER=${5:-:8920}
+
+    
+    exec_root mkdir -p "$PATH_TO_LIBRARY"
+    exec_root chmod 755 "$PATH_TO_LIBRARY"
+    exec_root chown udocker:udocker "$PATH_TO_LIBRARY"
+
+    exec_root mkdir -p "$PATH_TO_MOVIE"
+    exec_root chmod 755 "$PATH_TO_MOVIE"
+    exec_root chown udocker:udocker "$PATH_TO_MOVIE"
+
+    exec_root mkdir -p "$PATH_TO_MOVIE"
+    exec_root chmod 755 "$PATH_TO_MOVIE"
+    exec_root chown udocker:udocker "$PATH_TO_MOVIE"
+
     PATH_TO_LIBRARY=$PATH_TO_LIBRARY PATH_TO_TV=$PATH_TO_TV PATH_TO_MOVIE=$PATH_TO_MOVIE PORT_WEB=$PORT_WEB PORT_OTHER=$PORT_OTHER docker-compose up -d
     return 0
 }

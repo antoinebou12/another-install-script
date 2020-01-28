@@ -19,7 +19,10 @@
     PASSWORD=${3:-"password"}
     PATH_DOWNLOAD=${4:-"/home/udocker/cloud-torrent/download"}
 
-    mkdir -p "$PATH_DOWNLOAD"
+    exec_root mkdir -p "$PATH_DOWNLOAD"
+    exec_root chmod 755 "$PATH_DOWNLOAD"
+    exec_root chown udocker:udocker "$PATH_DOWNLOAD"
+
 
     docker build --build-arg USERNAME="$USERNAME" PASSWORD="$PASSWORD"
     docker run -d -p "$PORT_WEB":3000 -v "$PATH_DOWNLOAD":/downloads jpillora/cloud-torrent

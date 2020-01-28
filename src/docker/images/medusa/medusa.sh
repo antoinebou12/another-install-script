@@ -16,6 +16,19 @@
     PATH_DOWNLOAD=${2:-"/home/udocker/medusa/download"}
     PATH_TV=${3:-"/home/udocker/medusa/tv"}
     PORT_WEB=${4:-"8081"}
+
+    exec_root mkdir -p "$PATH_CONFIG"
+    exec_root chmod 755 "$PATH_CONFIG"
+    exec_root chown udocker:udocker "$PATH_CONFIG"
+
+    exec_root mkdir -p "$PATH_DOWNLOAD"
+    exec_root chmod 755 "$PATH_DOWNLOAD"
+    exec_root chown udocker:udocker "$PATH_DOWNLOAD"
+
+    exec_root mkdir -p "$PATH_TV"
+    exec_root chmod 755 "$PATH_TV"
+    exec_root chown udocker:udocker "$PATH_TV"
+
     PATH_CONFIG="$PATH_CONFIG" PATH_DOWNLOAD="$PATH_DOWNLOAD" PATH_TV="$PATH_TV" PORT_WEB="$PORT_WEB" docker-compose up -d
     return 0
 }

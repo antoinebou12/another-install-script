@@ -15,6 +15,11 @@
     PATH_CONFIG=${1:-:"/home/udocker/heimdall/config"}
     PORT_WEB=${2:-:8080}
     PORT_WEB_HTTPS=${3:-:8443}
+    
+    exec_root mkdir -p "$PATH_CONFIG"
+    exec_root chmod 755 "$PATH_CONFIG"
+    exec_root chown udocker:udocker "$PATH_CONFIG"
+
     PATH_CONFIG="$PATH_CONFIG" PORT_WEB="$PORT_WEB" PORT_WEB_HTTPS="$PORT_WEB_HTTPS" docker-compose up -d 
     return 0
 }

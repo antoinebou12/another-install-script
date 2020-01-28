@@ -15,6 +15,15 @@
     PATH_CONFIG=${1:-"/home/udocker/pyload/config"}
     PATH_DOWNLOAD=${2:-"/home/udocker/pyload/download"}
     PORT_WEB=${3:-"8001"}
+
+    exec_root mkdir -p "$PATH_CONFIG"
+    exec_root chmod 755 "$PATH_CONFIG"
+    exec_root chown udocker:udocker "$PATH_CONFIG"
+
+    exec_root mkdir -p "$PATH_DOWNLOAD"
+    exec_root chmod 755 "$PATH_DOWNLOAD"
+    exec_root chown udocker:udocker "$PATH_DOWNLOAD"
+
     PATH_CONFIG=$PATH_CONFIG PATH_DOWNLOAD=$PATH_DOWNLOAD PORT_WEB=$PORT_WEB docker-compose up -d
     return 0
 }
