@@ -162,8 +162,7 @@ create_docker_user() {
     print_line
 
     if id -u udocker >/dev/null 2>&1; then
-        exec_root useradd -m udocker
-        exec_root passwd udocker
+        exec_root adduser udocker
         exec_root usermod -aG docker udocker
         add_sudo "udocker"
         udocker_create_default_dir
