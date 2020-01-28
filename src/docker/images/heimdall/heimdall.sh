@@ -12,7 +12,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_heimdall(){
-    PATH_CONFIG=${1:-:"/home/udocker/heimdall/config"}
+    PATH_CONFIG=${1:-:"/home/udocker/volumes/heimdall/config"}
     PORT_WEB=${2:-:8080}
     PORT_WEB_HTTPS=${3:-:8443}
     

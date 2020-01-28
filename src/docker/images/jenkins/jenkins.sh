@@ -14,7 +14,7 @@
  create_docker_jenkins(){
     local PORT_WEB=${1:-8080}
     local PORT_JENKINS=${2:-25565}
-    local JENKINS_DATA=${3:"/home/udocker/jenkins"}
+    local JENKINS_DATA=${3:"/home/udocker/volumes/jenkins"}
 
     exec_root mkdir -p "$JENKINS_DATA"
     exec_root chmod 755 "$JENKINS_DATA"

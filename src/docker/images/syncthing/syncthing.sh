@@ -14,7 +14,7 @@
  create_docker_syncthing(){
     PORT_WEB=${1:-"6889"}
     PORT_SYNC=${2:-"6889"}
-    PATH_SYNC=${3:-"/home/udocker/syncthing/"}
+    PATH_SYNC=${3:-"/home/udocker/volumes/syncthing"}
 
     exec_root mkdir -p "$PATH_SYNC"
     exec_root chmod 755 "$PATH_SYNC"

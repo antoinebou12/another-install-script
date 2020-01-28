@@ -13,9 +13,9 @@
 create_docker_gitea(){
     echo "not implemented yet"
 
-    exec_root mkdir -p /home/udocker/gitea
-    exec_root chmod 755 /home/udocker/gitea
-    exec_root chown udocker:udocker /home/udocker/gitea
+    exec_root mkdir -p /home/udocker/volumes/gitea
+    exec_root chmod 755 /home/udocker/volumes/gitea
+    exec_root chown udocker:udocker /home/udocker/volumes/gitea
 
     return 1
 }

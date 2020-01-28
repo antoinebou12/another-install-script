@@ -12,9 +12,9 @@
 # @exitcode 1 On failure
  create_docker_medusa(){
     mkdir /home/udocker/medusa
-    PATH_CONFIG=${1:-"/home/udocker/medusa/config"}
-    PATH_DOWNLOAD=${2:-"/home/udocker/medusa/download"}
-    PATH_TV=${3:-"/home/udocker/medusa/tv"}
+    PATH_CONFIG=${1:-"/home/udocker/volumes/medusa/config"}
+    PATH_DOWNLOAD=${2:-"/home/udocker/volumes/medusa/download"}
+    PATH_TV=${3:-"/home/udocker/volumes/medusa/tv"}
     PORT_WEB=${4:-"8081"}
 
     exec_root mkdir -p "$PATH_CONFIG"

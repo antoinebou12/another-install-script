@@ -11,7 +11,7 @@
 # @exitcode 1 On failure
  create_docker_statping(){
     PORT_WEB=${1:-"8084"}
-    PATH_STATPING=${2:-"/home/udocker/statping/"}
+    PATH_STATPING=${2:-"/home/udocker/volumes/statping"}
 
     exec_root mkdir -p "$PATH_STATPING"
     exec_root chmod 755 "$PATH_STATPING"
