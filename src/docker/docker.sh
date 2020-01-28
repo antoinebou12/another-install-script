@@ -161,12 +161,16 @@ create_docker_user() {
     echo "Create Docker User"
     print_line
 
-    exec_root useradd -m udocker
-    exec_root passwd udocker
-    exec_root usermod -aG docker udocker
-    add_sudo "udocker"
+    if id -u udocker >/dev/null 2>&1; then
+        exec_root useradd -m udocker
+        exec_root passwd udocker
+        exec_root usermod -aG docker udocker
+        add_sudo "udocker"
+        udocker_create_default_dir
+    else
+        echo "The user udocker alreay exist"
+    fi
 
-    udocker_create_default_dir
 
     print_line
     return 0
