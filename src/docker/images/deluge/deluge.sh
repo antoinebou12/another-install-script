@@ -12,5 +12,15 @@
 # @exitcode 1 On failure
 create_docker_deluge(){
     echo "not implemented yet"
+
+    exec_root mkdir -p /home/udocker/deluge/config
+    exec_root chmod 755 /home/udocker/deluge/config
+    exec_root chown udocker:udocker /home/udocker/deluge/config
+
+    exec_root mkdir -p /home/udocker/deluge/download
+    exec_root chmod 755 /home/udocker/deluge/download
+    exec_root chown udocker:udocker /home/udocker/deluge/download
+
+
     return 1
 }

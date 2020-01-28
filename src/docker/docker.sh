@@ -190,6 +190,17 @@ do_as_udocker_user() {
     return 0
 }
 
+# @description do as the docker user
+#
+# @args $1 directory path
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+create_dir_udocker() {
+    exec_root mkdir -p "$1"
+    exec_root chmod 755 "$1"
+    exec_root chown udocker:udocker "$1"
+}
+
 # @description create tar for running docker for a local backup
 #
 # @args $1 docker id
