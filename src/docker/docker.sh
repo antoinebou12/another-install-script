@@ -135,18 +135,9 @@ udocker_create_default_dir() {
     echo "Create Folder for Docker User"
     print_line
 
-    [ -d /home/udocker/services ] || exec_root mkdir -p /home/udocker/services
-    [ -d /home/udocker/volumes ] || exec_root mkdir -p /home/udocker/volumes
-    [ -d /home/udocker/backups ] || exec_root mkdir -p /home/udocker/backups
-
-    # give current user rwx on the volumes and backups
-    exec_root chmod 755 /home/udocker/services
-    exec_root chmod 755 /home/udocker/volumes
-    exec_root chmod 755 /home/udocker/backups
-
-    exec_root chown udocker:udocker /home/udocker/services
-    exec_root chown udocker:udocker /home/udocker/volumes
-    exec_root chown udocker:udocker /home/udocker/backups
+    [ -d /home/udocker/services ] || exec_root udocker_create_dir /home/udocker/services
+    [ -d /home/udocker/volumes ]  || exec_root udocker_create_dir /home/udocker/volumes
+    [ -d /home/udocker/backups ]  || exec_root udocker_create_dir /home/udocker/backups
 
     print_line
     return 0
@@ -167,9 +158,8 @@ create_docker_user() {
         add_sudo "udocker"
         udocker_create_default_dir
     else
-        echo "The user udocker alreay exist"
+        echo "The user udocker already exist"
     fi
-
 
     print_line
     return 0

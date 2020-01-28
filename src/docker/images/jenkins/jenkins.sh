@@ -14,11 +14,15 @@
  create_docker_jenkins(){
     PORT_WEB=${1:-8080}
     PORT_JENKINS=${2:-50000}
-    JENKINS_DATA=${3:-"/home/udocker/volumes/jenkins"}
+    JENKINS_DATA=${3:-/home/udocker/volumes/jenkins}
+
+    echo "Open in a browser :$PORT_WEB and check jenkins logs"
 
     exec_root mkdir -p "$JENKINS_DATA"
     exec_root chmod 755 "$JENKINS_DATA"
     exec_root chown udocker:udocker "$JENKINS_DATA"
+
+    echo "docker run -d -p $PORT_WEB:8080 -p $PORT_JENKINS:50000 -v $JENKINS_DATA:/var/jenkins_home jenkins/jenkins:lts"
 
     docker run -d -p "$PORT_WEB":8080 -p "$PORT_JENKINS":50000 -v "$JENKINS_DATA":/var/jenkins_home jenkins/jenkins:lts
     return 0

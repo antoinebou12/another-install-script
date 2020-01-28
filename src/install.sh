@@ -141,14 +141,14 @@ install_signal_ssh_text() {
 
 # @description manage install menu
 #
-# @args $1 SETUP_CONTAINER_MENU
+# @args $1 SETUP_INSTALL_MENU
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 manage_exec_install_list() {
     local FUNC_INSTALL="install_"
     basic_option=()
-	mapfile -t basic_option <<<"$1"
-    echo "${basic_option[@]}"
+	mapfile -t basic_option <<< "$1""$1"
+    echo "$1"
 	for basic in "${basic_option[@]}"; do
         if [[ "$basic" == "docker" ]]; then
             install_docker
