@@ -1,0 +1,42 @@
+version: '3'
+services:
+  wallabag:
+    image: wallabag/wallabag:latest
+    restart: always
+    ports: 
+      - "8888:80"
+    tty: true
+    links:
+      - wallabag-db:wallabag-db
+      - redis:redis
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysuperstrongpassword
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
+      - SYMFONY__ENV__DATABASE_HOST=wallabag-db
+      - SYMFONY__ENV__DATABASE_PORT=3306
+      - SYMFONY__ENV__DATABASE_NAME=wallabagdb
+      - SYMFONY__ENV__DATABASE_USER=wallabag
+      - SYMFONY__ENV__DATABASE_PASSWORD=myuserpassword
+      #- SYMFONY__ENV__FOSUSER_REGISTRATION=false
+      #- POPULATE_DATABASE=true
+      
+    volumes:
+      - /mnt/backup/wallabag/nginx_logs:/var/log/nginx
+
+  
+  wallabag-db:
+    image: mariadb:latest
+    restart: always
+    # volumes:
+    #   - /mnt/backup/wallabag/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysuperstrongpassword
+      - MYSQL_DATABASE=wallabagdb
+      - MYSQL_USER=wallabag
+      - MYSQL_PASSWORD=myuserpassword
+  redis:
+    image: redis:alpine
+    restart: always
+    container_name: redis
+    volumes:
+      - /mnt/docker/redis:/data

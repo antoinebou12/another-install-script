@@ -108,6 +108,7 @@ to install docker docker compose on ubuntu18.04
 * [docker_create_dir()](#dockercreatedir)
 * [create_docker_user()](#createdockeruser)
 * [do_as_udocker_user()](#doasudockeruser)
+* [create_dir_udocker()](#createdirudocker)
 * [create_docker_id_backup()](#createdockeridbackup)
 * [create_docker_name_backup()](#createdockernamebackup)
 * [create_docker_backup_all()](#createdockerbackupall)
@@ -208,6 +209,19 @@ do as the docker user
 ### Arguments
 
 * # @args $1 command
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## create_dir_udocker()
+
+do as the docker user
+
+### Arguments
+
+* # @args $1 directory path
 
 ### Exit codes
 

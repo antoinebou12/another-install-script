@@ -414,7 +414,7 @@ get_geolocation() {
             read -r LONGITUDE
             read -r CITY
             read -r COUNTRY
-            echo "${LATITUDE},${LONGITUDE},${CITY},${COUNTRY}" | tr --delete \" /etc/server_geolocation.txt
+            echo "${LATITUDE},${LONGITUDE},${CITY},${COUNTRY}"
         done
 
     #cp geolocate.sh /etc/cron.daily

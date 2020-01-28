@@ -63,8 +63,10 @@ install_setup_menu() {
     if [[ $? == 0 ]] && [[ ! -z "$SETUP_INSTALL_MENU" ]]; then
         show_project_name
         manage_exec_install_list $SETUP_INSTALL_MENU
+        if [[ "$SETUP_INSTALL_MENU" == *"docker"* ]]; then
+            add_extra_setup_menu
+        fi
     fi
-    add_extra_setup_menu
     return 0
 }
 

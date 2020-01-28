@@ -1,0 +1,16 @@
+version: "3"
+services:
+  deluge:
+    image: linuxserver/deluge
+    container_name: deluge
+    network_mode: host
+    # environment:
+    #   - PUID=1000
+    #   - PGID=1000
+    #   - TZ=<timezone>
+    #   - UMASK_SET=022 #optional
+    #   - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - </path/to/deluge/config>:/config
+      - </path/to/your/downloads>:/downloads
+    restart: unless-stopped
