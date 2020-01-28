@@ -150,9 +150,9 @@ manage_exec_install_list() {
 	mapfile -t basic_option <<<"$1"
 	for basic in "${basic_option[@]}"; do
         if [[ "$basic" == "docker" ]]; then
-            create_docker_user
             install_docker
             install_docker_compose
+            create_docker_user
         else
             "$FUNC_INSTALL""$basic" 
         fi 

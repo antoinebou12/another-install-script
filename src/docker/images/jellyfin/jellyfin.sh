@@ -13,9 +13,9 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_jellyfin(){
-    PATH_TO_LIBRARY=${1:-"/home/udocker/jellyfin/config"}
-    PATH_TO_TV=${2:-"/home/udocker/jellyfin/tv"}
-    PATH_TO_MOVIE=${3:-"/home/udocker/jellyfin/movie"}
+    PATH_TO_LIBRARY=${1:-"/home/udocker/volumes/jellyfin/config"}
+    PATH_TO_TV=${2:-"/home/udocker/volumes/jellyfin/tv"}
+    PATH_TO_MOVIE=${3:-"/home/udocker/volumes/jellyfin/movie"}
     PORT_WEB=${4:-8096}
     PORT_OTHER=${5:-:8920}
 

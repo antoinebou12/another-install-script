@@ -53,13 +53,13 @@ install_docker() {
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-install-docker_compose() {
+install_docker_compose() {
     echo "Install Docker Compose"
     print_line
 
-    curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
-    ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    exec_root curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    exec_root chmod +x /usr/local/bin/docker-compose
+    #ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
     print_line
     return 0

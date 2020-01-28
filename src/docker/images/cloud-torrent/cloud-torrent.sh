@@ -17,7 +17,7 @@
     PORT_WEB=${1:-"6889"}
     USERNAME=${2:-"admin"}
     PASSWORD=${3:-"password"}
-    PATH_DOWNLOAD=${4:-"/home/udocker/cloud-torrent/download"}
+    PATH_DOWNLOAD=${4:-"/home/udocker/volumes/cloud-torrent/download"}
 
     exec_root mkdir -p "$PATH_DOWNLOAD"
     exec_root chmod 755 "$PATH_DOWNLOAD"
