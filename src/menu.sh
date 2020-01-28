@@ -47,28 +47,24 @@ password_dialog() {
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failur3
-install_custom_setup_menu() {
+install_setup_menu() {
+
+    declare -a SETUP_INSTALL_ITEMS=("basic" "Basic packages install" "ON" "cockpit" "Install Cockpit web server management" "ON" "emojify" "Emoji in the terminal" "ON" "docker" "install docker and docker-compose" "ON" "docker_extra" "install dry utils for docker" "ON")
+
     if [ $(tput lines) -lt 45 ]; then
-        local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 9))"
+        local NUM_ITEMS_SCALE="$((${#SETUP_INSTALL_ITEMS[@]} / 3))"
     elif [ $(tput lines) -gt 50 ]; then
-        local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 6))"
+        local NUM_ITEMS_SCALE="$((${#SETUP_INSTALL_ITEMS[@]} / 3))"
     else
-        local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 3))"
+        local NUM_ITEMS_SCALE=$((${#SETUP_INSTALL_ITEMS[@]} / 3))
     fi
-    SETUP_CONTAINER_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
-    if [[ $? == 0 ]] && [[ ! -z "$SETUP_CONTAINER_MENU" ]]; then
+
+    local SETUP_INSTALL_MENU=$(whiptail --nocancel --clear --title "Install" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${SETUP_INSTALL_ITEMS[@]}" 3>&1 1>&2 2>&3)
+    if [[ $? == 0 ]] && [[ ! -z "$SETUP_INSTALL_MENU" ]]; then
         show_project_name
-        install_basic
-        install_cockpit
-        install_emojify
-        install_docker
-        create_docker_user
-        manage_exec_containers_list "$SETUP_CONTAINER_MENU"
-        return 0
-    else
-        echo "Error"
-        return 1
+        manage_exec_install_list $SETUP_INSTALL_MENU
     fi
+    add_extra_setup_menu
     return 0
 }
 
@@ -76,30 +72,7 @@ install_custom_setup_menu() {
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-add_custom_extra_setup_menu() {
-    if [ $(tput lines) -lt 45 ]; then
-        local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 9))"
-    elif [ $(tput lines) -gt 50 ]; then
-        local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 6))"
-    else
-        local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 3))"
-    fi
-    SETUP_CONTAINER_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
-    if [[ $? == 0 ]] && [[ ! -z "$SETUP_CONTAINER_MENU" ]]; then
-        manage_exec_containers_list "$SETUP_CONTAINER_MENU"
-        return 0
-    else
-        echo "Error"
-        return 1
-    fi
-    return 0
-}
-
-# @description whiptails install add custom setup menu
-#
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-add_custom_extra_setup_menu() {
+add_extra_setup_menu() {
     if [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 9))"
     elif [ $(tput lines) -gt 50 ]; then
@@ -122,7 +95,7 @@ add_custom_extra_setup_menu() {
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-uninstall_custom_setup_menu() {
+uninstall_setup_menu() {
     bash uninstall.sh
 }
 
@@ -152,13 +125,13 @@ main_setup_menu() {
 
     case $SETUP_MENU in
     "install")
-        install_custom_setup_menu
+        install_setup_menu
         ;;
     "add_extra")
-        add_custom_extra_setup_menu
+        add_extra_setup_menu
         ;;
     "uninstall")
-        uninstall_custom_setup_menu
+        uninstall_setup_menu
         ;;
     "help")
         help_setup_menu

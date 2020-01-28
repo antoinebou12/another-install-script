@@ -5,17 +5,13 @@
 
 declare -a CONTAINER_NAME_MENU=(
 	"0-test-image" "0-test-image" "ON"
-	"1-test-image" "1-test-image" "ON"
-	"ansible" "ansible" "OFF"
 	"cloud-torrent" "cloud-torrent" "OFF"
 	"deluge" "cloud-torrent" "OFF"
 	"firefly-iii" "firefly-iii" "OFF"
 	"gitea" "gitea" "OFF"
-	"gitlab" "gitlab" "OFF"
 	"grafana" "grafana" "OFF"
 	"guacamole" "guacamole" "OFF"
 	"heimdall" "heimdall" "OFF"
-	"hlsxmltv" "hlsxmltv" "OFF"
 	"huginn" "huginn" "OFF"
 	"jackett" "jackett" "OFF"
 	"jellyfin" "jellyfin" "OFF"
@@ -29,7 +25,6 @@ declare -a CONTAINER_NAME_MENU=(
 	"mcmyadmin" "mcmyadmin" "OFF"
 	"medusa" "medusa" "OFF"
 	"monica" "monica" "OFF"
-	"mopidy" "mopidy" "OFF"
 	"neko" "neko" "OFF"
 	"netdata" "netdata" "OFF"
 	"nextcloud" "nextcloud" "OFF"
@@ -37,7 +32,6 @@ declare -a CONTAINER_NAME_MENU=(
 	"openldap" "openldap" "OFF"
 	"openvpn" "openvpn" "OFF"
 	"paperless" "paperless" "OFF"
-	"pihole" "pihole" "OFF"
 	"plex" "plex" "OFF"
 	"pyload" "pyload" "OFF"
 	"qbittorent-vpn" "qbittorent-vpn" "OFF"
@@ -51,7 +45,6 @@ declare -a CONTAINER_NAME_MENU=(
 	"tautulli" "tautulli" "OFF"
 	"tdarr" "tdarr" "OFF"
 	"teamspeak" "teamspeak" "OFF"
-	"traefik" "traefik" "OFF"
 	"wallabag" "wallabag" "OFF"
 )
 
@@ -95,11 +88,14 @@ manage_exec_containers_list() {
 	for container_name in "${containers[@]}"; do
 		echo "$container_name"
 		print_line
-		echo "$container_name" >>/tmp/containers.txt
+		exec_root echo "$container_name" >> /tmp/containers.txt
 		source "src/docker/images/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line
 	done
+
+	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/containers.txt
+
 	return 0
 	print_line
 }

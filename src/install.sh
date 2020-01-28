@@ -35,10 +35,11 @@ install_basic() {
 
     aptupdate
     aptupgrade
-    aptinstall bat nnn nmap wget curl bats mlocate mutt python3 python3-pip alsa-utils wireless-tools wpasupplicant zip unzip git cmake build-essential default-jre jq snapd acl net-tools
+    aptinstall nnn nmap wget curl bats mlocate python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools
 
     if [[ "$(checkWSL arg)" != "0" ]]; then
         # snap package
+        aptinstall snapd 
         exec_root "snap install hub --classic" > /dev/null
     fi
 
@@ -136,4 +137,24 @@ install_signal_ssh_text() {
 
     print_line
     return 0
+}
+
+# @description manage install menu
+#
+# @args $1 SETUP_CONTAINER_MENU
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+manage_exec_install_list() {
+    local FUNC_INSTALL="install_"
+    basic_option=()
+	mapfile -t basic_option <<<"$1"
+	for basic in "${basic_option[@]}"; do
+        if [[ "$basic" == "docker" ]]; then
+            create_docker_user
+            install_docker
+            install_docker_compose
+        else
+            "$FUNC_INSTALL""$basic" 
+        fi 
+    done
 }

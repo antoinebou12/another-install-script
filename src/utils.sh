@@ -419,3 +419,15 @@ get_geolocation() {
 
     #cp geolocate.sh /etc/cron.daily
 }
+
+# @description show aliases in the current shell
+# https://riptutorial.com/bash/topic/368/aliasing
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+show_aliases() {
+    echo There are ${#BASH_ALIASES[*]} aliases defined.
+    for ali in "${!BASH_ALIASES[@]}"; do
+        printf "alias: %-10s triggers: %s\n" "$ali" "${BASH_ALIASES[$ali]}"
+    done
+}

@@ -256,26 +256,6 @@ check if the port is used
 
 
 
-
-
-
-# ansible.sh
-
-to install docker ansible
-
-* [create_docker_ansible()](#createdockeransible)
-
-
-## create_docker_ansible()
-
-create docker ansible
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 # cloud-torrent.sh
 
 to install docker cloud-torrent
@@ -359,23 +339,6 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
-# gitlab.sh
-
-to install docker gitlab
-
-* [create_docker_gitlab()](#createdockergitlab)
-
-
-## create_docker_gitlab()
-
-create docker gitlab
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 # grafana.sh
 
 to install docker grafana
@@ -427,23 +390,6 @@ https://hub.docker.com/r/linuxserver/heimdall/
 * # @args $1 PATH_CONFIG
 * # @args $2 PORT_WEB
 * # @args $3 PORT_WEB_HTTPS
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# hlsxmltv.sh
-
-to install docker hlsxmltv
-
-* [create_docker_hlsxmltv()](#createdockerhlsxmltv)
-
-
-## create_docker_hlsxmltv()
-
-create docker hlsxmltv
-not implemented yet
 
 ### Exit codes
 
@@ -705,40 +651,6 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
-# mopidy.sh
-
-to install docker mopidy
-
-* [create_docker_mopidy()](#createdockermopidy)
-
-
-## create_docker_mopidy()
-
-create docker mopidy
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# snapcast.sh
-
-to install docker snapcast
-
-* [create_docker_snapcast()](#createdockersnapcast)
-
-
-## create_docker_snapcast()
-
-create docker snapcast
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 # neko.sh
 
 to install docker neko
@@ -864,23 +776,6 @@ to install docker paperless
 ## create_docker_paperless()
 
 create docker paperless
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# pihole.sh
-
-to install docker pihole
-
-* [create_docker_pihole()](#createdockerpihole)
-
-
-## create_docker_pihole()
-
-create docker pihole
 not implemented yet
 
 ### Exit codes
@@ -1118,23 +1013,6 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-# traefik.sh
-
-to install docker traefik
-
-* [create_docker_traefik()](#createdockertraefik)
-
-
-## create_docker_traefik()
-
-create docker traefik
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 # wallabag.sh
 
 to install docker wallabag
@@ -1162,6 +1040,7 @@ install my favirote packages for ubuntu18.04 and tested
 * [install_emojify()](#installemojify)
 * [install_signal_cli()](#installsignalcli)
 * [install_signal_ssh_text()](#installsignalsshtext)
+* [manage_exec_install_list()](#manageexecinstalllist)
 
 
 ## generate_apt_list_ubuntu()
@@ -1241,15 +1120,27 @@ https://8192.one/post/ssh_login_notification_signal/
 * **0**: If successfull.
 * **1**: On failure
 
+## manage_exec_install_list()
+
+manage install menu
+
+### Arguments
+
+* # @args $1 SETUP_CONTAINER_MENU
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # menu.sh
 
 setup menu and logic
 
 * [password_dialog()](#passworddialog)
-* [install_custom_setup_menu()](#installcustomsetupmenu)
-* [add_custom_extra_setup_menu()](#addcustomextrasetupmenu)
-* [add_custom_extra_setup_menu()](#addcustomextrasetupmenu)
-* [uninstall_custom_setup_menu()](#uninstallcustomsetupmenu)
+* [install_setup_menu()](#installsetupmenu)
+* [add_extra_setup_menu()](#addextrasetupmenu)
+* [uninstall_setup_menu()](#uninstallsetupmenu)
 * [help_setup_menu()](#helpsetupmenu)
 * [main_setup_menu()](#mainsetupmenu)
 
@@ -1263,7 +1154,7 @@ whiptails password dialog
 * **0**: If successfull.
 * **1**: On failure
 
-## install_custom_setup_menu()
+## install_setup_menu()
 
 whiptails install custom setup menu
 
@@ -1272,7 +1163,7 @@ whiptails install custom setup menu
 * **0**: If successfull.
 * **1**: On failur3
 
-## add_custom_extra_setup_menu()
+## add_extra_setup_menu()
 
 whiptails install add custom setup menu
 
@@ -1281,16 +1172,7 @@ whiptails install add custom setup menu
 * **0**: If successfull.
 * **1**: On failure
 
-## add_custom_extra_setup_menu()
-
-whiptails install add custom setup menu
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## uninstall_custom_setup_menu()
+## uninstall_setup_menu()
 
 uninstall the user and all
 
@@ -1351,6 +1233,7 @@ file containing the utils  for the project and other
 * [check_debian()](#checkdebian)
 * [get_current_ip()](#getcurrentip)
 * [get_geolocation()](#getgeolocation)
+* [show_aliases()](#showaliases)
 
 
 ## print_line()
@@ -1699,6 +1582,18 @@ _Function has no arguments._
 
 check the geolocation based on ip of the server
 https://www.howtogeek.com/405088/how-to-get-your-systems-geographic-location-from-a-bash-script/
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## show_aliases()
+
+show aliases in the current shell
+https://riptutorial.com/bash/topic/368/aliasing
 
 _Function has no arguments._
 

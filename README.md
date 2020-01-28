@@ -36,7 +36,6 @@ Some services/server cannot be installed at the same time
 | [gitea](https://github.com/go-gitea/gitea)                                | ✔️     |                    |         |            |         |
 | [gitlab](https://docs.gitlab.com/ee/install/docker.html)                  | ✔️     |                    |         |            |         |
 | [grafana](https://github.com/grafana/grafana)                             | ✔️     |                    |         |            |         |
-| [hlsxmltv](https://github.com/deanochips/HLS-XMLTV-Docker)                | ✔️     |                    |         |            |         |
 | [heimdall](https://github.com/linuxserver/docker-heimdall)                | ✔️     |                    |         | :8080      | ✔️      |
 | [huginn](https://github.com/huginn/huginn)                                | ✔️     |                    |         |            |         |
 | [jackett](https://github.com/Jackett/Jackett)                             | ✔️     |                    |         |            |         |
@@ -51,14 +50,12 @@ Some services/server cannot be installed at the same time
 | [mcmyadmin](https://github.com/linuxserver-archive/docker-mcmyadmin2)     | ✔️     | 8065, 25565        |         | :8065      |         |
 | [medusa](https://github.com/linuxserver/docker-medusa)                    | ✔️     |                    |         | :8081      | ✔️      |
 | [monica](https://github.com/monicahq/monica)                              | ✔️     |                    |         |            |         |
-| [mopidy](https://mopidy.com/)                                             | ✔️     |                    |         |            |         |
 | [neko](https://github.com/nurdism/neko)                                   | ✔️     |                    |         |            |         |
 | [netdata](https://github.com/netdata/netdata)                             | ✔️     |                    |         |            |         |
 | [olaris](https://gitlab.com/olaris/olaris-server)                         | ✔️     |                    |         |            |         |
 | [nextcloud](https://nextcloud.com/)                                       | ✔️     |                    |         |            |         |
 | [openvpn](https://github.com/kylemanna/docker-openvpn)                    | ✔️     |                    |         |            | ✔️      |
 | [paperless](https://github.com/the-paperless-project/paperless)           | ✔️     |                    |         |            |         |
-| [pihole](https://pi-hole.net/)                                            | ✔️     |                    |         |            |         |
 | [pyload](https://pyload.net/)                                             | ✔️     | 8000,7227          |         |            |         |
 | [qbittorrent-vpn](https://github.com/MarkusMcNugen/docker-qBittorrentvpn) | ✔️     |                    |         |            |         |
 | [radarr](https://github.com/Radarr/Radarr)                                | ✔️     |                    |         |            |         |
@@ -71,19 +68,15 @@ Some services/server cannot be installed at the same time
 | [tautulli](https://github.com/Tautulli/Tautulli)                          | ✔️     |                    |         |            |         |
 | [tdarr](https://github.com/HaveAGitGat/Tdarr)                             | ✔️     |                    |         |            |         |
 | [teamspeak](https://github.com/solidnerd/docker-teamspeak)                | ✔️     | 9987, 10011, 30033 |         |            |         |
-| [traefik](https://github.com/containous/traefik)                          | ✔️     |                    |         |            |         |
 | [wallabag](https://github.com/wallabag/wallabag)                          | ✔️     |                    |         |            |         |
 | [cockpit](https://cockpit-project.org/)                                   | ❌      | 9090               |         | :9090      | ✔️      |
 
 ## List of other installed program
 
 * build-essential
-* zip
-* unzip
 * git
 * python3
 * python3-pip
-* alsa-utils
 * wireless-tools
 * wpasupplicant
 * default-jre
@@ -91,14 +84,11 @@ Some services/server cannot be installed at the same time
 * net-tools
 * [vim](https://www.vim.org/)
 * [snapd](https://snapcraft.io/)
-* [bat](https://github.com/sharkdp/bat)
 * [nnn](https://github.com/jarun/nnn)
 * [nmap](https://nmap.org/)
 * [wget](https://www.gnu.org/software/wget/)
 * [curl](https://github.com/curl/curl)
-* [bats](https://github.com/bats-core/bats-core)
 * [mlocate](https://wiki.archlinux.org/index.php/Mlocate)
-* [mutt](https://gitlab.com/muttmua/mutt)
 * [cmake](https://cmake.org/)
 * [docker](https://www.docker.com/)
 * [docker-compose](https://docs.docker.com/compose/)
