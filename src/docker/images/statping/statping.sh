@@ -17,6 +17,9 @@
     exec_root chmod 755 "$PATH_STATPING"
     exec_root chown udocker:udocker "$PATH_STATPING"
 
-    docker run -d -p "$PORT_WEB":8080 -v "$PATH_STATPING":/app --restart always hunterlong/statping
+    docker run --name statping -d -p "$PORT_WEB":8080 -v "$PATH_STATPING":/app --restart always hunterlong/statping
+    
+    echo "ctrl+click to open in browser"
+    echo "$(get_current_ip):${PORT_WEB}"
     return 0
 }

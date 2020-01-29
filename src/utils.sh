@@ -422,7 +422,7 @@ get_geolocation() {
 
 # @description show aliases in the current shell
 # https://riptutorial.com/bash/topic/368/aliasing
-# @noargs
+# @noargsW
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 show_aliases() {

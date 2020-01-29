@@ -33,5 +33,9 @@ create_docker_firefly-iii(){
     exec_root chown udocker:udocker "$PATH_PATH_UPLOAD"
 
     PORT_WEB="${PORT_WEB}" PATH_DB="${PATH_DB}" PATH_EXPORT="${PATH_DB}" PATH_UPLOAD="${PATH_UPLOAD}" POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" docker-compose up -d
+       
+    echo "ctrl+click to open in browser"
+    echo "$(get_current_ip):${PORT_WEB}"
+
     return 0
 }

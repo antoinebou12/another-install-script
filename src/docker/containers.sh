@@ -106,7 +106,7 @@ manage_exec_containers_list() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 list_container() {
-	echo docker inspect --format='{{.Name}}' $(exec_root docker ps -aq --no-trunc) | cut -c2-
+	docker inspect --format='{{.Name}}' $(exec_root docker ps -aq --no-trunc) | cut -c2-
 	return 0
 }
 
