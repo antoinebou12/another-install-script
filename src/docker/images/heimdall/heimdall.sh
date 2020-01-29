@@ -21,5 +21,8 @@
     exec_root chown udocker:udocker "$PATH_CONFIG"
 
     PATH_CONFIG="$PATH_CONFIG" PORT_WEB="$PORT_WEB" PORT_WEB_HTTPS="$PORT_WEB_HTTPS" docker-compose up -d 
+    
+    echo "ctrl+click to open in browser"
+    echo "$(get_current_ip):${PORT_WEB}"
     return 0
 }

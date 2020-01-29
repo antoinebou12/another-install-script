@@ -26,5 +26,9 @@
 
     docker build --build-arg USERNAME="$USERNAME" PASSWORD="$PASSWORD"
     docker run -d -p "$PORT_WEB":3000 -v "$PATH_DOWNLOAD":/downloads jpillora/cloud-torrent
+
+    echo "ctrl+click to open in browser"
+    echo "$(get_current_ip):${PORT_WEB}"
+    
     return 0
 }

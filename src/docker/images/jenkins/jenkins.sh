@@ -16,14 +16,21 @@
     PORT_JENKINS=${2:-50000}
     JENKINS_DATA=${3:-/home/udocker/volumes/jenkins}
 
-    echo "Open in a browser :$PORT_WEB and check jenkins logs"
+    echo "Open in a browser :$PORT_WEB"
 
     exec_root mkdir -p "$JENKINS_DATA"
     exec_root chmod 755 "$JENKINS_DATA"
     exec_root chown udocker:udocker "$JENKINS_DATA"
 
-    echo "docker run -d -p $PORT_WEB:8080 -p $PORT_JENKINS:50000 -v $JENKINS_DATA:/var/jenkins_home jenkins/jenkins:lts"
 
-    docker run -d -p "$PORT_WEB":8080 -p "$PORT_JENKINS":50000 -v "$JENKINS_DATA":/var/jenkins_home jenkins/jenkins:lts
+    docker run -d --name jenkins -p "$PORT_WEB":8080 -p "$PORT_JENKINS":50000 -v "$JENKINS_DATA":/var/jenkins_home jenkins/jenkins:lts
+    
+    echo "Please wait ..."
+    echo "ctrl+click to open in browser"
+    echo "$(get_current_ip):${PORT_WEB}"
+    
+    sleep 60
+    echo "Admin Password:"
+    docker container exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword
     return 0
 }
