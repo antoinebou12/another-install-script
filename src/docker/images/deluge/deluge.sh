@@ -13,13 +13,8 @@
 create_docker_deluge(){
     echo "not implemented yet"
 
-    exec_root mkdir -p /home/udocker/volumes/deluge/config
-    exec_root chmod 755 /home/udocker/volumes/deluge/config
-    exec_root chown udocker:udocker /home/udocker/volumes/deluge/config
-
-    exec_root mkdir -p /home/udocker/volumes/deluge/download
-    exec_root chmod 755 /home/udocker/volumes/deluge/download
-    exec_root chown udocker:udocker /home/udocker/volumes/deluge/download
+    udocker_create_dir /home/udocker/volumes/deluge/config
+    udocker_create_dir /home/udocker/volumes/deluge/download
 
 
     return 1

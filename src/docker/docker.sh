@@ -16,33 +16,33 @@ source "$(dirname "${BASH_SOURCE[0]}")/../utils.sh"
 install_docker() {
     echo "Install Docker"
     print_line
+    
+    curl -sSL https://get.docker.com/ | CHANNEL=stable sh
+    # aptremove docker
+    # aptremove docker-engine
+    # aptremove docker.io
+    # aptremove containerd
+    # aptremove runc
+    # aptinstall apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add -
+    # exec_root apt-key fingerprint 0EBFCD88
+    # if [[ "$(lsb_release -cs)" == "eoan" ]]; then
+    #     if [[ "$UID" -gt 0 ]]; then
+    #         sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
+    #     else
+    #         add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
+    #     fi
+    # else
+    #     if [[ "$UID" -gt 0 ]]; then
+    #         sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    #     else
+    #         add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    #     fi
+    # fi
 
-    # curl -sSL https://get.docker.com/ | CHANNEL=stable bash
-    aptremove docker
-    aptremove docker-engine
-    aptremove docker.io
-    aptremove containerd
-    aptremove runc
-    aptinstall apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add -
-    exec_root apt-key fingerprint 0EBFCD88
-    if [[ "$(lsb_release -cs)" == "eoan" ]]; then
-        if [[ "$UID" -gt 0 ]]; then
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
-        else
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
-        fi
-    else
-        if [[ "$UID" -gt 0 ]]; then
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-        else
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-        fi
-    fi
-
-    aptupdate
-    aptinstall docker-ce docker-ce-cli containerd.io
-    aptclean
+    # aptupdate
+    # aptinstall docker-ce docker-ce-cli containerd.io
+    # aptclean
 
     print_line
     return 0
@@ -135,9 +135,9 @@ udocker_create_default_dir() {
     echo "Create Folder for Docker User"
     print_line
 
-    [ -d /home/udocker/services ] || exec_root udocker_create_dir /home/udocker/services
-    [ -d /home/udocker/volumes ]  || exec_root udocker_create_dir /home/udocker/volumes
-    [ -d /home/udocker/backups ]  || exec_root udocker_create_dir /home/udocker/backups
+    [ -d /home/udocker/services ] || udocker_create_dir /home/udocker/services
+    [ -d /home/udocker/volumes ]  || udocker_create_dir /home/udocker/volumes
+    [ -d /home/udocker/backups ]  || udocker_create_dir /home/udocker/backups
 
     print_line
     return 0

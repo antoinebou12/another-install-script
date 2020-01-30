@@ -11,6 +11,12 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_guacamole(){
-    echo "not implemented yet"
-    return 1
+    PORT_WEB=${1:-:8003}
+    PATH_CONFIG=${2:-:"/home/udocker/volumes/guacamole/config"}
+    
+    udocker_create_dir "$PATH_CONFIG"
+
+    docker run --name guacamole -d -p "$PORT_WEB":8080 -v "$PATH_CONFIG":/config oznu/guacamole
+
+    return 0
 }

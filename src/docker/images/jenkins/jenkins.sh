@@ -18,10 +18,7 @@
 
     echo "Open in a browser :$PORT_WEB"
 
-    exec_root mkdir -p "$JENKINS_DATA"
-    exec_root chmod 755 "$JENKINS_DATA"
-    exec_root chown udocker:udocker "$JENKINS_DATA"
-
+    udocker_create_dir "$JENKINS_DATA"
 
     docker run -d --name jenkins -p "$PORT_WEB":8080 -p "$PORT_JENKINS":50000 -v "$JENKINS_DATA":/var/jenkins_home jenkins/jenkins:lts
     

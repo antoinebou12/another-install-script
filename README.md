@@ -11,16 +11,16 @@ Another install Script is a W.I.P project/script to install docker container for
 ## The story behind the project
 
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.
-After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker.After learning more on docker and docker-compose to create bash project install script using Test-driven development and documented. Also, I found so GitHub repo that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack).I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall appand other selfhosted services/servers to easy to install with a simple cli menu.
+After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker.After learning more on docker and docker-compose to create bash project install script using Test-driven development and documented. Also, I found so GitHub repo that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack). I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall appand other selfhosted services/servers to easy to install with a simple cli menu.
 
 ## How to install
 
 For now only work on ubuntu and only tested on ubuntu18.04
 
 ```bash
-git clone --recursive https://github.com/antoinebou13/personal-vps.git
-cd personal-vps
-bash setup.sh
+git clone --recursive https://github.com/antoinebou13/another-install-script.git
+cd another-install-script
+bash install.sh
 ```
 
 ## List of the services/server
@@ -69,32 +69,32 @@ Some services/server cannot be installed at the same time
 | [tdarr](https://github.com/HaveAGitGat/Tdarr)                             | ✔️     |                    |         |            |         |
 | [teamspeak](https://github.com/solidnerd/docker-teamspeak)                | ✔️     | 9987, 10011, 30033 |         |            |         |
 | [wallabag](https://github.com/wallabag/wallabag)                          | ✔️     |                    |         |            |         |
-| [cockpit](https://cockpit-project.org/)                                   | ❌      | 9090               |         | :9090      | ✔️      |
+| [cockpit](https://cockpit-project.org/)                                   | ❌     | 9090               |         | :9090      | ✔️      |
 
 ## List of other installed program
 
-* build-essential
-* git
-* python3
-* python3-pip
-* wireless-tools
-* wpasupplicant
-* default-jre
-* jq
-* net-tools
-* [vim](https://www.vim.org/)
-* [snapd](https://snapcraft.io/)
-* [nnn](https://github.com/jarun/nnn)
-* [nmap](https://nmap.org/)
-* [wget](https://www.gnu.org/software/wget/)
-* [curl](https://github.com/curl/curl)
-* [mlocate](https://wiki.archlinux.org/index.php/Mlocate)
-* [cmake](https://cmake.org/)
-* [docker](https://www.docker.com/)
-* [docker-compose](https://docs.docker.com/compose/)
-* [dry](https://github.com/moncho/dry)
-* [emojify](https://github.com/mrowa44/emojify)
-* [signal-cli](https://github.com/AsamK/signal-cli)
+- build-essential
+- git
+- python3
+- python3-pip
+- wireless-tools
+- wpasupplicant
+- default-jre
+- jq
+- net-tools
+- [vim](https://www.vim.org/)
+- [snapd](https://snapcraft.io/)
+- [nnn](https://github.com/jarun/nnn)
+- [nmap](https://nmap.org/)
+- [wget](https://www.gnu.org/software/wget/)
+- [curl](https://github.com/curl/curl)
+- [mlocate](https://wiki.archlinux.org/index.php/Mlocate)
+- [cmake](https://cmake.org/)
+- [docker](https://www.docker.com/)
+- [docker-compose](https://docs.docker.com/compose/)
+- [dry](https://github.com/moncho/dry)
+- [emojify](https://github.com/mrowa44/emojify)
+- [signal-cli](https://github.com/AsamK/signal-cli)
 
 ## Project Structure
 
@@ -124,18 +124,17 @@ A simple project overview to with the explaination of each important file
 +-- uninstall.sh
 ```
 
-| Path                       |                           Explanation                            |
-| -------------------------- | :--------------------------------------------------------------: |
-| docs                       | The directory for the documentation for the code and the project |
-| docs/vendor                |         The vendor program to generate the documentation         |
-| src                        |              The path for the code for the project               |
-| src/docker                 |              The path for all docker related script              |
-| src/docker/$container_name |  The path for docker container with a script and docker-compose  |
-
+| Path                        |                           Explanation                            |
+| --------------------------- | :--------------------------------------------------------------: |
+| docs                        | The directory for the documentation for the code and the project |
+| docs/vendor                 |         The vendor program to generate the documentation         |
+| src                         |              The path for the code for the project               |
+| src/docker                  |              The path for all docker related script              |
+| src/docker/\$container_name |  The path for docker container with a script and docker-compose  |
 
 ## How to run coverage and tests
 
-For running the [bats](https://github.com/bats-core/bats-core) tests 
+For running the [bats](https://github.com/bats-core/bats-core) tests
 
 ```bash
 cd tests
@@ -161,6 +160,7 @@ cd docs
 chmod +x generate_docs.sh
 bash generate_docs.sh docs.md
 ```
+
 ## Documentation
 
 Go to [docs](docs/docs.md)

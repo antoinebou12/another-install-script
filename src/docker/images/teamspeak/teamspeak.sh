@@ -11,10 +11,7 @@
 # @exitcode 1 On failure
  create_docker_teamspeak(){
 
-
-    exec_root mkdir -p /home/udocker/volumes/teamspeak
-    exec_root chmod 755 /home/udocker/volumes/teamspeak
-    exec_root chown udocker:udocker /home/udocker/volumes/teamspeak
+    udocker_create_dir /home/udocker/volumes/teamspeak
 
     docker run -d -e TS3SERVER_LICENSE=accept --name="teamspeak_server" -p "9987:9987/udp" -p 10011:10011 -p 30033:30033 solidnerd/teamspeak
     docker logs teamspeak_server > /home/udocker/teamspeak/info.txt
