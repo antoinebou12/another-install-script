@@ -148,8 +148,9 @@ manage_exec_install_list() {
     local FUNC_INSTALL="install_"
     basic_option=()
 	mapfile -t basic_option <<< "$1"
-    echo "$1"
+    echo "install $1"
 	for basic in "${basic_option[@]}"; do
+        echo "hello $basic"
         if [[ "$basic" == "docker" ]]; then
             install_docker
             install_docker_compose

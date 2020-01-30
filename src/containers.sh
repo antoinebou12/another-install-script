@@ -56,7 +56,7 @@ declare -a CONTAINER_NAME_MENU=(
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 import_all_sh() {
-	find "$DIR/images" -name "*.sh" -execdir chmod u+x {} +
+	find "$(dirname "${BASH_SOURCE[0]}")/images" -name "*.sh" -execdir chmod u+x {} +
 	local names=$(find "$1" -name "$2")
 
 	local SAVEIFS="$IFS" # Save current IFS
@@ -89,7 +89,7 @@ manage_exec_containers_list() {
 		echo "$container_name"
 		print_line
 		exec_root echo "$container_name" >> /tmp/containers.txt
-		source "src/docker/images/$container_name/$container_name.sh"
+		source "$(dirname "${BASH_SOURCE[0]}")/images/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line
 	done

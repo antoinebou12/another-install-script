@@ -10,6 +10,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_template(){
+     echo "template"
      return 0
 }
 
@@ -19,6 +20,7 @@ create_docker_template(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 remove_docker_template(){
+     echo "template"
      return 0
 }
 
@@ -28,5 +30,6 @@ remove_docker_template(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 help_docker_template(){
+     echo "template"
      return 0
 }
