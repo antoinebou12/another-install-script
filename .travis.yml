@@ -2,12 +2,6 @@ language: shell
 jobs:
   include:
     - os: linux
-      dist: precise
-      arch: amd64
-    - os: linux
-      dist: precise
-      arch: arm64
-    - os: linux
       dist: trusty
       arch: amd64
     - os: linux
