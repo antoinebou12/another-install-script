@@ -12,8 +12,8 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_shidori(){
-    #docker build -t shiori .
-    docker run -d --name shidori -p 8024:8080 radhifadlillah/shiori
+    PORT_WEB=${1:-"8006"}
+    docker --name shidori -d -p "PORT_WEB":8080 radhifadlillah/shiori
     echo "not implemented yet"
-    return 1
+    return 0
 }

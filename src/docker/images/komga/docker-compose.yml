@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  komga:
+    image: gotson/komga
+    container_name: komga
+    volumes:
+      - type: bind
+        source: /home/udocker/volumes/komga/config
+        target: /config
+      - type: bind
+        source: /home/udocker/volumes/komga/books
+        target: /books
+      - type: bind
+        source: /etc/timezone
+        target: /etc/timezone
+        read_only: true
+    ports:
+      - 8080:8080
+    # user: "1000:1000"
+    environment:
+      - KOMGA_LIBRARIES_SCAN_DIRECTORY_EXCLUSIONS=#recycle,@eaDir
+    restart: unless-stopped

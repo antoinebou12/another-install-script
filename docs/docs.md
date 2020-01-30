@@ -100,15 +100,15 @@ _Function has no arguments._
 to install docker docker compose on ubuntu18.04
 
 * [install_docker()](#installdocker)
-* [install-docker_compose()](#install-dockercompose)
+* [install_docker_compose()](#installdockercompose)
 * [install_docker_extra()](#installdockerextra)
 * [prune_images_volumes_all()](#pruneimagesvolumesall)
 * [stop_containers_all()](#stopcontainersall)
 * [remove_containers_all()](#removecontainersall)
-* [docker_create_dir()](#dockercreatedir)
+* [udocker_create_default_dir()](#udockercreatedefaultdir)
 * [create_docker_user()](#createdockeruser)
 * [do_as_udocker_user()](#doasudockeruser)
-* [create_dir_udocker()](#createdirudocker)
+* [udocker_create_dir()](#udockercreatedir)
 * [create_docker_id_backup()](#createdockeridbackup)
 * [create_docker_name_backup()](#createdockernamebackup)
 * [create_docker_backup_all()](#createdockerbackupall)
@@ -125,7 +125,7 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-## install-docker_compose()
+## install_docker_compose()
 
 install the docker compose
 
@@ -180,7 +180,7 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-## docker_create_dir()
+## udocker_create_default_dir()
 
 this  creates the volumes, services and backup directories. It then assisgns the current user to the ACL to give full read write access
 
@@ -215,9 +215,9 @@ do as the docker user
 * **0**: If successfull.
 * **1**: On failure
 
-## create_dir_udocker()
+## udocker_create_dir()
 
-do as the docker user
+create udocker dir
 
 ### Arguments
 
@@ -267,8 +267,44 @@ check if the port is used
 * **0**: If successfull.
 * **1**: On failure
 
+# template.sh
+
+to install docker template
+
+* [create_docker_cloud-torrent()](#createdockercloud-torrent)
+* [remove_docker_cloud-torrent()](#removedockercloud-torrent)
+* [help_docker_cloud-torrent()](#helpdockercloud-torrent)
 
 
+## create_docker_cloud-torrent()
+
+create docker template
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_cloud-torrent()
+
+remove docker .template
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## help_docker_cloud-torrent()
+
+help for the server and docker container
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # cloud-torrent.sh
 
@@ -484,8 +520,8 @@ https://github.com/jenkinsci/docker
 ### Arguments
 
 * # @args $1 port number for the web server
-* # @args $1 port number for jenkins server
-* # @args $1 the path to jenkins data volume
+* # @args $2 port number for jenkins server
+* # @args $3 the path to jenkins data volume
 
 ### Exit codes
 
@@ -720,21 +756,15 @@ not implemented yet
 
 to install docker firefly-iii
 
-* [create_docker_firefly-iii()](#createdockerfirefly-iii)
+* [create_docker_olaris()](#createdockerolaris)
 
 
-## create_docker_firefly-iii()
+## create_docker_olaris()
 
 create docker firefly-iii
 https://github.com/firefly-iii/docker
 
-### Arguments
-
-* # @args $1 PORT_WEB
-* # @args $2 PATH_DB
-* # @args $3 PATH_EXPORT
-* # @args $4 PATH_UPLOAD
-* # @args $4 POSTGRES_PASSWORD
+_Function has no arguments._
 
 ### Exit codes
 
@@ -770,11 +800,6 @@ to install docker openvpn
 create docekr openvpn
 https://github.com/kylemanna/docker-openvpn
 
-### Arguments
-
-* # @args $1 the vps or server domain or ip
-* # @args $2 clientname that use the openvpn
-
 ### Exit codes
 
 * **0**: If successfull.
@@ -797,16 +822,16 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
-# tautulli.sh
+# plex.sh
 
-to install docker tautulli
+to install docker plex
 
-* [create_docker_tautulli()](#createdockertautulli)
+* [create_docker_plex()](#createdockerplex)
 
 
-## create_docker_tautulli()
+## create_docker_plex()
 
-create docker tautulli
+create docker plex
 not implemented yet
 
 ### Exit codes
@@ -1140,7 +1165,7 @@ manage install menu
 
 ### Arguments
 
-* # @args $1 SETUP_CONTAINER_MENU
+* # @args $1 SETUP_INSTALL_MENU
 
 ### Exit codes
 

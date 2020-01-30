@@ -6,20 +6,20 @@ setup() {
 }
 
 @test "install_docker" {
-    skip "check later"
+    # skip "check later"
     install_docker
     [ "$status" -eq 0 ]
 }
 
 @test "install_docker_compose" {
-    skip "check later"
+    # skip "check later"
     install_docker_compose
     [ "$status" -eq 0 ]
 
 }
 
 @test "install_docker_extra" {
-    skip "check later"
+    # skip "check later"
     install_docker_extra
     [ "$status" -eq 0 ]
 }

@@ -4,6 +4,7 @@ services:
   
   heimdall:
     image: linuxserver/heimdall:latest
+    container_name: heimdall
     restart: unless-stopped
     volumes:
     - ${PATH_CONFIG}:/config
