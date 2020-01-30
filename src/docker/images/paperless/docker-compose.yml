@@ -1,4 +1,5 @@
-version: '3.7'
+version: '2.1'
+
 services:
     webserver:
         build: ./
@@ -7,7 +8,7 @@ services:
         ports:
             # You can adapt the port you want Paperless to listen on by
             # modifying the part before the `:`.
-            - "8056:8000"
+            - "8000:8000"
         healthcheck:
             test: ["CMD", "curl" , "-f", "http://localhost:8000"]
             interval: 30s
@@ -25,20 +26,28 @@ services:
         # languages the user might have set in the env-file by overwriting the
         # value with nothing.
         environment:
-            - PAPERLESS_USE_SSL=false
-            - PAPERLESS_OCR_LANGUAGES=eng
+            - PAPERLESS_OCR_LANGUAGES=
         command: ["gunicorn", "-b", "0.0.0.0:8000"]
 
     consumer:
         build: ./
-        restart: always
+        # uncomment the following line to start automatically on system boot
+        # restart: always
         depends_on:
             webserver:
                 condition: service_healthy
         volumes:
-            - /home/paperless/data:/usr/src/paperless/data
-            - /home/paperless/media:/usr/src/paperless/media
-            - /home/paperless/consume:/consume
+            - data:/usr/src/paperless/data
+            - media:/usr/src/paperless/media
+            # This should be set to the same value as the consume directory
+            # in the webserver service above.
+            - ./consume:/consume
+            # Likewise, you can add a local path to mount a directory for
+            # exporting. This is not strictly needed for paperless to
+            # function, only if you're exporting your files: uncomment
+            # it and fill in a local path if you know you're going to
+            # want to export your documents.
+            # - /path/to/another/arbitrary/place:/export
         env_file: docker-compose.env
         command: ["document_consumer"]
 
