@@ -4,7 +4,7 @@
 # @brief list of container and other info
 
 declare -a CONTAINER_NAME_MENU=(
-	"0-test-image" "0-test-image" "ON"
+	"template" "template" "ON"
 	"cloud-torrent" "cloud-torrent" "OFF"
 	"deluge" "cloud-torrent" "OFF"
 	"firefly-iii" "firefly-iii" "OFF"

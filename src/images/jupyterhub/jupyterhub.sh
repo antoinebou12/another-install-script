@@ -10,7 +10,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_jupyter_hub(){
-    JUPYTERHUB_PORT=$1 docker-compose up -d
+    exec_root JUPYTERHUB_PORT=$1 docker-compose up -d
     return 0
 }
 

@@ -19,7 +19,7 @@
     cd mailcow-dockerized || return 1
     ./generate_config.sh
     nano mailcow.conf
-    docker-compose pull
-    docker-compose up -d
+    exec_root docker-compose pull
+    exec_root docker-compose up -d
     return 0
 }

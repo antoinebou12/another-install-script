@@ -147,10 +147,8 @@ install_signal_ssh_text() {
 manage_exec_install_list() {
     local FUNC_INSTALL="install_"
     basic_option=()
-	mapfile -t basic_option <<< "$1"
-    echo "install $1"
+	mapfile -t basic_option <<<"$1"
 	for basic in "${basic_option[@]}"; do
-        echo "hello $basic"
         if [[ "$basic" == "docker" ]]; then
             install_docker
             install_docker_compose
@@ -159,4 +157,5 @@ manage_exec_install_list() {
             "$FUNC_INSTALL""$basic" 
         fi 
     done
+    return 0
 }

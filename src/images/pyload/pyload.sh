@@ -17,9 +17,8 @@
     PORT_WEB=${3:-"8001"}
 
     udocker_create_dir "$PATH_CONFIG"
-
     udocker_create_dir "$PATH_DOWNLOAD"
 
-    PATH_CONFIG=$PATH_CONFIG PATH_DOWNLOAD=$PATH_DOWNLOAD PORT_WEB=$PORT_WEB docker-compose up -d
+    exec_root PATH_CONFIG=$PATH_CONFIG PATH_DOWNLOAD=$PATH_DOWNLOAD PORT_WEB=$PORT_WEB docker-compose up -d
     return 0
 }

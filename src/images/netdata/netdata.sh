@@ -14,7 +14,7 @@ create_docker_netdata(){
     set -e
     local PORT_WEB=${1:-19999}
     cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
-    docker-compose up -d
+    exec_root PORT_WEB=${PORT_WEB} docker-compose up -d
 
     echo "ctrl+click to open in browser"
     echo "$(get_current_ip):${PORT_WEB}"

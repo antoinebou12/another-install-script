@@ -14,6 +14,7 @@ create_docker_neko(){
     PORT_WEB=8032
 
     cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
+    
     docker-compose up -d
 
     echo "ctrl+click to open in browser"

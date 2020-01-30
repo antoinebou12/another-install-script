@@ -2,7 +2,7 @@
 
 
 setup() {
-  source "$BATS_TEST_DIRNAME/../../src/docker/docker.sh"
+  source "$BATS_TEST_DIRNAME/../../src/docker.sh"
 }
 
 @test "install_docker" {

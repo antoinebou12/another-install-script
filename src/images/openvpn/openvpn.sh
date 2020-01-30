@@ -12,11 +12,11 @@
     
     udocker_create_dir /home/udocker/volumes/openvpn
 
-    docker-compose run --rm openvpn ovpn_genconfig -u udp://"$(get_current_ip)"
-    docker-compose run --rm openvpn ovpn_initpki
-    docker-compose run --rm openvpn easyrsa build-client-full user nopass
-    docker-compose run --rm openvpn ovpn_getclient user > user.ovpn
-    docker-compose up -d openvpn
+    exec_root docker-compose run --rm openvpn ovpn_genconfig -u udp://"$(get_current_ip)"
+    exec_root docker-compose run --rm openvpn ovpn_initpki
+    exec_root docker-compose run --rm openvpn easyrsa build-client-full user nopass
+    exec_root docker-compose run --rm openvpn ovpn_getclient user > user.ovpn
+    exec_root docker-compose up -d openvpn
     return 0
 }
 
