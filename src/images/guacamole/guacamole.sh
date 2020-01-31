@@ -16,8 +16,8 @@ create_docker_guacamole(){
     
     udocker_create_dir "$PATH_CONFIG"
 
-    docker run --name guacamole -d -p "$PORT_WEB":8080 -v "$PATH_CONFIG":/config oznu/guacamole
-    docker restart guacamole
+    exec_root docker run --name guacamole -d -p "$PORT_WEB":8080 -v "$PATH_CONFIG":/config oznu/guacamole
+    exec_root docker restart guacamole
 
     echo "ctrl+click to open in browser"
     echo "$(get_current_ip):${PORT_WEB}"

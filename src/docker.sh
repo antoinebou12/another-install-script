@@ -139,7 +139,8 @@ udocker_create_default_dir() {
     [ -d /home/udocker/volumes ]  || udocker_create_dir /home/udocker/volumes
     [ -d /home/udocker/backups ]  || udocker_create_dir /home/udocker/backups
 
-    udocker_create_dir /home/udocker
+
+    cp "$(dirname "${BASH_SOURCE[0]}")/.." /home/udocker/
 
     print_line
     return 0

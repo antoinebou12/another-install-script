@@ -27,18 +27,18 @@ openvpn,openvpn
 paperless,paperless
 plex,plex
 portainer,portainer
-pyload, pyload
-qbittorent-vpn, qbittorent-vpn
-radarr, radarr
-recalbox, recalbox
-recipes, recipes
-sabnzbd, sabnzbd
-shidori, shidori
-sonarr, sonarr
-statping, statping
-syncthing, syncthing
-tautulli, tautulli
-tdarr, tdarr
-teamspeak, teamspeak
-template, template
-wallabag, wallabag
+pyload,pyload
+qbittorent-vpn,qbittorent-vpn
+radarr,radarr
+recalbox,recalbox
+recipes,recipes
+sabnzbd,sabnzbd
+shidori,shidori
+sonarr,sonarr
+statping,statping
+syncthing,syncthing
+tautulli,tautulli
+tdarr,tdarr
+teamspeak,teamspeak
+.template,template
+wallabag,wallabag
