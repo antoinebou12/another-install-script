@@ -1,0 +1,44 @@
+cloud-torrent,cloud-torrent
+deluge,deluge
+firefly-iii,firefly-iii
+gitea,gitea
+grafana,grafana
+guacamole,guacamole
+heimdall,heimdall
+huginn,huginn
+jackett,jackett
+jellyfin,jellyfin
+jenkins,jenkins
+jupyterhub,jupyterhub
+keycloak,keycloak
+komga,komga
+libresignage,libresignage
+lidarr,lidarr
+mailcow,mailcow
+mcmyadmin,mcmyadmin
+medusa,medusa
+monica,monica
+neko,neko
+netdata,netdata
+nextcloud,nextcloud
+olaris,olaris
+openldap,openldap
+openvpn,openvpn
+paperless,paperless
+plex,plex
+portainer,portainer
+pyload, pyload
+qbittorent-vpn, qbittorent-vpn
+radarr, radarr
+recalbox, recalbox
+recipes, recipes
+sabnzbd, sabnzbd
+shidori, shidori
+sonarr, sonarr
+statping, statping
+syncthing, syncthing
+tautulli, tautulli
+tdarr, tdarr
+teamspeak, teamspeak
+template, template
+wallabag, wallabag

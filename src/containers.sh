@@ -3,52 +3,9 @@
 # @file container.sh
 # @brief list of container and other info
 
-declare -a CONTAINER_NAME_MENU=(
-	"template" "template" "ON"
-	"cloud-torrent" "cloud-torrent" "OFF"
-	"deluge" "cloud-torrent" "OFF"
-	"firefly-iii" "firefly-iii" "OFF"
-	"gitea" "gitea" "OFF"
-	"grafana" "grafana" "OFF"
-	"guacamole" "guacamole" "OFF"
-	"heimdall" "heimdall" "OFF"
-	"huginn" "huginn" "OFF"
-	"jackett" "jackett" "OFF"
-	"jellyfin" "jellyfin" "OFF"
-	"jenkins" "jenkins" "OFF"
-	"jupyterhub" "jupyterhub" "OFF"
-	"keycloak" "keycloak" "OFF"
-	"komga" "komga" "OFF"
-	"libresignage" "libresignage" "OFF"
-	"lidarr" "lidarr" "OFF"
-	"mailcow" "mailcow" "OFF"
-	"mcmyadmin" "mcmyadmin" "OFF"
-	"medusa" "medusa" "OFF"
-	"monica" "monica" "OFF"
-	"neko" "neko" "OFF"
-	"netdata" "netdata" "OFF"
-	"nextcloud" "nextcloud" "OFF"
-	"olaris" "olaris" "OFF"
-	"openldap" "openldap" "OFF"
-	"openvpn" "openvpn" "OFF"
-	"paperless" "paperless" "OFF"
-	"plex" "plex" "OFF"
-	"pyload" "pyload" "OFF"
-	"qbittorent-vpn" "qbittorent-vpn" "OFF"
-	"radarr" "radarr" "OFF"
-	"recalbox" "recalbox" "OFF"
-	"sabnzbd" "sabnzbd" "OFF"
-	"shidori" "shidori" "OFF"
-	"sonarr" "sonarr" "OFF"
-	"statping" "statping" "OFF"
-	"syncthing" "syncthing" "OFF"
-	"tautulli" "tautulli" "OFF"
-	"tdarr" "tdarr" "OFF"
-	"teamspeak" "teamspeak" "OFF"
-	"wallabag" "wallabag" "OFF"
-)
+declare -a CONTAINER_NAME_MENU=()
 
-# @description import all the /docker/images/.../*.sh based on selected
+# @description import all the /images/.../*.sh based on selected
 #
 # @args $1 path of root of docker images
 # @args $2 name of the files
@@ -88,7 +45,7 @@ manage_exec_containers_list() {
 	for container_name in "${containers[@]}"; do
 		echo "$container_name"
 		print_line
-		exec_root echo "$container_name" >> /tmp/containers.txt
+		exec_root echo "$container_name" >>/tmp/containers.txt
 		source "$(dirname "${BASH_SOURCE[0]}")/images/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line
@@ -110,7 +67,6 @@ list_container() {
 	return 0
 }
 
-
 # @description show the list of src images
 #
 # @noargs
@@ -118,5 +74,30 @@ list_container() {
 # @exitcode 1 On failure
 list_src_images() {
 	echo ls -a1 images
+	return 0
+}
+
+# @description create CONTAINER_NAME_MENU
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+generate_container_menu() {
+	SAVEIFS="$IFS" # Save current IFS
+	IFS=,          # Change IFS to new line
+	while IFS=, read -r col1 col2; do
+		CONTAINER_NAME_MENU+=("$col1")
+		CONTAINER_NAME_MENU+=("$col2")
+		if [[ -f /home/udocker/containers.txt ]]; then
+			if grep -Fxq "$col1" /home/udocker/containers.txt; then
+				CONTAINER_NAME_MENU+=("ON")
+			else
+				CONTAINER_NAME_MENU+=("OFF")
+			fi
+		else
+			CONTAINER_NAME_MENU+=("OFF")
+		fi
+	done <"$(dirname "${BASH_SOURCE[0]}")/images/images.txt"
+	IFS="$SAVEIFS" # Restore IFS
 	return 0
 }

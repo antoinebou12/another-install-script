@@ -6,7 +6,7 @@
 # import
 # shellcheck source=../utils.sh
 # shellcheck disable=SC1091
-source "$(dirname "${BASH_SOURCE[0]}")/../utils.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 
 # @description install the docker
 #
@@ -155,12 +155,12 @@ create_docker_user() {
     print_line
 
     if id -u udocker >/dev/null 2>&1; then
+        echo "The user udocker already exist"
+    else
         exec_root adduser udocker
         exec_root usermod -aG docker udocker
         add_sudo "udocker"
         udocker_create_default_dir
-    else
-        echo "The user udocker already exist"
     fi
 
     print_line

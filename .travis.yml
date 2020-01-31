@@ -55,6 +55,7 @@ addons:
 script:
   - cd tests || exit 1
   - bash linter.sh # linter shellcheck
+  - bash tests.sh # coverage kcov
   - bash coverage.sh # coverage kcov
   - cd .. || exit 1
   - cd docs || exit 1

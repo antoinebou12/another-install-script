@@ -75,6 +75,7 @@ install_setup_menu() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 add_extra_setup_menu() {
+    generate_container_menu
     if [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 9))"
     elif [ $(tput lines) -gt 50 ]; then
