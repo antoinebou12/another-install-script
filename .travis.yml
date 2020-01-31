@@ -35,6 +35,7 @@ cache:
 
 addons:
   apt:
+    update: true
     sources:
       - sourceline: 'ppa:duggan/bats'
     packages:
@@ -54,9 +55,9 @@ addons:
 
 script:
   - cd tests || exit 1
-  - bash linter.sh # linter shellcheck
-  - bash tests.sh # coverage kcov
-  - bash coverage.sh # coverage kcov
+  - sudo bash linter.sh # linter shellcheck
+  - sudo bash tests.sh # coverage kcov
+  - sudo bash coverage.sh # coverage kcov
   - cd .. || exit 1
   - cd docs || exit 1
   - bash generate_docs.sh docs.sh # documentation shdoc

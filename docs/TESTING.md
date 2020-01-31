@@ -15,6 +15,7 @@ Using virtual machine you can test the install script manually
 - Install the minimal installation of ubuntu
 - Restart VM
 - Port forwarding 127.0.0.1:2222 -> 10.0.2.15:22
+- create a clone
 - `DISPLAY=localhost:0 ssh -X username@127.0.0.1 -p 2222`
 
 
