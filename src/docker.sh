@@ -139,7 +139,6 @@ udocker_create_default_dir() {
     [ -d /home/udocker/volumes ]  || udocker_create_dir /home/udocker/volumes
     [ -d /home/udocker/backups ]  || udocker_create_dir /home/udocker/backups
 
-
     cp "$(dirname "${BASH_SOURCE[0]}")/.." /home/udocker/
 
     print_line
@@ -162,6 +161,9 @@ create_docker_user() {
         exec_root usermod -aG docker udocker
         add_sudo "udocker"
         udocker_create_default_dir
+        echo "export UDOCKER_USERID=$(id -u udocker)" | tee -a home/udocker/.bashrc
+        echo "export UDOCKER_GROUPID=$(id -g udocker)" | tee -a home/udocker/.bashrc
+        echo "export TZ=$(cat /etc/timezone)" | tee -a home/udocker/.bashrc
     fi
 
     print_line
