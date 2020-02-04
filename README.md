@@ -11,7 +11,7 @@ Another install Script is a W.I.P project/script to install docker container for
 ## The story behind the project
 
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.
-After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker.After learning more on docker and docker-compose to create bash project install script using Test-driven development and documented. Also, I found so GitHub repo that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack). I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall appand other selfhosted services/servers to easy to install with a simple cli menu.
+After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker.After learning more on docker and docker-compose to create bash project install script using Test-driven development and documented. Also, I found so GitHub repo that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack) and [sovereign](https://github.com/sovereign/sovereign) and [MediaServrDockerCompose](https://github.com/vaeyo/MediaServer-DockerComposeFiles). I am trying to do with this project is to make a simple, extensible and customizable script to add most of Heimdall appand other selfhosted services/servers to easy to install with a simple cli menu.
 
 ## How to install
 
@@ -25,56 +25,57 @@ bash install.sh
 
 ## List of the services/server
 
-Some services/server cannot be installed at the same time
-Also more configuration needed for certain services
+Some services/servers cannot be installed at the same time
+Also more configuration needed for certain services/servers
 
-| Name                                                                      | Docker | Ports              | Volumes | Web server | Implemented |
-| ------------------------------------------------------------------------- | ------ | ------------------ | ------- | ---------- | ------- |
-| [ansible](https://github.com/ansible/ansible)                             | ✔️     |                    |         |            |    ❌       |
-| [cloud_torrent](https://github.com/jpillora/cloud-torrent)                | ✔️     |                    |         | :6889      |    ✔️     | 
-| [deluge](https://github.com/linuxserver/docker-deluge)                    | ✔️     |                    |         |            |    ❌       |
-| [firefly-iii](https://github.com/firefly-iii/firefly-iii)                 | ✔️     |                    |         |            |     ❌      |
-| [gitea](https://github.com/go-gitea/gitea)                                | ✔️     |                    |         |            |     ❌      |
-| [gitlab](https://docs.gitlab.com/ee/install/docker.html)                  | ✔️     |                    |         |            |     ❌      |
-| [grafana](https://github.com/grafana/grafana)                             | ✔️     |                    |         |            |      ✔️   |
-| [guacamole](https://github.com/oznu/docker-guacamole)                             | ✔️     |                    |         |   :8003         |      ✔️   |
-| [heimdall](https://github.com/linuxserver/docker-heimdall)                | ✔️     |                    |         | :8080      | ✔️      |
-| [huginn](https://github.com/huginn/huginn)                                | ✔️     |                    |         |            |   ❌        |
-| [jackett](https://github.com/Jackett/Jackett)                             | ✔️     |                    |         |            |    ❌       |
-| [jellyfin](https://github.com/linuxserver/docker-jellyfin)                | ✔️     |                    |         | :8096      | ✔️      |
-| [jenkins](https://github.com/jenkinsci/docker)                            | ✔️     | 8001,25566         |         | :8001      |     ✔️    |
-| [jupyterhub](https://github.com/jupyterhub/jupyterhub)                    | ✔️     |                    |         | :9000      |     ❌      |
-| [keycloak](https://hub.docker.com/r/jboss/keycloak)                       | ✔️     |                    |         |            |    ❌       |
-| [komga](https://github.com/gotson/komga)                                  | ✔️     |                    |         |            |    ❌       |
-| [libresignage](https://github.com/eerotal/LibreSignage)                   | ✔️     |                    |         |            |     ❌      |
-| [lidarr](https://lidarr.audio/)                                           | ✔️     |                    |         |            |    ❌       |
-| [mailcow](https://github.com/mailcow/mailcow-dockerized)                  | ✔️     |                    |         |            |  ❌         |
-| [mcmyadmin](https://github.com/linuxserver-archive/docker-mcmyadmin2)     | ✔️     | 8065, 25565        |         | :8065      |     ✔️    |
-| [medusa](https://github.com/linuxserver/docker-medusa)                    | ✔️     |                    |         | :8081      | ✔️      |
-| [monica](https://github.com/monicahq/monica)                              | ✔️     |                    |         |            |   ❌        |
-| [neko](https://github.com/nurdism/neko)                                   | ✔️     |                    |         |            |    ✔️     |
-| [netdata](https://github.com/netdata/netdata)                             | ✔️     |                    |         |            |     ✔️    |
-| [olaris](https://gitlab.com/olaris/olaris-server)                         | ✔️     |                    |         |            |     ✔️    |
-| [openldap](https://github.com/osixia/docker-openldap)                         | ✔️     |                    |    389, 636     |            |     ❌     |
-| [nextcloud](https://nextcloud.com/)                                       | ✔️     |                    |         |            |    ❌       |
-| [openvpn](https://github.com/kylemanna/docker-openvpn)                    | ✔️     |                    |         |            | ✔️      |
-| [paperless](https://github.com/the-paperless-project/paperless)           | ✔️     |                    |         |            |    ❌       |
-| [plex](https://hub.docker.com/r/linuxserver/plex/)           | ✔️     |                    |         |            |    ❌       |
-| [portainer](https://hub.docker.com/r/portainer/portainer/)           | ✔️     |                    |         |            |    ❌       |
-| [pyload](https://pyload.net/)                                             | ✔️     | 8000,7227          |         |            |    ❌       |
-| [qbittorrent-vpn](https://github.com/MarkusMcNugen/docker-qBittorrentvpn) | ✔️     |                    |         |            |    ❌       |
-| [radarr](https://github.com/Radarr/Radarr)                                | ✔️     |                    |         |            |    ❌       |
-| [recalBox](https://github.com/recalbox/recalbox-docker-build)             | ✔️     |                    |         |            |     ❌      |
-| [sabnzbd](https://sabnzbd.org/)                                           | ✔️     |                    |         |            |    ❌       |
-| [shidori](https://github.com/go-shiori/shiori)                            | ✔️     |                    |         |            |     ✔️    |
-| [sonarr](https://sonarr.tv/)                                              | ✔️     |                    |         |            |    ❌       |
-| [statping](https://github.com/hunterlong/statping)                        | ✔️     | 8084               |         | :8084      | ✔️      |
-| [syncthing](https://github.com/syncthing/syncthing)                       | ✔️     | 8384,22000, 21027  |         | :8384      | ✔️      |
-| [tautulli](https://github.com/Tautulli/Tautulli)                          | ✔️     |                    |         |            |   ❌        |
-| [tdarr](https://github.com/HaveAGitGat/Tdarr)                             | ✔️     |                    |         |            |    ❌       |
-| [teamspeak](https://github.com/solidnerd/docker-teamspeak)                | ✔️     | 9987, 10011, 30033 |         |            |    ✔️     |
-| [wallabag](https://github.com/wallabag/wallabag)                          | ✔️     |                    |         |            |   ❌        |
-| [cockpit](https://cockpit-project.org/)                                   | ❌     | 9090               |         | :9090      | ✔️      |
+| Name                                                                      | Docker | Ports              | Volumes  | Web server | Implemented |
+| ------------------------------------------------------------------------- | ------ | ------------------ | -------- | ---------- | ----------- |
+| [ansible](https://github.com/ansible/ansible)                             | ✔️     |                    |          |            | ❌          |
+| [cloud_torrent](https://github.com/jpillora/cloud-torrent)                | ✔️     |                    |          | :6889      | ✔️          |
+| [deluge](https://github.com/linuxserver/docker-deluge)                    | ✔️     |                    |          |            | ❌          |
+| [firefly-iii](https://github.com/firefly-iii/firefly-iii)                 | ✔️     |                    |          |            | ❌          |
+| [gitea](https://github.com/go-gitea/gitea)                                | ✔️     |                    |          |            | ❌          |
+| [gitlab](https://docs.gitlab.com/ee/install/docker.html)                  | ✔️     |                    |          |            | ❌          |
+| [grafana](https://github.com/grafana/grafana)                             | ✔️     |                    |          |            | ✔️          |
+| [guacamole](https://github.com/oznu/docker-guacamole)                     | ✔️     |                    |          | :8003      | ✔️          |
+| [heimdall](https://github.com/linuxserver/docker-heimdall)                | ✔️     |                    |          | :8080      | ✔️          |
+| [huginn](https://github.com/huginn/huginn)                                | ✔️     |                    |          |            | ❌          |
+| [jackett](https://github.com/Jackett/Jackett)                             | ✔️     |                    |          |            | ❌          |
+| [jellyfin](https://github.com/linuxserver/docker-jellyfin)                | ✔️     |                    |          | :8096      | ✔️          |
+| [jenkins](https://github.com/jenkinsci/docker)                            | ✔️     | 8001,25566         |          | :8001      | ✔️          |
+| [jupyterhub](https://github.com/jupyterhub/jupyterhub)                    | ✔️     |                    |          | :9000      | ❌          |
+| [keycloak](https://hub.docker.com/r/jboss/keycloak)                       | ✔️     |                    |          |            | ❌          |
+| [komga](https://github.com/gotson/komga)                                  | ✔️     |                    |          |            | ❌          |
+| [libresignage](https://github.com/eerotal/LibreSignage)                   | ✔️     |                    |          |            | ❌          |
+| [lidarr](https://lidarr.audio/)                                           | ✔️     |                    |          |            | ❌          |
+| [mailcow](https://github.com/mailcow/mailcow-dockerized)                  | ✔️     |                    |          |            | ❌          |
+| [mcmyadmin](https://github.com/linuxserver-archive/docker-mcmyadmin2)     | ✔️     | 8065, 25565        |          | :8065      | ✔️          |
+| [medusa](https://github.com/linuxserver/docker-medusa)                    | ✔️     |                    |          | :8081      | ✔️          |
+| [monica](https://github.com/monicahq/monica)                              | ✔️     |                    |          |            | ❌          |
+| [neko](https://github.com/nurdism/neko)                                   | ✔️     |                    |          |            | ✔️          |
+| [netdata](https://github.com/netdata/netdata)                             | ✔️     |                    |          |            | ✔️          |
+| [olaris](https://gitlab.com/olaris/olaris-server)                         | ✔️     |                    |          |            | ✔️          |
+| [openldap](https://github.com/osixia/docker-openldap)                     | ✔️     |                    | 389, 636 |            | ❌          |
+| [nextcloud](https://nextcloud.com/)                                       | ✔️     |                    |          |            | ❌          |
+| [openvpn](https://github.com/kylemanna/docker-openvpn)                    | ✔️     |                    |          |            | ✔️          |
+| [paperless](https://github.com/the-paperless-project/paperless)           | ✔️     |                    |          |            | ❌          |
+| [plex](https://hub.docker.com/r/linuxserver/plex/)                        | ✔️     |                    |          |            | ❌          |
+| [portainer](https://hub.docker.com/r/portainer/portainer/)                | ✔️     |                    |          |            | ❌          |
+| [pyload](https://pyload.net/)                                             | ✔️     | 8000,7227          |          |            | ❌          |
+| [qbittorrent-vpn](https://github.com/MarkusMcNugen/docker-qBittorrentvpn) | ✔️     |                    |          |            | ❌          |
+| [radarr](https://github.com/Radarr/Radarr)                                | ✔️     |                    |          |            | ❌          |
+| [recalBox](https://github.com/recalbox/recalbox-docker-build)             | ✔️     |                    |          |            | ❌          |
+| [sabnzbd](https://sabnzbd.org/)                                           | ✔️     |                    |          |            | ❌          |
+| [shidori](https://github.com/go-shiori/shiori)                            | ✔️     |                    |          |            | ✔️          |
+| [sonarr](https://sonarr.tv/)                                              | ✔️     |                    |          |            | ❌          |
+| [statping](https://github.com/hunterlong/statping)                        | ✔️     | 8084               |          | :8084      | ✔️          |
+| [syncthing](https://github.com/syncthing/syncthing)                       | ✔️     | 8384,22000, 21027  |          | :8384      | ✔️          |
+| [tautulli](https://github.com/Tautulli/Tautulli)                          | ✔️     |                    |          |            | ❌          |
+| [tdarr](https://github.com/HaveAGitGat/Tdarr)                             | ✔️     |                    |          |            | ❌          |
+| [teamspeak](https://github.com/solidnerd/docker-teamspeak)                | ✔️     | 9987, 10011, 30033 |          |            | ✔️          |
+| [wallabag](https://github.com/wallabag/wallabag)                          | ✔️     |                    |          |            | ❌          |
+| [cockpit](https://cockpit-project.org/)                                   | ❌     | 9090               |          | :9090      | ✔️          |
+
 ## List of other installed program
 
 - build-essential
