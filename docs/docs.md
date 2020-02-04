@@ -267,45 +267,6 @@ check if the port is used
 * **0**: If successfull.
 * **1**: On failure
 
-# template.sh
-
-to install docker template
-
-* [create_docker_cloud-torrent()](#createdockercloud-torrent)
-* [remove_docker_cloud-torrent()](#removedockercloud-torrent)
-* [help_docker_cloud-torrent()](#helpdockercloud-torrent)
-
-
-## create_docker_cloud-torrent()
-
-create docker template
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_cloud-torrent()
-
-remove docker .template
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## help_docker_cloud-torrent()
-
-help for the server and docker container
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 # cloud-torrent.sh
 
 to install docker cloud-torrent
@@ -839,6 +800,9 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
 # pyload.sh
 
 to install docker pyload
@@ -917,6 +881,45 @@ https://github.com/recalbox/recalbox-docker-build
 * **0**: If successfull.
 * **1**: On failure
 
+# template.sh
+
+to install docker template
+
+* [create_docker_cloud-torrent()](#createdockercloud-torrent)
+* [remove_docker_cloud-torrent()](#removedockercloud-torrent)
+* [help_docker_cloud-torrent()](#helpdockercloud-torrent)
+
+
+## create_docker_cloud-torrent()
+
+create docker template
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_cloud-torrent()
+
+remove docker .template
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## help_docker_cloud-torrent()
+
+help for the server and docker container
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # sabnzdb.sh
 
 to install docker sabnzdb
@@ -945,6 +948,7 @@ to install docker shidori
 
 create docker shidori
 not implemented yet
+https://github.com/MohammadAlHajj/shidori
 
 ### Exit codes
 
@@ -1046,6 +1050,45 @@ create docker teamspeak
 https://github.com/recalbox/recalbox-docker-build
 
 _Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# template.sh
+
+to install docker template
+
+* [create_docker_template()](#createdockertemplate)
+* [remove_docker_template()](#removedockertemplate)
+* [help_docker_template()](#helpdockertemplate)
+
+
+## create_docker_template()
+
+create docker template
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_template()
+
+remove docker .template
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## help_docker_template()
+
+help for the server and docker container
+link
 
 ### Exit codes
 

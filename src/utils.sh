@@ -131,11 +131,8 @@ exec_root_func() {
 # @exitcode 0 If installed
 # @exitcode 1 if not installed
 check_packages_install() {
-    output=$(
-        dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$'
-        echo "$?"
-    )
-    return "$output"
+    output=$(dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$')
+    return $?
 }
 
 # @description apt-get update

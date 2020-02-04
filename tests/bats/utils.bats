@@ -19,7 +19,7 @@ test-func(){
 }
 
 @test "check_packages_install" {
-  skip "check later"
+  # skip "check later"
   check_packages_install nano
   [ "$status" -eq 0 ]
     check_packages_install dasdsad
@@ -27,19 +27,19 @@ test-func(){
 }
 
 @test "aptupdate" {
-  skip
+  # skip
   aptupdate
   [ "$status" -eq 0 ]
 }
 
 @test "aptupgrade" {
-  skip
+  # skip
   aptupgrade
   [ "$status" -eq 0 ]
 }
 
 @test "aptclean" {
-  skip
+  # skip
   aptclean
   [ "$status" -eq 0 ]
 }
@@ -107,13 +107,13 @@ test-func(){
 }
 
 @test "get_timezones" {
-  skip "check later"
+  # skip "check later"
   if [[ "$TZ" == "$(cat /etc/timezone)" ]]; then return 0; else return 1; fi
   [ "$status" -eq 0 ]
 }
 
 @test "check_command_exist" {
-  skip "check later"
+  # skip "check later"
   check_command_exist ls
   [ "$status" -eq 0 ]
   check_command_exist afafafa
@@ -129,7 +129,7 @@ test-func(){
 }
 
 @test "check_debian" {
-  skip "check later"
+  # skip "check later"
   check_debian
   [ "$status" -eq 0 ]
 }

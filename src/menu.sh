@@ -6,8 +6,8 @@
 # import
 source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/install.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/docker/containers.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/docker/docker.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/containers.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/docker.sh"
 
 #const
 WHIPTAIL_TEXT=$(($(tput lines) - 8))
@@ -62,7 +62,7 @@ install_setup_menu() {
     local SETUP_INSTALL_MENU=$(whiptail --nocancel --clear --title "Install" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${SETUP_INSTALL_ITEMS[@]}" 3>&1 1>&2 2>&3)
     if [[ $? == 0 ]] && [[ ! -z "$SETUP_INSTALL_MENU" ]]; then
         show_project_name
-        manage_exec_install_list $SETUP_INSTALL_MENU
+        manage_exec_install_list "$SETUP_INSTALL_MENU"
         if [[ "$SETUP_INSTALL_MENU" == *"docker"* ]]; then
             add_extra_setup_menu
         fi
@@ -75,6 +75,7 @@ install_setup_menu() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 add_extra_setup_menu() {
+    generate_container_menu
     if [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 9))"
     elif [ $(tput lines) -gt 50 ]; then

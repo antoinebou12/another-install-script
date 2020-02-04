@@ -114,14 +114,13 @@ A simple project overview to with the explaination of each important file
 +-- etc
 |   +-- ...
 +-- src
-|   +-- docker
-|   |   +-- images
-|   |   |   +-- $container_name
+|   +-- images
+|   |   +-- $container_name
 |   |   |   |    +-- docker-compose.yml
 |   |   |   |    +-- $container_name.sh
 |   |   |   |    +-- ...
-|   |   +-- docker.sh
-|   |   +-- container.sh
+|   +-- docker.sh
+|   +-- container.sh
 |   +-- install.sh
 |   +-- menu.sh
 |   +-- utils.sh
@@ -134,8 +133,7 @@ A simple project overview to with the explaination of each important file
 | docs                        | The directory for the documentation for the code and the project |
 | docs/vendor                 |         The vendor program to generate the documentation         |
 | src                         |              The path for the code for the project               |
-| src/docker                  |              The path for all docker related script              |
-| src/docker/\$container_name |  The path for docker container with a script and docker-compose  |
+| src/images/$container_name  |  The path for docker container with a script and docker-compose  |
 
 ## How to run coverage and tests
 
