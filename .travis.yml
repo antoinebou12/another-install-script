@@ -19,14 +19,6 @@ jobs:
     - os: linux
       dist: bionic
       arch: arm64
-    # - os: linux
-    #   dist: disco
-    # - os: linux
-    #   dist: comic
-    # - os: linux
-    #   dist: eoan
-    # - os: linux
-    #   dist: focal
 
 cache:
   directories:
@@ -56,7 +48,7 @@ addons:
 script:
   - cd tests || exit 1
   - sudo bash linter.sh # linter shellcheck
-  - sudo bash tests.sh # coverage kcov
+  - sudo bash tests.sh # test
   - sudo bash coverage.sh # coverage kcov
   - cd .. || exit 1
   - cd docs || exit 1

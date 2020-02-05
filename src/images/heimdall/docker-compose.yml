@@ -1,17 +1,11 @@
 # https://hub.docker.com/r/linuxserver/heimdall/
-version: '3.3'
+version: "3.3"
 services:
-  
   heimdall:
     image: linuxserver/heimdall:latest
     container_name: heimdall
     restart: unless-stopped
     volumes:
-    - ${PATH_CONFIG}:/config
+      - ${PATH_CONFIG}:/config
     ports:
-    - ${PORT_WEB}:80
-    # # - ${PORT_WEB_HTTPS}:443
-    # environment:
-    # - PUID=1000
-    # - PGID=1000
-    # - TZ=America/New York
+      - ${PORT_WEB}:80

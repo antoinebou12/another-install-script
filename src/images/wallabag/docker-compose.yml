@@ -1,9 +1,9 @@
-version: '3'
+version: "3"
 services:
   wallabag:
     image: wallabag/wallabag:latest
     restart: always
-    ports: 
+    ports:
       - "8888:80"
     tty: true
     links:
@@ -19,11 +19,10 @@ services:
       - SYMFONY__ENV__DATABASE_PASSWORD=myuserpassword
       #- SYMFONY__ENV__FOSUSER_REGISTRATION=false
       #- POPULATE_DATABASE=true
-      
+
     volumes:
       - /mnt/backup/wallabag/nginx_logs:/var/log/nginx
 
-  
   wallabag-db:
     image: mariadb:latest
     restart: always

@@ -16,7 +16,6 @@ install_bats(){
 
 run_tests(){
     install_bats
-
     bats "bats/utils.bats"
     bats "bats/docker.bats"
     bats "bats/containers.bats"
