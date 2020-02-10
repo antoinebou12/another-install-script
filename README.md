@@ -8,6 +8,9 @@
 
 Another install Script is a W.I.P project/script to install docker container for my personal server
 
+![Another install Script](docs/images/another-install-script.png)
+
+
 ## The story behind the project
 
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.

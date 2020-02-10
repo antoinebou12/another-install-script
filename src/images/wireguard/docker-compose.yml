@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+    wireguard-docker:
+        container_name: wireguard
+        volumes:
+            - '/home/udocker/wireguard:/etc/wireguard'
+        ports:
+            - '5555:5555/udp'
+        image: 'cmulk/wireguard-docker:buster'

@@ -1,0 +1,65 @@
+.template, The template for the images to run container
+airsonic, Music and Podcast server
+ansible, systems automation
+bitwarden, Open source password management
+bookstack, ebook and other server
+calibre, ebook server
+cloud-torrent, Cloud Torrent: a self-hosted remote torrent client
+code-server, Run VS Code on a remote server
+cyberchef, The Cyber Swiss Army Knife - a web app for encryption, encoding, compression and data analysis
+deluge, BitTorrent Client
+draw.io, free online diagram software
+duplicati, backup software to store encrypted backups
+firefly-iii, A free and open source personal finance manager
+freshrss, A free, self-hostable aggregator 
+gitea, A painless self-hosted Git service
+gitlab, git service
+grafana, the open source analytics and monitoring solution 
+graylog, Free and open source log management
+guacamole, apache guacamole is clientless remote desktop gateway
+heimdall, An Application dashboard and launcher
+huginn, Create agents that monitor and act on your behalf
+invidious, alternative front-end to YouTube
+jackett, API Support for your favorite torrent trackers.
+jellyfin, free Software Media System also alternative for plex
+jenkins, open source automation server
+jupyterhub, Multi-user server for Jupyter notebooks
+jupyterlab, single-user server for Jupyter notebooks
+keycloak, open source identity and access management 
+komga, Media server for comics/mangas/BDs with API and OPDS support
+liberapay, recurrent donations platform like patreon
+libresignage, An open source digital signage solution
+lodestone, Personal Document Archiving (DMS, EDMS for Personal/Home Office use) 
+lychee, A great looking and easy-to-use photo-management-system you can run on your server, to manage and share photos
+mailcow, mailserver docker
+mcmyadmin, minecraft admin system
+medusa, Automatic Video Library Manager for TV Shows.
+monica, Personal CRM. Remember everything about your friends and family
+neko, A self hosted virtual browser (rabb.it clone) that runs in docker.
+netdata, Real-time performance monitoring, done right!
+nextcloud, on-premises file share and collaboration platform
+olaris, media manager and transcoding server
+open-streaming-platform, A Self-Hosted Video Streaming and Recording Server Using Python, Flask, Nginx-RTMP
+openldap, open source implementation of the Lightweight Directory Access Protocol.
+openvpn, open source vpn
+paperless, Scan, index, and archive all of your paper documents
+peertube, decentralized and free/libre alternative to video broadcasting services
+plex, Organize, beautify, stream, and share your personal collection of movies, TV, music, and photos anywhere, on all your devices.
+portainer, Build and manage your Docker environments with ease today.
+privatebin, is a minimalist, open source online pastebin where the server has zero knowledge of pasted data
+pyload, Open Source download manager and designed to be extremely lightweight, easily extensible and fully manageable via web
+qbittorent-vpn, open-source software alternative to µTorrent with vpn
+recipes, Django application for managing recipes
+rocket, simple chat server 
+searx, privacy-respecting metasearch engine
+shiori, ebook server
+sonarr, Smart PVR for newsgroup and bittorrent users.
+spiderfoot, open source intelligence (OSINT) automation tool. It integrates with just about every data source available and utilises a range of methods for data analysis
+statping, Status Page for monitoring your websites and applications with beautiful graphs, analytics, and plugins
+syncthing, google drive/dropbox self-hosted
+tautulli, Monitor your Plex Media Server
+tdarr, Tdarr Beta -Audio/Video library analytics + transcode automation using FFmpeg/HandBrake + video health checking
+teamspeak, voice chat application
+ubuntuxrdp, a ubuntu desktop with xrdp server can be use with guacamole
+wallabag, read-it-later server
+wireguard, vpn server

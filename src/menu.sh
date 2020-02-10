@@ -50,7 +50,6 @@ password_dialog() {
 install_setup_menu() {
 
     declare -a SETUP_INSTALL_ITEMS=("basic" "Basic packages install" "ON" "cockpit" "Install Cockpit web server management" "ON" "emojify" "Emoji in the terminal" "ON" "docker" "install docker and docker-compose" "ON" "docker_extra" "install dry utils for docker" "ON")
-
     if [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#SETUP_INSTALL_ITEMS[@]} / 3))"
     elif [ $(tput lines) -gt 50 ]; then
@@ -76,7 +75,11 @@ install_setup_menu() {
 # @exitcode 1 On failure
 add_extra_setup_menu() {
     generate_container_menu
-    if [ $(tput lines) -lt 45 ]; then
+    if [ $(tput lines) -lt 25 ]; then
+        local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 16))"
+    elif [ $(tput lines) -lt 35 ]; then
+        local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 12))"
+    elif [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 9))"
     elif [ $(tput lines) -gt 50 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 6))"
