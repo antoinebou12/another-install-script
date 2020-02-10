@@ -63,17 +63,17 @@ install_setup_menu() {
         show_project_name
         manage_exec_install_list "$SETUP_INSTALL_MENU"
         if [[ "$SETUP_INSTALL_MENU" == *"docker"* ]]; then
-            add_extra_setup_menu
+            add_container_setup_menu
         fi
     fi
     return 0
 }
 
-# @description whiptails install add custom setup menu
+# @description whiptails install add custom add container setup menu
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-add_extra_setup_menu() {
+add_container_setup_menu() {
     generate_container_menu
     if [ $(tput lines) -lt 25 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 16))"
@@ -123,8 +123,9 @@ main_setup_menu() {
 
     SETUP_MENU=$(whiptail --clear --title "Another Install Script" --menu --notags "" 20 78 12 -- \
         "install" "Installation" \
-        "add_extra" "Add Extra" \
-        "uninstall" "Uninstall" \
+        "add_container" "Add Container" \
+        "remove_container" "Remove Container" \
+        "uninstall_all" "Uninstall" \
         "help" "Help" \
         "exit" "Exit" \
         3>&1 1>&2 2>&3)
@@ -133,10 +134,13 @@ main_setup_menu() {
     "install")
         install_setup_menu
         ;;
-    "add_extra")
-        add_extra_setup_menu
+    "add_container")
+        add_container_setup_menu
         ;;
-    "uninstall")
+    "remove container")
+        remove_container_menu
+        ;;
+    "uninstall all")
         uninstall_setup_menu
         ;;
     "help")

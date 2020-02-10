@@ -12,15 +12,15 @@ draw.io,Diagram software
 duplicati,Backup software to store encrypted backups
 firefly-iii,Personal finance manager
 freshrss,RSS
-gitea,A painless self-hosted Git service
+gitea,Git service
 gitlab,Git service
 grafana,Analytics and monitoring solution 
 graylog,log management
-guacamole,Apache guacamole is clientless remote desktop gateway
+guacamole,clientless remote desktop gateway
 heimdall,Application dashboard and launcher
 huginn,Create agents that monitor and act on your behalf
 invidious,Alternative front-end to YouTube
-jackett,API Support for your favorite torrent trackers.
+jackett,API Support for your favorite torrent trackers
 jellyfin,Software media system
 jenkins,Automation server
 jupyterhub,Multi-user server for Jupyter
@@ -33,33 +33,33 @@ lodestone,Personal document archiving
 lychee,Photo management system
 mailcow,Mailserver docker
 mcmyadmin,Minecraft admin system
-medusa,Automatic video Library Manager for TV Shows.
-monica,Personal CRM. Remember everything about your friends
+medusa,Automatic video Library Manager for TV Shows
+monica,Personal CRM
 neko,Virtual browser
-netdata,Real-time performance monitoring, done right!
+netdata,Real-time performance monitoring
 nextcloud,File share and collaboration platform
-olaris,Media manager, transcoding server
+olaris,Media manager and transcoding server
 open-streaming-platform,Video streaming and recording 
-openldap,Lightweight Directory Access Protocol.
-openvpn,Vpn
+openldap,Ldap
+openvpn,VPN
 paperless,Archive all of your paper documents
-peertube,P2P alternative to video broadcasting services
+peertube,P2P video broadcasting services
 plex,Collection of movies, TV, music, and photos
 portainer,Manage your Docker environments
 privatebin,Pastebin 
 pyload,Download manager
-qbittorent-vpn,Qbittorent vpn
+qbittorent-vpn,qbittorent VPN
 recipes,Django application for managing recipes
 rocket,Simple chat server 
 searx,Privacy-respecting metasearch engine
-shiori,Ebook server
+shiori,Bookmark manager
 sonarr,Smart PVR newsgroup and bittorrent users
 spiderfoot,Intelligence (OSINT) automation tool
 statping,Status Page for monitoring your websites
-syncthing,Google drive/dropbox self-hosted
-tautulli,Monitor your Plex Media Server
+syncthing, Alternative Google drive/Dropbox
+tautulli,Monitor your Plex
 tdarr,Audio/Video library analytics, transcode
 teamspeak,Voice chat application
 ubuntuxrdp,Ubuntu desktop with xrdp server
-wallabag,read-it-later 
-wireguard,vpn 
+wallabag,Read-it-later 
+wireguard,VPN 

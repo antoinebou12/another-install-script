@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+    ubuntu-xrdp:
+        container_name: ubuntuxrdp
+        ports:
+            - '3389:3389'
+            - '2232:22'
+        image: danielguerra/ubuntu-xrdp

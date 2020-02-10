@@ -1,0 +1,466 @@
+services:
+  containers:
+    .template:
+      ports: [6889]
+      webport: [6889]
+      description: The template for the images to run container
+      short_description: The template for the images to run container
+      link: 
+
+    airsonic:
+      ports: [6889]
+      webport: [6889]
+      description: Music and Podcast server
+      short_description: Music and Podcast server
+      link: https://github.com/linuxserver/docker-airsonic
+
+    ansible:
+      ports: [6889]
+      webport: [6889]
+      description: Systems automation
+      short_description: Systems automation
+      link: https://www.ansible.com/integrations/containers/docker
+
+    bitwarden:
+      ports: [6889]
+      webport: [6889]
+      description: Open source password management
+      short_description: Password management
+      link: https://github.com/bitwarden
+
+    bookstack:
+      ports: [6889]
+      webport: [6889]
+      description: simple, self-hosted, easy-to-use platform for organising and storing information
+      short_description: Ebook server
+      link: https://www.bookstackapp.com/
+
+    calibre:
+      ports: [6889]
+      webport: [6889]
+      description: Powerful and easy to use e-book manager
+      short_description: Ebook server
+      link: https://github.com/kovidgoyal/calibre
+
+    cloud-torrent:
+      ports: [6889]
+      webport: [6889]
+      description: A self-hosted remote torrent client
+      short_description: Remote torrent client
+      link: https://github.com/jpillora/cloud-torrent
+
+    code-server:
+      ports: [6889]
+      webport: [6889]
+      description: Run VS Code on a remote server
+      short_description: VS Code on a remote server
+      link: https://github.com/cdr/code-server
+
+    cyberchef:
+      ports: [6889]
+      webport: [6889]
+      description: The Cyber Swiss Army Knife - a web app for encryption, encoding, compression and data analysis
+      short_description: Web app for encryption, encoding, compression
+      link: https://github.com/gchq/CyberChef
+
+    deluge:
+      ports: [6889]
+      webport: [6889]
+      description: BitTorrent Client
+      short_description: BitTorrent Client
+      link: https://github.com/deluge-torrent/deluge
+
+    drawio:
+      ports: [6889]
+      webport: [6889]
+      description: free online diagram software
+      short_description: Diagram software
+      link: https://hub.docker.com/r/fjudith/draw.io
+
+    duplicati:
+      ports: [6889]
+      webport: [6889]
+      description: backup software to store encrypted backups
+      short_description: Backup software to store encrypted backups
+      link: https://hub.docker.com/r/linuxserver/duplicati/
+
+    firefly-iii:
+      ports: [6889]
+      webport: [6889]
+      description: A free and open source personal finance manager
+      short_description: Personal finance manager
+      link: https://www.firefly-iii.org/
+
+    freshrss:
+      ports: [6889]
+      webport: [6889]
+      description: A free, self-hostable aggregator RSS
+      short_description: RSS
+      link: https://hub.docker.com/r/linuxserver/freshrss
+
+    gitea:
+      ports: [6889]
+      webport: [6889]
+      description: A painless self-hosted Git service
+      short_description: Git service
+      link: https://gitea.io/en-us/
+
+    gitlab:
+      ports: [6889]
+      webport: [6889]
+      description: gitlab service self-hosted
+      short_description: Git service
+      link: https://hub.docker.com/r/gitlab/gitlab-ce/
+
+    grafana:
+      ports: [6889]
+      webport: [6889]
+      description: the open source analytics and monitoring solution 
+      short_description: Analytics and monitoring solution 
+      link: https://grafana.com/
+
+    graylog:
+      ports: [6889]
+      webport: [6889]
+      description: Free and open source log management
+      short_description: log management
+      link: https://docs.graylog.org/en/3.1/pages/installation/docker.html
+
+    guacamole:
+      ports: [6889]
+      webport: [6889]
+      description: Apache guacamole is clientless remote desktop gateway
+      short_description: clientless remote desktop gateway
+      link: https://github.com/oznu/docker-guacamole
+
+    heimdall:
+      ports: [6889]
+      webport: [6889]
+      description: An Application dashboard and launcher
+      short_description: Application dashboard and launcher
+      link: https://hub.docker.com/r/linuxserver/heimdall/
+
+    huginn:
+      ports: [6889]
+      webport: [6889]
+      description: Create agents that monitor and act on your behalf
+      short_description: Create agents that monitor and act on your behalf
+      link: https://github.com/huginn/huginn
+
+    invidious:
+      ports: [6889]
+      webport: [6889]
+      description: alternative front-end to YouTube
+      short_description: Alternative front-end to YouTube
+      link: https://github.com/omarroth/invidious
+
+    jackett:
+      ports: [6889]
+      webport: [6889]
+      description: API Support for your favorite torrent trackers
+      short_description: API Support for your favorite torrent trackers
+      link: https://github.com/Jackett/Jackett 
+
+    jellyfin:
+      ports: [6889]
+      webport: [6889]
+      description:  Free Software Media System also alternative for plex
+      short_description: Software media system
+      link: https://jellyfin.org/
+
+    jenkins:
+      ports: [6889]
+      webport: [6889]
+      description: Open source automation server CI/CD
+      short_description: Automation server
+      link: https://jenkins.io/
+
+    jupyterhub:
+      ports: [6889]
+      webport: [6889]
+      description: Multi-user server for Jupyter notebooks
+      short_description: Multi-user server for Jupyter
+      link: https://github.com/jupyterhub/jupyterhub
+
+    keycloak:
+      ports: [6889]
+      webport: [6889]
+      description: Open source identity and access management
+      short_description: Identity and access management 
+      link: https://www.keycloak.org/
+
+    komga:
+      ports: [6889]
+      webport: [6889]
+      description: Media server for comics/mangas/BDs with API and OPDS support
+      short_description: Media server for comics/mangas/BDs
+      link: https://github.com/gotson/komga
+    liberapay:
+      ports: [6889]
+      webport: [6889]
+      description: Recurrent donations platform like Patreon
+      short_description: Recurrent donations platform
+      link: https://en.liberapay.com/
+
+    libresignage:
+      ports: [6889]
+      webport: [6889]
+      description: An open source digital signage solution
+      short_description: Digital signage solution
+      link: https://github.com/eerotal/LibreSignage
+
+    lodestone:
+      ports: [6889]
+      webport: [6889]
+      description: Personal Document Archiving (DMS, EDMS for Personal/Home Office use) 
+      short_description: Personal document archiving
+      link: https://github.com/AnalogJ/lodestone
+
+    lychee:
+      ports: [6889]
+      webport: [6889]
+      description: A great looking and easy-to-use photo-management-system you can run on your server, to manage and share photos
+      short_description: Photo management system
+      link: https://github.com/electerious/Lychee
+
+    mailcow:
+      ports: [6889]
+      webport: [6889]
+      description: Mailserver docker
+      short_description: Mailserver docker
+      link: https://mailcow.email/
+
+    mcmyadmin:
+      ports: [6889]
+      webport: [6889]
+      description: Minecraft admin system
+      short_description: Minecraft admin system
+      link: https://www.mcmyadmin.com/
+
+    medusa:
+      ports: [6889]
+      webport: [6889]
+      description: Automatic Video Library Manager for TV Shows
+      short_description: Automatic video Library Manager for TV Shows
+      link: https://github.com/pymedusa/Medusa
+
+    monica:
+      ports: [6889]
+      webport: [6889]
+      description: Personal CRM. Remember everything about your friends and family
+      short_description: Personal CRM
+      link: https://github.com/monicahq/monica
+
+    neko:
+      ports: [6889]
+      webport: [6889]
+      description: A self hosted virtual browser (rabb.it clone) that runs in docker.
+      short_description: Virtual browser
+      link: https://github.com/nurdism/neko
+
+    netdata:
+      ports: [6889]
+      webport: [6889]
+      description: Real-time performance monitoring, done right! 
+      short_description: Real-time performance monitoring
+      link:  https://github.com/netdata/netdata
+
+    nextcloud:
+      ports: [6889]
+      webport: [6889]
+      description: on-premises file share and collaboration platform
+      short_description: File share and collaboration platform
+      link: https://github.com/nextcloud
+
+    olaris:
+      ports: [6889]
+      webport: [6889]
+      description: Media Manager and transcoding server
+      short_description: Media manager and transcoding server
+      link: https://gitlab.com/olaris/olaris-server
+
+    open-streaming-platform:
+      ports: [6889]
+      webport: [6889]
+      description: A Self-Hosted Video Streaming and Recording Server Using Python, Flask, Nginx-RTMP
+      short_description: Video streaming and recording
+      link: https://gitlab.com/Deamos/flask-nginx-rtmp-manager
+
+    openldap:
+      ports: [6889]
+      webport: [6889]
+      description: Open Source implementation of the Lightweight Directory Access Protocol.
+      short_description: Ldap
+      link: https://github.com/osixia/docker-openldap
+
+    openvpn:
+      ports: [6889]
+      webport: [6889]
+      description: Open Source VPN
+      short_description: VPN
+      link: https://github.com/kylemanna/docker-openvpn
+
+    paperless:
+      ports: [6889]
+      webport: [6889]
+      description: Scan, index, and archive all of your paper documents
+      short_description: Archive all of your paper documents
+      link: https://github.com/the-paperless-project/paperless
+
+    peertube:
+      ports: [6889]
+      webport: [6889]
+      description: Decentralized P2P and free/libre alternative to video broadcasting services
+      short_description: P2P video broadcasting services
+      link: https://joinpeertube.org/
+
+    plex:
+      ports: [6889]
+      webport: [6889]
+      description: Organize, beautify, stream, and share your personal collection of movies, TV, music, and photos anywhere, on all your devices
+      short_description: Collection of movies, TV, music, and photos
+      link: https://www.plex.tv/fr/
+
+    portainer:
+      ports: [6889]
+      webport: [6889]
+      description: Build and manage your Docker environments with ease today
+      short_description: Manage your Docker environments
+      link: https://www.portainer.io/
+
+    privatebin:
+      ports: [6889]
+      webport: [6889]
+      description: A minimalist, open source online pastebin where the server has zero knowledge of pasted data
+      short_description: Pastebin 
+      link: https://privatebin.info/
+
+    pyload:
+      ports: [6889]
+      webport: [6889]
+      description: Open Source download manager and designed to be extremely lightweight, easily extensible and fully manageable via web
+      short_description: Download manager
+      link: https://pyload.net/
+
+    qbittorent-vpn:
+      ports: [6889]
+      webport: [6889]
+      description:  Open Source software alternative to µTorrent with VPN
+      short_description: qbittorent VPN
+      link: https://hub.docker.com/r/markusmcnugen/qbittorrentvpn/
+        
+    recipes:
+      ports: [6889]
+      webport: [6889]
+      description: Django application for managing recipes
+      short_description: Django application for managing recipes
+      link: https://github.com/vabene1111/recipes
+
+    rocket:
+      ports: [6889]
+      webport: [6889]
+      description: Open Source Team Communication, replace email, HipChat & Slack 
+      short_description: Simple chat server 
+      link: https://rocket.chat/docs/installation/docker-containers/
+
+    searx:
+      ports: [6889]
+      webport: [6889]
+      description:  Privacy-respecting metasearch engine
+      short_description: Privacy-respecting metasearch engine
+      link: https://github.com/asciimoo/searx
+
+    shiori:
+      ports: [6889]
+      webport: [6889]
+      description: Simple bookmark manager built with Go
+      short_description: Bookmark manager
+      link: https://github.com/go-shiori/shiori
+
+    sonarr:
+      ports: [6889]
+      webport: [6889]
+      description: Smart PVR for newsgroup and bittorrent users.
+      short_description: Smart PVR newsgroup and bittorrent users
+      link: https://github.com/smicallef/spiderfoot
+
+    spiderfoot:
+      ports: [6889]
+      webport: [6889]
+      description: open source intelligence (OSINT) automation tool. It integrates with just about every data source available and utilises a range of methods for data analysis
+      short_description: Intelligence (OSINT) automation tool
+      link:
+
+    statping:
+      ports: [6889]
+      webport: [6889]
+      description: Status Page for monitoring your websites and applications with beautiful graphs, analytics, and plugins
+      short_description: Status Page for monitoring your websites
+      link: https://github.com/hunterlong/statping
+
+    syncthing:
+      ports: [6889]
+      webport: [6889]
+      description: Open Source Continuous File Synchronization
+      short_description: Alternative Google drive/Dropbox
+      link: https://github.com/syncthing/syncthing
+
+    tautulli:
+      ports: [6889]
+      webport: [6889]
+      description: Monitor your Plex Media Server
+      short_description: Monitor your Plex
+      link: https://github.com/HaveAGitGat/Tdarr
+
+    tdarr:
+      ports: [6889]
+      webport: [6889]
+      description: Tdarr Beta -Audio/Video library analytics + transcode automation using FFmpeg/HandBrake + video health checking
+      short_description: Audio/Video library analytics, transcode
+      link:
+
+    teamspeak:
+      ports: [6889]
+      webport: [6889]
+      description: Voice Chat Application
+      short_description: Voice chat application
+      link: https://github.com/solidnerd/docker-teamspeak
+
+    ubuntuxrdp:
+      ports: [6889]
+      webport: [6889]
+      description: An Ubuntu Desktop with xrdp server can be use with Apache Guacamole
+      short_description: Ubuntu desktop with xrdp server
+      link: https://github.com/danielguerra69/ubuntu-xrdp
+
+    wallabag:
+      ports: [6889]
+      webport: [6889]
+      description: Save and classify articles, Read them later, Freely
+      short_description: Read-it-later 
+      link: https://github.com/wallabag/wallabag
+
+    wireguard:
+      ports: [6889]
+      webport: [6889]
+      description: VPN Server
+      short_description: VPN
+      link: https://github.com/WireGuard
+
+  local:
+    cockpit:
+      ports: [9090]
+      webport: [9090]
+      description: Open web-based interface for your servers
+      short_description: Admin web for the server
+      link: https://cockpit-project.org/
+
+    jupyterlab:
+      ports: [6889]
+      webport: [6889]
+      description: Single-user server for Jupyter notebooks
+      short_description: Single-user server for Jupyter
+      link: https://jupyterlab.readthedocs.io/en/stable/
+
+system-config:
+  other: list
