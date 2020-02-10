@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+    lychee-docker:
+        container_name: lychee
+        ports:
+            - '80:80'
+        volumes:
+            - '/home/udocker/lycee/uploads:/uploads/'
+            - '/home/udocker/lycee/data/:/data/'
+            - '/home/udocker/lycee/mysql/:/mysql/'
+        image: kdelfour/lychee-docker
