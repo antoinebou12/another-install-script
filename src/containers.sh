@@ -77,7 +77,7 @@ list_container() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 list_src_images() {
-	echo ls -a1 images
+	echo ls -a1 "$(dirname "${BASH_SOURCE[0]}")/images"
 	return 0
 }
 
