@@ -51,9 +51,9 @@ script:
   - sudo bash tests.sh # test
   - sudo bash coverage.sh # coverage kcov
   - cd .. || exit 1
-  - cd docs || exit 1
-  - bash generate_docs.sh docs.sh # documentation shdoc
-  - cd .. || exit 1
+  - cd docs/generator || exit 1
+  - bash generate_docs.sh ../docs.sh # documentation shdoc
+  - cd ../.. || exit 1
 
 notifications:
     email: false

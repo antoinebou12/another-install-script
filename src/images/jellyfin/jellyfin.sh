@@ -23,7 +23,7 @@
     udocker_create_dir "$PATH_TO_TV"
     udocker_create_dir "$PATH_TO_MOVIE"
 
-    exec_rootPATH_TO_LIBRARY=$PATH_TO_LIBRARY PATH_TO_TV=$PATH_TO_TV PATH_TO_MOVIE=$PATH_TO_MOVIE PORT_WEB=$PORT_WEB PORT_OTHER=$PORT_OTHER docker-compose up -d
+    exec_rootPATH_TO_LIBRARY=$PATH_TO_LIBRARY PATH_TO_TV=$PATH_TO_TV PATH_TO_MOVIE=$PATH_TO_MOVIE PORT_WEB=$PORT_WEB PORT_OTHER=$PORT_OTHER docker-compose -d -f "$(dirname "${BASH_SOURCE[0]}")/docker-compose.yml" up
     
     echo "ctrl+click to open in browser"
     echo "$(get_current_ip):${PORT_WEB}"

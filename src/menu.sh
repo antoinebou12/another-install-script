@@ -42,14 +42,21 @@ password_dialog() {
     return 0
 }
 
-
 # @description whiptails install custom setup menu
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failur3
 install_setup_menu() {
 
-    declare -a SETUP_INSTALL_ITEMS=("basic" "Basic packages install" "ON" "cockpit" "Install Cockpit web server management" "ON" "emojify" "Emoji in the terminal" "ON" "docker" "install docker and docker-compose" "ON" "docker_extra" "install dry utils for docker" "ON")
+    declare -a SETUP_INSTALL_ITEMS=(
+        "basic" "Basic packages install" "ON"
+        "cockpit" "Install Cockpit web server management" "ON"
+        "ansible" "Install Ansible systems automation" "ON"
+        "emojify" "Emoji in the terminal" "ON"
+        "docker" "install docker and docker-compose" "ON"
+        "docker_extra" "install dry utils for docker" "ON"
+    )
+
     if [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#SETUP_INSTALL_ITEMS[@]} / 3))"
     elif [ $(tput lines) -gt 50 ]; then

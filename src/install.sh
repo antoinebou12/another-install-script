@@ -67,6 +67,24 @@ install_cockpit() {
     return 0
 }
 
+# @description install ansible
+#  https://www.ansible.com
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+install_ansible() {
+    echo "Install Ansible"
+    print_line
+
+    exec_root apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+    aptupdate
+    aptinstall ansible software-properties-common
+    exec_root pip3 install ansible
+
+    print_line
+    return 0
+}
+
 # @description install the cockpit to web
 #
 # https://github.com/mrowa44/emojify

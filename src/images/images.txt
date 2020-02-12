@@ -1,6 +1,5 @@
 .template,The template for the images to run container
 airsonic,Music and Podcast server
-ansible,Systems automation
 bitwarden,Password management
 bookstack,Ebook server
 calibre,Ebook server

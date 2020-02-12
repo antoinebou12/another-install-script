@@ -18,7 +18,7 @@
     
     udocker_create_dir "$PATH_CONFIG"
     
-    exec_root PATH_CONFIG="$PATH_CONFIG" PORT_WEB="$PORT_WEB" PORT_WEB_HTTPS="$PORT_WEB_HTTPS" docker-compose up -d 
+    exec_root PATH_CONFIG="$PATH_CONFIG" PORT_WEB="$PORT_WEB" PORT_WEB_HTTPS="$PORT_WEB_HTTPS" docker-compose -d -f "$(dirname "${BASH_SOURCE[0]}")/docker-compose.yml" up
     
     echo "ctrl+click to open in browser"
     echo "$(get_current_ip):${PORT_WEB}"
