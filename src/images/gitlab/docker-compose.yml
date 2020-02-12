@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+  gitlab-ce:
+    image: "gitlab/gitlab-ce:latest"
+    container_name: gitlab
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    ports:
+      # - '443:443'
+      - "8009:80"
+      - "22222:22"
+    volumes:
+      - "/home/udocker/gitlab/config:/etc/gitlab"
+      - "/home/udocker/gitlab/logs:/var/log/gitlab"
+      - "/home/udocker/gitlab/data:/var/opt/gitlab"
+    restart: unless-stopped

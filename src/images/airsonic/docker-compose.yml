@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  airsonic:
+    image: linuxserver/airsonic
+    container_name: airsonic
+    environment:
+      PUID: ${userid}
+      PGID: ${groupid}
+      TZ: ${time}
+    volumes:
+      - /home/udocker/airsonic/config:/config
+      - /home/udocker/airsonic/music:/music
+      - /home/udocker/airsonic/playlists:/playlists
+      - /home/udocker/airsonic/podcasts:/podcasts
+      - /home/udocker/airsonic/media:/media #optional
+    ports:
+      - 4040:4040
+      - 1900:1900
+    restart: unless-stopped

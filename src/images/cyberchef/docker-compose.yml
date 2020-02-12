@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  cyberchef:
+    image: "4nxio/cyberchef:latest"
+    container_name: cyberchef
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    ports:
+      - "8004:80"
+    volumes:
+      - "/home/udocker/cyberchef/cyberchef-nginx:/etc/nginx"
+      - "/home/udocker/cyberchef/cyberchef-ssl:/etc/ssl"
+      - "/home/udocker/cyberchef/cyberchef-logs:/var/log/nginx"
+    restart: unless-stopped

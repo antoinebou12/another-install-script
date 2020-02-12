@@ -1,9 +1,14 @@
-version: '3.3'
+version: "3"
 services:
     cloud-torrent:
-        container_name: cloud-torrent
-        ports:
-            - '6889:3000'
-        volumes:
-            - '/home/udocker/volumes/cloud-torrent/download:/downloads'
         image: jpillora/cloud-torrent
+        container_name: cloud-torrent
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
+        volumes:
+            - "/home/udocker/volumes/cloud-torrent/download:/downloads"
+        ports:
+            - "6889:3000"
+        restart: unless-stopped

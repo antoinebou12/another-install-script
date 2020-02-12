@@ -15,7 +15,6 @@ Another install Script is a W.I.P project/script to install docker container for
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.
 After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker. After learning more on docker and docker-compose to create bash project install script using Test-driven development and documented install script. Also, I found multiple repos that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack) and [sovereign](https://github.com/sovereign/sovereign) and [MediaServrDockerCompose](https://github.com/vaeyo/MediaServer-DockerComposeFiles). I am trying to do with this project is to make a simple, extensible and customizable script to add a lot of selfhosted services/servers to easy to install with a simple cli menu. The project is a super easy install script for beginner/intermediate linux power user that want to test quickly interesting docker images of server/service. The project isn't a highly configurable install script with a container orchestrator and general manager for multiple docker.
 
-
 ## How to install
 
 For now only work on ubuntu and only tested on ubuntu18.04
@@ -31,7 +30,8 @@ bash install.sh
 Some services/servers cannot be installed at the same time
 Also more configuration needed for certain services/servers
 
-Go to [License](docs/SERVER_LIST.md)
+Go to the [List](docs/SERVER_LIST.md)
+Go to the [Google Sheet](https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-HfnRhwkce-/view?usp=sharing)
 
 ## List of other installed program
 

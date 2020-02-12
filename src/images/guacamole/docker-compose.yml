@@ -3,9 +3,12 @@ services:
     guacamole:
         image: guacamole
         container_name: guacamole
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         ports:
-            - '8057:8080'
-        # environment:
-        #     - 'EXTENSIONS=auth-ldap,auth-duo'
+            - '8012:8080'
         volumes:
             - '/home/udocker/guacamole/config:/configoznu/guacamole'
+        restart: unless-stopped

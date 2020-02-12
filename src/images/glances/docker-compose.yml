@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+  reverse-proxy:
+    image: traefik:alpine
+    container_name: traefik
+    command: --api --docker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  whoami:
+    image: emilevauge/whoami
+    container_name: whoami
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    labels:
+      - "traefik.frontend.rule=Host:whoami.docker.localhost"
+
+  monitoring:
+    image: nicolargo/glances:latest-alpine
+    container_name: glances
+    pid: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+      - "GLANCES_OPT=-w"
+    labels:
+      - "traefik.port=61208"
+      - "traefik.frontend.rule=Host:glances.docker.localhost"
+    restart: always

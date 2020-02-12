@@ -1,16 +1,16 @@
-version: '3'
-
+version: "3"
 services:
     deluge:
         image: linuxserver/deluge
         container_name: deluge
-        network_mode: host
-        restart: always
-        volumes:
-            - /srv/appdata/deluge:/config
-            - /srv/downloads:/downloads
         environment:
-            PUID: ${userid}
-            PGID: ${groupid}
-            TZ: ${time}
-            UMASK_SET: 022
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
+            - UMASK_SET: 022
+            - DELUGE_LOGLEVEL=error #optional
+        network_mode: host
+        volumes:
+            - /home/udocker/deluge/config:/config
+            - /home/udocker/deluge/downloads:/downloads
+        restart: unless-stopped

@@ -1,0 +1,12 @@
+version: "3"
+services:
+  draw.io:
+    image: jgraph/draw.io
+    container_name: drawio
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    ports:
+      - "8005:8080"
+    restart: unless-stopped

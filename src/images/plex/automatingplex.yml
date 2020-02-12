@@ -1,5 +1,5 @@
 # https://blog.gostew.art/automating-home-tv-show-streaming/
-version: '3.7'
+version: '3.3'
 services:
   torrent:
     container_name: qbittorent-vpn

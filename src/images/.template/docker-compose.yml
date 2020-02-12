@@ -1,9 +1,12 @@
-version: '3.7'
+version: "3"
 services:
-    template:
-        image: template/template
-        container_name: template
-        ports:
-            - '8080:8080'
+    .template:
+        image: .template
+        container_name: .template
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         volumes:
-            - '/home/udocker/volumes/template:/template'
+        ports:
+        restart: unless-stopped

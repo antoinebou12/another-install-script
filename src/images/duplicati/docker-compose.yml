@@ -1,0 +1,16 @@
+version: "3"
+services:
+  duplicati:
+    image: linuxserver/duplicati
+    container_name: duplicati
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    volumes:
+      - /home/udocker/duplicati/config:/config
+      - /home/udocker/duplicati/backups:/backups
+      - /home/udocker/duplicati/source:/source
+    ports:
+      - 8200:8200
+    restart: unless-stopped

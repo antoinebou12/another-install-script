@@ -1,12 +1,15 @@
  grafana:
-    container_name: grafana
     image: grafana/grafana:latest
-    restart: unless-stopped
-    # user: "0"
+    container_name: grafana
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
     ports:
-      - 3000:3000
+      - 8011:3000
     env_file:
       - grafana.env
     volumes:
-      - ./volumes/grafana/data:/var/lib/grafana
-      - ./volumes/grafana/log:/var/log/grafana
+      - /home/udocker/grafana/data:/var/lib/grafana
+      - /home/udocker/grafana/log:/var/log/grafana
+    restart: unless-stopped

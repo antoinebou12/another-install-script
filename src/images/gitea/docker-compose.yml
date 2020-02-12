@@ -7,7 +7,7 @@ networks:
 services:
   server:
     image: gitea/gitea:latest
-    restart: always
+    container_name: gitea
     networks:
       - gitea
     volumes:
@@ -17,3 +17,4 @@ services:
     ports:
       - "3000:3000"
       - "222:22"
+    restart: unless-stopped

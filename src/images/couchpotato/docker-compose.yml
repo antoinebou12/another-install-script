@@ -1,0 +1,17 @@
+version: "2"
+services:
+  couchpotato:
+    image: linuxserver/couchpotato
+    container_name: couchpotato
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+      - UMASK_SET=022
+    volumes:
+      - /home/udocker/couchpotato/config:/config
+      - /home/udocker/couchpotato/downloads:/downloads
+      - /home/udocker/couchpotato/movies:/movies
+    ports:
+      - 5050:5050
+    restart: unless-stopped

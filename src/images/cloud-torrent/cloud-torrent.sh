@@ -13,15 +13,14 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_cloud-torrent(){
-    cd /home/udocker/ || return 1
     local PORT_WEB=${1:-"6889"}
-    local USERNAME=${2:-"admin"}
-    local PASSWORD=${3:-"password"}
+    local USERNAME=${2:-"cloud-torrent"}
+    local PASSWORD=${3:-"cloud-torrent"}
     local PATH_DOWNLOAD=${4:-"/home/udocker/volumes/cloud-torrent/download"}
 
     udocker_create_dir "$PATH_DOWNLOAD"
 
-    docker build --build-arg USERNAME="$USERNAME" PASSWORD="$PASSWORD"
+    docker build -f "$(dirname "${BASH_SOURCE[0]}")/Dockerfile" --build-arg USERNAME="$USERNAME" PASSWORD="$PASSWORD"
     docker run -d -p "$PORT_WEB":3000 -v "$PATH_DOWNLOAD":/downloads jpillora/cloud-torrent
 
     echo "ctrl+click to open in browser"

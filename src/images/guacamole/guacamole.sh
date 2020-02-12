@@ -11,7 +11,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_guacamole(){
-    PORT_WEB=${1:-8003}
+    PORT_WEB=${1:-8012}
     PATH_CONFIG=${2:-/home/udocker/volumes/guacamole/config}
     
     udocker_create_dir "$PATH_CONFIG"
