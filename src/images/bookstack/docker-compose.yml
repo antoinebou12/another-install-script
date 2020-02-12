@@ -3,6 +3,7 @@ services:
   bookstack:
     image: linuxserver/bookstack
     container_name: bookstack
+    user: udocker
     environment:
       - PUID: ${userid}
       - PGID: ${groupid}
@@ -12,7 +13,7 @@ services:
       - DB_PASS=bookstack
       - DB_DATABASE=bookstackapp
     volumes:
-      - /home/udocker/bookstack/config:/config
+      - /home/udocker/volumes/bookstack/config:/config
     ports:
       - 6875:80
     restart: unless-stopped
@@ -30,5 +31,5 @@ services:
       - MYSQL_USER=bookstack
       - MYSQL_PASSWORD=bookstack
     volumes:
-      - /home/udocker/bookstack/db/config:/config
+      - /home/udocker/volumes/bookstack/db/config:/config
     restart: unless-stopped

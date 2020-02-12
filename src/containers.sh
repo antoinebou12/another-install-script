@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 #
 # @file container.sh
-# @brief list of container and other info
+# @brief list of container and create/remove container and menu management
+
+# shellcheck source=utils.sh
+# shellcheck disable=SC1091
+source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 
 declare -a CONTAINER_NAME_MENU=()
 

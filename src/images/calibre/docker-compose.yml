@@ -3,6 +3,7 @@ services:
   calibre:
     image: linuxserver/calibre
     container_name: calibre
+    user: udocker
     environment:
       - PUID: ${userid}
       - PGID: ${groupid}
@@ -10,7 +11,7 @@ services:
       - GUAC_USER=abc #optional
       - GUAC_PASS=900150983cd24fb0d6963f7d28e17f72 #optional
     volumes:
-      - /home/udocker/calibre/config:/config
+      - /home/udocker/volumes/calibre/config:/config
     ports:
       - 8001:8080
       - 8002:8081

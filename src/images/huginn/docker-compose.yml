@@ -1,2 +1,13 @@
 version: '3.3'
 services:
+    huginn:
+        image: huginn/huginn
+        container_name: huginn
+        user: udocker
+        environment:
+          - PUID: ${userid}
+          - PGID: ${groupid}
+          - TZ: ${time}
+        ports:
+            - '8013:3000'
+        restart: unless-stopped

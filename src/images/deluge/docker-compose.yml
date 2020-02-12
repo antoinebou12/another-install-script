@@ -3,6 +3,7 @@ services:
     deluge:
         image: linuxserver/deluge
         container_name: deluge
+        user: udocker
         environment:
             - PUID: ${userid}
             - PGID: ${groupid}
@@ -11,6 +12,6 @@ services:
             - DELUGE_LOGLEVEL=error #optional
         network_mode: host
         volumes:
-            - /home/udocker/deluge/config:/config
-            - /home/udocker/deluge/downloads:/downloads
+            - /home/udocker/volumes/deluge/config:/config
+            - /home/udocker/volumes/deluge/downloads:/downloads
         restart: unless-stopped

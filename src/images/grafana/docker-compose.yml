@@ -1,6 +1,7 @@
  grafana:
     image: grafana/grafana:latest
     container_name: grafana
+    user: udocker
     environment:
       - PUID: ${userid}
       - PGID: ${groupid}
@@ -10,6 +11,6 @@
     env_file:
       - grafana.env
     volumes:
-      - /home/udocker/grafana/data:/var/lib/grafana
-      - /home/udocker/grafana/log:/var/log/grafana
+      - /home/udocker/volumes/grafana/data:/var/lib/grafana
+      - /home/udocker/volumes/grafana/log:/var/log/grafana
     restart: unless-stopped

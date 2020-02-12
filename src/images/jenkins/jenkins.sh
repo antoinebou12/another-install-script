@@ -12,7 +12,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_jenkins(){
-    PORT_WEB=${1:-8080}
+    PORT_WEB=${1:-8015}
     PORT_JENKINS=${2:-50000}
     JENKINS_DATA=${3:-/home/udocker/volumes/jenkins}
 

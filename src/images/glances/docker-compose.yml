@@ -5,6 +5,7 @@ services:
     image: traefik:alpine
     container_name: traefik
     command: --api --docker
+    user: udocker
     environment:
       - PUID: ${userid}
       - PGID: ${groupid}
@@ -17,6 +18,7 @@ services:
   whoami:
     image: emilevauge/whoami
     container_name: whoami
+    user: udocker
     environment:
       - PUID: ${userid}
       - PGID: ${groupid}

@@ -1,14 +1,15 @@
-version: '3.3'
+version: "3.3"
 services:
     guacamole:
         image: guacamole
         container_name: guacamole
+        user: udocker
         environment:
             - PUID: ${userid}
             - PGID: ${groupid}
             - TZ: ${time}
         ports:
-            - '8012:8080'
+            - 8012:8080
         volumes:
-            - '/home/udocker/guacamole/config:/configoznu/guacamole'
+            - /home/udocker/volumes/guacamole/config:/configoznu/guacamole
         restart: unless-stopped

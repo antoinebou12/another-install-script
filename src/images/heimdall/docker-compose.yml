@@ -1,11 +1,16 @@
-# https://hub.docker.com/r/linuxserver/heimdall/
 version: "3.3"
 services:
   heimdall:
-    image: linuxserver/heimdall:latest
+    image: linuxserver/heimdall
     container_name: heimdall
-    restart: unless-stopped
+    user: udocker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
     volumes:
-      - ${PATH_CONFIG}:/config
+      - /home/udocker/heimdall/config:/config
     ports:
-      - ${PORT_WEB}:80
+      - 8080:80
+      - 443:443
+    restart: unless-stopped

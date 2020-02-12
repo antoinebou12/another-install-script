@@ -16,7 +16,7 @@
 create_docker_firefly-iii(){
     PORT_WEB=${1:-"8087"}
     PATH_DB=${2:-"/home/udocker/volumes/firefly-iii/db"}
-    PATH_EXPORT=${3:-"/home/udocker/volumes/firefly-iii/export"}
+    PATH_EXPORT=${3:-"/home/udocker/volumes/firefly-iii/db"}
     PATH_UPLOAD=${4:-"/home/udocker/volumes/firefly-iii/upload"}
     POSTGRES_PASSWORD=${5:-"firefly"}
 

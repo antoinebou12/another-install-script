@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  headphones:
+    image: linuxserver/headphones
+    container_name: headphones
+    user: udocker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    volumes:
+      - /home/udocker/volumes/headphones/config:/config
+      - /home/udocker/volumes/headphones/downloads:/downloads
+      - /home/udocker/volumes/headphones/music:/music
+    ports:
+      - 8181:8181
+    restart: unless-stopped

@@ -5,8 +5,9 @@ networks:
     driver: bridge
 services: 
   firefly_iii_app:
-    container_name: firefly-iii
     image: jc5x/firefly-iii:latest
+    container_name: firefly-iii
+    user: udocker
     environment:
       - PUID: ${userid}
       - PGID: ${groupid}
@@ -21,15 +22,16 @@ services:
     volumes: 
       - 
         source: firefly_iii_export
-        target: ${PATH_EXPORT}
+        target: /home/udocker/volumes/firefly-iii/upload
         type: volume
       - 
         source: firefly_iii_upload
-        target: ${PATH_UPLOAD}
+        target: /home/udocker/volumes/firefly-iii/upload
         type: volume
   firefly_iii_db: 
     image: "postgres:10"
     container_name: firefly_iii_db
+    user: udocker
     environment:
       - PUID: ${userid}
       - PGID: ${groupid}
@@ -39,7 +41,7 @@ services:
     networks: 
       - firefly_iii_net
     volumes: 
-      - /home/udocker/firefly_iii/db:/var/lib/postgresql/data
+      - /home/udocker/volumes/firefly-iii/db:/var/lib/postgresql/data
 volumes: 
   firefly_iii_db: ~
   firefly_iii_export: ~

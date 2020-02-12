@@ -1,9 +1,16 @@
-version: '3.3'
+version: "3.3"
 services:
     jenkins:
+        image: "jenkins/jenkins:lts"
+        container_name: jenkins
+        user: udocker
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         ports:
-            - '8080:8080'
-            - '50000:50000'
+            - 8015:8080
+            - 50000:50000
         volumes:
-            - '$jenkins_data:/var/jenkins_home'
-        image: 'jenkins/jenkins:lts'
+            - /home/udocker/volumes/jenkins:/var/jenkins_home
+        restart: unless-stopped

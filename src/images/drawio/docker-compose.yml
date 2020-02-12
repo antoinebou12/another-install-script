@@ -3,6 +3,7 @@ services:
   draw.io:
     image: jgraph/draw.io
     container_name: drawio
+    user: udocker
     environment:
       - PUID: ${userid}
       - PGID: ${groupid}

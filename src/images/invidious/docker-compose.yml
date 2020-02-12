@@ -1,0 +1,35 @@
+version: "3.3"
+services:
+  postgres:
+    container_name: invidious_db
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.postgres
+    user: udocker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+  invidious:
+    container_name: invidious
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    user: udocker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    ports:
+      - 8014:3000
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgresdata:
