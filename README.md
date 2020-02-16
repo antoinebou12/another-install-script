@@ -145,6 +145,7 @@ Go to [License](.github/LICENSE)
 
 ## Roadmap
 
+- [] Add traefik reverse proxy with subdomain for each docker container
 - [] Easier config file or adding yml file to individual folder
 - [] More docker container and images
 - [] Automatic docker compose and container update

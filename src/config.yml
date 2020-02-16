@@ -1,7 +1,15 @@
 system-config:
-  firewall: disable
-  udocker: enable
-  bash_menu: enable
+  ssl:
+    enable: no
+  reverse-proxy:
+    enable: no
+    provider: traefik_docker
+  firewall: no
+  udocker: 
+    enable: yes
+    username: udocker
+    password: udocker
+  bash_menu: yes
 
 services:
   local:

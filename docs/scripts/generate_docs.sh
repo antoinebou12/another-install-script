@@ -9,7 +9,7 @@ install_shdoc(){
 
 
 use_shdoc(){
-    names=$(find ../ -type d \( -path ../tests/coverage -o -path ../tests/bin -o -path ../etc -o -path ../docs \) -prune -o -iname "*.sh" -print)
+    names=$(find ../../ -type d \( -path ../../tests/coverage -o -path ../../tests/bin -o -path ../../etc -o -path ../../docs/scripts \) -prune -o -iname "*.sh" -print)
 
     SAVEIFS="$IFS"   # Save current IFS
     IFS=$'\n'      # Change IFS to new line

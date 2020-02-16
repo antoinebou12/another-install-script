@@ -37,17 +37,18 @@ _Function has no arguments._
 
 # container.sh
 
-list of container and other info
+list of container and create/remove container and menu management
 
 * [import_all_sh()](#importallsh)
 * [manage_exec_containers_list()](#manageexeccontainerslist)
 * [list_container()](#listcontainer)
 * [list_src_images()](#listsrcimages)
+* [generate_container_menu()](#generatecontainermenu)
 
 
 ## import_all_sh()
 
-import all the /docker/images/.../*.sh based on selected
+import all the /images/.../*.sh based on selected
 
 ### Arguments
 
@@ -95,6 +96,17 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
+## generate_container_menu()
+
+create CONTAINER_NAME_MENU
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # docker.sh
 
 to install docker docker compose on ubuntu18.04
@@ -112,6 +124,8 @@ to install docker docker compose on ubuntu18.04
 * [create_docker_id_backup()](#createdockeridbackup)
 * [create_docker_name_backup()](#createdockernamebackup)
 * [create_docker_backup_all()](#createdockerbackupall)
+* [install_reverse_proxy()](#installreverseproxy)
+* [add_subdomain()](#addsubdomain)
 
 
 ## install_docker()
@@ -267,6 +281,149 @@ check if the port is used
 * **0**: If successfull.
 * **1**: On failure
 
+## install_reverse_proxy()
+
+install_reverse_proxy
+
+### Arguments
+
+* # @args $# the backup of all the container names
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## add_subdomain()
+
+add_subdomain
+
+### Arguments
+
+* # @args $# the backup of all the container names
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# firewall.sh
+
+to manage the open port in the firewall
+
+* [enable_firewall()](#enablefirewall)
+* [disable_firewall()](#disablefirewall)
+* [allow_port_in_firewall()](#allowportinfirewall)
+* [deny_port_in_firewall()](#denyportinfirewall)
+
+
+## enable_firewall()
+
+enable firewall
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## disable_firewall()
+
+disable firewall
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## allow_port_in_firewall()
+
+allow a port in the firewall
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## deny_port_in_firewall()
+
+deny a port in the firewall
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# .template.sh
+
+to install docker .template
+
+
+
+# airsonic.sh
+
+to install docker airsonic
+
+* [create_docker_airsonic()](#createdockerairsonic)
+
+
+## create_docker_airsonic()
+
+create docker airsonic
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# bitwarden.sh
+
+to install docker bitwarden
+
+
+
+# bookstack.sh
+
+to install docker bookstack
+
+* [create_docker_bookstack()](#createdockerbookstack)
+
+
+## create_docker_bookstack()
+
+create docker bookstack
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# calibre.sh
+
+to install docker calibre
+
+* [create_docker_calibre()](#createdockercalibre)
+
+
+## create_docker_calibre()
+
+create docker calibre
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # cloud-torrent.sh
 
 to install docker cloud-torrent
@@ -291,6 +448,57 @@ https://github.com/jpillora/cloud-torrent
 * **0**: If successfull.
 * **1**: On failure
 
+# code-server.sh
+
+to install docker code-server
+
+* [create_docker_code-server()](#createdockercode-server)
+
+
+## create_docker_code-server()
+
+create docker code-server
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# couchpotato.sh
+
+to install docker couchpotato
+
+* [create_docker_couchpotato()](#createdockercouchpotato)
+
+
+## create_docker_couchpotato()
+
+create docker couchpotato
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# cyberchef.sh
+
+to install docker cyberchef
+
+* [create_docker_cyberchef()](#createdockercyberchef)
+
+
+## create_docker_cyberchef()
+
+create docker cyberchef
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # deluge.sh
 
 to install docker deluge
@@ -301,6 +509,40 @@ to install docker deluge
 ## create_docker_deluge()
 
 create docker deluge
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# drawio.sh
+
+to install docker drawio
+
+* [create_docker_drawio()](#createdockerdrawio)
+
+
+## create_docker_drawio()
+
+create docker drawio
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# duplicati.sh
+
+to install docker duplicati
+
+* [create_docker_duplicati()](#createdockerduplicati)
+
+
+## create_docker_duplicati()
+
+create docker duplicati
 not implemented yet
 
 ### Exit codes
@@ -333,6 +575,23 @@ https://github.com/firefly-iii/docker
 * **0**: If successfull.
 * **1**: On failure
 
+# freshrss.sh
+
+to install docker freshrss
+
+* [create_docker_freshrss()](#createdockerfreshrss)
+
+
+## create_docker_freshrss()
+
+create docker freshrss
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # gitea.sh
 
 to install docker gitea
@@ -343,6 +602,40 @@ to install docker gitea
 ## create_docker_gitea()
 
 create docker gitea
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# gitlab.sh
+
+to install docker gitlab
+
+* [create_docker_gitlab()](#createdockergitlab)
+
+
+## create_docker_gitlab()
+
+create docker gitlab
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# glances.sh
+
+to install docker glances
+
+* [create_docker_glances()](#createdockerglances)
+
+
+## create_docker_glances()
+
+create docker glances
 not implemented yet
 
 ### Exit codes
@@ -367,6 +660,23 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
+# graylog.sh
+
+to install docker graylog
+
+* [create_docker_graylog()](#createdockergraylog)
+
+
+## create_docker_graylog()
+
+create docker graylog
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # guacamole.sh
 
 to install docker guacamole
@@ -383,6 +693,9 @@ not implemented yet
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 # heimdall.sh
 
@@ -417,6 +730,23 @@ to install docker huginn
 ## create_docker_huginn()
 
 create docker huginn
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# invidious.sh
+
+to install docker invidious
+
+* [create_docker_invidious()](#createdockerinvidious)
+
+
+## create_docker_invidious()
+
+create docker invidious
 not implemented yet
 
 ### Exit codes
@@ -510,6 +840,9 @@ https://github.com/jupyterhub/jupyterhub-deploy-docker
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
 # keycloak.sh
 
 to install docker keycloak
@@ -561,22 +894,11 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
-# lidarr.sh
-
-to install docker lidarr
-
-* [create_docker_lidarr()](#createdockerlidarr)
 
 
-## create_docker_lidarr()
 
-create docker lidarr
-not implemented yet
 
-### Exit codes
 
-* **0**: If successfull.
-* **1**: On failure
 
 # mailcow.sh
 
@@ -644,6 +966,9 @@ https://github.com/linuxserver/docker-medusa
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 # monica.sh
 
@@ -783,6 +1108,9 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
 # plex.sh
 
 to install docker plex
@@ -799,6 +1127,9 @@ not implemented yet
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 
 
@@ -837,44 +1168,6 @@ to install docker qbittorrent-vpn
 
 create docker qbittorrent-vpn
 not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# radarr.sh
-
-to install docker radarr
-
-* [create_docker_radarr()](#createdockerradarr)
-
-
-## create_docker_radarr()
-
-create docker radarr
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# recalbox.sh
-
-to install docker recalbox
-
-* [create_docker_recalbox()](#createdockerrecalbox)
-
-
-## create_docker_recalbox()
-
-create docker recalbox
-https://github.com/recalbox/recalbox-docker-build
-
-### Arguments
-
-* # @args $1 PATH_RECALBOX
 
 ### Exit codes
 
@@ -920,31 +1213,20 @@ link
 * **0**: If successfull.
 * **1**: On failure
 
-# sabnzdb.sh
-
-to install docker sabnzdb
-
-* [create_docker_sabnzdb()](#createdockersabnzdb)
 
 
-## create_docker_sabnzdb()
 
-create docker sabnzdb
-not implemented yet
 
-### Exit codes
 
-* **0**: If successfull.
-* **1**: On failure
 
 # shidori.sh
 
 to install docker shidori
 
-* [create_docker_shidori()](#createdockershidori)
+* [create_docker_go-shidori()](#createdockergo-shidori)
 
 
-## create_docker_shidori()
+## create_docker_go-shidori()
 
 create docker shidori
 not implemented yet
@@ -971,6 +1253,9 @@ not implemented yet
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 # statping.sh
 
@@ -1056,39 +1341,17 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-# template.sh
+# ubuntuxrdp.sh
 
-to install docker template
+to install docker ubuntuxrdp
 
-* [create_docker_template()](#createdockertemplate)
-* [remove_docker_template()](#removedockertemplate)
-* [help_docker_template()](#helpdockertemplate)
+* [create_docker_ubuntuxrdp()](#createdockerubuntuxrdp)
 
 
-## create_docker_template()
+## create_docker_ubuntuxrdp()
 
-create docker template
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_template()
-
-remove docker .template
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## help_docker_template()
-
-help for the server and docker container
-link
+create docker ubuntuxrdp
+https://hub.docker.com/r/danielguerra/ubuntu-xrdp/
 
 ### Exit codes
 
@@ -1112,6 +1375,23 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
+# wireguard.sh
+
+to install docker wireguard
+
+* [create_docker_wireguard()](#createdockerwireguard)
+
+
+## create_docker_wireguard()
+
+create docker ubuntuxrdp
+https://github.com/cmulk/wireguard-docker
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # install.sh
 
 install my favirote packages for ubuntu18.04 and tested
@@ -1119,6 +1399,7 @@ install my favirote packages for ubuntu18.04 and tested
 * [generate_apt_list_ubuntu()](#generateaptlistubuntu)
 * [install_basic()](#installbasic)
 * [install_cockpit()](#installcockpit)
+* [install_ansible()](#installansible)
 * [install_emojify()](#installemojify)
 * [install_signal_cli()](#installsignalcli)
 * [install_signal_ssh_text()](#installsignalsshtext)
@@ -1152,6 +1433,18 @@ _Function has no arguments._
 install the cockpit to web
 See your server in a web browser and perform system tasks with a mouse. It’s easy to start containers, administer storage, configure networks, and inspect logs.
 https://cockpit-project.org/
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_ansible()
+
+install ansible
+ https://www.ansible.com
 
 _Function has no arguments._
 
@@ -1221,7 +1514,7 @@ setup menu and logic
 
 * [password_dialog()](#passworddialog)
 * [install_setup_menu()](#installsetupmenu)
-* [add_extra_setup_menu()](#addextrasetupmenu)
+* [add_container_setup_menu()](#addcontainersetupmenu)
 * [uninstall_setup_menu()](#uninstallsetupmenu)
 * [help_setup_menu()](#helpsetupmenu)
 * [main_setup_menu()](#mainsetupmenu)
@@ -1245,9 +1538,9 @@ whiptails install custom setup menu
 * **0**: If successfull.
 * **1**: On failur3
 
-## add_extra_setup_menu()
+## add_container_setup_menu()
 
-whiptails install add custom setup menu
+whiptails install add custom add container setup menu
 
 ### Exit codes
 
@@ -1316,6 +1609,8 @@ file containing the utils  for the project and other
 * [get_current_ip()](#getcurrentip)
 * [get_geolocation()](#getgeolocation)
 * [show_aliases()](#showaliases)
+* [parse_yml()](#parseyml)
+* [read_config_yml()](#readconfigyml)
 
 
 ## print_line()
@@ -1676,6 +1971,30 @@ _Function has no arguments._
 
 show aliases in the current shell
 https://riptutorial.com/bash/topic/368/aliasing
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## parse_yml()
+
+Read YML file from Bash script
+https://gist.github.com/pkuczynski/8665367
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## read_config_yml()
+
+show aliases in the current shell
+https://gist.github.com/pkuczynski/8665367
 
 _Function has no arguments._
 
