@@ -13,3 +13,6 @@ services:
         volumes:
             - /home/udocker/volumes/guacamole/config:/configoznu/guacamole
         restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=guacamole"       

@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  jupyterlab:
+    image: ndslabs/jupyterlab
+    container_name: jupyterlab
+    user: udocker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    ports: 
+      - 8888:8888
+    volumes: /home/udocker/volumes/jupyterlab:~
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=jupyterlab"    

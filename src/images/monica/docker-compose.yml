@@ -1,29 +1,42 @@
-version: "3.7"
+version: "3.3"
 
 services:
   app:
     image: monicahq/monicahq
+    container_name: monica
+    user: udocker
     depends_on:
       - mysql
     ports:
-      - 8080:80
+      - 8039:80
     environment:
-      - APP_KEY=
+      - APP_KEY=kENAi5LPto3rMXO1OXDV7H9GEqOSkIpn
       - DB_HOST=mysql
     volumes:
-      - data:/var/www/monica/storage
-    restart: always
+      - /home/udocker/volumes/monica:/var/www/monica/storage
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=monica"
 
   mysql:
     image: mysql:5.7
+    container_name: monica_db
+    user: udocker
     environment:
-      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ROOT_PASSWORD=monica
       - MYSQL_DATABASE=monica
       - MYSQL_USER=homestead
       - MYSQL_PASSWORD=secret
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
     volumes:
-      - mysql:/var/lib/mysql
-    restart: always
+      - /home/udocker/volumes/monica/db:/var/lib/mysql
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=monica_db"
 
 volumes:
   data:

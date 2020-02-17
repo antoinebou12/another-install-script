@@ -13,3 +13,6 @@ services:
     ports:
       - 8007:80
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=freshrss"

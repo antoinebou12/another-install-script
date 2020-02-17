@@ -17,3 +17,6 @@ services:
       - /home/udocker/volumes/gitlab/logs:/var/log/gitlab
       - /home/udocker/volumes/gitlab/data:/var/opt/gitlab
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=gitlab"

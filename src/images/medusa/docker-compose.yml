@@ -1,16 +1,20 @@
-version: '3.3'
+version: "3.3"
 services:
   medusa:
     image: linuxserver/medusa
     container_name: medusa
-    # environment:
-    #   - PUID=1000
-    #   - PGID=1000
-    #   - TZ=Europe/London
+    user: udocker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
     volumes:
-      - ${PATH_CONFIG}:/config
-      - ${PATH_DOWNLOAD}:/downloads
-      - ${PATH_TV}:/tv
+      - /home/udocker/volumes/medusa/config:/config
+      - /home/udocker/volumes/medusa/downloads:/downloads
+      - /home/udocker/volumes/medusa/tv:/tv
     ports:
-      - ${PORT_WEB}:8081
+      - 8038:8081
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=medusa"

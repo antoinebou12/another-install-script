@@ -1,19 +1,17 @@
-version: "2"
+version: "3.3"
 services:
-  openvpn-as:
-    image: linuxserver/openvpn-as
-    container_name: openvpn-as
+  openvpn:
+    image: kylemanna/openvpn
+    container_name: openvpn
     cap_add:
       - NET_ADMIN
+    user: udocker
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
-      - INTERFACE=eth0 #optional
-    volumes:
-      - <path to data>:/config
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
     ports:
-      - 943:943
-      - 9443:9443
-      - 1194:1194/udp
+      - "1194:1194/udp"
     restart: unless-stopped
+    volumes:
+      - /home/udocker/volumes/openvpn/conf:/etc/openvpn

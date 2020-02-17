@@ -133,6 +133,8 @@ Go to [Code of Conduct](.github/CODE_OF_CONDUCT.md)
 
 ## Contributing
 
+![Please Contribute for Bernie](docs/images/contribution.png)
+
 Go to [Contributing](.github/CONTRIBUTING.md)
 
 ## Changelog

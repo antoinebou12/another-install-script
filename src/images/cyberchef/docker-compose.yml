@@ -15,3 +15,6 @@ services:
       - /home/udocker/volumes/cyberchef/cyberchef-ssl:/etc/ssl
       - /home/udocker/volumes/cyberchef/cyberchef-logs:/var/log/nginx
     restart: unless-stopped
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=cyberchef"

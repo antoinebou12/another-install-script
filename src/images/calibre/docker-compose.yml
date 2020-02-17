@@ -16,3 +16,6 @@ services:
       - 8001:8080
       - 8002:8081
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=calibre"

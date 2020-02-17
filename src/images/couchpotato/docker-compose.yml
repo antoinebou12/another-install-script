@@ -16,3 +16,6 @@ services:
     ports:
       - 5050:5050
     restart: unless-stopped
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=couchpotato"

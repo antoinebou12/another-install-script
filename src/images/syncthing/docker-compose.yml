@@ -1,10 +1,19 @@
 version: '3.3'
 services:
     syncthing:
+        image: 'syncthing/syncthing:latest'
+        user: udocker
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         container_name: syncthing
         ports:
             - '8384:8384'
             - '22000:22000'
         volumes:
             - '$PATH_SYNC:/var/syncthing'
-        image: 'syncthing/syncthing:latest'
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=udocker"

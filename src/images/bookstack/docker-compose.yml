@@ -33,3 +33,6 @@ services:
     volumes:
       - /home/udocker/volumes/bookstack/db/config:/config
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=bookstack"

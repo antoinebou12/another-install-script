@@ -1,9 +1,20 @@
+version: "3.3"
+services:
   portainer:
     container_name: portainer
     image: portainer/portainer
-    restart: unless-stopped
+    user: udocker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
     ports:
-      - 9000:9000
+      - 9001:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./volumes/portainer/data:/data
+      - /home/udocker/volumes/portainer/data:/data
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=portainer"
+

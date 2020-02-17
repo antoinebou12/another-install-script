@@ -7,15 +7,18 @@ version: '3.3'
 services:
   hub-db:
     image: postgres:9.5
-    container_name: jupyterhub-db
+    container_name: jupyterhub_db
     restart: always
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       PGDATA: ${DB_VOLUME_CONTAINER}
     env_file:
-      - secrets/postgres.env
+      - postgres.env
     volumes:
       - "db:${DB_VOLUME_CONTAINER}"
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=jupyterhub_db"
 
   hub:
     depends_on:
@@ -51,10 +54,13 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_HOST: hub-db
     env_file:
-      - secrets/postgres.env
-      - secrets/oauth.env
+      - postgres.env
+      - oauth.env
     command: >
       jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=jupyterhub"
 
 volumes:
   data:

@@ -9,6 +9,7 @@ services:
   nginx:
     container_name: nginx
     image: jwilder/nginx-proxy
+    user: udocker
     ports:
       - 0.0.0.0:80:80
       - 0.0.0.0:443:443
@@ -22,7 +23,10 @@ services:
       - ./statup/nginx/html:/usr/share/nginx/html:ro
       - ./statup/nginx/dhparam:/etc/nginx/dhparam
     environment:
-      DEFAULT_HOST: localhost
+      - DEFAULT_HOST: localhost
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
 
   statup:
     container_name: statup

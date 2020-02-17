@@ -1,15 +1,20 @@
-version: '3.3'
+version: "3.3"
 services:
     olaris-server:
         image: olaristv/olaris-server
-        name: olaris-server
+        container_name: olaris
         ports:
-            - '8090:8080'
+            - "8043:8080"
+        user: udocker
         environment:
-            - 'OLARIS_UID=$(id -u)'
-            - 'OLARIS_GID=$(id -g)'
-
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         volumes:
-            - /home/udocker/olaris:/var/media
-            - /home/udocker/olaris/config:/home/olaris/.config/olaris
-            - /home/udocker/olaris/config/rclone:/home/olaris/.config/rclone
+            - /home/udocker/volumes/olaris:/var/media
+            - /home/udocker/volumes/olaris/config:/home/olaris/.config/olaris
+            - /home/udocker/volumes/olaris/config/rclone:/home/olaris/.config/rclone
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=olaris"

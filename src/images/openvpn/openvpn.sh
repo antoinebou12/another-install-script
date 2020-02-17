@@ -10,8 +10,6 @@
 # @exitcode 1 On failure
  create_docker_openvpn(){
     
-    udocker_create_dir /home/udocker/volumes/openvpn
-
     exec_root docker-compose run --rm openvpn ovpn_genconfig -u udp://"$(get_current_ip)"
     exec_root docker-compose run --rm openvpn ovpn_initpki
     exec_root docker-compose run --rm openvpn easyrsa build-client-full user nopass

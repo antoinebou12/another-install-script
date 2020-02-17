@@ -5,6 +5,9 @@ services:
     image: mongo:3
     container_name: mongo
     user: udocker
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=mongo"
     networks:
       - graylog
   # Elasticsearch: https://www.elastic.co/guide/en/elasticsearch/reference/6.x/docker.html
@@ -17,6 +20,9 @@ services:
       - transport.host=localhost
       - network.host=0.0.0.0
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=elasticsearch"
     ulimits:
       memlock:
         soft: -1
@@ -54,6 +60,9 @@ services:
       - 12201:12201
       # GELF UDP
       - 12201:12201/udp
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=graylog"
 networks:
   graylog:
     driver: bridge

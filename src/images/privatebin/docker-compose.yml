@@ -1,11 +1,19 @@
 version: '3.3'
 services:
     nginx-fpm-alpine:
-      container_name: privatebin
-      restart: always
-      ports:
-          - '8080:80'
-      volumes:
-          - 'conf.php:/srv/cfg/conf.php:ro'
-          - '/home/udocker/privatebin/data:/srv/data'
-      image: 'privatebin/nginx-fpm-alpine:1.3.1'
+        image: 'privatebin/nginx-fpm-alpine:1.3.1'
+        container_name: privatebin
+        user: udocker
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
+        ports:
+            - '8052:80'
+        volumes:
+            - '/home/udocker/volumes/privatebin/conf.php:/srv/cfg/conf.php:ro'
+            - '/home/udocker/volumes/privatebin/data:/srv/data'
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=privatebin"

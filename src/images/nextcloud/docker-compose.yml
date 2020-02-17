@@ -3,24 +3,39 @@ services:
   nextcloud:
     image: nextcloud
     container_name: nextcloud
+    user: udocker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
     ports:
       - 9321:80
     volumes:
-      - ./volumes/nextcloud/html:/var/www/html
+      - /home/udocker/volumes/nextcloud:/var/www/html
     restart: unless-stopped
     depends_on: 
       - nextcloud_db
     links:
       - nextcloud_db
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=nextcloud"
 
   nextcloud_db:
     image: linuxserver/mariadb
     container_name: nextcloud_db
-    volumes:
-      - ./volumes/nextcloud/db:/config
+    user: udocker
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=nextcloud
+      - MYSQL_PASSWORD=nextcloud
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
+    volumes:
+      - /home/udocker/volumes/nextcloud/db:/config
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=nextcloud_db"

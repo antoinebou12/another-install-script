@@ -19,3 +19,6 @@ services:
       - "3000:3000"
       - "222:22"
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=gitea"
