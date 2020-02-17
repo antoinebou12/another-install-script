@@ -44,6 +44,7 @@ uninstall() {
     aptremove docker-ce
     aptremove docker-ce-cli
     aptremove containerd.io
+    aptremove ansible
     # snap remove hub > /dev/null  
     aptclean
 
