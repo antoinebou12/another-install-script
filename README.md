@@ -31,6 +31,7 @@ Some services/servers cannot be installed at the same time
 Also more configuration needed for certain services/servers
 
 Go to the [List](docs/SERVER_LIST.md)
+
 Go to the [Google Sheet](https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-HfnRhwkce-/view?usp=sharing)
 
 ## List of other installed program
@@ -125,7 +126,7 @@ bash generate_docs.sh ../docs.md
 
 ## Documentation
 
-Go to [docs](docs/docs.md)
+Go to [Documentation](docs/docs.md)
 
 ## Code of Conduct
 
