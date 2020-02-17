@@ -14,3 +14,6 @@ services:
       - 8080:80
       - 443:443
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=heimdall"

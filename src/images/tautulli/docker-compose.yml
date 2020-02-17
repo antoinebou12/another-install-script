@@ -4,12 +4,16 @@ services:
     image: linuxserver/tautulli
     container_name: tautulli
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
     volumes:
-      - /home/udocker/tautulli/config:/config
-      - /home/udocker/plex/logs:/logs
+      - /home/udocker/volumes/tautulli/config:/config
+      - /home/udocker/volumes/plex/logs:/logs
     ports:
       - 8181:8181
     restart: unless-stopped
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=tautulli"
+

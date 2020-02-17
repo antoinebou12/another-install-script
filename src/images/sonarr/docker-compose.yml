@@ -1,10 +1,19 @@
-version: '3.7'
+version: "3.7"
 services:
     sonarr:
+        image: linuxserver/sonarr:latest
         container_name: sonarr
-        image: linuxserver/sonarr:preview
+        user: udocker
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         ports:
             - 8989:8989
         volumes:
-            - ./sonarr:/config
-            - ./media/TV:/tv
+            - /home/udocker/volumes/sonarr/config:/config
+            - /home/udocker/volumes/sonarr/tv:/tv
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=sonarr"

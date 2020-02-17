@@ -3,14 +3,18 @@ services:
   pyload:
     image: linuxserver/pyload
     container_name: pyload
-    # environment:
-    #   - PUID=1000
-    #   - PGID=1000
-    #   - TZ=Europe/London
+    user: udocker
+    environment:
+      - PUID: ${userid}
+      - PGID: ${groupid}
+      - TZ: ${time}
     volumes:
-      - ${PATH_CONFIG}:/config
-      - ${PATH_DOWNLOAD}:/downloads
+      - /home/udocker/volumes/pyload/config:/config
+      - /home/udocker/volumes/pyload/downloads:/downloads
     ports:
-      - ${PORT_WEB}:8000
+      - 8053:8000
       - 7227:7227 #optional
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=pyload"

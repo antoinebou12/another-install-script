@@ -1,11 +1,20 @@
 version: '3.3'
 services:
     lychee-docker:
-        container_name: lychee
-        ports:
-            - '80:80'
-        volumes:
-            - '/home/udocker/lycee/uploads:/uploads/'
-            - '/home/udocker/lycee/data/:/data/'
-            - '/home/udocker/lycee/mysql/:/mysql/'
         image: kdelfour/lychee-docker
+        container_name: lychee
+        user: udocker
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
+        ports:
+            - '8035:80'
+        volumes:
+            - '/home/udocker/volumes/lycee/uploads:/uploads/'
+            - '/home/udocker/volumes/lycee/data/:/data/'
+            - '/home/udocker/volumes/lycee/mysql/:/mysql/'
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=lychee"

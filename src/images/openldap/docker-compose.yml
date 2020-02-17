@@ -3,6 +3,15 @@ services:
     openldap:
         image: openldap
         container_name: openldap
+        user: udocker
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         ports:
             - '389:389'
             - '636:636'
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=.template"

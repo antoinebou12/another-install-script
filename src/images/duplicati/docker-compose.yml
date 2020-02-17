@@ -15,3 +15,6 @@ services:
     ports:
       - 8200:8200
     restart: unless-stopped
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=deluge"

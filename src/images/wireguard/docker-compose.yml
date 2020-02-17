@@ -1,9 +1,18 @@
 version: '3.3'
 services:
     wireguard-docker:
+        image: 'cmulk/wireguard-docker:buster'
         container_name: wireguard
+        user: udocker
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         volumes:
-            - '/home/udocker/wireguard:/etc/wireguard'
+            - '/home/udocker/volumes/wireguard:/etc/wireguard'
         ports:
             - '5555:5555/udp'
-        image: 'cmulk/wireguard-docker:buster'
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=wireguard"

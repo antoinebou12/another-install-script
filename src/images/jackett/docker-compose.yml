@@ -14,3 +14,6 @@ services:
     ports:
       - 9117:9117
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=jackett"    

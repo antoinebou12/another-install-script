@@ -19,6 +19,9 @@ services:
     ports: 
       - "8006:80"
     env_file: firefly_iii.env
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=firefly-iii"
     volumes: 
       - 
         source: firefly_iii_export
@@ -42,6 +45,9 @@ services:
       - firefly_iii_net
     volumes: 
       - /home/udocker/volumes/firefly-iii/db:/var/lib/postgresql/data
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=firefly-iii_db"
 volumes: 
   firefly_iii_db: ~
   firefly_iii_export: ~

@@ -16,3 +16,6 @@ services:
       - /dev/dri:/dev/dri #optional
       - /dev/vchiq:/dev/vchiq #optional
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=jellyfin"    

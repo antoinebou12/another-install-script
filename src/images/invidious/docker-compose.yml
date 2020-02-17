@@ -13,6 +13,9 @@ services:
     volumes:
       - postgresdata:/var/lib/postgresql/data
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=invidious_db"   
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
   invidious:
@@ -30,6 +33,9 @@ services:
     depends_on:
       - postgres
     restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=invidious"    
 
 volumes:
   postgresdata:

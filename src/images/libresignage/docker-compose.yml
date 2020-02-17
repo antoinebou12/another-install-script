@@ -1,9 +1,18 @@
-version: '3.3'
+version: "3.3"
 services:
-    libresignage:               
-        image: 'eerotal/libresignage:latest'
+    libresignage:
+        image: "eerotal/libresignage:latest"
         container_name: libresignage
+        user: udocker
+        environment:
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         ports:
-            - '8030:80'
+            - "8030:80"
         volumes:
-            - '/home/udocker/libresignage:/var/www/html/data'
+            - "/home/udocker/volumes/libresignage:/var/www/html/data"
+        restart: unless-stopped
+        labels:
+        - "AIS.traefik=false"
+        - "AIS.name=libresignage"

@@ -483,6 +483,18 @@ services:
       image: no
       implemented: no
 
+    minecraft:
+      name: minecraft
+      ports: [25565]
+      webport: []
+      volumes: no
+      network: no
+      description: Minecraft Server 
+      short_description: Minecraft Server 
+      source-link: https://hub.docker.com/r/itzg/minecraft-server
+      image: no
+      implemented: no
+
     monica:
       name: monica
       ports: [6889]

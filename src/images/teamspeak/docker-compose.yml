@@ -1,12 +1,19 @@
 version: '3.3'
 services:
     teamspeak:
+        image: solidnerd/teamspeak
         container_name: teamspeak
+        user: udocker
         environment:
             - TS3SERVER_LICENSE=accept
-        container_name: teamspeak_server
+            - PUID: ${userid}
+            - PGID: ${groupid}
+            - TZ: ${time}
         ports:
             - '9987:9987/udp'
             - '10011:10011'
             - '30033:30033'
-        image: solidnerd/teamspeak
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=teamspeak"
