@@ -9,7 +9,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 enable_firewall(){
-    aptinstall ufw
+    exec_root snap install ufw
     exec_root ufw default deny incoming
     exec_root ufw default allow outgoing
     exec_root ufw allow ssh

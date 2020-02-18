@@ -877,6 +877,23 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
+# liberapay.sh
+
+to install docker liberapay
+
+* [create_docker_liberapay()](#createdockerliberapay)
+
+
+## create_docker_liberapay()
+
+create docker liberapay
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # libresignature.sh
 
 to install docker libresignature
@@ -894,8 +911,22 @@ not implemented yet
 * **0**: If successfull.
 * **1**: On failure
 
+# lodestone.sh
+
+to install docker lodestone
+
+* [create_docker_lodestone()](#createdockerlodestone)
 
 
+## create_docker_lodestone()
+
+create docker lodestone
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 
 
@@ -919,6 +950,9 @@ _Function has no arguments._
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 # mcmyadmin.sh
 
@@ -956,19 +990,27 @@ to install docker medusa
 create docker medusa
 https://github.com/linuxserver/docker-medusa
 
-### Arguments
-
-* # @args $1 PATH_CONFIG
-* # @args $2 PATH_DOWNLOAD
-* # @args $3 PORT_WEB
-
 ### Exit codes
 
 * **0**: If successfull.
 * **1**: On failure
 
+# minecraft.sh
+
+to install docker minecraft
+
+* [create_docker_minecraft()](#createdockerminecraft)
 
 
+## create_docker_minecraft()
+
+create docker minecraft
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # monica.sh
 
@@ -986,6 +1028,9 @@ not implemented yet
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 # neko.sh
 
@@ -1057,6 +1102,9 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
 # openldap.sh
 
 to install docker openldap
@@ -1107,6 +1155,9 @@ not implemented yet
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 
 
@@ -1216,9 +1267,6 @@ link
 
 
 
-
-
-
 # shidori.sh
 
 to install docker shidori
@@ -1291,12 +1339,6 @@ to install docker syncthing
 create docker syncthing
 https://github.com/syncthing/syncthing
 
-### Arguments
-
-* # @args $1 PORT_WEB
-* # @args $2 PORT_SYNC
-* # @args $3 PATH_SYNC
-
 ### Exit codes
 
 * **0**: If successfull.
@@ -1335,6 +1377,23 @@ create docker teamspeak
 https://github.com/recalbox/recalbox-docker-build
 
 _Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# traefik
+
+to install docker traefik
+
+* [create_docker_traefik()](#createdockertraefik)
+
+
+## create_docker_traefik()
+
+create docker traefik
+link
 
 ### Exit codes
 
@@ -1611,6 +1670,8 @@ file containing the utils  for the project and other
 * [show_aliases()](#showaliases)
 * [parse_yml()](#parseyml)
 * [read_config_yml()](#readconfigyml)
+* [dist_check()](#distcheck)
+* [virt_check()](#virtcheck)
 
 
 ## print_line()
@@ -1722,7 +1783,7 @@ _Function has no arguments._
 
 ## aptupgrade()
 
-apt-get upgrade all
+upgrade all
 
 _Function has no arguments._
 
@@ -1733,7 +1794,7 @@ _Function has no arguments._
 
 ## aptinstall()
 
-apt-get install package
+install package
 
 ### Arguments
 
@@ -1746,7 +1807,7 @@ apt-get install package
 
 ## aptremove()
 
-apt-get install package
+remove package
 
 ### Arguments
 
@@ -1995,6 +2056,30 @@ _Function has no arguments._
 
 show aliases in the current shell
 https://gist.github.com/pkuczynski/8665367
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## dist_check()
+
+show aliases in the current shell
+Detect Operating System
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## virt_check()
+
+show aliases in the current shell
+Checking For Virtualization
 
 _Function has no arguments._
 

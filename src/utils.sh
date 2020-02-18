@@ -22,26 +22,26 @@ show_project_name() {
     print_line
     cat <<EOF
 
-    ___                   __   __               
+    ___                   __   __
    /   |   ____   ____   / /_ / /_   ___   _____
   / /| |  / __ \ / __ \ / __// __ \ / _ \ / ___/
- / ___ | / / / // /_/ // /_ / / / //  __// /    
-/_/  |_|/_/ /_/ \____/ \__//_/ /_/ \___//_/     
-                                                
+ / ___ | / / / // /_/ // /_ / / / //  __// /
+/_/  |_|/_/ /_/ \____/ \__//_/ /_/ \___//_/
+
 
     ____              __          __ __
    /  _/____   _____ / /_ ____ _ / // /
-   / / / __ \ / ___// __// __  // // / 
- _/ / / / / /(__  )/ /_ / /_/ // // /  
-/___//_/ /_//____/ \__/ \____//_//_/   
+   / / / __ \ / ___// __// __  // // /
+ _/ / / / / /(__  )/ /_ / /_/ // // /
+/___//_/ /_//____/ \__/ \____//_//_/
 
 
-   _____              _         __ 
+   _____              _         __
   / ___/ _____ _____ (_)____   / /_
   \__ \ / ___// ___// // __ \ / __/
- ___/ // /__ / /   / // /_/ // /_  
-/____/ \___//_/   /_// ____/ \__/  
-                    /_/           
+ ___/ // /__ / /   / // /_/ // /_
+/____/ \___//_/   /_// ____/ \__/
+                    /_/
 EOF
     print_line
     return 0
@@ -101,7 +101,7 @@ exec_root() {
         return 0
     fi
     return 1
-
+    
 }
 
 # @description check if the user is root then execute the bash func
@@ -114,7 +114,7 @@ exec_root_func() {
     if [[ ! "$#" -eq 0 ]]; then
         if [[ "$UID" -gt 0 ]]; then
             sudo bash -c "$(declare -f ${func}); ${func}"
-        else 
+        else
             bash -c "$(declare -f ${func}); ${func}"
         fi
         # shellcheck disable=SC2086
@@ -122,7 +122,7 @@ exec_root_func() {
         return 0
     fi
     return 1
-
+    
 }
 
 # @description check if the packages exist
@@ -142,54 +142,132 @@ check_packages_install() {
 # @exitcode 1 On failure
 aptupdate() {
     echo "apt update"
-    exec_root "apt-get -qq update" >/dev/null
-    exec_root "apt-get -qq install -f" >/dev/null
-    exec_root "apt-get -qq autoclean" >/dev/null
-    return 0
+    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+        exec_root "apt-get -qq update" >/dev/null
+        exec_root "apt-get -qq install -f" >/dev/null
+        exec_root "apt-get -qq autoclean -y" >/dev/null
+        exec_root "apt-get -qq autoremove -y" >/dev/null
+        return 0
+    fi
+    if [ "$DISTRO" == "arch" ]; then
+        exec_root "pacman -Syy --noconfirm" >/dev/null
+        return 0
+    fi
+    if [ "$DISTRO" = 'fedora' ]; then
+        exec_root "dnf check-update -y" >/dev/null
+        return 0
+    fi
+    if [ "$DISTRO" == "centos" ] && [ "$DISTRO" == "redhat" ]; then
+        exec_root "yum check-update -y" >/dev/null
+        return 0
+    fi
+    return 1
 }
 
-# @description apt-get upgrade all
+# @description upgrade all
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptupgrade() {
     echo "apt upgrade"
-    exec_root "apt-get -qq update" >/dev/null
-    exec_root "apt-get -qq upgrade" >/dev/null
-    exec_root "apt-get -qq dist-upgrade" >/dev/null
-    exec_root "apt-get -qq install -f" >/dev/null
-    exec_root "apt-get -qq autoclean" >/dev/null
-    return 0
+    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+        exec_root "apt-get -qq update" >/dev/null
+        exec_root "apt-get -qq upgrade" >/dev/null
+        exec_root "apt-get -qq dist-upgrade" >/dev/null
+        exec_root "apt-get -qq install -f" >/dev/null
+        exec_root "apt-get -qq autoclean" >/dev/null
+        return 0
+    fi
+    if [ "$DISTRO" == "arch" ]; then
+        exec_root "pacman -Su --noconfirm" >/dev/null
+        return 0
+    fi
+    if [ "$DISTRO" = 'fedora' ]; then
+        exec_root "dnf upgrade -y" >/dev/null
+        return 0
+    fi
+    if [ "$DISTRO" == "centos" ] && [ "$DISTRO" == "redhat" ]; then
+        exec_root "yum update -y" >/dev/null
+        return 0
+    fi
+    return 1
 }
 
-# @description apt-get install package
+# @description install package
 #
 # @args $@ packages to install
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptinstall() {
     echo "apt install $@"
-    aptupdate >/dev/null
-    for var in "$@"; do
-        exec_root "apt-get -qq install -y $var" >/dev/null
-    done
-    return 0
+    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+        aptupdate >/dev/null
+        for var in "$@"; do
+            exec_root "apt-get -qq install -y $var" >/dev/null
+        done
+        return 0
+    fi
+    if [ "$DISTRO" == "arch" ]; then
+        aptupdate >/dev/null
+        for var in "$@"; do
+            exec_root "pacman -Syu --noconfirm $var" >/dev/null
+        done
+        return 0
+    fi
+    if [ "$DISTRO" = 'fedora' ]; then
+        aptupdate >/dev/null
+        for var in "$@"; do
+            exec_root "dnf install -y $var" >/dev/null
+        done
+        return 0
+    fi
+    if [ "$DISTRO" == "centos" ] && [ "$DISTRO" == "redhat" ]; then
+        aptupdate >/dev/null
+        for var in "$@"; do
+            exec_root "yum install -y $var" >/dev/null
+        done
+        return 0
+    fi
+    return 1
 }
 
-# @description apt-get install package
+# @description remove package
 #
 # @args $@ packages to remove
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 aptremove() {
     echo "apt remove $@"
-    aptupdate >/dev/null
-    for var in "$@"; do
-        exec_root "apt-get -qq remove -y $var" >/dev/null
-    done
-    return 0
-    return 0
+    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+        aptupdate >/dev/null
+        for var in "$@"; do
+            exec_root "apt-get -qq remove -y $var" >/dev/null
+        done
+        return 0
+    fi
+    if [ "$DISTRO" == "arch" ]; then
+        aptupdate >/dev/null
+        for var in "$@"; do
+            exec_root "pacman -R --noconfirm $var" >/dev/null
+        done
+        return 0
+    fi
+    if [ "$DISTRO" = 'fedora' ]; then
+        aptupdate >/dev/null
+        for var in "$@"; do
+            exec_root "dnf erase -y $var" >/dev/null
+        done
+        return 0
+    fi
+    if [ "$DISTRO" == "centos" ] && [ "$DISTRO" == "redhat" ]; then
+        aptupdate >/dev/null
+        for var in "$@"; do
+            exec_root "yum remove -y $var" >/dev/null
+        done
+        return 0
+    fi
+    return 1
 }
 
 # @description apt-get autoclean
@@ -199,10 +277,22 @@ aptremove() {
 # @exitcode 1 On failure
 aptclean() {
     echo "apt clean"
-    exec_root "apt-get -qq install -f" >/dev/null
-    exec_root "apt-get -qq autoclean -y" >/dev/null
-    exec_root "apt-get -qq autoremove -y" >/dev/null
-    return 0
+    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+        exec_root "apt-get -qq install -f" >/dev/null
+        exec_root "apt-get -qq autoclean -y" >/dev/null
+        exec_root "apt-get -qq autoremove -y" >/dev/null
+        return 0
+    fi
+    if [ "$DISTRO" == "arch" ]; then
+        return 0
+    fi
+    if [ "$DISTRO" = 'fedora' ]; then
+        return 0
+    fi
+    if [ "$DISTRO" == "centos" ] && [ "$DISTRO" == "redhat" ]; then
+        return 0
+    fi
+    return 1
 }
 
 # @description check mimetype of a file
@@ -228,7 +318,7 @@ send_email() {
     local subject="$3"
     local body="$4"
     local attachment=$5
-
+    
     echo "$body" | mutt -s "$subject" -a "$attachment" "$to"
     return 0
 }
@@ -354,17 +444,17 @@ chmod_sh_all() {
 # @exitcode 1 On failure
 loop_files_func() {
     local names=$(find "$1" -name "$2")
-
+    
     local SAVEIFS="$IFS" # Save current IFS
     local IFS=$'\n'      # Change IFS to new line
     local names=($names) # split to array $names
     local IFS="$SAVEIFS" # Restore IFS
-
+    
     for ((i = 0; i < ${#names[@]}; i++)); do
         echo "$i: ${names[$i]}"
         $3 "${names[$i]}"
     done
-
+    
     return 0
 }
 
@@ -407,13 +497,13 @@ get_current_ip() {
 get_geolocation() {
     get_current_ip
     curl -s https://ipvigilante.com/${PUBLIC_IP} | jq '.data.latitude, .data.longitude, .data.city_name, .data.country_name' |
-        while read -r LATITUDE; do
-            read -r LONGITUDE
-            read -r CITY
-            read -r COUNTRY
-            echo "${LATITUDE},${LONGITUDE},${CITY},${COUNTRY}"
-        done
-
+    while read -r LATITUDE; do
+        read -r LONGITUDE
+        read -r CITY
+        read -r COUNTRY
+        echo "${LATITUDE},${LONGITUDE},${CITY},${COUNTRY}"
+    done
+    
     #cp geolocate.sh /etc/cron.daily
 }
 
@@ -435,11 +525,11 @@ show_aliases() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 parse_yml() {
-   local prefix=$2
-   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
-   sed -ne "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
-        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
-   awk -F$fs '{
+    local prefix=$2
+    local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
+    sed -ne "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
+    -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
+    awk -F$fs '{
       indent = length($1)/2;
       vname[indent] = $2;
       for (i in vname) {if (i > indent) {delete vname[i]}}
@@ -447,16 +537,54 @@ parse_yml() {
          vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
          printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
       }
-   }'
-   return 0
+    }'
+    return 0
 }
 
 # @description show aliases in the current shell
 # https://gist.github.com/pkuczynski/8665367
-# @noargsW
+# @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 read_config_yml(){
     eval $(parse_yaml config.yml "config_")
     return 0
+}
+
+# @description show aliases in the current shell
+# Detect Operating System
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function dist_check() {
+    DIST_CHECK="/etc/os-release"
+    # shellcheck disable=SC1090
+    if [ -e $DIST_CHECK ]; then
+        # shellcheck disable=SC1091
+        source $DIST_CHECK
+        DISTRO=$ID
+        # shellcheck disable=SC2034
+        VERSION=$VERSION_ID
+    else
+        echo "Your distribution is not supported (yet)."
+        exit
+    fi
+}
+
+
+# @description show aliases in the current shell
+# Checking For Virtualization
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function virt_check() {
+    if [[ $(command -v "systemd-detect-virt") ]]; then
+        if systemd-detect-virt; then
+            return 0
+        else
+            return 1
+        fi
+    else
+        return 1
+    fi
 }

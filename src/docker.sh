@@ -105,7 +105,7 @@ stop_containers_all() {
     echo "Stop all Docker Containers"
     print_line
 
-    docker container stop "$(docker container ls -aq)"
+    docker container stop "$(docker ps --filter "label=AIS.name" -aq)"
 
     print_line
     return 0
@@ -120,7 +120,7 @@ remove_containers_all() {
     echo "Remove all Docker Containers"
     print_line
 
-    docker rm "$(docker ps -a -q)"
+    docker rm "$(docker ps --filter "label=AIS.name" -aq)"
 
     print_line
     return 0
