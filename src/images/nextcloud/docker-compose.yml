@@ -5,9 +5,9 @@ services:
     container_name: nextcloud
     user: udocker
     environment:
-      - PUID: ${userid}
-      - PGID: ${groupid}
-      - TZ: ${time}
+      - PUID: ${UDOCKER_USERID}
+      - PGID: ${UDOCKER_GROUPID}
+      - TZ: ${TZ}
     ports:
       - 9321:80
     volumes:
@@ -30,9 +30,9 @@ services:
       - MYSQL_PASSWORD=nextcloud
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
-      - PUID: ${userid}
-      - PGID: ${groupid}
-      - TZ: ${time}
+      - PUID: ${UDOCKER_USERID}
+      - PGID: ${UDOCKER_GROUPID}
+      - TZ: ${TZ}
     volumes:
       - /home/udocker/volumes/nextcloud/db:/config
     restart: unless-stopped

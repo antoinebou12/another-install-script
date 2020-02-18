@@ -79,7 +79,7 @@ install_ansible() {
     exec_root apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
     aptupdate
     aptinstall ansible software-properties-common
-    exec_root pip3 install ansible
+    exec_root pip install ansible
 
     print_line
     return 0

@@ -5,9 +5,9 @@ services:
     container_name: jackett
     user: udocker
     environment:
-      - PUID: ${userid}
-      - PGID: ${groupid}
-      - TZ: ${time}
+      - PUID: ${UDOCKER_USERID}
+      - PGID: ${UDOCKER_GROUPID}
+      - TZ: ${TZ}
     volumes:
       - /home/udocker/volumes/jackett/config:/config
       - /home/udocker/volumes/jackett/downloads:/downloads

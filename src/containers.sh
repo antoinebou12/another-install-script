@@ -42,6 +42,11 @@ manage_exec_containers_list() {
 	echo "Containers"
 	print_line
 
+
+	export UDOCKER_USERID=$(id -u udocker)
+    export UDOCKER_GROUPID=$(id -g udocker)
+    export TZ=$(cat /etc/timezone)
+
 	local FUNC_CREATE="create_docker_"
 	touch /tmp/containers.txt
 	containers=()

@@ -4,9 +4,9 @@ services:
   image: linuxserver/mylar
   container_name: mylar
   environment:
-    - PUID: ${userid}
-    - PGID: ${groupid}
-    - TZ: ${time}
+    - PUID: ${UDOCKER_USERID}
+    - PGID: ${UDOCKER_GROUPID}
+    - TZ: ${TZ}
   volumes:
     - /home/udocker/volumes/mylar/config:/config
     - /home/udocker/volumes/mylar/comics:/comics
