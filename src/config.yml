@@ -520,6 +520,18 @@ services:
       image: no
       implemented: no
 
+    mylar:
+      name: mylar
+      ports: [8090]
+      webport: [8090]
+      volumes: no
+      network: no
+      description: Automated Comic Book downloader
+      short_description: Comic Book downloader
+      source-link: https://github.com/monicahq/monica
+      image: no
+      implemented: no
+
     neko:
       name: neko
       ports: [8032]
@@ -805,6 +817,18 @@ services:
       description: Voice Chat Application
       short_description: Voice chat application
       source-link: https://github.com/solidnerd/docker-teamspeak
+      image: no
+      implemented: no
+
+      traefik:
+      name: traefik
+      ports: [80, 443, 8080]
+      webport: [8080]
+      volumes: no
+      network: no
+      description: Edge router simplify networking complexity/reverse proxy
+      short_description: Edge router
+      source-link: https://docs.traefik.io/user-guides/docker-compose/basic-example/
       image: no
       implemented: no
 
