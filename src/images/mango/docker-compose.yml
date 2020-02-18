@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  mango:
+    container_name: mango
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    expose:
+      - 9000
+    ports:
+      - 8036:9000
+    volumes:
+      - /home/udocker/volumes/mango/library:/root/mango/library
+      - /home/udocker/volumes/mango/config:/root/.config/mango

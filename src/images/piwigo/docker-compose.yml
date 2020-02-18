@@ -1,19 +1,17 @@
 version: "3.3"
 services:
-  heimdall:
-    image: linuxserver/heimdall
-    container_name: heimdall
-    user: udocker
+  piwigo:
+    image: linuxserver/piwigo
+    container_name: piwigo
     environment:
       - PUID: ${userid}
       - PGID: ${groupid}
       - TZ: ${time}
     volumes:
-      - /home/udocker/heimdall/config:/config
+      - /home/udocker/volumes/piwigo/config:/config
     ports:
-      - 8080:80
-      - 8443:443
+      - 8049:80
     restart: unless-stopped
     labels:
       - "AIS.traefik=false"
-      - "AIS.name=heimdall"
+      - "AIS.name=piwigo"

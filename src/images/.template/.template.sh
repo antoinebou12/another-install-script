@@ -3,13 +3,12 @@
 # @file .template.sh
 # @brief to install docker .template
 
-
 # @description create docker .template
 # link
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-create_docker_.template(){
+create_docker_.template() {
      return 0
 }
 
@@ -18,7 +17,7 @@ create_docker_.template(){
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-remove_docker_.template(){
+remove_docker_.template() {
      return 0
 }
 
@@ -27,6 +26,6 @@ remove_docker_.template(){
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-help_docker_.template(){
+help_docker_.template() {
      return 0
 }

@@ -11,7 +11,7 @@ services:
       - /home/udocker/volumes/tautulli/config:/config
       - /home/udocker/volumes/plex/logs:/logs
     ports:
-      - 8181:8181
+      - 8063:8181
     restart: unless-stopped
     labels:
         - "AIS.traefik=false"
