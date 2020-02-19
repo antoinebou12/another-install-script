@@ -42,7 +42,6 @@ manage_exec_containers_list() {
 	echo "Containers"
 	print_line
 
-
 	export UDOCKER_USERID=$(id -u udocker)
     export UDOCKER_GROUPID=$(id -g udocker)
     export TZ=$(cat /etc/timezone)
@@ -111,3 +110,12 @@ generate_container_menu() {
 	return 0
 }
 
+# @description generate a real docker-compose.yml with the template.yml
+# and the env variable
+# @args $1 template
+# @args $2 output docker compose
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+generate_docker_compose_yml(){
+	envsubst < "$1" > "$2"
+}
