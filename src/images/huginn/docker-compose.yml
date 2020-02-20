@@ -5,9 +5,9 @@ services:
     container_name: huginn
     user: udocker
     environment:
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
     ports:
       - "8013:3000"
     restart: unless-stopped

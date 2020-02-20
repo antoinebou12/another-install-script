@@ -15,9 +15,9 @@ services:
       - POSTGRES_DB: keycloak
       - POSTGRES_USER: keycloak
       - POSTGRES_PASSWORD: password
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
     restart: unless-stopped
     labels:
       - "AIS.traefik=false"
@@ -35,9 +35,9 @@ services:
       - DB_PASSWORD: password
       - KEYCLOAK_USER: admin
       - KEYCLOAK_PASSWORD: password
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
       # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
       #JDBC_PARAMS: "ssl=true"
     ports:

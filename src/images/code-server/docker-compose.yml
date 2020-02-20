@@ -7,9 +7,9 @@ services:
     user: udocker
     environment:
       - PASSWORD: coder
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
     ports:
       - "8003:8080"
     volumes:

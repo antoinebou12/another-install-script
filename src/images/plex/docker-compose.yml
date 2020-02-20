@@ -6,9 +6,9 @@ services:
     network_mode: host
     user: udocker
     environment:
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
       - UMASK_SET=022 #optional
     volumes:
       - /home/udocker/volumes/plex/config:/config

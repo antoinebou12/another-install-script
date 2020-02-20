@@ -10,9 +10,9 @@ services:
           - EULA: "TRUE"
           - PVP=true
           - DIFFICULTY=easy
-          - PUID: ${UDOCKER_USERID}
-          - PGID: ${UDOCKER_GROUPID}
-          - TZ: ${TZ}
+          - PUID: "${UDOCKER_USERID}"
+          - PGID: "${UDOCKER_GROUPID}"
+          - TZ: "${TZ}"
         volume:
           - /home/udocker/volumes/minecraft:/data
         tty: true

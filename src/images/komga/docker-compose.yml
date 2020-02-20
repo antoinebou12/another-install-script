@@ -6,9 +6,9 @@ services:
     user: udocker
     environment:
       - KOMGA_LIBRARIES_SCAN_DIRECTORY_EXCLUSIONS=#recycle,@eaDir
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
     volumes:
       - type: bind
         source: /home/udocker/volumes/komga/config

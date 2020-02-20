@@ -5,9 +5,9 @@ services:
         container_name: jenkins
         user: udocker
         environment:
-            - PUID: ${UDOCKER_USERID}
-            - PGID: ${UDOCKER_GROUPID}
-            - TZ: ${TZ}
+            - PUID: "${UDOCKER_USERID}"
+            - PGID: "${UDOCKER_GROUPID}"
+            - TZ: "${TZ}"
         ports:
             - 8015:8080
             - 50000:50000

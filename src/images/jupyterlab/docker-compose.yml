@@ -5,9 +5,9 @@ services:
     container_name: jupyterlab
     user: udocker
     environment:
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
     ports: 
       - 8888:8888
     volumes: /home/udocker/volumes/jupyterlab:~

@@ -5,9 +5,9 @@ services:
         container_name: libresignage
         user: udocker
         environment:
-            - PUID: ${UDOCKER_USERID}
-            - PGID: ${UDOCKER_GROUPID}
-            - TZ: ${TZ}
+            - PUID: "${UDOCKER_USERID}"
+            - PGID: "${UDOCKER_GROUPID}"
+            - TZ: "${TZ}"
         ports:
             - "8030:80"
         volumes:

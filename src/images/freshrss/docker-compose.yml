@@ -5,9 +5,9 @@ services:
     container_name: freshrss
     user: udocker
     environment:
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
     volumes:
       - /home/udocker/volumes/freshrss/config:/config
     ports:

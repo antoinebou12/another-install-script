@@ -4,9 +4,9 @@ services:
         container_name: ubuntuxrdp
         user: udocker
         environment:
-            - PUID: ${UDOCKER_USERID}
-            - PGID: ${UDOCKER_GROUPID}
-            - TZ: ${TZ}
+            - PUID: "${UDOCKER_USERID}"
+            - PGID: "${UDOCKER_GROUPID}"
+            - TZ: "${TZ}"
         ports:
             - '3389:3389'
             - '2232:22'

@@ -9,9 +9,9 @@ services:
     container_name: firefly-iii
     user: udocker
     environment:
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
     depends_on:
       - firefly_iii_db
     networks: 
@@ -36,9 +36,9 @@ services:
     container_name: firefly_iii_db
     user: udocker
     environment:
-      - PUID: ${UDOCKER_USERID}
-      - PGID: ${UDOCKER_GROUPID}
-      - TZ: ${TZ}
+      - PUID: "${UDOCKER_USERID}"
+      - PGID: "${UDOCKER_GROUPID}"
+      - TZ: "${TZ}"
       - POSTGRES_PASSWORD=firefly
       - POSTGRES_USER=firefly
     networks: 

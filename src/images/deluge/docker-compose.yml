@@ -5,9 +5,9 @@ services:
         container_name: deluge
         user: udocker
         environment:
-            - PUID: ${UDOCKER_USERID}
-            - PGID: ${UDOCKER_GROUPID}
-            - TZ: ${TZ}
+            - PUID: "${UDOCKER_USERID}"
+            - PGID: "${UDOCKER_GROUPID}"
+            - TZ: "${TZ}"
             - UMASK_SET: 022
             - DELUGE_LOGLEVEL=error #optional
         network_mode: host

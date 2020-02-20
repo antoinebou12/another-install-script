@@ -172,9 +172,9 @@ create_docker_user() {
         echo "export TZ=$(cat /etc/timezone)" | tee -a /home/udocker/.bashrc
     fi
 
-    export UDOCKER_USERID="$(id -u udocker)"
-    export UDOCKER_GROUPID="$(id -g udocker)"
-    export TZ="$(cat /etc/timezone)"
+    exec_root echo "UDOCKER_USERID=$(id -u udocker)" | tee -a /etc/environment
+    exec_root echo "UDOCKER_GROUPID=$(id -g udocker)" | tee -a /etc/environment
+    exec_root echo "TZ=$(cat /etc/timezone)" | tee -a /etc/environment
 
     print_line
     return 0
