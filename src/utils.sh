@@ -142,7 +142,7 @@ check_packages_install() {
 # @exitcode 1 On failure
 aptupdate() {
     echo "apt update"
-    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+    if [ "$DISTRO" == "ubuntu" ] || [ "$DISTRO" == "debian" ] || [ "$DISTRO" == "raspbian" ]; then
         exec_root "apt-get -qq update" >/dev/null
         exec_root "apt-get -qq install -f" >/dev/null
         exec_root "apt-get -qq autoclean -y" >/dev/null
@@ -157,7 +157,7 @@ aptupdate() {
         exec_root "dnf check-update -y" >/dev/null
         return 0
     fi
-    if [ "$DISTRO" == "centos" ] && [ "$DISTRO" == "redhat" ]; then
+    if [ "$DISTRO" == "centos" ] || [ "$DISTRO" == "redhat" ]; then
         exec_root "yum check-update -y" >/dev/null
         return 0
     fi
@@ -171,7 +171,7 @@ aptupdate() {
 # @exitcode 1 On failure
 aptupgrade() {
     echo "apt upgrade"
-    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+    if [ "$DISTRO" == "ubuntu" ] || [ "$DISTRO" == "debian" ] || [ "$DISTRO" == "raspbian" ]; then
         exec_root "apt-get -qq update" >/dev/null
         exec_root "apt-get -qq upgrade" >/dev/null
         exec_root "apt-get -qq dist-upgrade" >/dev/null
@@ -187,7 +187,7 @@ aptupgrade() {
         exec_root "dnf upgrade -y" >/dev/null
         return 0
     fi
-    if [ "$DISTRO" == "centos" ] && [ "$DISTRO" == "redhat" ]; then
+    if [ "$DISTRO" == "centos" ] || [ "$DISTRO" == "redhat" ]; then
         exec_root "yum update -y" >/dev/null
         return 0
     fi
@@ -201,7 +201,7 @@ aptupgrade() {
 # @exitcode 1 On failure
 aptinstall() {
     echo "apt install $@"
-    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+    if [ "$DISTRO" == "ubuntu" ] || [ "$DISTRO" == "debian" ] || [ "$DISTRO" == "raspbian" ]; then
         aptupdate >/dev/null
         for var in "$@"; do
             exec_root "apt-get -qq install -y $var" >/dev/null
@@ -222,7 +222,7 @@ aptinstall() {
         done
         return 0
     fi
-    if [ "$DISTRO" == "centos" ] && [ "$DISTRO" == "redhat" ]; then
+    if [ "$DISTRO" == "centos" ] || [ "$DISTRO" == "redhat" ]; then
         aptupdate >/dev/null
         for var in "$@"; do
             exec_root "yum install -y $var" >/dev/null
@@ -239,7 +239,7 @@ aptinstall() {
 # @exitcode 1 On failure
 aptremove() {
     echo "apt remove $@"
-    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+    if [ "$DISTRO" == "ubuntu" ] || [ "$DISTRO" == "debian" ] || [ "$DISTRO" == "raspbian" ]; then
         aptupdate >/dev/null
         for var in "$@"; do
             exec_root "apt-get -qq remove -y $var" >/dev/null
@@ -260,7 +260,7 @@ aptremove() {
         done
         return 0
     fi
-    if [ "$DISTRO" == "centos" ] && [ "$DISTRO" == "redhat" ]; then
+    if [ "$DISTRO" == "centos" ] || [ "$DISTRO" == "redhat" ]; then
         aptupdate >/dev/null
         for var in "$@"; do
             exec_root "yum remove -y $var" >/dev/null
@@ -277,7 +277,7 @@ aptremove() {
 # @exitcode 1 On failure
 aptclean() {
     echo "apt clean"
-    if [ "$DISTRO" == "ubuntu" ] && [ "$DISTRO" == "debian" ] && [ "$DISTRO" == "raspbian" ]; then
+    if [ "$DISTRO" == "ubuntu" ] || [ "$DISTRO" == "debian" ] || [ "$DISTRO" == "raspbian" ]; then
         exec_root "apt-get -qq install -f" >/dev/null
         exec_root "apt-get -qq autoclean -y" >/dev/null
         exec_root "apt-get -qq autoremove -y" >/dev/null

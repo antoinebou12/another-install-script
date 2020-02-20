@@ -133,7 +133,6 @@ help_setup_menu() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 main_setup_menu() {
-    dist_check
     
     SETUP_MENU=$(whiptail --clear --title "Another Install Script" --menu --notags "" 20 78 12 -- \
         "install" "Installation" \

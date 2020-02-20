@@ -33,6 +33,8 @@ install_basic() {
     echo "Install the basic packages"
     print_line
 
+    dist_check
+
     aptupdate
     aptupgrade
     aptinstall nnn nmap wget curl bats mlocate python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools openssl
