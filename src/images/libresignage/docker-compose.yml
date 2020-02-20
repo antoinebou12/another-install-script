@@ -3,7 +3,7 @@ services:
     libresignage:
         image: "eerotal/libresignage:latest"
         container_name: libresignage
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

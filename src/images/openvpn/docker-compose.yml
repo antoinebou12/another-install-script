@@ -5,7 +5,7 @@ services:
     container_name: openvpn
     cap_add:
       - NET_ADMIN
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

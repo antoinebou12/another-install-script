@@ -4,7 +4,7 @@ services:
   app:
     image: monicahq/monicahq
     container_name: monica
-    user: udocker
+    # user: udocker
     depends_on:
       - mysql
     ports:
@@ -22,7 +22,7 @@ services:
   mysql:
     image: mysql:5.7
     container_name: monica_db
-    user: udocker
+    # user: udocker
     environment:
       - MYSQL_ROOT_PASSWORD=monica
       - MYSQL_DATABASE=monica

@@ -3,7 +3,7 @@ services:
   draw.io:
     image: jgraph/drawio
     container_name: drawio
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
@@ -14,3 +14,4 @@ services:
     labels:
         - "AIS.traefik=false"
         - "AIS.name=drawio"
+    

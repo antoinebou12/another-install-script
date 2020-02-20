@@ -3,7 +3,7 @@ services:
   jupyterlab:
     image: ndslabs/jupyterlab
     container_name: jupyterlab
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

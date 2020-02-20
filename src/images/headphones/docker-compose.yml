@@ -3,7 +3,7 @@ services:
   headphones:
     image: linuxserver/headphones
     container_name: headphones
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

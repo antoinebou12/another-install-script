@@ -5,7 +5,7 @@ services:
         container_name: olaris
         ports:
             - "8043:8080"
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

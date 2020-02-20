@@ -3,7 +3,7 @@ services:
     .template:
         image: .template
         container_name: .template
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

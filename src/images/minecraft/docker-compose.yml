@@ -2,7 +2,7 @@ version: '3.3'
 services:
     minecraft:
         image: itzg/minecraft-server
-        user: udocker
+        # user: udocker
         container_name: minecraft
         ports:
             - '25565:25565'

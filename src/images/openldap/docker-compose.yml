@@ -3,7 +3,7 @@ services:
     openldap:
         image: openldap
         container_name: openldap
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

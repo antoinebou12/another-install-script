@@ -3,7 +3,7 @@ services:
   airsonic:
     image: linuxserver/airsonic
     container_name: airsonic
-    user: udocker
+    # user: udocker
     environment:
       PUID='${UDOCKER_USERID}'
       PGID='${UDOCKER_GROUPID}'

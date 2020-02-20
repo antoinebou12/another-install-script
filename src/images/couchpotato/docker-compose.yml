@@ -3,7 +3,7 @@ services:
   couchpotato:
     image: linuxserver/couchpotato
     container_name: couchpotato
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

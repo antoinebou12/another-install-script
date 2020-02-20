@@ -11,7 +11,7 @@ services:
   elasticsearch:
     image: analogj/lodestone:elasticsearch
     container_name: lodestone_elasticsearch
-    user: udocker
+    # user: udocker
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - PUID='${UDOCKER_USERID}'
@@ -64,7 +64,7 @@ services:
   webapp:
     image: analogj/lodestone:web
     container_name: lodestone
-    user: udocker
+    # user: udocker
     depends_on:
       elasticsearch:
         condition: service_healthy
@@ -96,7 +96,7 @@ services:
   storage:
     image: analogj/lodestone:storage
     container_name: lodestone_storage
-    user: udocker
+    # user: udocker
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -121,7 +121,7 @@ services:
   rabbitmq:
     image: analogj/lodestone:rabbitmq
     container_name: lodestone_rabbitmq
-    user: udocker
+    # user: udocker
     environment:
       - RABBITMQ_DEFAULT_USER=lodestone
       - RABBITMQ_DEFAULT_PASS=lodestone
@@ -133,7 +133,7 @@ services:
   tika:
     image: analogj/lodestone:tika
     container_name: lodestone_tika
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

@@ -2,7 +2,7 @@ version: '3.3'
 services:
     syncthing:
         image: 'syncthing/syncthing:latest'
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

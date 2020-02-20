@@ -4,7 +4,7 @@ services:
   mongo:
     image: mongo:3
     container_name: mongo
-    user: udocker
+    # user: udocker
     labels:
       - "AIS.traefik=false"
       - "AIS.name=mongo"
@@ -14,7 +14,7 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.2
     container_name: elasticsearch
-    user: udocker
+    # user: udocker
     environment:
       - http.host=0.0.0.0
       - transport.host=localhost
@@ -37,7 +37,7 @@ services:
   graylog:
     image: graylog/graylog:3.1
     container_name: graylog
-    user: udocker
+    # user: udocker
     environment:
       # CHANGE ME (must be at least 16 characters)!
       - GRAYLOG_PASSWORD_SECRET=graylog

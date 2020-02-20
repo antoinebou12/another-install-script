@@ -3,7 +3,7 @@ services:
   recipes_db:
     image: "postgres:11-alpine"
     container_name: recipes_db
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
@@ -19,7 +19,7 @@ services:
   web_recipes:
     build: .
     container_name: nginx_recipes
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
@@ -38,7 +38,7 @@ services:
   nginx_recipes:
     image: "nginx"
     container_name: nginx_recipes
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

@@ -4,7 +4,7 @@ services:
   code-server:
     image: codercom/code-server
     container_name: code-server
-    user: udocker
+    # user: udocker
     environment:
       - PASSWORD: coder
       - PUID='${UDOCKER_USERID}'

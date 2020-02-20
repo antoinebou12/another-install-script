@@ -3,7 +3,7 @@ services:
     nginx-fpm-alpine:
         image: 'privatebin/nginx-fpm-alpine:1.3.1'
         container_name: privatebin
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

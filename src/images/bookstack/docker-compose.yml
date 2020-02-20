@@ -3,7 +3,7 @@ services:
   bookstack:
     image: linuxserver/bookstack
     container_name: bookstack
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

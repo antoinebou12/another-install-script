@@ -3,7 +3,7 @@ services:
     .template:
         image: .template
         container_name: .template
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'
@@ -11,7 +11,7 @@ services:
         volumes:
             - /home/udocker/volumes/.template:/home/template
         ports:
-            - 8080:8080
+            - 8000:8080
         restart: unless-stopped
         labels:
             - "AIS.traefik=false"

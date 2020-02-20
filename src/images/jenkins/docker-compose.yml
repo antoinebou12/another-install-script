@@ -3,7 +3,7 @@ services:
     jenkins:
         image: "jenkins/jenkins:lts"
         container_name: jenkins
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

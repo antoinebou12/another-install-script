@@ -3,7 +3,7 @@ services:
   jackett:
     image: linuxserver/jackett
     container_name: jackett
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

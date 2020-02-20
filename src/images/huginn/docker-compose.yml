@@ -3,7 +3,7 @@ services:
   huginn:
     image: huginn/huginn
     container_name: huginn
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

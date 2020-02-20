@@ -3,7 +3,7 @@ services:
   portainer:
     container_name: portainer
     image: portainer/portainer
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

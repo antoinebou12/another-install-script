@@ -8,7 +8,7 @@ services:
   server:
     image: gitea/gitea:latest
     container_name: gitea
-    user: udocker
+    # user: udocker
     networks:
       - gitea
     volumes:

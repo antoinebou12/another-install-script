@@ -3,7 +3,7 @@ services:
   heimdall:
     image: linuxserver/heimdall
     container_name: heimdall
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

@@ -3,7 +3,7 @@ services:
     mcmyadmin2:
         image: linuxserver/mcmyadmin2
         container_name: mcmyadmin
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

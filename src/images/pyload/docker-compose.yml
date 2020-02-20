@@ -3,7 +3,7 @@ services:
   pyload:
     image: linuxserver/pyload
     container_name: pyload
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

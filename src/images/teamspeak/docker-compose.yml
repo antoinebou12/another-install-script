@@ -3,7 +3,7 @@ services:
     teamspeak:
         image: solidnerd/teamspeak
         container_name: teamspeak
-        user: udocker
+        # user: udocker
         environment:
             - TS3SERVER_LICENSE=accept
             - PUID='${UDOCKER_USERID}'

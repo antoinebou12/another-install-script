@@ -37,13 +37,7 @@ install_basic() {
 
     aptupdate
     aptupgrade
-    aptinstall nnn nmap wget curl bats mlocate python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools openssl
-
-    if [[ "$(checkWSL arg)" != "0" ]]; then
-        # snap package
-        aptinstall snapd 
-        exec_root "snap install hub --classic" > /dev/null
-    fi
+    aptinstall nmap wget curl bats mlocate python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools openssl nnn
 
     print_line
     return 0

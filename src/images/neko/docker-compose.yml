@@ -3,7 +3,7 @@ services:
   neko:
     image: nurdism/neko
     container_name: neko
-    user: udocker
+    # user: udocker
     environment:
       NEKO_DISPLAY: 0
       NEKO_WIDTH: 1280

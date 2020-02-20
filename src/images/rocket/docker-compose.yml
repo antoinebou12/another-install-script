@@ -4,7 +4,7 @@ services:
   rocketchat:
     image: rocketchat/rocket.chat:latest
     container_name: rocketchat
-    user: udocker
+    # user: udocker
     command: >
       bash -c
         "for i in `seq 1 30`; do
@@ -36,7 +36,7 @@ services:
   mongo:
     image: mongo:4.0
     container_name: rocketchat_db
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
@@ -53,7 +53,7 @@ services:
   mongo-init-replica:
     image: mongo:4.0
     container_name: rocketchat_db_replica
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
@@ -78,7 +78,7 @@ services:
   hubot:
     image: rocketchat/hubot-rocketchat:latest
     container_name: rocketchat_hubot
-    user: udocker
+    # user: udocker
     environment:
       - ROCKETCHAT_URL=rocketchat:3000
       - ROCKETCHAT_ROOM=GENERAL

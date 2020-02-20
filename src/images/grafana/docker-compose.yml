@@ -1,7 +1,7 @@
  grafana:
     image: grafana/grafana:latest
     container_name: grafana
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

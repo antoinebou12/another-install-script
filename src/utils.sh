@@ -242,7 +242,7 @@ aptremove() {
     if [ "$DISTRO" == "ubuntu" ] || [ "$DISTRO" == "debian" ] || [ "$DISTRO" == "raspbian" ]; then
         aptupdate >/dev/null
         for var in "$@"; do
-            exec_root "apt-get -qq remove -y $var" >/dev/null
+            exec_root "apt-get remove -y $var" >/dev/null
         done
         return 0
     fi

@@ -75,7 +75,7 @@ install_docker_extra() {
     print_line
 
     curl -sSf https://moncho.github.io/dry/dryup.sh | exec_root sh
-
+    exec_root chmod 755 /usr/local/bin/dry
     print_line
     return 0
 }

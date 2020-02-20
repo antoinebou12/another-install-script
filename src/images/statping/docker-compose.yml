@@ -9,7 +9,7 @@ services:
   nginx:
     container_name: nginx
     image: jwilder/nginx-proxy
-    user: udocker
+    # user: udocker
     ports:
       - 0.0.0.0:80:80
       - 0.0.0.0:443:443

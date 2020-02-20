@@ -3,7 +3,7 @@ services:
     lychee-docker:
         image: kdelfour/lychee-docker
         container_name: lychee
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

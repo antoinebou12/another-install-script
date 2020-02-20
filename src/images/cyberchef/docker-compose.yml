@@ -3,7 +3,7 @@ services:
   cyberchef:
     image: 4nxio/cyberchef:latest
     container_name: cyberchef
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

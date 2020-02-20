@@ -3,7 +3,7 @@ services:
   komga:
     image: gotson/komga
     container_name: komga
-    user: udocker
+    # user: udocker
     environment:
       - KOMGA_LIBRARIES_SCAN_DIRECTORY_EXCLUSIONS=#recycle,@eaDir
       - PUID='${UDOCKER_USERID}'

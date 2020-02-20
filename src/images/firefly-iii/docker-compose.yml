@@ -7,7 +7,7 @@ services:
   firefly_iii_app:
     image: jc5x/firefly-iii:latest
     container_name: firefly-iii
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
@@ -34,7 +34,7 @@ services:
   firefly_iii_db: 
     image: "postgres:10"
     container_name: firefly_iii_db
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

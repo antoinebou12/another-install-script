@@ -10,9 +10,9 @@
 # @exitcode 1 On failure
 create_docker_drawio() {
     
-    docker-compose -f "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/docker-compose.yml" up
+    docker-compose -f "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/docker-compose.yml" up -d
 
     echo "ctrl+click to open in browser"
-    echo "$(get_current_ip):${PORT_WEB}"
+    echo "$(get_current_ip):8005"
     return 0
 }

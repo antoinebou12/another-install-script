@@ -3,7 +3,7 @@ services:
     guacamole:
         image: guacamole
         container_name: guacamole
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

@@ -3,7 +3,7 @@ services:
     wireguard-docker:
         image: 'cmulk/wireguard-docker:buster'
         container_name: wireguard
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

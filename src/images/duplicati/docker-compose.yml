@@ -3,7 +3,7 @@ services:
   duplicati:
     image: linuxserver/duplicati
     container_name: duplicati
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

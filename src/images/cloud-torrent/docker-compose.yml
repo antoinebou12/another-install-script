@@ -3,7 +3,7 @@ services:
     cloud-torrent:
         image: jpillora/cloud-torrent
         container_name: cloud-torrent
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

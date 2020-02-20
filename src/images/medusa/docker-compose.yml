@@ -3,7 +3,7 @@ services:
   medusa:
     image: linuxserver/medusa
     container_name: medusa
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

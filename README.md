@@ -22,7 +22,13 @@ For now only work on ubuntu and only tested on ubuntu18.04
 ```bash
 git clone --recursive https://github.com/antoinebou13/another-install-script.git
 cd another-install-script
-bash install.sh
+sudo bash install.sh
+```
+
+### Uninstall
+```bash
+cd another-install-script
+sudo bash install.sh
 ```
 
 ## List of the services/server

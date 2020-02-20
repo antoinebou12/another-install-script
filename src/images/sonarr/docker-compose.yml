@@ -3,7 +3,7 @@ services:
     sonarr:
         image: linuxserver/sonarr:latest
         container_name: sonarr
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

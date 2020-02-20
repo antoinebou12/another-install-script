@@ -4,7 +4,7 @@ services:
     image: linuxserver/plex
     container_name: plex
     network_mode: host
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'

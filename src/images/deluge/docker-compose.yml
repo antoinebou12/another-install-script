@@ -3,7 +3,7 @@ services:
     deluge:
         image: linuxserver/deluge
         container_name: deluge
-        user: udocker
+        # user: udocker
         environment:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'

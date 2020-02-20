@@ -3,7 +3,7 @@ services:
   nextcloud:
     image: nextcloud
     container_name: nextcloud
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
@@ -24,7 +24,7 @@ services:
   nextcloud_db:
     image: linuxserver/mariadb
     container_name: nextcloud_db
-    user: udocker
+    # user: udocker
     environment:
       - MYSQL_ROOT_PASSWORD=nextcloud
       - MYSQL_PASSWORD=nextcloud

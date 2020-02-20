@@ -3,7 +3,7 @@ services:
   gitlab-ce:
     image: "gitlab/gitlab-ce:latest"
     container_name: gitlab
-    user: udocker
+    # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
