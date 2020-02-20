@@ -5,9 +5,9 @@ services:
     container_name: recipes_db
     user: udocker
     environment:
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/recipes/db:/var/lib/postgresql/data
     env_file:
@@ -21,9 +21,9 @@ services:
     container_name: nginx_recipes
     user: udocker
     environment:
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     env_file:
       - recipe.env
     command: "gunicorn --bind 0.0.0.0:8080 recipes.wsgi"
@@ -40,9 +40,9 @@ services:
     container_name: nginx_recipes
     user: udocker
     environment:
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     env_file:
       - recipe.env
     volumes:

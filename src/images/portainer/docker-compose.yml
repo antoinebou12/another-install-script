@@ -5,9 +5,9 @@ services:
     image: portainer/portainer
     user: udocker
     environment:
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     ports:
       - 9001:9000
     volumes:

@@ -5,9 +5,9 @@ services:
     container_name: gitlab
     user: udocker
     environment:
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     ports:
       # - '443:443'
       - 8009:80

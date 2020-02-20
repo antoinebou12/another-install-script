@@ -5,9 +5,9 @@ services:
         container_name: wireguard
         user: udocker
         environment:
-            - PUID: "${UDOCKER_USERID}"
-            - PGID: "${UDOCKER_GROUPID}"
-            - TZ: "${TZ}"
+            - PUID='${UDOCKER_USERID}'
+            - PGID='${UDOCKER_GROUPID}'
+            - TZ='${TZ}'
         volumes:
             - '/home/udocker/volumes/wireguard:/etc/wireguard'
         ports:

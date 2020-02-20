@@ -5,9 +5,9 @@ services:
     container_name: medusa
     user: udocker
     environment:
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/medusa/config:/config
       - /home/udocker/volumes/medusa/downloads:/downloads

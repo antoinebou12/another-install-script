@@ -24,9 +24,9 @@ services:
       - ./statup/nginx/dhparam:/etc/nginx/dhparam
     environment:
       - DEFAULT_HOST: localhost
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
 
   statup:
     container_name: statup

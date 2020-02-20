@@ -7,7 +7,7 @@ cloud-torrent,Remote torrent client
 code-server,Run VS Code on a remote server
 cyberchef,Web app for encryption, encoding, compression
 deluge,BitTorrent Client
-draw.io,Diagram software
+drawio,Diagram software
 duplicati,Backup software to store encrypted backups
 firefly-iii,Personal finance manager
 freshrss,RSS

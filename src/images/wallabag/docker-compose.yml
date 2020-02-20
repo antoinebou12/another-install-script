@@ -18,9 +18,9 @@ services:
       - SYMFONY__ENV__DATABASE_NAME=wallabagdb
       - SYMFONY__ENV__DATABASE_USER=wallabag
       - SYMFONY__ENV__DATABASE_PASSWORD=wallabag
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/wallabag/logs:/var/log/nginx
     restart: unless-stopped
@@ -37,9 +37,9 @@ services:
       - MYSQL_DATABASE=wallabagdb
       - MYSQL_USER=wallabag
       - MYSQL_PASSWORD=wallabag
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/wallabag/db:/var/lib/mysql
     restart: unless-stopped
@@ -52,9 +52,9 @@ services:
     container_name: wallabag_redis
     user: udocker
     environment:
-        - PUID: "${UDOCKER_USERID}"
-        - PGID: "${UDOCKER_GROUPID}"
-        - TZ: "${TZ}"
+        - PUID='${UDOCKER_USERID}'
+        - PGID='${UDOCKER_GROUPID}'
+        - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/wallabag/redis:/data
     restart: unless-stopped

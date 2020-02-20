@@ -7,9 +7,9 @@ services:
     command: --api --docker
     user: udocker
     environment:
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     ports:
       - "80:80"
       - "8080:8080"
@@ -23,9 +23,9 @@ services:
     container_name: whoami
     user: udocker
     environment:
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     labels:
       - "traefik.frontend.rule=Host:whoami.docker.localhost"
       - "AIS.traefik=true"
@@ -37,9 +37,9 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - PUID: "${UDOCKER_USERID}"
-      - PGID: "${UDOCKER_GROUPID}"
-      - TZ: "${TZ}"
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
       - "GLANCES_OPT=-w"
     labels:
       - "traefik.port=61208"
