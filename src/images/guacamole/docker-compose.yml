@@ -1,7 +1,7 @@
 version: "3.3"
 services:
     guacamole:
-        image: guacamole
+        image: oznu/guacamole
         container_name: guacamole
         # user: udocker
         environment:

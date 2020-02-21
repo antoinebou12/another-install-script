@@ -46,7 +46,7 @@ uninstall() {
     aptremove cockpit-packagekit
 
     aptremove docker 
-    aptremove docker-ce*
+    aptremove docker-ce
     aptremove docker-ce-cli
     aptremove containerd.io
     aptclean
@@ -54,13 +54,13 @@ uninstall() {
     aptremove ansible
     aptclean
 
-    exec_root rm -rf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/signal-cli
+    exec_root rm -rf /opt/signal-cli-0.6.5/bin/signal-cli
+    exec_root rm -rf  /usr/local/bin/signal-cli
     exec_root rm -rf /usr/local/bin/emojify
     exec_root rm -rf /usr/local/bin/docker-compose
     exec_root rm -rf /usr/bin/docker-compose
 
     exec_root userdel -f udocker > /dev/null
-    exec_root groupdel docker > /dev/null
     return 0
 }
 

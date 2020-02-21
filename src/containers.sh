@@ -49,11 +49,11 @@ manage_exec_containers_list() {
 	local FUNC_CREATE="create_docker_"
 	touch /tmp/containers.txt
 	containers=()
-	mapfile -t containers <<<"$1"
+	mapfile -t containers <<< "$1"
 	for container_name in "${containers[@]}"; do
 		echo "$container_name"
 		print_line
-		exec_root "$container_name" >> /tmp/containers.txt
+		exec_root "printf $container_name >> /tmp/containers.txt"
 		source "$(dirname "${BASH_SOURCE[0]}")/images/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line
