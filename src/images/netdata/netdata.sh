@@ -3,22 +3,16 @@
 # @file netdata.sh
 # @brief to install docker netdata
 
-
-
 # @description create docker netdata
 # not implemented yet
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-create_docker_netdata(){
-    set -e
-    local PORT_WEB=${1:-19999}
-    cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
-    exec_root PORT_WEB=${PORT_WEB} docker-compose up -d
+create_docker_netdata() {
+    docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" up -d
 
     echo "ctrl+click to open in browser"
-    echo "$(get_current_ip):${PORT_WEB}"
+    echo "$(get_current_ip):8004"
 
-    exit 1
     return 0
 }

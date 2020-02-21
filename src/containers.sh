@@ -53,7 +53,7 @@ manage_exec_containers_list() {
 	for container_name in "${containers[@]}"; do
 		echo "$container_name"
 		print_line
-		exec_root "$container_name >> /tmp/containers.txt"
+		exec_root echo "$container_name" >> /tmp/containers.txt
 		source "$(dirname "${BASH_SOURCE[0]}")/images/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line

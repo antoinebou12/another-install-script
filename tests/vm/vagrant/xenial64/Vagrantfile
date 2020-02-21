@@ -22,7 +22,6 @@ Vagrant.configure("2") do |config|
     # config.vm.network "forwarded_port", guest: 8006, host: 8006
     # config.vm.network "forwarded_port", guest: 8007, host: 8007
     # config.vm.network "forwarded_port", guest: 8008, host: 8008
-
     # config.vm.network "forwarded_port", guest: 8009, host: 8009
     # config.vm.network "forwarded_port", guest: 8011, host: 8011
     # config.vm.network "forwarded_port", guest: 8012, host: 8012
@@ -37,6 +36,21 @@ Vagrant.configure("2") do |config|
     # config.vm.network "forwarded_port", guest: 8031, host: 8031
     # config.vm.network "forwarded_port", guest: 8339, host: 8339
     # config.vm.network "forwarded_port", guest: 8034, host: 8034
+
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
+    # config.vm.network "forwarded_port", guest: , host: 
     
   end
 end

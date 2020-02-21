@@ -9,10 +9,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_deluge() {
-    echo "not implemented yet"
-
-    udocker_create_dir /home/udocker/volumes/deluge/config
-    udocker_create_dir /home/udocker/volumes/deluge/download
+    docker-compose -f "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/docker-compose.yml" up -d
 
     return 0
 }

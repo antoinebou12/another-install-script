@@ -12,7 +12,7 @@ services:
       - db
     ports:
       - "8339:8339"
-    volume
+    # volumes:
 
   db:
     image: postgres:9.6

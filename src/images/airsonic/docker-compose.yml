@@ -19,5 +19,5 @@ services:
       - 1900:1900
     restart: unless-stopped
     labels:
-        - "AIS.traefik=false"
-        - "AIS.name=airsonic"
+      - "AIS.traefik=false"
+      - "AIS.name=airsonic"
