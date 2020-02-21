@@ -5,7 +5,7 @@ system-config:
     enable: no
     provider: traefik_docker
   firewall: no
-  udocker: 
+  udocker:
     enable: yes
     username: udocker
     password: udocker
@@ -38,7 +38,6 @@ services:
       implemented: no
 
   containers:
-    
     airsonic:
       name: airsonic
       ports: [4040, 1900]
@@ -77,8 +76,8 @@ services:
 
     calibre:
       name: calibre
-      ports: [8001,8002]
-      web: [:8001, ":8002"]
+      ports: [8001, 8002]
+      web: [":8001", ":8002"]
       volumes: no
       network: no
       description: Powerful and easy to use e-book manager
@@ -237,8 +236,8 @@ services:
       web: [":8011"]
       volumes: no
       network: no
-      description: the open source analytics and monitoring solution 
-      short_description: Analytics and monitoring solution 
+      description: the open source analytics and monitoring solution
+      short_description: Analytics and monitoring solution
       source-link: https://grafana.com/
       image: no
       implemented: no
@@ -333,7 +332,7 @@ services:
       web: [":8096"]
       volumes: no
       network: no
-      description:  Free Software Media System also alternative for plex
+      description: Free Software Media System also alternative for plex
       short_description: Software media system
       source-link: https://jellyfin.org/
       image: no
@@ -382,7 +381,7 @@ services:
       volumes: no
       network: no
       description: Open source identity and access management
-      short_description: Identity and access management 
+      short_description: Identity and access management
       source-link: https://www.keycloak.org/
       image: no
       implemented: no
@@ -429,7 +428,7 @@ services:
       web: [":8034"]
       volumes: no
       network: no
-      description: Personal Document Archiving (DMS, EDMS for Personal/Home Office use) 
+      description: Personal Document Archiving (DMS, EDMS for Personal/Home Office use)
       short_description: Personal document archiving
       source-link: https://github.com/AnalogJ/lodestone
       image: no
@@ -471,7 +470,6 @@ services:
       image: no
       implemented: no
 
-
     mcmyadmin:
       name: mcmyadmin
       ports: [8037, 25565]
@@ -502,8 +500,8 @@ services:
       web: []
       volumes: no
       network: no
-      description: Minecraft Server 
-      short_description: Minecraft Server 
+      description: Minecraft Server
+      short_description: Minecraft Server
       source-link: https://hub.docker.com/r/itzg/minecraft-server
       image: no
       implemented: no
@@ -550,9 +548,9 @@ services:
       web: [":19999"]
       volumes: no
       network: no
-      description: Real-time performance monitoring, done right! 
+      description: Real-time performance monitoring, done right!
       short_description: Real-time performance monitoring
-      source-link:  https://github.com/netdata/netdata
+      source-link: https://github.com/netdata/netdata
       image: no
       implemented: no
 
@@ -671,7 +669,7 @@ services:
       volumes: no
       network: no
       description: A minimalist, open source online pastebin where the server has zero knowledge of pasted data
-      short_description: Pastebin 
+      short_description: Pastebin
       source-link: https://privatebin.info/
       image: no
       implemented: no
@@ -694,12 +692,12 @@ services:
       web: []
       volumes: no
       network: no
-      description:  Open Source software alternative to µTorrent with VPN
+      description: Open Source software alternative to µTorrent with VPN
       short_description: qbittorent VPN
       source-link: https://hub.docker.com/r/markusmcnugen/qbittorrentvpn/
       image: no
       implemented: no
-        
+
     recipes:
       name: recipes
       ports: []
@@ -718,8 +716,8 @@ services:
       web: []
       volumes: no
       network: no
-      description: Open Source Team Communication, replace email, HipChat & Slack 
-      short_description: Simple chat server 
+      description: Open Source Team Communication, replace email, HipChat & Slack
+      short_description: Simple chat server
       source-link: https://rocket.chat/docs/installation/docker-containers/
       image: no
       implemented: no
@@ -820,7 +818,7 @@ services:
       image: no
       implemented: no
 
-      traefik:
+    traefik:
       name: traefik
       ports: [80, 443, 8080]
       webport: [8080]
@@ -834,7 +832,7 @@ services:
 
     ubuntuxrdp:
       name: ubuntuxrdp
-      ports: [3389,2232]
+      ports: [3389, 2232]
       web: []
       volumes: no
       network: no
@@ -851,7 +849,7 @@ services:
       volumes: no
       network: no
       description: Save and classify articles, Read them later, Freely
-      short_description: Read-it-later 
+      short_description: Read-it-later
       source-link: https://github.com/wallabag/wallabag
       image: no
       implemented: no
