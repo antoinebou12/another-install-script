@@ -1,7 +1,0 @@
-version: '3.3'
-services:
-    recalbox-docker-build:
-        container_name: recalbox
-        volumes:
-            - '/usr/share/recalbox/build/:/usr/share/recalbox/build/'
-        image: recalbox/recalbox-docker-build

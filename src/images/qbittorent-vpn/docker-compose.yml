@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  qbittorrentvpn:
+    image: markusmcnugen/qbittorrentvpn
+    container_name: qbittorent-vpn
+    environment:
+      - VPN_ENABLED: 'yes'
+      - LAN_NETWORK: 192.168.1.0/24
+      - NAME_SERVERS: 8.8.8.8,8.8.4.4
+      - INCOMING_PORT_ENV: 6969
+    ports:
+      - 8054:8080
+      - 6969:6969
+      - 6969:6969/udp
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: 0
+    privileged: true
+    volumes:
+      - /home/udocker/volumes/qbittorent-vpn/torrent:/config
+      - /home/udocker/volumes/qbittorent-vpn/media:/downloads
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=qbittorent-vpn"

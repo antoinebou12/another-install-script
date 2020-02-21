@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  gitlab-ce:
+    image: "gitlab/gitlab-ce:latest"
+    container_name: gitlab
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    ports:
+      # - '443:443'
+      - "8009:80"
+      - "22222:22"
+    volumes:
+      - /home/udocker/volumes/gitlab/config:/etc/gitlab
+      - /home/udocker/volumes/gitlab/logs:/var/log/gitlab
+      - /home/udocker/volumes/gitlab/data:/var/opt/gitlab
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=gitlab"

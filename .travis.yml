@@ -1,6 +1,24 @@
 language: shell
-os: linux
-dist: bionic
+jobs:
+  include:
+    - os: linux
+      dist: trusty
+      arch: amd64
+    - os: linux
+      dist: trusty
+      arch: arm64
+    - os: linux
+      dist: xenial
+      arch: amd64
+    - os: linux
+      dist: xenial
+      arch: amd64
+    - os: linux
+      dist: bionic
+      arch: amd64
+    - os: linux
+      dist: bionic
+      arch: arm64
 
 cache:
   directories:
@@ -9,6 +27,7 @@ cache:
 
 addons:
   apt:
+    update: true
     sources:
       - sourceline: 'ppa:duggan/bats'
     packages:
@@ -23,17 +42,22 @@ addons:
       - build-essential
       - bats
       - bc
-      
-# before_install:
+      - ruby-full
+
+before_install:
+  - gem install awesome_bot
 
 script:
   - cd tests || exit 1
-  - bash linter.sh # linter shellcheck
-  - bash coverage.sh # coverage kcov
+  - sudo bash linter.sh # linter shellcheck
+  # - sudo bash tests.sh # test
+  # - sudo bash coverage.sh # coverage kcov
   - cd .. || exit 1
-  - cd docs || exit 1
-  - bash generate_docs.sh docs.sh # documentation shdoc
-  - cd .. || exit 1
+  - cd docs/scripts || exit 1
+  - bash generate_docs.sh ../docs.md # documentation shdoc
+  - cd ../.. || exit 1
+  - awesome_bot README.md --allow-dupe --allow-redirect --allow-ssl --allow-timeout --allow 999,403,405,500,503,522
+  - awesome_bot docs/SERVER_LIST.md --allow-dupe --allow-redirect --allow-ssl --allow-timeout --allow 999,403,405,500,503,522
 
 notifications:
     email: false

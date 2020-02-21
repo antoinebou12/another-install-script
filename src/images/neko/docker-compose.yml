@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  neko:
+    image: nurdism/neko
+    container_name: neko
+    # user: udocker
+    environment:
+      NEKO_DISPLAY: 0
+      NEKO_WIDTH: 1280
+      NEKO_HEIGHT: 720
+      NEKO_PASSWORD: neko
+      NEKO_BIND: :8080
+    shm_size: '1gb'
+    ports:
+      - "8032:8080"
+    restart: always
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=neko"

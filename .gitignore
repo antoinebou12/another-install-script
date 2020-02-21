@@ -162,3 +162,9 @@ zsdoc/data
 
 /tests/coverage
 /tests/bin
+
+#vargant 
+*.log
+*/.vagrant
+tests/vm/vagrant/*/*.log
+tests/vm/vagrant/*/*.vagrant

@@ -1,9 +1,0 @@
-version: '3.3'
-services:
-    cloud-torrent:
-        container_name: cloud-torrent
-        ports:
-            - '6889:3000'
-        volumes:
-            - '/home/udocker/cloud-torrent/download:/downloads'
-        image: jpillora/cloud-torrent

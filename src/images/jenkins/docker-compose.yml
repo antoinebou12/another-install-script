@@ -1,0 +1,19 @@
+version: "3.3"
+services:
+    jenkins:
+        image: "jenkins/jenkins:lts"
+        container_name: jenkins
+        # user: udocker
+        environment:
+            - PUID='${UDOCKER_USERID}'
+            - PGID='${UDOCKER_GROUPID}'
+            - TZ='${TZ}'
+        ports:
+            - 8015:8080
+            - 50000:50000
+        volumes:
+            - /home/udocker/volumes/jenkins:/var/jenkins_home
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=jenkins"

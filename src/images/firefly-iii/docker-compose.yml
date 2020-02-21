@@ -1,0 +1,54 @@
+# https://github.com/firefly-iii/docker
+version: "3"
+networks: 
+  firefly_iii_net: 
+    driver: bridge
+services: 
+  firefly_iii_app:
+    image: jc5x/firefly-iii:latest
+    container_name: firefly-iii
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    depends_on:
+      - firefly_iii_db
+    networks: 
+      - firefly_iii_net
+    ports: 
+      - "8006:80"
+    env_file: firefly_iii.env
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=firefly-iii"
+    volumes: 
+      - 
+        source: firefly_iii_export
+        target: /home/udocker/volumes/firefly-iii/upload
+        type: volume
+      - 
+        source: firefly_iii_upload
+        target: /home/udocker/volumes/firefly-iii/upload
+        type: volume
+  firefly_iii_db: 
+    image: "postgres:10"
+    container_name: firefly_iii_db
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+      - POSTGRES_PASSWORD=firefly
+      - POSTGRES_USER=firefly
+    networks: 
+      - firefly_iii_net
+    volumes: 
+      - /home/udocker/volumes/firefly-iii/db:/var/lib/postgresql/data
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=firefly-iii_db"
+volumes: 
+  firefly_iii_db: ~
+  firefly_iii_export: ~
+  firefly_iii_upload: ~

@@ -13,7 +13,7 @@ use_kcov(){
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     install_kcov
     [[ -d coverage ]] || mkdir coverage
-    "${DIR}"/bin/kcov --exclude-pattern=docs/,etc/,tests/,*.yml,coverage,/usr,/tmp,.git,.*,*.md,.*.yml coverage tests.sh
+    "${DIR}"/bin/kcov --exclude-pattern=docs/,etc/,tests/,*.yml,coverage,/usr,/tmp,.git,.*,*.md,.*.yml,src/image/ coverage tests.sh
     return 0
 }
 

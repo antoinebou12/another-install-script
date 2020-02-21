@@ -1,0 +1,64 @@
+version: "3"
+services:
+  recipes_db:
+    image: "postgres:11-alpine"
+    container_name: recipes_db
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/recipes/db:/var/lib/postgresql/data
+    env_file:
+      - recipes.env
+    networks:
+      - default
+    restart: always
+
+  web_recipes:
+    build: .
+    container_name: nginx_recipes
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    env_file:
+      - recipe.env
+    command: "gunicorn --bind 0.0.0.0:8080 recipes.wsgi"
+    volumes:
+      - /home/udocker/volumes/recipes:/Recipes
+    depends_on:
+      - recipes_db
+    networks:
+      - default
+    restart: always
+
+  nginx_recipes:
+    image: "nginx"
+    container_name: nginx_recipes
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    env_file:
+      - recipe.env
+    volumes:
+      - /home/udocker/volumes/recipes/nginx/conf.d:/etc/nginx/conf.d
+      - /home/udocker/volumes/recipes/staticfiles:/static
+      - /home/udocker/volumes/recipes/mediafiles:/media
+    networks:
+      - default
+      - nginx-proxy
+    restart: always
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=nginx_recipes"
+
+networks:
+  default:
+  nginx-proxy:
+    external:
+      name: nginx-proxy

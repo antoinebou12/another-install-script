@@ -33,15 +33,11 @@ install_basic() {
     echo "Install the basic packages"
     print_line
 
+    dist_check
+
     aptupdate
     aptupgrade
-    aptinstall nnn nmap wget curl bats mlocate python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools
-
-    if [[ "$(checkWSL arg)" != "0" ]]; then
-        # snap package
-        aptinstall snapd 
-        exec_root "snap install hub --classic" > /dev/null
-    fi
+    aptinstall nmap wget curl bats mlocate python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools openssl nnn firefox
 
     print_line
     return 0
@@ -62,6 +58,24 @@ install_cockpit() {
     if [[ "$(checkWSL arg)" != "0" ]]; then
         exec_root systemctl restart cockpit
     fi
+
+    print_line
+    return 0
+}
+
+# @description install ansible
+#  https://www.ansible.com
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+install_ansible() {
+    echo "Install Ansible"
+    print_line
+
+    exec_root apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+    aptupdate
+    aptinstall ansible software-properties-common
+    exec_root pip install ansible
 
     print_line
     return 0
@@ -147,8 +161,7 @@ install_signal_ssh_text() {
 manage_exec_install_list() {
     local FUNC_INSTALL="install_"
     basic_option=()
-	mapfile -t basic_option <<< "$1""$1"
-    echo "$1"
+	mapfile -t basic_option <<<"$1"
 	for basic in "${basic_option[@]}"; do
         if [[ "$basic" == "docker" ]]; then
             install_docker
@@ -158,4 +171,5 @@ manage_exec_install_list() {
             "$FUNC_INSTALL""$basic" 
         fi 
     done
+    return 0
 }

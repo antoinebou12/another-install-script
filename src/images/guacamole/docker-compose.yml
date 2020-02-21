@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+    guacamole:
+        image: oznu/guacamole
+        container_name: guacamole
+        # user: udocker
+        environment:
+            - PUID='${UDOCKER_USERID}'
+            - PGID='${UDOCKER_GROUPID}'
+            - TZ='${TZ}'
+        ports:
+            - 8012:8080
+        volumes:
+            - /home/udocker/volumes/guacamole/config:/configoznu/guacamole
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=guacamole"       

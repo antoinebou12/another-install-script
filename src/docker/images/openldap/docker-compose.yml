@@ -1,8 +1,0 @@
-version: '3.3'
-services:
-    openldap:
-        image: openldap
-        container_name: openldap
-        ports:
-            - '389:389'
-            - '636:636'

@@ -16,5 +16,4 @@ while [[ $# > 0 ]]; do
     shift
 done
 
-
 main_setup_menu

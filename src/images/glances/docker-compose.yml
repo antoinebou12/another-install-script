@@ -1,0 +1,49 @@
+version: '3.3'
+
+services:
+  reverse-proxy:
+    image: traefik:alpine
+    container_name: traefik
+    command: --api --docker
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "AIS.traefik=true"
+      - "AIS.name=traefik"
+  whoami:
+    image: emilevauge/whoami
+    container_name: whoami
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    labels:
+      - "traefik.frontend.rule=Host:whoami.docker.localhost"
+      - "AIS.traefik=true"
+      - "AIS.name=whoami"
+  glances:
+    image: nicolargo/glances:latest-alpine
+    container_name: glances
+    pid: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+      - "GLANCES_OPT=-w"
+    labels:
+      - "traefik.port=61208"
+      - "traefik.frontend.rule=Host:glances.docker.localhost"
+      - "AIS.traefik=true"
+      - "AIS.name=glances"
+    restart: always

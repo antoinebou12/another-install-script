@@ -1,0 +1,18 @@
+version: "3"
+services:
+    cloud-torrent:
+        image: jpillora/cloud-torrent
+        container_name: cloud-torrent
+        # user: udocker
+        environment:
+            - PUID='${UDOCKER_USERID}'
+            - PGID='${UDOCKER_GROUPID}'
+            - TZ='${TZ}'
+        volumes:
+            - /home/udocker/volumes/cloud-torrent/download:/downloads
+        ports:
+            - "6889:3000"
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=cloud-torrent"

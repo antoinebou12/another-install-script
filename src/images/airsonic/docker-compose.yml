@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  airsonic:
+    image: linuxserver/airsonic
+    container_name: airsonic
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/airsonic/config:/config
+      - /home/udocker/volumes/airsonic/music:/music
+      - /home/udocker/volumes/airsonic/playlists:/playlists
+      - /home/udocker/volumes/airsonic/podcasts:/podcasts
+      - /home/udocker/volumes/airsonic/media:/media #optional
+    ports:
+      - 4040:4040
+      - 1900:1900
+    restart: unless-stopped
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=airsonic"

@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  draw.io:
+    image: jgraph/drawio
+    container_name: drawio
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    ports:
+      - "8005:8080"
+    restart: unless-stopped
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=drawio"
+    

@@ -1,0 +1,20 @@
+version: "3"
+services:
+    deluge:
+        image: linuxserver/deluge
+        container_name: deluge
+        # user: udocker
+        environment:
+            - PUID='${UDOCKER_USERID}'
+            - PGID='${UDOCKER_GROUPID}'
+            - TZ='${TZ}'
+            - UMASK_SET: 022
+            - DELUGE_LOGLEVEL=error #optional
+        network_mode: host
+        volumes:
+            - /home/udocker/volumes/deluge/config:/config
+            - /home/udocker/volumes/deluge/downloads:/downloads
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=deluge"
