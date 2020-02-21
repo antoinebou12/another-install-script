@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 #
-# @file firefly-iii.sh
-# @brief to install docker firefly-iii
+# @file olaris.sh
+# @brief to install docker folaris
 
-# @description create docker firefly-iii
-# https://github.com/firefly-iii/docker
+# @description create docker olaris
+# https://gitlab.com/olaris/olaris-server
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_olaris() {
+   docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" up -d
+
+   echo "ctrl+click to open in browser"
+   echo "$(get_current_ip):19999"
    return 0
 }
