@@ -75,8 +75,10 @@ install_docker_extra() {
     print_line
 
     curl -sSf https://moncho.github.io/dry/dryup.sh | exec_root sh
-    exec_root chmod 755 /usr/local/bin/dry
+    exec_root "chmod 755 /usr/local/bin/dry"
+    
     print_line
+
     return 0
 }
 
@@ -145,7 +147,7 @@ udocker_create_default_dir() {
     [ -d /home/udocker/audio ]  || udocker_create_dir /home/udocker/audio
     [ -d /home/udocker/music ]  || udocker_create_dir /home/udocker/audio
 
-    cp "$(dirname "${BASH_SOURCE[0]}")/.." /home/udocker/
+    cp "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/.." /home/udocker/
 
     print_line
     return 0

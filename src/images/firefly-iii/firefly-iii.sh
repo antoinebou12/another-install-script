@@ -14,20 +14,10 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_firefly-iii(){
-    PORT_WEB=${1:-"8087"}
-    PATH_DB=${2:-"/home/udocker/volumes/firefly-iii/db"}
-    PATH_EXPORT=${3:-"/home/udocker/volumes/firefly-iii/db"}
-    PATH_UPLOAD=${4:-"/home/udocker/volumes/firefly-iii/upload"}
-    POSTGRES_PASSWORD=${5:-"firefly"}
+    docker-compose -f "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/docker-compose.yml" up -d
 
-    udocker_create_dir "$PATH_DB"
-    udocker_create_dir "$PATH_EXPORT"
-    udocker_create_dir "$PATH_UPLOAD"
-
-    exec_root PORT_WEB="${PORT_WEB}" PATH_DB="${PATH_DB}" PATH_EXPORT="${PATH_DB}" PATH_UPLOAD="${PATH_UPLOAD}" POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" docker-compose -d -f "$(dirname "${BASH_SOURCE[0]}")/docker-compose.yml" up
-       
     echo "ctrl+click to open in browser"
-    echo "$(get_current_ip):${PORT_WEB}"
+    echo "$(get_current_ip):8006"
 
     return 0
 }

@@ -17,4 +17,4 @@ services:
     restart: unless-stopped
     labels:
         - "AIS.traefik=false"
-        - "AIS.name=deluge"
+        - "AIS.name=duplicati"

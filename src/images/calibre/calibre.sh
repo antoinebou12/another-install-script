@@ -12,7 +12,8 @@
 create_docker_calibre(){
 
      docker-compose -f "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/docker-compose.yml" up -d
+
      echo "ctrl+click to open in browser"
-     echo "$(get_current_ip):6875"
+     echo "$(get_current_ip):8001"
      return 0
 }
