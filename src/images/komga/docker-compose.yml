@@ -10,16 +10,9 @@ services:
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
     volumes:
-      - type: bind
-        source: /home/udocker/volumes/komga/config
-        target: /config
-      - type: bind
-        source: /home/udocker/volumes/komga/books
-        target: /books
-      - type: bind
-        source: /etc/timezone
-        target: /etc/timezone
-        read_only: true
+        - /home/udocker/volumes/komga/config:/config
+        - /home/udocker/volumes/komga/books:/books
+        - /etc/timezone:/etc/timezone
     ports:
       - 8031:8080
     restart: unless-stopped

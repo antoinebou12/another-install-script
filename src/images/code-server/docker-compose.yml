@@ -6,7 +6,7 @@ services:
     container_name: code-server
     # user: udocker
     environment:
-      - PASSWORD: coder
+      - PASSWORD=coder
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'

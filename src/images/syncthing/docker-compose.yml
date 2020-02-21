@@ -12,7 +12,7 @@ services:
             - '8384:8384'
             - '22000:22000'
         volumes:
-            - '$PATH_SYNC:/var/syncthing'
+            - '/home/udocker/volumes/syncthing:/var/syncthing'
         restart: unless-stopped
         labels:
             - "AIS.traefik=false"

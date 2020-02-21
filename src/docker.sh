@@ -147,7 +147,7 @@ udocker_create_default_dir() {
     [ -d /home/udocker/audio ]  || udocker_create_dir /home/udocker/audio
     [ -d /home/udocker/music ]  || udocker_create_dir /home/udocker/audio
 
-    cp "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/.." /home/udocker/
+    cp "../$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" /home/udocker/
 
     print_line
     return 0
