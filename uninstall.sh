@@ -38,6 +38,7 @@ uninstall() {
     aptremove cmake 
     aptremove default-jre
     aptremove jq
+    aptremove firefox
 
     aptremove cockpit 
     aptremove cockpit-docker

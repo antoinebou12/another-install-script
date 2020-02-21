@@ -1,24 +1,7 @@
 # Testing
 
-[Download Ubuntu server](https://ubuntu.com/download/server)
 
-## Manuel Testing
-
-Using virtual machine you can test the install script manually
-
-### VirtualBox
-
-[Virtualbox](https://www.virtualbox.org/wiki/Downloads)
-
-- ![Create virtualbox vm](images/virtualbox_create_vm.png)
-- ![Add iso to vm](images/virtualbox_create_vm.png)
-- Install the minimal installation of ubuntu
-- Restart VM
-- Port forwarding 127.0.0.1:2222 -> 10.0.2.15:22
-- create a clone
-- `DISPLAY=localhost:0 ssh -X username@127.0.0.1 -p 2222`
-
-
+## Bats
 
 ```bash
 sudo apt-get install bats firefox
@@ -32,6 +15,40 @@ cd ..
 
 bash install.sh
 ```
+
+## Manuel Testing
+
+
+[Download Ubuntu server](https://ubuntu.com/download/server)
+
+Using virtual machine you can test the install script manually
+
+
+### VirtualBox
+
+[Virtualbox](https://www.virtualbox.org/wiki/Downloads)
+
+- ![Create virtualbox vm](images/virtualbox_create_vm.png)
+- ![Add iso to vm](images/virtualbox_create_vm.png)
+- Install the minimal installation of ubuntu
+- Restart VM
+- Port forwarding 127.0.0.1:2222 -> 10.0.2.15:22
+- create a clone
+- `DISPLAY=localhost:0.0 ssh -X username@127.0.0.1 -p 2222`
+- `DISPLAY=localhost:10.0 firefox &`
+
+### Vagrant
+
+```bash
+cd tests/vm/vagrant/xenial64
+vagrant up
+vagrant ssh
+git clone https://github.com/antoinebou13/another-install-script.git
+cd another-install-script
+sudo bash install.sh
+DISPLAY=localhost:10.0 firefox &
+```
+
 
 ### Qemu
 

@@ -51,6 +51,7 @@ Go to the [Google Sheet](https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-
 - default-jre
 - jq
 - net-tools
+- firefox
 - [vim](https://www.vim.org/)
 - [snapd](https://snapcraft.io/)
 - [nnn](https://github.com/jarun/nnn)
@@ -154,6 +155,7 @@ Go to [License](.github/LICENSE)
 
 ## Roadmap
 
+- [] auto vm creatation for ci and personnal use
 - [] Add traefik reverse proxy with subdomain for each docker container
 - [] Easier config file or adding yml file to individual folder
 - [] More docker container and images

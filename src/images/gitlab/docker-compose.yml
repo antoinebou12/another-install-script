@@ -10,8 +10,8 @@ services:
       - TZ='${TZ}'
     ports:
       # - '443:443'
-      - 8009:80
-      - 22222:22
+      - "8009:80"
+      - "22222:22"
     volumes:
       - /home/udocker/volumes/gitlab/config:/etc/gitlab
       - /home/udocker/volumes/gitlab/logs:/var/log/gitlab

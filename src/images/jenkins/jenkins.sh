@@ -12,19 +12,11 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_jenkins(){
-    PORT_WEB=${1:-8015}
-    PORT_JENKINS=${2:-50000}
-    JENKINS_DATA=${3:-/home/udocker/volumes/jenkins}
-
-    echo "Open in a browser :$PORT_WEB"
-
-    udocker_create_dir "$JENKINS_DATA"
-
-    docker run -d --name jenkins -p "$PORT_WEB":8080 -p "$PORT_JENKINS":50000 -v "$JENKINS_DATA":/var/jenkins_home jenkins/jenkins:lts
+    docker-compose -f "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/docker-compose.yml" up -d
     
     echo "Please wait ..."
     echo "ctrl+click to open in browser"
-    echo "$(get_current_ip):${PORT_WEB}"
+    echo "$(get_current_ip):8015"
     
     sleep 60
     echo "Admin Password:"

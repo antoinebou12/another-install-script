@@ -21,7 +21,7 @@ services:
         target: /etc/timezone
         read_only: true
     ports:
-      - 8080:8080
+      - 8031:8080
     restart: unless-stopped
     labels:
       - "AIS.traefik=false"

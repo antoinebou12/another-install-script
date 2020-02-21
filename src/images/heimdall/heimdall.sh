@@ -12,15 +12,11 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_heimdall(){
-    PATH_CONFIG=${1:-:"/home/udocker/volumes/heimdall/config"}
-    PORT_WEB=${2:-:8080}
-    PORT_WEB_HTTPS=${3:-:8443}
-    
-    udocker_create_dir "$PATH_CONFIG"
-    
-    exec_root PATH_CONFIG="$PATH_CONFIG" PORT_WEB="$PORT_WEB" PORT_WEB_HTTPS="$PORT_WEB_HTTPS" docker-compose -d -f "$(dirname "${BASH_SOURCE[0]}")/docker-compose.yml" up
-    
+
+    docker-compose -f "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/docker-compose.yml" up -d
+
     echo "ctrl+click to open in browser"
-    echo "$(get_current_ip):${PORT_WEB}"
+    echo "$(get_current_ip):8080"
+    
     return 0
 }

@@ -6,11 +6,14 @@
 
 # @description create docker jupyterhub
 # https://github.com/jupyterhub/jupyterhub-deploy-docker
-# @args $1 port number for the web server
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
  create_docker_jupyter_hub(){
-    exec_root JUPYTERHUB_PORT=$1 docker-compose up -d
+        docker-compose -f "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/docker-compose.yml" up -d
+    
+    echo "Please wait ..."
+    echo "ctrl+click to open in browser"
+    echo "$(get_current_ip):8015"
     return 0
 }
 
