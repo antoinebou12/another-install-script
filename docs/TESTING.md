@@ -40,7 +40,7 @@ Using virtual machine you can test the install script manually
 ### Vagrant
 
 ```bash
-cd tests/vm/vagrant/xenial64
+cd vm/vagrant/xenial64
 vagrant up
 vagrant ssh
 git clone https://github.com/antoinebou13/another-install-script.git
