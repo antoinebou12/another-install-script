@@ -54,7 +54,7 @@ manage_exec_containers_list() {
 		echo "$container_name"
 		print_line
 		exec_root echo "$container_name" >>/tmp/containers.txt
-		read_config_yml "$container_name_ports" >/tmp/ports.txt
+		read_config_yml "$container_name""_ports" >/tmp/ports.txt
 		source "$(dirname "${BASH_SOURCE[0]}")/images/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line

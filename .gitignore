@@ -163,7 +163,7 @@ zsdoc/data
 /tests/coverage
 /tests/bin
 
-#vargant 
+# vargant 
 *.log
 */.vagrant
 *.vagrant

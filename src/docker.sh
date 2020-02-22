@@ -148,8 +148,6 @@ udocker_create_default_dir() {
     [ -d /home/udocker/audio ]  || udocker_create_dir /home/udocker/audio
     [ -d /home/udocker/music ]  || udocker_create_dir /home/udocker/audio
 
-    cp "../$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" /home/udocker/
-
     print_line
     return 0
 }
@@ -166,7 +164,8 @@ create_docker_user() {
     if id -u udocker >/dev/null 2>&1; then
         echo "The user udocker already exist"
     else
-        exec_root adduser udocker
+        exec_root "adduser --disabled-password --gecos '' udocker"
+        echo $(read_config_yml udocker_password) | exec_root passwd udocker
         exec_root usermod -aG docker udocker
         add_sudo "udocker"
         udocker_create_default_dir
