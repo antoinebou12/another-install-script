@@ -43,23 +43,25 @@ manage_exec_containers_list() {
 	print_line
 
 	export UDOCKER_USERID=$(id -u udocker)
-    export UDOCKER_GROUPID=$(id -g udocker)
-    export TZ=$(cat /etc/timezone)
+	export UDOCKER_GROUPID=$(id -g udocker)
+	export TZ=$(cat /etc/timezone)
 
 	local FUNC_CREATE="create_docker_"
 	touch /tmp/containers.txt
 	containers=()
-	mapfile -t containers <<< "$1"
+	mapfile -t containers <<<"$1"
 	for container_name in "${containers[@]}"; do
 		echo "$container_name"
 		print_line
-		exec_root echo "$container_name" >> /tmp/containers.txt
+		exec_root echo "$container_name" >>/tmp/containers.txt
+		read_config_yml "$container_name_ports" >/tmp/ports.txt
 		source "$(dirname "${BASH_SOURCE[0]}")/images/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line
 	done
 
-	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/containers.txt
+	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/conf/containers.txt
+	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/conf/ports.txt
 
 	return 0
 	print_line
@@ -94,15 +96,17 @@ generate_container_menu() {
 	SAVEIFS="$IFS" # Save current IFS
 	IFS=,          # Change IFS to new line
 	while IFS=, read -r col1 col2; do
-		CONTAINER_NAME_MENU+=("$col1")
-		CONTAINER_NAME_MENU+=("$col2")
 		if [[ -f /home/udocker/containers.txt ]]; then
-			if grep -Fxq "$col1" /home/udocker/containers.txt; then
-				CONTAINER_NAME_MENU+=("ON")
+			if grep -Fxq "$col1" /home/udocker/conf/containers.txt; then
+				echo 1;
 			else
+				CONTAINER_NAME_MENU+=("$col1")
+				CONTAINER_NAME_MENU+=("$col2")
 				CONTAINER_NAME_MENU+=("OFF")
 			fi
 		else
+			CONTAINER_NAME_MENU+=("$col1")
+			CONTAINER_NAME_MENU+=("$col2")
 			CONTAINER_NAME_MENU+=("OFF")
 		fi
 	done <"$(dirname "${BASH_SOURCE[0]}")/images/images.txt"
@@ -116,6 +120,6 @@ generate_container_menu() {
 # @args $2 output docker compose
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-generate_docker_compose_yml(){
-	envsubst < "$1" > "$2"
+generate_docker_compose_yml() {
+	envsubst <"$1" >"$2"
 }

@@ -12,7 +12,7 @@ create_docker_netdata() {
     docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" up -d
 
     echo "ctrl+click to open in browser"
-    echo "$(get_current_ip):8004"
+    echo "$(get_current_ip):19999"
 
     return 0
 }

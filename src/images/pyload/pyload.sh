@@ -10,15 +10,10 @@
 # @args $3 PORT_WEB
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- create_docker_pyload(){
-    mkdir /home/udocker/pyload
-    PATH_CONFIG=${1:-"/home/udocker/pyload/config"}
-    PATH_DOWNLOAD=${2:-"/home/udocker/pyload/download"}
-    PORT_WEB=${3:-"8001"}
+create_docker_pyload() {
+    docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" up -d
 
-    udocker_create_dir "$PATH_CONFIG"
-    udocker_create_dir "$PATH_DOWNLOAD"
-
-    exec_root PATH_CONFIG=$PATH_CONFIG PATH_DOWNLOAD=$PATH_DOWNLOAD PORT_WEB=$PORT_WEB docker-compose up -d
+    echo "ctrl+click to open in browser"
+    echo "$(get_current_ip):8053"
     return 0
 }

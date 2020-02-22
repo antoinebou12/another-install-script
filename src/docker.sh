@@ -137,6 +137,7 @@ udocker_create_default_dir() {
     echo "Create Folder for Docker User"
     print_line
 
+    [ -d /home/udocker/conf ] || udocker_create_dir /home/udocker/conf 
     [ -d /home/udocker/services ] || udocker_create_dir /home/udocker/services
     [ -d /home/udocker/volumes ]  || udocker_create_dir /home/udocker/volumes
     [ -d /home/udocker/backups ]  || udocker_create_dir /home/udocker/backups

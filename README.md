@@ -564,7 +564,6 @@ Go to the [Google Sheet](https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-
 - firefox
 - [vim](https://www.vim.org/)
 - [snapd](https://snapcraft.io/)
-- [nnn](https://github.com/jarun/nnn)
 - [nmap](https://nmap.org/)
 - [wget](https://www.gnu.org/software/wget/)
 - [curl](https://github.com/curl/curl)

@@ -538,16 +538,15 @@ parse_yml() {
          printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
       }
     }'
-    return 0
 }
 
-# @description show aliases in the current shell
-# https://gist.github.com/pkuczynski/8665367
-# @noargs
+# @description get value for yml
+# 
+# @args $1 variable path name
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 read_config_yml(){
-    eval $(parse_yaml config.yml "config_")
+    parse_yml "$(dirname "${BASH_SOURCE[0]}")/config.yml" | grep "$1" | cut -d '=' -f 2-
     return 0
 }
 

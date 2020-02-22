@@ -1,8 +1,6 @@
 # https://github.com/firefly-iii/docker
-version: "3"
-networks: 
-  firefly_iii_net: 
-    driver: bridge
+
+version: "3.3"
 services: 
   firefly_iii_app:
     image: jc5x/firefly-iii:latest
@@ -23,14 +21,8 @@ services:
         - "AIS.traefik=false"
         - "AIS.name=firefly-iii"
     volumes: 
-      - 
-        source: firefly_iii_export
-        target: /home/udocker/volumes/firefly-iii/upload
-        type: volume
-      - 
-        source: firefly_iii_upload
-        target: /home/udocker/volumes/firefly-iii/upload
-        type: volume
+      - /home/udocker/volumes/firefly-iii/export:firefly_iii_export
+      - /home/udocker/volumes/firefly-iii/upload:firefly_iii_upload
   firefly_iii_db: 
     image: "postgres:10"
     container_name: firefly_iii_db
@@ -48,7 +40,7 @@ services:
     labels:
       - "AIS.traefik=false"
       - "AIS.name=firefly-iii_db"
-volumes: 
-  firefly_iii_db: ~
-  firefly_iii_export: ~
-  firefly_iii_upload: ~
+
+networks: 
+  firefly_iii_net: 
+    driver: bridge

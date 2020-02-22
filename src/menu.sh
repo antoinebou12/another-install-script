@@ -50,11 +50,11 @@ install_setup_menu() {
     
     declare -a SETUP_INSTALL_ITEMS=(
         "basic" "Basic packages install" "ON"
+        "docker" "install docker and docker-compose" "ON"
+        "docker_extra" "install dry utils for docker" "ON"
         "cockpit" "Install Cockpit web server management" "ON"
         "ansible" "Install Ansible systems automation" "ON"
         "emojify" "Emoji in the terminal" "ON"
-        "docker" "install docker and docker-compose" "ON"
-        "docker_extra" "install dry utils for docker" "ON"
         "enable_firewall" "install firewall ufw" "OFF"
     )
     

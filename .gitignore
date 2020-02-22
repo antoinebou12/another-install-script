@@ -168,3 +168,4 @@ zsdoc/data
 */.vagrant
 tests/vm/vagrant/*/*.log
 tests/vm/vagrant/*/*.vagrant
+.vscode

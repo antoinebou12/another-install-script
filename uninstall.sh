@@ -13,6 +13,10 @@ source "$(dirname "${BASH_SOURCE[0]}")/src/utils.sh"
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 uninstall() {
+
+    echo "Uninstall"
+    print_line
+
     dist_check
 
     sed '/UDOCKER_USERID/d' /etc/environment
@@ -61,6 +65,8 @@ uninstall() {
     exec_root rm -rf /usr/bin/docker-compose
 
     exec_root userdel -f udocker > /dev/null
+
+    print_line
     return 0
 }
 
