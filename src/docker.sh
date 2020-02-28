@@ -165,7 +165,7 @@ create_docker_user() {
         echo "The user udocker already exist"
     else
         exec_root "adduser --disabled-password --gecos '' udocker"
-        echo $(read_config_yml udocker_password) | exec_root passwd udocker
+        echo $(read_config_yml udocker_password) | exec_root passwd udocker --stdin
         exec_root usermod -aG docker udocker
         add_sudo "udocker"
         udocker_create_default_dir

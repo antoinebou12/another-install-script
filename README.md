@@ -22,7 +22,7 @@ For now only work on ubuntu and only tested on ubuntu18.04
 ```bash
 git clone --recursive https://github.com/antoinebou13/another-install-script.git
 cd another-install-script
-sudo bash install.sh
+sudo bash another-install-script.sh
 ```
 
 ### Uninstall
