@@ -18,25 +18,25 @@ After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the
 
 ## How to install
 
-For now only work on ubuntu and only tested on ubuntu18.04
+For now only tested on ubuntu18.04
 
 ```bash
 git clone --recursive https://github.com/antoinebou13/another-install-script.git
 cd another-install-script
-sudo bash another-install-script.sh
+sudo bash setup.sh
 ```
 
 ### Uninstall
 
 ```bash
 cd another-install-script
-sudo bash install.sh
+sudo bash uninstall.sh
 ```
 
 ## List of the services/server
 
-Some services/servers cannot be installed at the same time
-Also more configuration needed for certain services/servers
+Around 80 containers/servers can be installed with this script.
+Go check the list below ⬇.
 
 <details>
 <summary>List</summary>
@@ -44,7 +44,9 @@ Also more configuration needed for certain services/servers
 Go to the <a href="https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-HfnRhwkce-/view?usp=sharing">Google Sheet</a>
 </details>
 
+### Notes
 
+Some services/servers cannot be installed at the same time. Also more configuration needed for certain services/servers
 
 ## List of other installed program
 
@@ -88,20 +90,25 @@ A simple project overview to with the explaination of each important file
 |   |   |   |    +-- docker-compose.yml
 |   |   |   |    +-- $container_name.sh
 |   |   |   |    +-- ...
+|   +-- config.sh
+|   +-- config.yml
+|   +-- containers.sh
 |   +-- docker.sh
-|   +-- container.sh
+|   +-- firewall.sh
 |   +-- install.sh
 |   +-- menu.sh
+|   +-- other.sh
+|   +-- router.sh
 |   +-- utils.sh
 +-- setup.sh
 +-- uninstall.sh
 ```
 
-| Path                        |                           Explanation                            |
-| --------------------------- | :--------------------------------------------------------------: |
-| docs                        | The directory for the documentation for the code and the project |
-| docs/vendor                 |         The vendor program to generate the documentation         |
-| src                         |              The path for the code for the project               |
+| Path                            |                           Explanation                            |
+| ------------------------------- | :--------------------------------------------------------------: |
+| docs                            | The directory for the documentation for the code and the project |
+| docs/vendor                     |         The vendor program to generate the documentation         |
+| src                             |              The path for the code for the project               |
 | src/containers/\$container_name |  The path for docker container with a script and docker-compose  |
 
 ## How to run coverage and tests

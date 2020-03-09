@@ -3,6 +3,40 @@
 # @file other.sh
 # @brief file containing the utils for the project and other
 
+# @description print ascii art
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+show_project_name() {
+    print_line
+    cat <<EOF
+
+    ___                   __   __
+   /   |   ____   ____   / /_ / /_   ___   _____
+  / /| |  / __ \ / __ \ / __// __ \ / _ \ / ___/
+ / ___ | / / / // /_/ // /_ / / / //  __// /
+/_/  |_|/_/ /_/ \____/ \__//_/ /_/ \___//_/
+
+
+    ____              __          __ __
+   /  _/____   _____ / /_ ____ _ / // /
+   / / / __ \ / ___// __// __  // // /
+ _/ / / / / /(__  )/ /_ / /_/ // // /
+/___//_/ /_//____/ \__/ \____//_//_/
+
+
+   _____              _         __
+  / ___/ _____ _____ (_)____   / /_
+  \__ \ / ___// ___// // __ \ / __/
+ ___/ // /__ / /   / // /_/ // /_
+/____/ \___//_/   /_// ____/ \__/
+                    /_/
+EOF
+    print_line
+    return 0
+}
+
 # @description simple scp for downloading file for a remote dir scp/ssh
 #
 # @args $1 username@ip

@@ -3,9 +3,33 @@
 # @file uninstall.sh
 # @brief uninstall the project
 
-source "$(dirname "${BASH_SOURCE[0]}")/src/containers.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/src/docker.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/src/utils.sh"
+# shellcheck source=config.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/config.sh"
+# shellcheck source=src/containers.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/containers.sh"
+# shellcheck source=src/docker.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker.sh"
+# shellcheck source=src/firewall.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/firewall.sh"
+# shellcheck source=src/install.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/install.sh"
+# shellcheck source=src/menu.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/menu.sh"
+# shellcheck source=src/other.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/other.sh"
+# shellcheck source=src/router.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/router.sh"
+# shellcheck source=src/utils
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 
 # @description uninstall everything
 #

@@ -30,7 +30,7 @@ parse_yml() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 read_config_yml() {
-    parse_yml "$(dirname "${BASH_SOURCE[0]}")/config.yml" | grep "$1" | cut -d '=' -f 2-
+    parse_yml "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/config.yml" | grep "$1" | cut -d '=' -f 2-
     return 0
 }
 
@@ -59,4 +59,20 @@ config_get() {
     fi
     printf -- "%s" "${val}"
     return 0
+}
+
+# @description get config var array into a list
+# @arg $1 the config file var array
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+parse_yml_array() {
+    local ARRAY="$(read_config_yml $1)"
+    local ARRAY="${ARRAY//\"}"
+    if [[ "$ARRAY" == *"["*"]"* ]]; then
+        local VALUES="$(echo "$ARRAY" | jq -c '.[]')"
+        printf -- "%s\n" "${VALUES}"
+        return 0
+    else
+        return 1
+    fi
 }

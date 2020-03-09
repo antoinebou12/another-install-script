@@ -1,3 +1,9 @@
+# install.sh
+
+file containing the utils  for the project and other
+
+
+
 # test.sh
 
 run bats test
@@ -126,12 +132,6 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-# install.sh
-
-file containing the utils  for the project and other
-
-
-
 # menu.sh
 
 setup menu and logic
@@ -205,7 +205,6 @@ _Function has no arguments._
 file containing the utils  for the project and other
 
 * [print_line()](#printline)
-* [show_project_name()](#showprojectname)
 * [dist_check()](#distcheck)
 * [virt_check()](#virtcheck)
 * [checkWSL()](#checkwsl)
@@ -234,17 +233,6 @@ file containing the utils  for the project and other
 ## print_line()
 
 print line ======
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## show_project_name()
-
-print ascii art
 
 _Function has no arguments._
 
@@ -686,6 +674,7 @@ create tar for running docker for a local backup
 
 file containing the utils for the project and other
 
+* [show_project_name()](#showprojectname)
 * [download_scp()](#downloadscp)
 * [upload_scp()](#uploadscp)
 * [get_mimetype()](#getmimetype)
@@ -693,6 +682,17 @@ file containing the utils for the project and other
 * [install_signal_cli()](#installsignalcli)
 * [install_signal_ssh_text()](#installsignalsshtext)
 
+
+## show_project_name()
+
+print ascii art
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 ## download_scp()
 
@@ -2989,6 +2989,7 @@ file containing the utils  for the project and other
 * [read_config_yml()](#readconfigyml)
 * [config_read_file()](#configreadfile)
 * [config_get()](#configget)
+* [parse_yml_array()](#parseymlarray)
 
 
 ## parse_yml()
@@ -3045,15 +3046,53 @@ https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-scr
 * **0**: If successfull.
 * **1**: On failure
 
+## parse_yml_array()
+
+get config var array into a list
+
+### Arguments
+
+* **$1** (the): config file var array
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # firewall.sh
 
 to manage the open port in the firewall
 
+* [install_firewall()](#installfirewall)
+* [uninstall_firewall()](#uninstallfirewall)
 * [enable_firewall()](#enablefirewall)
 * [disable_firewall()](#disablefirewall)
 * [allow_port_in_firewall()](#allowportinfirewall)
 * [deny_port_in_firewall()](#denyportinfirewall)
+* [manage_firewall_ports_allow_list()](#managefirewallportsallowlist)
 
+
+## install_firewall()
+
+install firewall
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## uninstall_firewall()
+
+uninstalll firewall
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 ## enable_firewall()
 
@@ -3081,7 +3120,9 @@ _Function has no arguments._
 
 allow a port in the firewall
 
-_Function has no arguments._
+### Arguments
+
+* # @args $1 port to allow
 
 ### Exit codes
 
@@ -3092,7 +3133,22 @@ _Function has no arguments._
 
 deny a port in the firewall
 
-_Function has no arguments._
+### Arguments
+
+* # @args $1 port to deny
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## manage_firewall_ports_allow_list()
+
+manage allow port based on installed containers
+
+### Arguments
+
+* # @args $1 SETUP_CONTAINER_MENU
 
 ### Exit codes
 
@@ -3103,24 +3159,12 @@ _Function has no arguments._
 
 install my favirote packages for ubuntu18.04 and tested
 
-* [generate_apt_list_ubuntu()](#generateaptlistubuntu)
 * [install_basic()](#installbasic)
 * [install_cockpit()](#installcockpit)
 * [install_ansible()](#installansible)
 * [install_emojify()](#installemojify)
 * [manage_exec_install_list()](#manageexecinstalllist)
 
-
-## generate_apt_list_ubuntu()
-
-change the source.list with template in /etc
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
 
 ## install_basic()
 

@@ -4,9 +4,13 @@
 # @brief to install docker docker compose on ubuntu18.04
 
 # import
-# shellcheck source=../utils.sh
+
+# shellcheck source=config.sh
 # shellcheck disable=SC1091
-source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/config.sh"
+# shellcheck source=utils.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 
 # @description install the docker
 #

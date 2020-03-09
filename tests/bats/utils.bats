@@ -94,18 +94,6 @@ test-func(){
   [ "$status" -eq 0 ]
 }
 
-@test "config_read_file" {
-  if [[ "$(config_read_file config_test.cfg)" == "__UNDEFINED__" ]]; then echo 0; else return 1; fi
-  if config_read_file config_test.cfg; then return 0; else echo 1; fi
-  [ "$status" -eq 0 ]
-}
-
-@test "config_get" {
-  skip "check later"
-  if [[ "$(config_read_file config_test.cfg email)" == "test@test.com" ]]; then return 0; else return 1; fi
-  [ "$status" -eq 0 ]
-}
-
 @test "get_timezones" {
   # skip "check later"
   if [[ "$TZ" == "$(cat /etc/timezone)" ]]; then return 0; else return 1; fi

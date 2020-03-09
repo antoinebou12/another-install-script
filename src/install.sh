@@ -5,24 +5,15 @@
 
 # import
 
+# shellcheck source=config.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/config.sh"
+# shellcheck source=firewall.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/firewall.sh"
 # shellcheck source=utils.sh
 # shellcheck disable=SC1091
-source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
-
-# @description change the source.list with template in /etc
-#
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-generate_apt_list_ubuntu() {
-    echo "Create Curated apt list"
-    print_line
-
-    ../etc/source.list | tee /etc/apt/source.list
-
-    print_line
-    return 0
-}
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 
 # @description install the basic package to ubuntu I personnally like
 #
@@ -58,6 +49,8 @@ install_cockpit() {
     if [[ "$(checkWSL arg)" != "0" ]]; then
         exec_root systemctl restart cockpit
     fi
+
+    allow_port_in_firewall 9090
 
     print_line
     return 0

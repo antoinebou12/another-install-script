@@ -13,40 +13,6 @@ print_line() {
     return 0
 }
 
-# @description print ascii art
-#
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-show_project_name() {
-    print_line
-    cat <<EOF
-
-    ___                   __   __
-   /   |   ____   ____   / /_ / /_   ___   _____
-  / /| |  / __ \ / __ \ / __// __ \ / _ \ / ___/
- / ___ | / / / // /_/ // /_ / / / //  __// /
-/_/  |_|/_/ /_/ \____/ \__//_/ /_/ \___//_/
-
-
-    ____              __          __ __
-   /  _/____   _____ / /_ ____ _ / // /
-   / / / __ \ / ___// __// __  // // /
- _/ / / / / /(__  )/ /_ / /_/ // // /
-/___//_/ /_//____/ \__/ \____//_//_/
-
-
-   _____              _         __
-  / ___/ _____ _____ (_)____   / /_
-  \__ \ / ___// ___// // __ \ / __/
- ___/ // /__ / /   / // /_/ // /_
-/____/ \___//_/   /_// ____/ \__/
-                    /_/
-EOF
-    print_line
-    return 0
-}
-
 # @description show aliases in the current shell
 # Detect Operating System
 # @noargs
@@ -188,8 +154,13 @@ exec_root_func() {
 # @exitcode 0 If installed
 # @exitcode 1 if not installed
 check_packages_install() {
-    output=$(dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$')
-    return $?
+    if [ "$DISTRO" == "ubuntu" ] || [ "$DISTRO" == "debian" ] || [ "$DISTRO" == "raspbian" ]; then
+        local output=$(dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$')
+        return $?
+    else
+        local output=$(which "$1")
+        return $?
+    fi
 }
 
 # @description apt-get update

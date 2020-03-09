@@ -3,9 +3,15 @@
 # @file container.sh
 # @brief list of container and create/remove container and menu management
 
+# shellcheck source=config.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/config.sh"
+# shellcheck source=firewall.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/firewall.sh"
 # shellcheck source=utils.sh
 # shellcheck disable=SC1091
-source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 
 declare -a CONTAINER_NAME_MENU=()
 
@@ -17,7 +23,7 @@ declare -a CONTAINER_NAME_MENU=()
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 import_all_sh() {
-	find "$(dirname "${BASH_SOURCE[0]}")/containers" -name "*.sh" -execdir chmod u+x {} +
+	find "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/containers" -name "*.sh" -execdir chmod u+x {} +
 	local names="$(find "$1" -name "$2")"
 
 	local SAVEIFS="$IFS" # Save current IFS
@@ -58,15 +64,15 @@ manage_exec_containers_list() {
 		echo "$container_name"
 		print_line
 		exec_root echo "$container_name" >>/tmp/containers.txt
-		read_config_yml "$container_name""_ports" >/tmp/ports.txt
 		source "$(dirname "${BASH_SOURCE[0]}")/containers/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line
 	done
 
-	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/conf/containers.txt
-	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/conf/ports.txt
+	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/config/containers.txt
 
+	manage_firewall_ports_allow_list
+	
 	return 0
 	print_line
 }

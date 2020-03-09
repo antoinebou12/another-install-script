@@ -1,6 +1,5 @@
 # Testing
 
-
 ## Bats
 
 ```bash
@@ -18,11 +17,9 @@ bash install.sh
 
 ## Manuel Testing
 
-
 [Download Ubuntu server](https://ubuntu.com/download/server)
 
 Using virtual machine you can test the install script manually
-
 
 ### VirtualBox
 
@@ -49,9 +46,7 @@ sudo bash install.sh
 DISPLAY=localhost:10.0 firefox &
 ```
 
-
 ### Qemu
-
 
 ```bash
 sudo apt-get install qemu-kvm qemu virt-manager virt-viewer libvirt-bin
