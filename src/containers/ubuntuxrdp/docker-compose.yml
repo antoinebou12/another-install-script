@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+    ubuntu-xrdp:
+        container_name: ubuntuxrdp
+        # user: udocker
+        environment:
+            - PUID='${UDOCKER_USERID}'
+            - PGID='${UDOCKER_GROUPID}'
+            - TZ='${TZ}'
+        ports:
+            - '3389:3389'
+            - '2232:22'
+        image: danielguerra/ubuntu-xrdp
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=ubuntuxrdp"

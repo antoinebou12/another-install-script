@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+  nextcloud:
+    image: nextcloud
+    container_name: nextcloud
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    ports:
+      - 9321:80
+    volumes:
+      - /home/udocker/volumes/nextcloud:/var/www/html
+    restart: unless-stopped
+    depends_on: 
+      - nextcloud_db
+    links:
+      - nextcloud_db
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=nextcloud"
+
+  nextcloud_db:
+    image: linuxserver/mariadb
+    container_name: nextcloud_db
+    # user: udocker
+    environment:
+      - MYSQL_ROOT_PASSWORD=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/nextcloud/db:/config
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=nextcloud_db"

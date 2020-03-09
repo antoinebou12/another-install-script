@@ -1,0 +1,63 @@
+version: "3.3"
+services:
+  wallabag:
+    image: wallabag/wallabag:latest
+    container_name: wallabag
+    ports:
+      - "8899:80"
+    tty: true
+    links:
+      - wallabag_db:wallabag_db
+      - wallabag_redis:wallabag_redis
+    # user: udocker
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysuperstrongpassword
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
+      - SYMFONY__ENV__DATABASE_HOST=wallabag_db
+      - SYMFONY__ENV__DATABASE_PORT=3306
+      - SYMFONY__ENV__DATABASE_NAME=wallabagdb
+      - SYMFONY__ENV__DATABASE_USER=wallabag
+      - SYMFONY__ENV__DATABASE_PASSWORD=wallabag
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/wallabag/logs:/var/log/nginx
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=wallabag"
+
+  wallabag_db:
+    image: mariadb:latest
+    container_name: wallabag_db
+    # user: udocker
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysuperstrongpassword
+      - MYSQL_DATABASE=wallabagdb
+      - MYSQL_USER=wallabag
+      - MYSQL_PASSWORD=wallabag
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/wallabag/db:/var/lib/mysql
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=wallabag_db"
+
+  wallabag_redis:
+    image: redis:alpine
+    container_name: wallabag_redis
+    # user: udocker
+    environment:
+        - PUID='${UDOCKER_USERID}'
+        - PGID='${UDOCKER_GROUPID}'
+        - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/wallabag/redis:/data
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=wallabag_redis"

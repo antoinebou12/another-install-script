@@ -1,0 +1,19 @@
+ grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    ports:
+      - 8011:3000
+    env_file:
+      - grafana.env
+    volumes:
+      - /home/udocker/volumes/grafana/data:/var/lib/grafana
+      - /home/udocker/volumes/grafana/log:/var/log/grafana
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=grafana"

@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+ ansible-semaphore:
+    image: playniuniu/ansible-semaphore
+    container_name: ansible-semaphore
+    ports:
+      - "4000:3000"
+    volumes:
+      - "/home/udocker/volumes/ansible-semaphore/semaphore:/data"
+    links: 
+      - "ansible-semaphore_db"
+    depends_on:
+      - "ansible-semaphore_db"
+    restart: unless-stopped
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=ansible-semaphore"
+
+ ansible-semaphore_gogs:
+    image: gogs/gogs
+    container_name: ansible-semaphore_gogs
+    expose:
+      - 3000
+      - 22
+    volumes:
+      - "~/volumes/gogs:/data"
+    links:
+      - "ansible-semaphore_db"
+    depends_on:
+      - "ansible-semaphore_db"
+    restart: unless-stopped
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=ansible-semaphore_gogs"
+    
+
+  ansible-semaphore_db:
+    image: "mariadb"
+    container_name: ansible-semaphore_db
+    volumes:
+      - "/home/udocker/volumes/ansible-semaphore/db:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    expose:
+      - 3306
+    restart: unless-stopped
+    labels:
+        - "AIS.traefik=false"
+        - "AIS.name=ansible-semaphore_db"

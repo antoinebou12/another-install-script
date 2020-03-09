@@ -1,0 +1,18 @@
+version: "3"
+services:
+  freshrss:
+    image: linuxserver/freshrss
+    container_name: freshrss
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/freshrss/config:/config
+    ports:
+      - 8007:80
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=freshrss"
