@@ -24,20 +24,20 @@ class GeneratorAIS(object):
         with open(configfile, 'r') as f:
             return yaml.load(f, Loader=yaml.FullLoader)
 
-    def generate_images_list(self):
-        images_list = []
+    def generate_containers_list(self):
+        containers_list = []
         for i, container in self.config_obj['services']['containers'].items():
             print(i)
-            images_list.append({'name': container['name'],'desc': container['short_description']})
-        return images_list
+            containers_list.append({'name': container['name'],'desc': container['short_description']})
+        return containers_list
 
-    def write_images_list_text(self, output=None):
-        images_list = self.generate_images_list()
+    def write_containers_list_text(self, output=None):
+        containers_list = self.generate_containers_list()
         with open(output, 'w') as f:
-            for i in images_list:
+            for i in containers_list:
                 f.write(f"{i['name']},{i['desc']}\n")
 
 if __name__ == "__main__":
     generator = GeneratorAIS(output_fname="", config_fname="/home/antoine/Code/another-install-script/src/config.yml", config_type="yaml")
-    generator.write_images_list_text('../../src/images/images.txt')
+    generator.write_containers_list_text('../../src/containers/containers.txt')
 

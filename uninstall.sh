@@ -21,7 +21,7 @@ uninstall() {
 
     if check_packages_install docker; then
         stop_containers_all
-        prune_images_volumes_all
+        prune_containers_volumes_all
         remove_containers_all
     fi
 

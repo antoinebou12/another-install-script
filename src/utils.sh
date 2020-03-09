@@ -47,6 +47,43 @@ EOF
     return 0
 }
 
+# @description show aliases in the current shell
+# Detect Operating System
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function dist_check() {
+    DIST_CHECK="/etc/os-release"
+    # shellcheck disable=SC1090
+    if [ -e $DIST_CHECK ]; then
+        # shellcheck disable=SC1091
+        source $DIST_CHECK
+        DISTRO=$ID
+        # shellcheck disable=SC2034
+        VERSION=$VERSION_ID
+    else
+        echo "Your distribution is not supported (yet)."
+        exit
+    fi
+}
+
+# @description show aliases in the current shell
+# Checking For Virtualization
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+function virt_check() {
+    if [[ $(command -v "systemd-detect-virt") ]]; then
+        if systemd-detect-virt; then
+            return 0
+        else
+            return 1
+        fi
+    else
+        return 1
+    fi
+}
+
 # @description check if the system is a WSL
 #
 # @exitcode 0 If successfull.
@@ -56,6 +93,26 @@ checkWSL() {
         return 0
     fi
     return 1
+}
+
+# @description check if the os is debian or ubuntu
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+check_debian() {
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        # shellcheck source=/etc/os-release
+        # shellcheck disable=SC1091
+        source /etc/os-release
+        if [[ $ID_LIKE == "debian" ]]; then
+            return 0
+        fi
+        return 1
+    else
+        echo "Please use this project on an Ubuntu or Debian system tested on (Ubuntu18.04)"
+        return 1
+    fi
 }
 
 # @description check for args for a
@@ -295,61 +352,6 @@ aptclean() {
     return 1
 }
 
-# @description check mimetype of a file
-# @arg $1 file
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-get_mimetype() {
-    file --mime-type "$1" | sed 's/.*: //'
-    return 0
-}
-
-# @description send mail locally with heirloom-mailx
-# @arg $1 email from
-# @arg $2 email to
-# @arg $3 email subject
-# @arg $4 email body
-# @arg $5 email attachement file
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-send_email() {
-    # from="$1"
-    local to="$2"
-    local subject="$3"
-    local body="$4"
-    local attachment=$5
-
-    echo "$body" | mutt -s "$subject" -a "$attachment" "$to"
-    return 0
-}
-
-# @description read config file
-# https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
-# @arg $1 the config fiel path
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-config_read_file() {
-    (grep -E "^${2}=" -m 1 "${1}" 2>/dev/null || echo "VAR=__UNDEFINED__") | head -n 1 | cut -d '=' -f 2-
-    return 0
-}
-
-# @description get config var from a spefic file
-# https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
-# @arg $1 the config file path
-# @arg $2 the config file var
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-config_get() {
-    # shellcheck disable=SC2086
-    val="$(config_read_file ${1} ${2})"
-    if [ "${val}" = "__UNDEFINED__" ]; then
-        # shellcheck disable=SC2086
-        val="$(config_read_file config.cfg.defaults ${2})"
-    fi
-    printf -- "%s" "${val}"
-    return 0
-}
-
 # @description get timezone
 #
 # @noargs
@@ -404,30 +406,6 @@ add_sudo() {
 
 # @description simple scp for downloading file for a remote dir scp/ssh
 #
-# @args $1 username@ip
-# @args $2 file path on remote device
-# @args $3 file path for the local device
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-download_scp() {
-    scp "$1":"$2" "$3"
-    return 0
-}
-
-# @description simple scp for downloading file for a remote dir scp/ssh
-#
-# @args $1 file path for the local device
-# @args $2 username@ip
-# @args $3 file path on remote device
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-upload_scp() {
-    scp "$1" "$2":"$3"
-    return 0
-}
-
-# @description simple scp for downloading file for a remote dir scp/ssh
-#
 # @args $1 path to folder
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
@@ -458,35 +436,16 @@ loop_files_func() {
     return 0
 }
 
-# @description check if the os is debian or ubuntu
-#
-# @noargs
+# @description show aliases in the current shell
+# https://riptutorial.com/bash/topic/368/aliasing
+# @noargsW
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-check_debian() {
-    if [[ "$OSTYPE" == "linux-gnu" ]]; then
-        # shellcheck source=/etc/os-release
-        # shellcheck disable=SC1091
-        source /etc/os-release
-        if [[ $ID_LIKE == "debian" ]]; then
-            return 0
-        fi
-        return 1
-    else
-        echo "Please use this project on an Ubuntu or Debian system tested on (Ubuntu18.04)"
-        return 1
-    fi
-}
-
-# @description check the ip of the server
-#
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-get_current_ip() {
-    PUBLIC_IP=$(curl -s https://ipinfo.io/ip)
-    export PUBLIC_IP
-    echo $PUBLIC_IP
+show_aliases() {
+    echo There are ${#BASH_ALIASES[*]} aliases defined.
+    for ali in "${!BASH_ALIASES[@]}"; do
+        printf "alias: %-10s triggers: %s\n" "$ali" "${BASH_ALIASES[$ali]}"
+    done
 }
 
 # @description check the geolocation based on ip of the server
@@ -507,82 +466,13 @@ get_geolocation() {
     #cp geolocate.sh /etc/cron.daily
 }
 
-# @description show aliases in the current shell
-# https://riptutorial.com/bash/topic/368/aliasing
-# @noargsW
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-show_aliases() {
-    echo There are ${#BASH_ALIASES[*]} aliases defined.
-    for ali in "${!BASH_ALIASES[@]}"; do
-        printf "alias: %-10s triggers: %s\n" "$ali" "${BASH_ALIASES[$ali]}"
-    done
-}
-
-# @description Read YML file from Bash script
-# https://gist.github.com/pkuczynski/8665367
-# @noargsW
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-parse_yml() {
-    local prefix=$2
-    local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @ | tr @ '\034')
-    sed -ne "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
-        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p" $1 |
-        awk -F$fs '{
-      indent = length($1)/2;
-      vname[indent] = $2;
-      for (i in vname) {if (i > indent) {delete vname[i]}}
-      if (length($3) > 0) {
-         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
-      }
-    }'
-}
-
-# @description get value for yml
+# @description check the ip of the server
 #
-# @args $1 variable path name
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-read_config_yml() {
-    parse_yml "$(dirname "${BASH_SOURCE[0]}")/config.yml" | grep "$1" | cut -d '=' -f 2-
-    return 0
-}
-
-# @description show aliases in the current shell
-# Detect Operating System
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function dist_check() {
-    DIST_CHECK="/etc/os-release"
-    # shellcheck disable=SC1090
-    if [ -e $DIST_CHECK ]; then
-        # shellcheck disable=SC1091
-        source $DIST_CHECK
-        DISTRO=$ID
-        # shellcheck disable=SC2034
-        VERSION=$VERSION_ID
-    else
-        echo "Your distribution is not supported (yet)."
-        exit
-    fi
-}
-
-# @description show aliases in the current shell
-# Checking For Virtualization
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-function virt_check() {
-    if [[ $(command -v "systemd-detect-virt") ]]; then
-        if systemd-detect-virt; then
-            return 0
-        else
-            return 1
-        fi
-    else
-        return 1
-    fi
+get_current_ip() {
+    PUBLIC_IP=$(curl -s https://ipinfo.io/ip)
+    export PUBLIC_IP
+    echo $PUBLIC_IP
 }

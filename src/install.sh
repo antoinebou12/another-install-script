@@ -99,62 +99,6 @@ install_emojify() {
     return 0
 }
 
-# @description install the cockpit to web
-# https://github.com/AsamK/signal-cli
-#
-# @args $1 username
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-install_signal_cli() {
-    echo "Install Signal cli"
-    print_line
-
-    wget https://github.com/AsamK/signal-cli/releases/download/v0.6.5/signal-cli-0.6.5.tar.gz >/dev/null
-    exec_root "tar xf signal-cli-0.6.5.tar.gz -C /opt" >/dev/null
-    exec_root "ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/" >/dev/null
-    rm -rf signal-cli-0.6.5.tar.gz >/dev/null
-    signal-cli -u "$1" register
-    read -r CODE
-    signal-cli -u "$1" verify "$CODE"
-
-    print_line
-    return 0
-}
-
-# @description install the cockpit to web
-# https://8192.one/post/ssh_login_notification_signal/
-#
-# @args $1 phone number senders phone
-# @args $2 phone number recipient
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-install_signal_ssh_text() {
-    echo "Install Signal on login ssh"
-    print_line
-
-    local DATEEXEC="$(date "+%d %b %Y %H:%M")"
-    local TMPFILE='/tmp/ipinfo-$DATEEXEC.txt'
-    if [ -n "$SSH_CLIENT" ] && [ -z "$TMUX" ]; then
-        local IP="$(echo "$SSH_CLIENT" | awk '{print $1}')"
-        local PORT="$(echo "$SSH_CLIENT" | awk '{print $3}')"
-        local HOSTNAME="$(hostname -f)"
-        local IPADDR="$(hostname -I | awk '{print $1}')"
-
-        curl https://ipinfo.io/"$IP" -s -o "$TMPFILE"
-
-        local CITY="$(cat $TMPFILE | sed -n 's/^  "city":[[:space:]]*//p' | sed 's/"//g')"
-        local REGION="$(cat $TMPFILE | sed -n 's/^  "region":[[:space:]]*//p' | sed 's/"//g')"
-        local COUNTRY="$(cat $TMPFILE | sed -n 's/^  "country":[[:space:]]*//p' | sed 's/"//g')"
-        local ORG="$(cat $TMPFILE | sed -n 's/^  "org":[[:space:]]*//p' | sed 's/"//g')"
-        local TEXT="$DATEEXEC: ${USER} logged in to $HOSTNAME ($IPADDR) from $IP - $ORG - $CITY, $REGION, $COUNTRY port $PORT"
-        signal-cli -u +"$1" send -m "$TEXT" +"$2"
-        rm $TMPFILE
-    fi
-
-    print_line
-    return 0
-}
-
 # @description manage install menu
 #
 # @args $1 SETUP_INSTALL_MENU

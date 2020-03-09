@@ -206,7 +206,10 @@ file containing the utils  for the project and other
 
 * [print_line()](#printline)
 * [show_project_name()](#showprojectname)
+* [dist_check()](#distcheck)
+* [virt_check()](#virtcheck)
 * [checkWSL()](#checkwsl)
+* [check_debian()](#checkdebian)
 * [check_args()](#checkargs)
 * [check_root()](#checkroot)
 * [exec_root()](#execroot)
@@ -217,26 +220,15 @@ file containing the utils  for the project and other
 * [aptinstall()](#aptinstall)
 * [aptremove()](#aptremove)
 * [aptclean()](#aptclean)
-* [get_mimetype()](#getmimetype)
-* [send_email()](#sendemail)
-* [config_read_file()](#configreadfile)
-* [config_get()](#configget)
 * [get_timezones()](#gettimezones)
 * [check_command_exist()](#checkcommandexist)
 * [check_port()](#checkport)
 * [add_sudo()](#addsudo)
-* [download_scp()](#downloadscp)
-* [upload_scp()](#uploadscp)
 * [chmod_sh_all()](#chmodshall)
 * [loop_files_func()](#loopfilesfunc)
-* [check_debian()](#checkdebian)
-* [get_current_ip()](#getcurrentip)
-* [get_geolocation()](#getgeolocation)
 * [show_aliases()](#showaliases)
-* [parse_yml()](#parseyml)
-* [read_config_yml()](#readconfigyml)
-* [dist_check()](#distcheck)
-* [virt_check()](#virtcheck)
+* [get_geolocation()](#getgeolocation)
+* [get_current_ip()](#getcurrentip)
 
 
 ## print_line()
@@ -261,9 +253,44 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
+## dist_check()
+
+show aliases in the current shell
+Detect Operating System
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## virt_check()
+
+show aliases in the current shell
+Checking For Virtualization
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 ## checkWSL()
 
 check if the system is a WSL
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## check_debian()
+
+check if the os is debian or ubuntu
+
+_Function has no arguments._
 
 ### Exit codes
 
@@ -394,65 +421,6 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-## get_mimetype()
-
-check mimetype of a file
-
-### Arguments
-
-* **$1** (file):
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## send_email()
-
-send mail locally with heirloom-mailx
-
-### Arguments
-
-* **$1** (email): from
-* **$2** (email): to
-* **$3** (email): subject
-* **$4** (email): body
-* **$5** (email): attachement file
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## config_read_file()
-
-read config file
-https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
-
-### Arguments
-
-* **$1** (the): config fiel path
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## config_get()
-
-get config var from a spefic file
-https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
-
-### Arguments
-
-* **$1** (the): config file path
-* **$2** (the): config file var
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 ## get_timezones()
 
 get timezone
@@ -501,6 +469,231 @@ check if the port is used
 * **0**: If successfull.
 * **1**: On failure
 
+## chmod_sh_all()
+
+simple scp for downloading file for a remote dir scp/ssh
+
+### Arguments
+
+* # @args $1 path to folder
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## loop_files_func()
+
+loop find files func
+
+### Arguments
+
+* # @args $1 path to folder
+* # @args $2 regex of files
+* # @args $3 func
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## show_aliases()
+
+show aliases in the current shell
+https://riptutorial.com/bash/topic/368/aliasing
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## get_geolocation()
+
+check the geolocation based on ip of the server
+https://www.howtogeek.com/405088/how-to-get-your-systems-geographic-location-from-a-bash-script/
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## get_current_ip()
+
+check the ip of the server
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# router.sh
+
+file containing the router for traefik and subdomain for docker containers
+
+* [install_reverse_proxy()](#installreverseproxy)
+* [add_subdomain()](#addsubdomain)
+
+
+## install_reverse_proxy()
+
+install_reverse_proxy
+
+### Arguments
+
+* # @args $# the backup of all the container names
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## add_subdomain()
+
+add_subdomain
+
+### Arguments
+
+* # @args $# the backup of all the container names
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# container.sh
+
+list of container and create/remove container and menu management
+
+* [import_all_sh()](#importallsh)
+* [manage_exec_containers_list()](#manageexeccontainerslist)
+* [list_container()](#listcontainer)
+* [list_src_containers()](#listsrccontainers)
+* [generate_container_menu()](#generatecontainermenu)
+* [generate_docker_compose_yml()](#generatedockercomposeyml)
+* [create_container_id_backup()](#createcontaineridbackup)
+* [create_container_name_backup()](#createcontainernamebackup)
+
+
+## import_all_sh()
+
+import all the /containers/.../*.sh based on selected
+
+### Arguments
+
+* # @args $1 path of root of docker containers
+* # @args $2 name of the files
+* # @args $1
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## manage_exec_containers_list()
+
+manage exec containers sh in the containers src do_as_docker_user
+
+### Arguments
+
+* # @args $1 SETUP_CONTAINER_MENU
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## list_container()
+
+list of the container
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## list_src_containers()
+
+show the list of src containers
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## generate_container_menu()
+
+create CONTAINER_NAME_MENU
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## generate_docker_compose_yml()
+
+generate a real docker-compose.yml with the template.yml
+and the env variable
+
+### Arguments
+
+* # @args $1 template
+* # @args $2 output docker compose
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## create_container_id_backup()
+
+create tar for running docker for a local backup
+
+### Arguments
+
+* # @args $1 container id
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## create_container_name_backup()
+
+create tar for running docker for a local backup
+
+### Arguments
+
+* # @args $1 container container name
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# other.sh
+
+file containing the utils for the project and other
+
+* [download_scp()](#downloadscp)
+* [upload_scp()](#uploadscp)
+* [get_mimetype()](#getmimetype)
+* [send_email()](#sendemail)
+* [install_signal_cli()](#installsignalcli)
+* [install_signal_ssh_text()](#installsignalsshtext)
+
+
 ## download_scp()
 
 simple scp for downloading file for a remote dir scp/ssh
@@ -531,123 +724,59 @@ simple scp for downloading file for a remote dir scp/ssh
 * **0**: If successfull.
 * **1**: On failure
 
-## chmod_sh_all()
+## get_mimetype()
 
-simple scp for downloading file for a remote dir scp/ssh
-
-### Arguments
-
-* # @args $1 path to folder
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## loop_files_func()
-
-loop find files func
+check mimetype of a file
 
 ### Arguments
 
-* # @args $1 path to folder
-* # @args $2 regex of files
-* # @args $3 func
+* **$1** (file):
 
 ### Exit codes
 
 * **0**: If successfull.
 * **1**: On failure
 
-## check_debian()
+## send_email()
 
-check if the os is debian or ubuntu
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## get_current_ip()
-
-check the ip of the server
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## get_geolocation()
-
-check the geolocation based on ip of the server
-https://www.howtogeek.com/405088/how-to-get-your-systems-geographic-location-from-a-bash-script/
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## show_aliases()
-
-show aliases in the current shell
-https://riptutorial.com/bash/topic/368/aliasing
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## parse_yml()
-
-Read YML file from Bash script
-https://gist.github.com/pkuczynski/8665367
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## read_config_yml()
-
-get value for yml
+send mail locally with heirloom-mailx
 
 ### Arguments
 
-* # @args $1 variable path name
+* **$1** (email): from
+* **$2** (email): to
+* **$3** (email): subject
+* **$4** (email): body
+* **$5** (email): attachement file
 
 ### Exit codes
 
 * **0**: If successfull.
 * **1**: On failure
 
-## dist_check()
+## install_signal_cli()
 
-show aliases in the current shell
-Detect Operating System
+install the signal-cli
+https://github.com/AsamK/signal-cli
 
-_Function has no arguments._
+### Arguments
+
+* # @args $1 username
 
 ### Exit codes
 
 * **0**: If successfull.
 * **1**: On failure
 
-## virt_check()
+## install_signal_ssh_text()
 
-show aliases in the current shell
-Checking For Virtualization
+install the cockpit to web
+https://8192.one/post/ssh_login_notification_signal/
 
-_Function has no arguments._
+### Arguments
+
+* # @args $1 phone number senders phone
+* # @args $2 phone number recipient
 
 ### Exit codes
 
@@ -1663,8 +1792,31 @@ link
 * **0**: If successfull.
 * **1**: On failure
 
+# portainer.sh
+
+to install docker portainer
+
+* [create_docker_portainer()](#createdockerportainer)
+* [remove_docker_portainer()](#removedockerportainer)
 
 
+## create_docker_portainer()
+
+create docker portainer
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_portainer()
+
+remove docker portainer
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # tautulli.sh
 
@@ -1693,8 +1845,31 @@ remove docker tautulli
 * **0**: If successfull.
 * **1**: On failure
 
+# privatebin.sh
+
+to install docker privatebin
+
+* [create_docker_privatebin()](#createdockerprivatebin)
+* [remove_docker_privatebin()](#removedockerprivatebin)
 
 
+## create_docker_privatebin()
+
+create docker privatebin
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_privatebin()
+
+remove docker privatebin
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # medusa.sh
 
@@ -1913,6 +2088,9 @@ remove docker syncthing
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
 # paperless.sh
 
 to install docker paperless
@@ -2050,8 +2228,32 @@ remove docker jenkins
 * **0**: If successfull.
 * **1**: On failure
 
+# open-streaming-platform.sh
+
+to install docker open-streaming-platform
+
+* [create_docker_open-streaming-platform()](#createdockeropen-streaming-platform)
+* [remove_docker_open-streaming-platform()](#removedockeropen-streaming-platform)
 
 
+## create_docker_open-streaming-platform()
+
+create docker open-streaming-platform
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_open-streaming-platform()
+
+remove docker open-streaming-platform
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # mailcow.sh
 
@@ -2196,8 +2398,32 @@ remove docker gitea
 * **0**: If successfull.
 * **1**: On failure
 
+# mylar.sh
+
+to install docker mylar
+
+* [create_docker_mylar()](#createdockermylar)
+* [remove_docker_mylar()](#removedockermylar)
 
 
+## create_docker_mylar()
+
+create docker mylar
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_mylar()
+
+remove docker mylar
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # monica.sh
 
@@ -2315,8 +2541,31 @@ remove docker openldap
 * **0**: If successfull.
 * **1**: On failure
 
+# kdedocker.sh
+
+to install docker kdedocker
+
+* [create_docker_kdedocker()](#createdockerkdedocker)
+* [remove_docker_kdedocker()](#removedockerkdedocker)
 
 
+## create_docker_kdedocker()
+
+create docker kdedocker
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_kdedocker()
+
+remove docker kdedocker
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
 
 # nextcloud.sh
 
@@ -2588,94 +2837,6 @@ remove docker headphones
 * **0**: If successfull.
 * **1**: On failure
 
-# container.sh
-
-list of container and create/remove container and menu management
-
-* [import_all_sh()](#importallsh)
-* [manage_exec_containers_list()](#manageexeccontainerslist)
-* [list_container()](#listcontainer)
-* [list_src_images()](#listsrcimages)
-* [generate_container_menu()](#generatecontainermenu)
-* [generate_docker_compose_yml()](#generatedockercomposeyml)
-
-
-## import_all_sh()
-
-import all the /images/.../*.sh based on selected
-
-### Arguments
-
-* # @args $1 path of root of docker images
-* # @args $2 name of the files
-* # @args $1
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## manage_exec_containers_list()
-
-manage exec containers sh in the images src do_as_docker_user
-
-### Arguments
-
-* # @args $1 SETUP_CONTAINER_MENU
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## list_container()
-
-list of the container
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## list_src_images()
-
-show the list of src images
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## generate_container_menu()
-
-create CONTAINER_NAME_MENU
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## generate_docker_compose_yml()
-
-generate a real docker-compose.yml with the template.yml
-and the env variable
-
-### Arguments
-
-* # @args $1 template
-* # @args $2 output docker compose
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 # docker.sh
 
 to install docker docker compose on ubuntu18.04
@@ -2683,18 +2844,14 @@ to install docker docker compose on ubuntu18.04
 * [install_docker()](#installdocker)
 * [install_docker_compose()](#installdockercompose)
 * [install_docker_extra()](#installdockerextra)
-* [prune_images_volumes_all()](#pruneimagesvolumesall)
+* [prune_containers_volumes_all()](#prunecontainersvolumesall)
 * [stop_containers_all()](#stopcontainersall)
 * [remove_containers_all()](#removecontainersall)
 * [udocker_create_default_dir()](#udockercreatedefaultdir)
 * [create_docker_user()](#createdockeruser)
 * [do_as_udocker_user()](#doasudockeruser)
 * [udocker_create_dir()](#udockercreatedir)
-* [create_docker_id_backup()](#createdockeridbackup)
-* [create_docker_name_backup()](#createdockernamebackup)
 * [create_docker_backup_all()](#createdockerbackupall)
-* [install_reverse_proxy()](#installreverseproxy)
-* [add_subdomain()](#addsubdomain)
 
 
 ## install_docker()
@@ -2730,7 +2887,7 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-## prune_images_volumes_all()
+## prune_containers_volumes_all()
 
 prune all the volumes and images
 
@@ -2811,32 +2968,6 @@ create udocker dir
 * **0**: If successfull.
 * **1**: On failure
 
-## create_docker_id_backup()
-
-create tar for running docker for a local backup
-
-### Arguments
-
-* # @args $1 docker id
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## create_docker_name_backup()
-
-create tar for running docker for a local backup
-
-### Arguments
-
-* # @args $1 docker container name
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 ## create_docker_backup_all()
 
 check if the port is used
@@ -2850,26 +2981,64 @@ check if the port is used
 * **0**: If successfull.
 * **1**: On failure
 
-## install_reverse_proxy()
+# config.sh
 
-install_reverse_proxy
+file containing the utils  for the project and other
 
-### Arguments
+* [parse_yml()](#parseyml)
+* [read_config_yml()](#readconfigyml)
+* [config_read_file()](#configreadfile)
+* [config_get()](#configget)
 
-* # @args $# the backup of all the container names
+
+## parse_yml()
+
+Read YML file from Bash script
+https://gist.github.com/pkuczynski/8665367
+
+_Function has no arguments._
 
 ### Exit codes
 
 * **0**: If successfull.
 * **1**: On failure
 
-## add_subdomain()
+## read_config_yml()
 
-add_subdomain
+get value for yml
 
 ### Arguments
 
-* # @args $# the backup of all the container names
+* # @args $1 variable path name
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## config_read_file()
+
+read config file
+https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
+
+### Arguments
+
+* **$1** (the): config fiel path
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## config_get()
+
+get config var from a spefic file
+https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
+
+### Arguments
+
+* **$1** (the): config file path
+* **$2** (the): config file var
 
 ### Exit codes
 
@@ -2939,8 +3108,6 @@ install my favirote packages for ubuntu18.04 and tested
 * [install_cockpit()](#installcockpit)
 * [install_ansible()](#installansible)
 * [install_emojify()](#installemojify)
-* [install_signal_cli()](#installsignalcli)
-* [install_signal_ssh_text()](#installsignalsshtext)
 * [manage_exec_install_list()](#manageexecinstalllist)
 
 
@@ -2998,35 +3165,6 @@ install the cockpit to web
 https://github.com/mrowa44/emojify
 
 _Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## install_signal_cli()
-
-install the cockpit to web
-https://github.com/AsamK/signal-cli
-
-### Arguments
-
-* # @args $1 username
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## install_signal_ssh_text()
-
-install the cockpit to web
-https://8192.one/post/ssh_login_notification_signal/
-
-### Arguments
-
-* # @args $1 phone number senders phone
-* # @args $2 phone number recipient
 
 ### Exit codes
 

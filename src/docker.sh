@@ -87,12 +87,12 @@ install_docker_extra() {
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-prune_images_volumes_all() {
-    echo "Prune all Docker Images Volumes"
+prune_containers_volumes_all() {
+    echo "Prune all Docker Images and Volumes"
     print_line
 
     docker image prune -a
-    docker system prune --volumes
+    docker system prune
 
     print_line
     return 0
@@ -137,7 +137,7 @@ udocker_create_default_dir() {
     echo "Create Folder for Docker User"
     print_line
 
-    [ -d /home/udocker/conf ] || udocker_create_dir /home/udocker/conf
+    [ -d /home/udocker/config ] || udocker_create_dir /home/udocker/config
     [ -d /home/udocker/services ] || udocker_create_dir /home/udocker/services
     [ -d /home/udocker/volumes ] || udocker_create_dir /home/udocker/volumes
     [ -d /home/udocker/backups ] || udocker_create_dir /home/udocker/backups
@@ -172,11 +172,13 @@ create_docker_user() {
         echo "export UDOCKER_USERID=\"$(id -u udocker)\"" | tee -a /home/udocker/.bashrc
         echo "export UDOCKER_GROUPID=\"$(id -g udocker)\"" | tee -a /home/udocker/.bashrc
         echo "export TZ=\"$(cat /etc/timezone)\"" | tee -a /home/udocker/.bashrc
+        echo "export UDOCKER_ROOT=\"/home/udocker/volumes\"" | tee -a /home/udocker/.bashrc
     fi
 
     grep -qxF "UDOCKER_USERID=\"$(id -u udocker)\"" /etc/environment || echo "UDOCKER_USERID=\"$(id -u udocker)\"" >>/etc/environment
     grep -qxF "UDOCKER_GROUPID=\"$(id -g udocker)\"" /etc/environment || echo "UDOCKER_GROUPID=\"$(id -g udocker)\"" >>/etc/environment
     grep -qxF "TZ=\"$(cat /etc/timezone)\"" /etc/environment || echo "TZ=\"$(cat /etc/timezone)\"" >>/etc/environment
+    grep -qxF "UDOCKER_ROOT=\"/home/udocker/volumes\"" /etc/environment || echo "UDOCKER_ROOT=\"/home/udocker/volumes\"" >>/etc/environment
 
     print_line
     return 0
@@ -211,51 +213,6 @@ udocker_create_dir() {
     exec_root chown udocker:udocker "$1"
 }
 
-# @description create tar for running docker for a local backup
-#
-# @args $1 docker id
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-create_docker_id_backup() {
-    echo "Create Docker Container Backup $1"
-    print_line
-
-    # shellcheck disable=SC2086,SC2143
-    if [ ! "$(docker ps -a | grep $1)" ]; then
-        container_name="$(docker ps | grep $1 | awk '{ print $2 }')"
-        date_id="$(date +'%m/%d/%Y_%s')"
-        container_backup="${container_name}_${date_id}_backup"
-        docker commit -p "$1" "$container_backup"
-        docker save -o /home/udocker/backups/"$container_backup".tar "$container_backup"
-    fi
-
-    print_line
-    return 0
-}
-
-# @description create tar for running docker for a local backup
-#
-# @args $1 docker container name
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-create_docker_name_backup() {
-    echo "Create Docker Container Backup $1"
-    print_line
-
-    # shellcheck disable=SC2086,SC2143
-    if [ ! "$(docker ps -a | grep $1)" ]; then
-        # shellcheck disable=SC2086
-        container_name="$(docker ps | grep $1 | awk '{ print $1 }')"
-        date_id=$(date +'%m/%d/%Y_%s')
-        container_backup="${container_name}_${date_id}_backup"
-        docker commit -p "$1" "$container_backup"
-        docker save -o /home/udocker/backups/"$container_backup".tar "$container_backup"
-    fi
-
-    print_line
-    return 0
-}
-
 # @description check if the port is used
 #
 # @args $# the backup of all the container names
@@ -267,24 +224,4 @@ create_docker_backup_all() {
         shift # shift all parameters;
     done
     return 0
-}
-
-# @description install_reverse_proxy
-#
-# @args $# the backup of all the container names
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-install_reverse_proxy() {
-    echo "install_reverse_proxy"
-    return 1
-}
-
-# @description add_subdomain
-#
-# @args $# the backup of all the container names
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-add_subdomain() {
-    echo "add_subdomain"
-    return 1
 }

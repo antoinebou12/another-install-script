@@ -27,7 +27,7 @@ install_shellcheck(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 use_shellcheck(){
-    names=$(find ../ -type d \( -path ../tests/coverage -o -path ../tests/bin -o -path ../etc -o -path /tmp -o -path ../docs/scripts -o -path vm/ \) -prune -o -iname "*.sh" -print)
+    names=$(find ../ -type d \( -path ../tests/coverage -o -path ../tests/bin -o -path ../etc -o -path /tmp -o -path ../docs/scripts -o -path vm \) -prune -o -iname "*.sh" -print)
 
     SAVEIFS=$IFS   # Save current IFS
     IFS=$'\n'      # Change IFS to new line
