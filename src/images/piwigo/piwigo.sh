@@ -15,3 +15,12 @@ create_docker_piwigo() {
     echo "$(get_current_ip):8049"
     return 0
 }
+
+# @description remove docker piwigo
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_piwigo() {
+    echo "not implemented"
+    return 0
+}

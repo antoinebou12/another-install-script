@@ -20,3 +20,12 @@ create_docker_cloud-torrent() {
 
     return 0
 }
+
+# @description remove docker cloud-torrent
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_cloud-torrent() {
+    echo "not implemented"
+    return 0
+}

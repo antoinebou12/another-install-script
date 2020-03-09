@@ -16,3 +16,12 @@ create_docker_drawio() {
     echo "$(get_current_ip):8005"
     return 0
 }
+
+# @description remove docker drawio
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_drawio() {
+    echo "not implemented"
+    return 0
+}

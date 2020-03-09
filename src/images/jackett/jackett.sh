@@ -15,3 +15,12 @@ create_docker_jackett() {
     echo "$(get_current_ip):9117"
     return 0
 }
+
+# @description remove docker jackett
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_jackett() {
+    echo "not implemented"
+    return 0
+}

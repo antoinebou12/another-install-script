@@ -17,3 +17,12 @@ create_docker_gitlab() {
 
     return 0
 }
+
+# @description remove docker gitlab
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_gitlab() {
+    echo "not implemented"
+    return 0
+}

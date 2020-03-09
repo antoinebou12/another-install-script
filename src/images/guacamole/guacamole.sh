@@ -23,3 +23,12 @@ create_docker_guacamole(){
 
     return 0
 }
+
+# @description remove docker guacamole
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_guacamole() {
+    echo "not implemented"
+    return 0
+}

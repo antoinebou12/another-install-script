@@ -17,3 +17,12 @@ create_docker_wireguard() {
     docker-compose up -d
 
 }
+
+# @description remove docker wireguard
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_wireguard() {
+    echo "not implemented"
+    return 0
+}

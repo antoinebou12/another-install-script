@@ -13,3 +13,12 @@ create_docker_deluge() {
 
     return 0
 }
+
+# @description remove docker deluge
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_deluge() {
+    echo "not implemented"
+    return 0
+}

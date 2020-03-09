@@ -15,3 +15,12 @@
     echo "$(get_current_ip):8037"
     return 0
 }
+
+# @description remove docker mcmyadmin
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_mcmyadmin() {
+    echo "not implemented"
+    return 0
+}

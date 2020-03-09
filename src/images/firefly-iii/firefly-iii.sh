@@ -6,11 +6,6 @@
 
 # @description create docker firefly-iii
 # https://github.com/firefly-iii/docker
-# @args $1 PORT_WEB
-# @args $2 PATH_DB
-# @args $3 PATH_EXPORT
-# @args $4 PATH_UPLOAD
-# @args $4 POSTGRES_PASSWORD
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_firefly-iii(){
@@ -19,5 +14,14 @@ create_docker_firefly-iii(){
     echo "ctrl+click to open in browser"
     echo "$(get_current_ip):8006"
 
+    return 0
+}
+
+# @description remove docker firefly-iii
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_firefly-iii() {
+    echo "not implemented"
     return 0
 }

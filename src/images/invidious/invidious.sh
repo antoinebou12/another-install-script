@@ -15,3 +15,12 @@ create_docker_invidious() {
     rm -rf invidious
     return 0
 }
+
+# @description remove docker invidious
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_invidious() {
+    echo "not implemented"
+    return 0
+}

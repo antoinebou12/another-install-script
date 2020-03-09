@@ -15,3 +15,12 @@ create_docker_code-server() {
     echo "$(get_current_ip):8003"
     return 0
 }
+
+# @description remove docker bookstack
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_bookstack() {
+    echo "not implemented"
+    return 0
+}

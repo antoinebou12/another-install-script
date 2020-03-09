@@ -17,3 +17,12 @@ create_docker_go-shidori(){
     echo "not implemented yet"
     return 0
 }
+
+# @description remove docker go-shiori
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_go-shiori() {
+    echo "not implemented"
+    return 0
+}

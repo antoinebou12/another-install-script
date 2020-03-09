@@ -13,3 +13,12 @@ create_docker_grafana() {
 
     return 0
 }
+
+# @description remove docker grafana
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_grafana() {
+    echo "not implemented"
+    return 0
+}

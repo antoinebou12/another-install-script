@@ -23,3 +23,12 @@ create_docker_spiderfoot() {
     unset CURRENT_DIRECTORY
     return 0
 }
+
+# @description remove docker spiderfoot
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_spiderfoot() {
+    echo "not implemented"
+    return 0
+}

@@ -14,3 +14,12 @@
 
     return 0
 }
+
+# @description remove docker dailynotes
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_dailynotes() {
+    echo "not implemented"
+    return 0
+}

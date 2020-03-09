@@ -13,3 +13,12 @@ create_docker_chevereto() {
 
     return 0
 }
+
+# @description remove docker chevereto
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_chevereto() {
+    echo "not implemented"
+    return 0
+}

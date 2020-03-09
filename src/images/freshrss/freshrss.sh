@@ -16,3 +16,12 @@ create_docker_freshrss() {
     echo "$(get_current_ip):8007"
     return 0
 }
+
+# @description remove docker freshrss
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_freshrss() {
+    echo "not implemented"
+    return 0
+}

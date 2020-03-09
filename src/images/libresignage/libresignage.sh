@@ -18,3 +18,12 @@ create_docker_libresignature(){
     return 0
 }
 
+# @description remove docker libresignage
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_libresignage() {
+    echo "not implemented"
+    return 0
+}
+

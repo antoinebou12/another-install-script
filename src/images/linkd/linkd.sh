@@ -12,3 +12,12 @@ create_docker_linkd() {
 
     return 0
 }
+
+# @description remove docker linkd
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_linkd() {
+    echo "not implemented"
+    return 0
+}

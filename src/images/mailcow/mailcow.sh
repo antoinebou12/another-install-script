@@ -9,11 +9,11 @@
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
- create_docker_mailcow(){
+create_docker_mailcow() {
     udocker_create_dir /home/udocker/volumes/mailcow
     pushd /home/udocker/volumes/mailcow
     git clone https://github.com/mailcow/mailcow-dockerized
-    pushd mailcow-dockerized 
+    pushd mailcow-dockerized
     ./generate_config.sh
     nano mailcow.conf
     nano docker-compose.yml
@@ -21,5 +21,14 @@
     exec_root docker-compose up -d
     popd
     popd
+    return 0
+}
+
+# @description remove docker mailcow
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_mailcow() {
+    echo "not implemented"
     return 0
 }

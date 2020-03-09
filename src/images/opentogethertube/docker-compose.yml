@@ -20,6 +20,9 @@ services:
     depends_on:
       - redis_db
       - postgres_db
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=opentogethertube"
 
   redis_db:
     container_name: opentogethertube_redis
@@ -31,6 +34,9 @@ services:
     volumes:
       - /home/udocker/opentogethertube/redis:/data
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=opentogethertube_redis"
 
   postgres_db:
     container_name: opentogethertube_postgres
@@ -47,3 +53,6 @@ services:
     volumes:
       - /home/udocker/opentogethertube/db:/var/lib/postgresql/data
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=opentogethertube_postgres"

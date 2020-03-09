@@ -12,3 +12,12 @@ create_docker_monica() {
     echo "not implemented yet"
     return 1
 }
+
+# @description remove docker monica
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_monica() {
+    echo "not implemented"
+    return 0
+}

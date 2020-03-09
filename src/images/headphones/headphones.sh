@@ -17,3 +17,12 @@ create_docker_headphones(){
 
     return 0
 }
+
+# @description remove docker headphones
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_headphones() {
+    echo "not implemented"
+    return 0
+}

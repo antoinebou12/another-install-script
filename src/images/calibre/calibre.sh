@@ -17,3 +17,12 @@ create_docker_calibre(){
      echo "$(get_current_ip):8001"
      return 0
 }
+
+# @description remove docker calibre
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_calibre() {
+    echo "not implemented"
+    return 0
+}

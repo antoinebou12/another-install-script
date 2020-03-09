@@ -16,3 +16,12 @@ create_docker_netdata() {
 
     return 0
 }
+
+# @description remove docker netdata
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_netdata() {
+    echo "not implemented"
+    return 0
+}

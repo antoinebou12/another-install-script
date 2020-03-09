@@ -15,3 +15,12 @@ create_docker_olaris() {
    echo "$(get_current_ip):6666"
    return 0
 }
+
+# @description remove docker opentogethertube
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_opentogethertube() {
+    echo "not implemented"
+    return 0
+}
