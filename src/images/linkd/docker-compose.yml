@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  linkd:
+    image: hexf/linkd
+    container_name: : linkd
+    ports:
+      - "1336:1336"

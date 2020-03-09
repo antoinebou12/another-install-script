@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+    dailynotes:
+        image: m0ngr31/dailynotes
+        ports:
+            - '5000:5000'
+        volumes:
+            - '/home/udocker/volumes/config:/app/config'
