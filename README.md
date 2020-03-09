@@ -1,10 +1,11 @@
 # another-install-script
 
+![GitHub top language](https://img.shields.io/github/languages/top/antoinebou13/another-install-script)
 [![Build Status](https://travis-ci.com/antoinebou13/another-install-script.svg?token=MUq69udyyqAR24bsXgRq&branch=master)](https://travis-ci.com/antoinebou13/another-install-script)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/another-install-script?style=flat)
-![Codecov](https://img.shields.io/codecov/c/github/antoinebou13/another-install-script?style=flat&token=FcTtxpEGhF)
-![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/another-install-script?style=flat)
-![GitHub](https://img.shields.io/github/license/antoinebou13/another-install-script?style=flat)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/another-install-script)
+[![codecov](https://codecov.io/gh/antoinebou13/another-install-script/branch/master/graph/badge.svg?token=FcTtxpEGhF)](https://codecov.io/gh/antoinebou13/another-install-script)
+![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/another-install-script)
+![GitHub](https://img.shields.io/github/license/antoinebou13/another-install-script)
 
 Another install Script is a W.I.P project/script to install docker container for my personal server
 

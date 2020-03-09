@@ -10,8 +10,11 @@ services:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/openvpn/conf:/etc/openvpn
     ports:
       - "1194:1194/udp"
     restart: unless-stopped
-    volumes:
-      - /home/udocker/volumes/openvpn/conf:/etc/openvpn
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=openvpn"

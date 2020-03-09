@@ -19,9 +19,6 @@ uninstall() {
 
     dist_check
 
-    sed '/UDOCKER_USERID/d' /etc/environment
-    sed '/UDOCKER_GROUPID/d' /etc/environment
-
     if check_packages_install docker; then
         stop_containers_all
         prune_images_volumes_all

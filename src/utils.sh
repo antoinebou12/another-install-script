@@ -587,3 +587,4 @@ function virt_check() {
         return 1
     fi
 }
+

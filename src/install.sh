@@ -37,7 +37,7 @@ install_basic() {
 
     aptupdate
     aptupgrade
-    aptinstall nmap wget curl bats mlocate python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools openssl firefox
+    aptinstall nmap wget curl bats mlocate python python-pip python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools openssl firefox
 
     print_line
     return 0

@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.7"
 services:
   wine-vnc:
     image: "msjpq/wine-vnc:bionic"
@@ -11,6 +11,9 @@ services:
      - RECON_DELAY=250
      - PAGE_TITLE=kdedocker
      - ROOT_PASSWORD=root
+     - PUID='${UDOCKER_USERID}'
+     - PGID='${UDOCKER_GROUPID}'
+     - TZ='${TZ}'
     ports:
       - "8100:8080"
       - "5900:5900"

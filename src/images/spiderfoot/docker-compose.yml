@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  spiderfoot:
+    image: spiderfoot
+    container_name: spiderfoot
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=spiderfoot"
