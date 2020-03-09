@@ -6,7 +6,7 @@
 source "$(dirname "${BASH_SOURCE[0]}")/src/menu.sh"
 
 # Load the user defined parameters
-while [[ $# > 0 ]]; do
+while [[ $# -gt 0 ]]; do
     case "$1" in
         --help|*)
             cat docs/help.txt

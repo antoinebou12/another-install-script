@@ -101,7 +101,7 @@ exec_root() {
         return 0
     fi
     return 1
-    
+
 }
 
 # @description check if the user is root then execute the bash func
@@ -118,11 +118,11 @@ exec_root_func() {
             bash -c "$(declare -f ${func}); ${func}"
         fi
         # shellcheck disable=SC2086
-        
+
         return 0
     fi
     return 1
-    
+
 }
 
 # @description check if the packages exist
@@ -318,7 +318,7 @@ send_email() {
     local subject="$3"
     local body="$4"
     local attachment=$5
-    
+
     echo "$body" | mutt -s "$subject" -a "$attachment" "$to"
     return 0
 }
@@ -444,17 +444,17 @@ chmod_sh_all() {
 # @exitcode 1 On failure
 loop_files_func() {
     local names=$(find "$1" -name "$2")
-    
+
     local SAVEIFS="$IFS" # Save current IFS
     local IFS=$'\n'      # Change IFS to new line
     local names=($names) # split to array $names
     local IFS="$SAVEIFS" # Restore IFS
-    
+
     for ((i = 0; i < ${#names[@]}; i++)); do
         echo "$i: ${names[$i]}"
         $3 "${names[$i]}"
     done
-    
+
     return 0
 }
 
@@ -497,13 +497,13 @@ get_current_ip() {
 get_geolocation() {
     get_current_ip
     curl -s https://ipvigilante.com/${PUBLIC_IP} | jq '.data.latitude, .data.longitude, .data.city_name, .data.country_name' |
-    while read -r LATITUDE; do
-        read -r LONGITUDE
-        read -r CITY
-        read -r COUNTRY
-        echo "${LATITUDE},${LONGITUDE},${CITY},${COUNTRY}"
-    done
-    
+        while read -r LATITUDE; do
+            read -r LONGITUDE
+            read -r CITY
+            read -r COUNTRY
+            echo "${LATITUDE},${LONGITUDE},${CITY},${COUNTRY}"
+        done
+
     #cp geolocate.sh /etc/cron.daily
 }
 
@@ -526,10 +526,10 @@ show_aliases() {
 # @exitcode 1 On failure
 parse_yml() {
     local prefix=$2
-    local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
+    local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @ | tr @ '\034')
     sed -ne "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
-    -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
-    awk -F$fs '{
+        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p" $1 |
+        awk -F$fs '{
       indent = length($1)/2;
       vname[indent] = $2;
       for (i in vname) {if (i > indent) {delete vname[i]}}
@@ -541,11 +541,11 @@ parse_yml() {
 }
 
 # @description get value for yml
-# 
+#
 # @args $1 variable path name
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-read_config_yml(){
+read_config_yml() {
     parse_yml "$(dirname "${BASH_SOURCE[0]}")/config.yml" | grep "$1" | cut -d '=' -f 2-
     return 0
 }
@@ -570,7 +570,6 @@ function dist_check() {
     fi
 }
 
-
 # @description show aliases in the current shell
 # Checking For Virtualization
 # @noargs
@@ -587,4 +586,3 @@ function virt_check() {
         return 1
     fi
 }
-

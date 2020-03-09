@@ -8,7 +8,7 @@
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-enable_firewall(){
+enable_firewall() {
     exec_root snap install ufw
     exec_root ufw default deny incoming
     exec_root ufw default allow outgoing
@@ -22,7 +22,7 @@ enable_firewall(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-disable_firewall(){
+disable_firewall() {
     exec_root ufw disable
     return 0
 }
@@ -32,8 +32,8 @@ disable_firewall(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-allow_port_in_firewall(){
-    exec_root ufw allow $1
+allow_port_in_firewall() {
+    exec_root ufw allow "$1"
     return 0
 }
 
@@ -42,7 +42,7 @@ allow_port_in_firewall(){
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-deny_port_in_firewall(){
-    exec_root ufw allow $1
+deny_port_in_firewall() {
+    exec_root ufw allow "$1"
     return 0
 }

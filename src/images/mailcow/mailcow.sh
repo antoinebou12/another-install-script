@@ -11,16 +11,16 @@
 # @exitcode 1 On failure
 create_docker_mailcow() {
     udocker_create_dir /home/udocker/volumes/mailcow
-    pushd /home/udocker/volumes/mailcow
+    pushd /home/udocker/volumes/mailcow || exit
     git clone https://github.com/mailcow/mailcow-dockerized
-    pushd mailcow-dockerized
+    pushd mailcow-dockerized || exit
     ./generate_config.sh
     nano mailcow.conf
     nano docker-compose.yml
     exec_root docker-compose pull
     exec_root docker-compose up -d
-    popd
-    popd
+    popd || exit
+    popd || exit
     return 0
 }
 

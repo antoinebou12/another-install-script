@@ -57,7 +57,6 @@ script:
   - bash generate_docs.sh ../docs.md # documentation shdoc
   - cd ../.. || exit 1
   - awesome_bot README.md --allow-dupe --allow-redirect --allow-ssl --allow-timeout --allow 999,403,405,500,503,522
-  - awesome_bot docs/SERVER_LIST.md --allow-dupe --allow-redirect --allow-ssl --allow-timeout --allow 999,403,405,500,503,522
 
 notifications:
     email: false

@@ -18,11 +18,11 @@ declare -a CONTAINER_NAME_MENU=()
 # @exitcode 1 On failure
 import_all_sh() {
 	find "$(dirname "${BASH_SOURCE[0]}")/images" -name "*.sh" -execdir chmod u+x {} +
-	local names=$(find "$1" -name "$2")
+	local names="$(find "$1" -name "$2")"
 
 	local SAVEIFS="$IFS" # Save current IFS
 	local IFS=$'\n'      # Change IFS to new line
-	local names=($names) # split to array $names
+	local names=("$names") # split to array $names
 	local IFS="$SAVEIFS" # Restore IFS
 
 	for ((i = 0; i < ${#names[@]}; i++)); do
@@ -42,9 +42,13 @@ manage_exec_containers_list() {
 	echo "Containers"
 	print_line
 
-	export UDOCKER_USERID=$(id -u udocker)
-	export UDOCKER_GROUPID=$(id -g udocker)
-	export TZ=$(cat /etc/timezone)
+	UDOCKER_USERID="$(id -u udocker)"
+	UDOCKER_GROUPID="$(id -g udocker)"
+	TZ="$(cat /etc/timezone)"
+
+	export UDOCKER_USERID
+	export UDOCKER_GROUPID
+	export TZ
 
 	local FUNC_CREATE="create_docker_"
 	touch /tmp/containers.txt
@@ -73,7 +77,7 @@ manage_exec_containers_list() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 list_container() {
-	docker inspect --format='{{.Name}}' $(exec_root docker ps -aq --no-trunc) | cut -c2-
+	docker inspect --format='{{.Name}}' "$(exec_root docker ps -aq --no-trunc)" | cut -c2-
 	return 0
 }
 
@@ -98,7 +102,7 @@ generate_container_menu() {
 	while IFS=, read -r col1 col2; do
 		if [[ -f /home/udocker/containers.txt ]]; then
 			if grep -Fxq "$col1" /home/udocker/conf/containers.txt; then
-				echo 1;
+				echo 1
 			else
 				CONTAINER_NAME_MENU+=("$col1")
 				CONTAINER_NAME_MENU+=("$col2")

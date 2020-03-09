@@ -113,9 +113,9 @@ install_signal_cli() {
     exec_root "tar xf signal-cli-0.6.5.tar.gz -C /opt" >/dev/null
     exec_root "ln -sf /opt/signal-cli-0.6.5/bin/signal-cli /usr/local/bin/" >/dev/null
     rm -rf signal-cli-0.6.5.tar.gz >/dev/null
-    signal-cli -u $1 register
-    read CODE
-    signal-cli -u $1 verify $CODE
+    signal-cli -u "$1" register
+    read -r CODE
+    signal-cli -u "$1" verify "$CODE"
 
     print_line
     return 0
@@ -132,20 +132,22 @@ install_signal_ssh_text() {
     echo "Install Signal on login ssh"
     print_line
 
-    local DATE_EXEC="$(date "+%d %b %Y %H:%M")"
-    local TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
+    local DATEEXEC="$(date "+%d %b %Y %H:%M")"
+    local TMPFILE='/tmp/ipinfo-$DATEEXEC.txt'
     if [ -n "$SSH_CLIENT" ] && [ -z "$TMUX" ]; then
-        local IP=$(echo $SSH_CLIENT | awk '{print $1}')
-        local PORT=$(echo $SSH_CLIENT | awk '{print $3}')
-        local HOSTNAME=$(hostname -f)
-        local IPADDR=$(hostname -I | awk '{print $1}')
-        curl https://ipinfo.io/$IP -s -o $TMPFILE
-        local CITY=$(cat $TMPFILE | sed -n 's/^  "city":[[:space:]]*//p' | sed 's/"//g')
-        local REGION=$(cat $TMPFILE | sed -n 's/^  "region":[[:space:]]*//p' | sed 's/"//g')
-        local COUNTRY=$(cat $TMPFILE | sed -n 's/^  "country":[[:space:]]*//p' | sed 's/"//g')
-        local ORG=$(cat $TMPFILE | sed -n 's/^  "org":[[:space:]]*//p' | sed 's/"//g')
-        local TEXT="$DATE_EXEC: ${USER} logged in to $HOSTNAME ($IPADDR) from $IP - $ORG - $CITY, $REGION, $COUNTRY port $PORT"
-        signal-cli -u +$1 send -m "$TEXT" +$2
+        local IP="$(echo "$SSH_CLIENT" | awk '{print $1}')"
+        local PORT="$(echo "$SSH_CLIENT" | awk '{print $3}')"
+        local HOSTNAME="$(hostname -f)"
+        local IPADDR="$(hostname -I | awk '{print $1}')"
+
+        curl https://ipinfo.io/"$IP" -s -o "$TMPFILE"
+
+        local CITY="$(cat $TMPFILE | sed -n 's/^  "city":[[:space:]]*//p' | sed 's/"//g')"
+        local REGION="$(cat $TMPFILE | sed -n 's/^  "region":[[:space:]]*//p' | sed 's/"//g')"
+        local COUNTRY="$(cat $TMPFILE | sed -n 's/^  "country":[[:space:]]*//p' | sed 's/"//g')"
+        local ORG="$(cat $TMPFILE | sed -n 's/^  "org":[[:space:]]*//p' | sed 's/"//g')"
+        local TEXT="$DATEEXEC: ${USER} logged in to $HOSTNAME ($IPADDR) from $IP - $ORG - $CITY, $REGION, $COUNTRY port $PORT"
+        signal-cli -u +"$1" send -m "$TEXT" +"$2"
         rm $TMPFILE
     fi
 
@@ -161,15 +163,15 @@ install_signal_ssh_text() {
 manage_exec_install_list() {
     local FUNC_INSTALL="install_"
     basic_option=()
-	mapfile -t basic_option <<<"$1"
-	for basic in "${basic_option[@]}"; do
+    mapfile -t basic_option <<<"$1"
+    for basic in "${basic_option[@]}"; do
         if [[ "$basic" == "docker" ]]; then
             install_docker
             install_docker_compose
             create_docker_user
         else
-            "$FUNC_INSTALL""$basic" 
-        fi 
+            "$FUNC_INSTALL""$basic"
+        fi
     done
     return 0
 }
