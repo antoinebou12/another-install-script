@@ -1,8 +1,13 @@
-version: '3.7'
+version: "3.7"
 services:
-    dailynotes:
-        image: m0ngr31/dailynotes
-        ports:
-            - '5000:5000'
-        volumes:
-            - '/home/udocker/volumes/config:/app/config'
+  dailynotes:
+    image: m0ngr31/dailynotes
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    ports:
+      - "5000:5000"
+    volumes:
+      - "/home/udocker/volumes/config:/app/config"
+    restart: unless-stopped

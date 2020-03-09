@@ -3,5 +3,11 @@ services:
   linkd:
     image: hexf/linkd
     container_name: : linkd
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
     ports:
       - "1336:1336"
+    restart: unless-stopped
