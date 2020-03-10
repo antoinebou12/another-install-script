@@ -66,8 +66,8 @@ config_get() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 parse_yml_array_ports() {
-    local ARRAY="$(read_config_yml $1)"
-    local NEW_ARRAY="${ARRAY//\"}"
+    local ARRAY="$(read_config_yml "$1""_ports")"
+    local NEW_ARRAY="${ARRAY//\"/}"
     if [[ "$NEW_ARRAY" == *"["*"]"* ]]; then
         local VALUES="$(echo "$NEW_ARRAY" | jq -c '.[]')"
         printf -- "%s\n" "${VALUES}"
@@ -81,18 +81,14 @@ parse_yml_array_ports() {
 # @arg $1 the config file var array
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-parse_yml_array_webs() {
-    local ARRAY="$(read_config_yml $1)"
-    echo $ARRAY
+parse_yml_array_web() {
+    local ARRAY="$(read_config_yml "$1""_web")"
     local NEW_ARRAY="${ARRAY:1:${#ARRAY}-2}"
-    echo $NEW_ARRAY
-    if [[ "$ARRAY" == *"["*"]"* ]]; then
-        local VALUES="$(echo "$ARRAY" | jq -c '.[]')"
-        printf -- "%s\n" "${VALUES}"
-        return 0
-    else
-        return 1
-    fi
+    local NEW_ARRAY="${NEW_ARRAY:1:${#NEW_ARRAY}-2}"
+    local NEW_ARRAY="$(echo "$NEW_ARRAY" | sed -e $'s/,/\\\n/g')"
+    local VALUES="$NEW_ARRAY"
+    printf -- "%s\n" "${VALUES}"
+    return 0
 }
 
 # @description generate the container url on the server
@@ -100,8 +96,8 @@ parse_yml_array_webs() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 containers_url() {
-    local webport="$(parse_yml_array "$1""_web")"
+    local webport="$(parse_yml_array_web "$1")"
     local domain="$(read_config_yml "domain")"
-    printf -- "%s%s/n" "${domain}${webport}"
+    printf "${domain//\"/}${webport//\"/}\n"
     return 0
 }

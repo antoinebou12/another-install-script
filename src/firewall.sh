@@ -111,8 +111,8 @@ manage_firewall_ports_allow_list() {
     fi
 
     for container_name in "${containers[@]}"; do
-        echo "$(parse_yml_array_ports "$container_name""_ports")"
-        parse_yml_array_ports "$container_name""_ports" >>/tmp/ports.txt
+        echo "$(parse_yml_array_ports "$container_name")"
+        parse_yml_array_ports "$container_name" >>/tmp/ports.txt
     done
 
     [ -d /home/udocker/ ] && cp /tmp/ports.txt /home/udocker/config/ports.txt

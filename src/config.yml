@@ -91,7 +91,7 @@ services:
     calibre:
       name: calibre
       ports: [8001, 8002]
-      web: [":8001", ":8002"]
+      web: [":8001",":8002"]
       volumes: no
       network: no
       description: Powerful and easy to use ebook manager
@@ -174,8 +174,8 @@ services:
 
     deluge:
       name: deluge
-      ports: [6889]
-      web: [6889]
+      ports: []
+      web: []
       volumes: no
       network: no
       description: BitTorrent Client
@@ -246,7 +246,7 @@ services:
 
     gitlab:
       name: gitlab
-      ports: ["8009, 22222"]
+      ports: [8009, 22222]
       web: [":8009"]
       volumes: no
       network: no
@@ -306,8 +306,8 @@ services:
 
     headphones:
       name: headphones
-      ports: [":8181"]
-      web: [8181]
+      ports: [8181]
+      web: [":8181"]
       volumes: no
       network: no
       description: Automated music downloader for NZB and Torrent, written in Python
@@ -391,7 +391,7 @@ services:
     jenkins:
       name: jenkins
       ports: [8015, 50000]
-      web: [8015]
+      web: [":8015"]
       volumes: no
       network: no
       description: Open source automation server CI/CD

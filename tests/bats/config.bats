@@ -16,14 +16,18 @@ setup() {
 }
 
 @test "parse_yml_array_ports" {
-    if [[ "$(parse_yml_array_ports "airsonic_ports")" == "4040
+    if [[ "$(parse_yml_array_ports "airsonic")" == "4040
 1900" ]]; then return 0; else return 1; fi
     [ "$status" -eq 0 ]
 }
 
+@test "parse_yml_array_web" {
+    if [[ "$(parse_yml_array_web "calibre")" == "\":8001\"
+\":8002\"" ]]; then return 0; else return 1; fi
+    [ "$status" -eq 0 ]
+}
 
-@test "parse_yml_array_webs" {
-    if [[ "$(parse_yml_array_webs "airsonic_web")" == "4040
-1900" ]]; then return 0; else return 1; fi
+@test "containers_url" {
+    if [[ "$(containers_url airsonic)" == "localhost:4040" ]]; then return 0; else return 1; fi
     [ "$status" -eq 0 ]
 }
