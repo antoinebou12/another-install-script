@@ -39,7 +39,6 @@ services:
       implemented: no
 
   containers:
-
     airsonic:
       name: airsonic
       ports: [4040, 1900]

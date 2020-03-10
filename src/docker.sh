@@ -20,7 +20,6 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 install_docker() {
     echo "Install Docker"
     print_line
-
     # exec_root curl -sSL https://get.docker.com/ | CHANNEL=stable sh > /dev/null
     aptremove docker
     aptremove docker-engine
@@ -80,7 +79,6 @@ install_docker_extra() {
 
     curl -sSf https://moncho.github.io/dry/dryup.sh | exec_root sh
     exec_root "chmod 755 /usr/local/bin/dry"
-
     print_line
 
     return 0

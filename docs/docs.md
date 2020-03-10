@@ -2344,6 +2344,12 @@ remove docker mango
 * **0**: If successfull.
 * **1**: On failure
 
+
+
+
+
+
+
 # pyload.sh
 
 to install docker pyload
@@ -2454,7 +2460,6 @@ remove docker monica
 
 
 
-
 # traefik
 
 to install docker traefik
@@ -2481,6 +2486,9 @@ remove docker traefik
 
 * **0**: If successfull.
 * **1**: On failure
+
+
+
 
 # statping.sh
 

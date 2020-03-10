@@ -37,6 +37,10 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 uninstall() {
+    dist_check
+
+    sed '/UDOCKER_USERID/d' /etc/environment
+    sed '/UDOCKER_GROUPID/d' /etc/environment
 
     echo "Uninstall"
     print_line
