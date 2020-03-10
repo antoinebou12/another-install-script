@@ -4,8 +4,12 @@
 # @brief to manage the open port in the firewall
 
 # import
-source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
+# shellcheck source=config.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/config.sh"
+# shellcheck source=utils.sh
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 
 # @description install firewall
 #
