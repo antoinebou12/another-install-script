@@ -951,14 +951,14 @@ services:
       image: no
       implemented: no
 
-    wireguard:
-      name: wireguard
-      ports: [5555]
-      web: []
+    wireguardweb:
+      name: wireguardweb
+      ports: [7676,51820]
+      web: [":7676"]
       volumes: no
       network: no
-      description: VPN Server
+      description: VPN Server Web interface
       short_description: VPN
-      sourcelink: https://github.com/WireGuard
+      sourcelink: https://github.com/antoinebou13/wg-access-server/tree/update
       image: no
       implemented: no
