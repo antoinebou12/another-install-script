@@ -1,11 +1,11 @@
 system-config:
-  domain_nam: localhost
+  domain_name: localhost
   ssl:
     enable: no
   reverse-proxy:
     enable: no
     provider: traefik_docker
-  firewall: no
+  firewall: yes
   udocker:
     enable: yes
     username: udocker

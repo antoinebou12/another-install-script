@@ -13,6 +13,16 @@ print_line() {
     return 0
 }
 
+# @description print newline
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+print_newline() {
+    printf "\n"
+    return 0
+}
+
 # @description show aliases in the current shell
 # Detect Operating System
 # @noargs

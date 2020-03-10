@@ -46,6 +46,7 @@ import_all_sh() {
 # @exitcode 1 On failure
 manage_exec_containers_list() {
 	echo "Containers"
+	print_newline
 	print_line
 
 	UDOCKER_USERID="$(id -u udocker)"
@@ -63,7 +64,7 @@ manage_exec_containers_list() {
 	for container_name in "${containers[@]}"; do
 		echo "$container_name"
 		print_line
-		exec_root echo "$container_name" >>/tmp/containers.txt
+		exec_root "$container_name" >>/tmp/containers.txt
 		source "$(dirname "${BASH_SOURCE[0]}")/containers/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line

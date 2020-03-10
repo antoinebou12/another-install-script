@@ -2,7 +2,7 @@ version: "3.7"
 services:
   sonarr:
     image: linuxserver/radarr
-    container_name: sonarr
+    container_name: radarr
     # user: udocker
     environment:
       - PUID='${UDOCKER_USERID}'

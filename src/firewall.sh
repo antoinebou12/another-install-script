@@ -97,37 +97,41 @@ deny_port_in_firewall() {
 
 # @description manage allow port based on installed containers
 #
-# @args $1 SETUP_CONTAINER_MENU
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 manage_firewall_ports_allow_list() {
-    echo "Containers"
-    print_line
 
     containers=()
     if [[ -f /home/udocker/config/containers.txt ]]; then
-        mapfile -t containers <<< /home/udocker/config/containers.txt
+        mapfile -t containers <<<"$(cat/home/udocker/config/containers.txt)"
     elif [[ -f /tmp/containers.txt ]]; then
-        mapfile -t containers <<< /tmp/containers.txt
+        mapfile -t containers <<<"$(cat /tmp/containers.txt)"
     fi
 
     for container_name in "${containers[@]}"; do
-        parse_yml_array "$container_name""_ports" >> /tmp/ports.txt
+        echo "$(parse_yml_array "$container_name""_ports")"
+        parse_yml_array "$container_name""_ports" >>/tmp/ports.txt
     done
 
     [ -d /home/udocker/ ] && cp /tmp/ports.txt /home/udocker/config/ports.txt
 
     ports=()
-    if [[ -f /home/udocker/config/prts.txt ]]; then
-        mapfile -t ports <<< /home/udocker/config/ports.txt
+    if [[ -f /home/udocker/config/ports.txt ]]; then
+        mapfile -t ports <<<"$(cat/home/udocker/config/ports.txt)"
     elif [[ -f /tmp/ports.txt ]]; then
-        mapfile -t ports <<< /tmp/ports.txt
+        mapfile -t ports <<<"$(cat/tmp/ports.txt)"
     fi
 
-    for port in "${ports[@]}"; do
-        echo "allow $port"
-        allow_port_in_firewall "$port"
+    for port_numbers in "${ports[@]}"; do
+        echo "allow $port_numbers"
+        allow_port_in_firewall "$port_numbers"
     done
+
+    if [[ "$(read_config_yml "system-config_firewall")" == "on" ]]; then
+        enable_firewall
+    else
+        disable_firewall
+    fi
 
     return 0
     print_line
