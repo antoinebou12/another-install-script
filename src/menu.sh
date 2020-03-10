@@ -152,35 +152,38 @@ help_setup_menu() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 main_setup_menu() {
+    if [[ "$(read_config_yml "system_bashmenu")" == "yes" ]]; then
+        SETUP_MENU=$(whiptail --clear --title "Another Install Script" --menu --notags "" 20 78 12 -- \
+            "install" "Installation" \
+            "add_container" "Add Container" \
+            "remove_container" "Remove Container" \
+            "uninstall_all" "Uninstall" \
+            "help" "Help" \
+            "exit" "Exit" \
+            3>&1 1>&2 2>&3)
 
-    SETUP_MENU=$(whiptail --clear --title "Another Install Script" --menu --notags "" 20 78 12 -- \
-        "install" "Installation" \
-        "add_container" "Add Container" \
-        "remove_container" "Remove Container" \
-        "uninstall_all" "Uninstall" \
-        "help" "Help" \
-        "exit" "Exit" \
-        3>&1 1>&2 2>&3)
-
-    case $SETUP_MENU in
-    "install")
-        install_setup_menu
-        ;;
-    "add_container")
-        add_container_setup_menu
-        ;;
-    "remove container")
-        remove_container_menu
-        ;;
-    "uninstall all")
-        uninstall_setup_menu
-        ;;
-    "help")
-        help_setup_menu
-        ;;
-    "exit")
-        exit 0
-        ;;
-    *) ;;
-    esac
+        case $SETUP_MENU in
+        "install")
+            install_setup_menu
+            ;;
+        "add_container")
+            add_container_setup_menu
+            ;;
+        "remove container")
+            remove_container_menu
+            ;;
+        "uninstall all")
+            uninstall_setup_menu
+            ;;
+        "help")
+            help_setup_menu
+            ;;
+        "exit")
+            exit 0
+            ;;
+        *) ;;
+        esac
+    else
+        echo "Error"
+    fi
 }

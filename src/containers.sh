@@ -135,46 +135,32 @@ generate_docker_compose_yml() {
 	envsubst <"$1" >"$2"
 }
 
-# @description create tar for running docker for a local backup
+
+# @description stop all container
 #
-# @args $1 container id
+# @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-create_container_id_backup() {
-    echo "Create Docker Container Backup $1"
+stop_containers_all() {
+    echo "Stop all Docker Containers"
     print_line
 
-    # shellcheck disable=SC2086,SC2143
-    if [ ! "$(docker ps -a | grep $1)" ]; then
-        container_name="$(docker ps | grep $1 | awk '{ print $2 }')"
-        date_id="$(date +'%m/%d/%Y_%s')"
-        container_backup="${container_name}_${date_id}_backup"
-        docker commit -p "$1" "$container_backup"
-        docker save -o /home/udocker/backups/"$container_backup".tar "$container_backup"
-    fi
+    docker container stop "$(docker ps --filter "label=AIS.name" -aq)"
 
     print_line
     return 0
 }
 
-# @description create tar for running docker for a local backup
+# @description stop all container
 #
-# @args $1 container container name
+# @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-create_container_name_backup() {
-    echo "Create Docker Container Backup $1"
+remove_containers_all() {
+    echo "Remove all Docker Containers"
     print_line
 
-    # shellcheck disable=SC2086,SC2143
-    if [ ! "$(docker ps -a | grep $1)" ]; then
-        # shellcheck disable=SC2086
-        container_name="$(docker ps | grep $1 | awk '{ print $1 }')"
-        date_id=$(date +'%m/%d/%Y_%s')
-        container_backup="${container_name}_${date_id}_backup"
-        docker commit -p "$1" "$container_backup"
-        docker save -o /home/udocker/backups/"$container_backup".tar "$container_backup"
-    fi
+    docker rm "$(docker ps --filter "label=AIS.name" -aq)"
 
     print_line
     return 0

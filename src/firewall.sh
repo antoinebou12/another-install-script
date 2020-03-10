@@ -115,7 +115,7 @@ manage_firewall_ports_allow_list() {
     fi
 
     for container_name in "${containers[@]}"; do
-        echo "$(parse_yml_array_ports "$container_name")"
+        parse_yml_array_ports "$container_name"
         parse_yml_array_ports "$container_name" >>/tmp/ports.txt
     done
 
@@ -133,7 +133,7 @@ manage_firewall_ports_allow_list() {
         allow_port_in_firewall "$port_numbers"
     done
 
-    if [[ "$(read_config_yml "system-config_firewall")" == "on" ]]; then
+    if [[ "$(read_config_yml "system_firewall")" == "yes" ]]; then
         install_firewall
         enable_firewall
     else

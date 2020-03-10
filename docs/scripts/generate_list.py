@@ -42,5 +42,5 @@ class GeneratorAIS(object):
 
 if __name__ == "__main__":
     generator = GeneratorAIS(
-        output_fname="", config_fname="/home/antoine/Code/another-install-script/src/config.yml", config_type="yaml")
+        output_fname="", config_fname="/home/antoine/Code/another-install-script/config.yml", config_type="yaml")
     generator.write_containers_list_text('../../src/containers/containers.txt')

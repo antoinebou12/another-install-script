@@ -27,7 +27,12 @@ setup() {
     [ "$status" -eq 0 ]
 }
 
-@test "containers_url" {
-    if [[ "$(containers_url airsonic)" == "localhost:4040" ]]; then return 0; else return 1; fi
+@test "container_url" {
+    if [[ "$(container_url airsonic)" == "localhost:4040" ]]; then return 0; else return 1; fi
+    [ "$status" -eq 0 ]
+}
+
+@test "subdomain_container_url" {
+    if [[ "$(subdomain_container_url airsonic)" == "airsonic.localhost" ]]; then return 0; else return 1; fi
     [ "$status" -eq 0 ]
 }

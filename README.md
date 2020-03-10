@@ -90,8 +90,8 @@ A simple project overview to with the explaination of each important file
 |   |   |   |    +-- docker-compose.yml
 |   |   |   |    +-- $container_name.sh
 |   |   |   |    +-- ...
+|   +-- backup.sh
 |   +-- config.sh
-|   +-- config.yml
 |   +-- containers.sh
 |   +-- docker.sh
 |   +-- firewall.sh
@@ -100,6 +100,7 @@ A simple project overview to with the explaination of each important file
 |   +-- other.sh
 |   +-- router.sh
 |   +-- utils.sh
++-- config.yml
 +-- setup.sh
 +-- uninstall.sh
 ```

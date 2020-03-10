@@ -1,4 +1,4 @@
-systemconfig:
+system:
   domain: localhost
   ssl:
     enable: no

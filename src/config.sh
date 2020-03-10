@@ -19,7 +19,7 @@ parse_yml() {
       for (i in vname) {if (i > indent) {delete vname[i]}}
       if (length($3) > 0) {
          vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
+         printf("%s%s%s=\"%s\"\n", "'"$prefix"'",vn, $2, $3);
       }
     }'
 }
@@ -30,7 +30,7 @@ parse_yml() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 read_config_yml() {
-    parse_yml "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/config.yml" | grep "$1" | cut -d '=' -f 2-
+    parse_yml "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../config.yml" | grep "$1" | cut -d '=' -f 2-
     return 0
 }
 
@@ -66,10 +66,13 @@ config_get() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 parse_yml_array_ports() {
-    local ARRAY="$(read_config_yml "$1""_ports")"
-    local NEW_ARRAY="${ARRAY//\"/}"
+    local ARRAY
+    local NEW_ARRAY
+    local VALUES
+    ARRAY="$(read_config_yml "$1""_ports")"
+    NEW_ARRAY="${ARRAY//\"/}"
     if [[ "$NEW_ARRAY" == *"["*"]"* ]]; then
-        local VALUES="$(echo "$NEW_ARRAY" | jq -c '.[]')"
+        VALUES="$(echo "$NEW_ARRAY" | jq -c '.[]')"
         printf -- "%s\n" "${VALUES}"
         return 0
     else
@@ -82,12 +85,15 @@ parse_yml_array_ports() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 parse_yml_array_web() {
-    local ARRAY="$(read_config_yml "$1""_web")"
-    local NEW_ARRAY="${ARRAY:1:${#ARRAY}-2}"
-    local NEW_ARRAY="${NEW_ARRAY:1:${#NEW_ARRAY}-2}"
-    local NEW_ARRAY="$(echo "$NEW_ARRAY" | sed -e $'s/,/\\\n/g')"
-    local VALUES="$NEW_ARRAY"
-    printf -- "%s\n" "${VALUES}"
+    local ARRAY
+    local NEW_ARRAY
+    ARRAY="$(read_config_yml "$1""_web")"
+    NEW_ARRAY="${ARRAY:1:${#ARRAY}-2}"
+    NEW_ARRAY="${NEW_ARRAY:1:${#NEW_ARRAY}-2}"
+    NEW_ARRAY="${NEW_ARRAY//,/
+}" # newline
+
+    printf -- "%s\n" "${NEW_ARRAY}"
     return 0
 }
 
@@ -95,9 +101,24 @@ parse_yml_array_web() {
 # @arg $1 container name
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-containers_url() {
-    local webport="$(parse_yml_array_web "$1")"
-    local domain="$(read_config_yml "domain")"
-    printf "${domain//\"/}${webport//\"/}\n"
+container_url() {
+    local WEBPORT
+    local DOMAIN
+    WEBPORT="$(parse_yml_array_web "$1")"
+    DOMAIN="$(read_config_yml "system_domain")"
+    printf "%s%s\n" "${DOMAIN//\"/}" "${WEBPORT//\"/}"
+    return 0
+}
+
+# @description generate the subdomain container url on the server
+# @arg $1 container name
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+subdomain_container_url() {
+    local CONTAINER
+    local DOMAIN
+    CONTAINER="$(read_config_yml "$1""_name")"
+    DOMAIN="$(read_config_yml "system_domain")"
+    printf "%s.%s\n" "${CONTAINER//\"/}" "${DOMAIN//\"/}"
     return 0
 }
