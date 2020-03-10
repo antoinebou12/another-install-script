@@ -18,3 +18,12 @@
  ___/ // /__ / /   / // /_/ // /_  
 /____/ \___//_/   /_// ____/ \__/  
                     /_/            
+
+Menu navigation
+Select box with space and enter when you complete. Press escape when you want to cancel and escape the menu
+
+1. Click on the Installation
+2. Make sure to install basic and docker (If you want containers)
+3. Wait them fill the udocker info
+4. Select the containers you want (check if in readme)
+5. Open web browser and do additional setup for each service (if needed)

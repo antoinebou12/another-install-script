@@ -1,3 +1,2 @@
-
 Context (Environment)
 Detailed Description

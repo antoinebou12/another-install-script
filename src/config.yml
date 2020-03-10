@@ -1,15 +1,16 @@
-system-config:
+systemconfig:
+  domain: localhost
   ssl:
     enable: no
-  reverse-proxy:
+  reverseproxy:
     enable: no
     provider: traefik_docker
-  firewall: no
-  udocker: 
+  firewall: yes
+  udocker:
     enable: yes
     username: udocker
     password: udocker
-  bash_menu: yes
+  bashmenu: yes
 
 services:
   local:
@@ -19,9 +20,9 @@ services:
       web: [9090]
       volumes: no
       network: local
-      description: Open web-based interface for your servers
+      description: Open webbased interface for your servers
       short_description: Admin web for the server
-      source-link: https://cockpit-project.org/
+      sourcelink: https://cockpitproject.org/
       image: no
       implemented: no
 
@@ -33,12 +34,11 @@ services:
       network: local
       description: IT Systems automation
       short_description: Systems automation
-      source-link: https://www.ansible.com
+      sourcelink: https://www.ansible.com
       image: no
       implemented: no
 
   containers:
-    
     airsonic:
       name: airsonic
       ports: [4040, 1900]
@@ -47,7 +47,19 @@ services:
       network: no
       description: Music and Podcast server
       short_description: Music and Podcast server
-      source-link: https://github.com/linuxserver/docker-airsonic
+      sourcelink: https://github.com/linuxserver/dockerairsonic
+      image: no
+      implemented: no
+    
+    ansiblesemaphore:
+      name: ansiblesemaphore
+      ports: [4000]
+      web: [":4000"]
+      volumes: no
+      network: no
+      description: Open Source alternative to Ansible Tower
+      short_description: Ansible Frontend
+      sourcelink: https://github.com/ansiblesemaphore/semaphore
       image: no
       implemented: no
 
@@ -59,7 +71,7 @@ services:
       network: no
       description: Open source password management
       short_description: Password management
-      source-link: https://github.com/bitwarden
+      sourcelink: https://github.com/bitwarden
       image: no
       implemented: no
 
@@ -69,45 +81,57 @@ services:
       web: [":6875"]
       volumes: no
       network: no
-      description: Simple, self-hosted, easy-to-use platform for organising and storing information
+      description: Simple, selfhosted, easytouse platform for organising and storing information
       short_description: Ebook server
-      source-link: https://www.bookstackapp.com/
+      sourcelink: https://www.bookstackapp.com/
       image: no
       implemented: no
 
     calibre:
       name: calibre
-      ports: [8001,8002]
-      web: [:8001, ":8002"]
+      ports: [8001, 8002]
+      web: [":8001",":8002"]
       volumes: no
       network: no
-      description: Powerful and easy to use e-book manager
+      description: Powerful and easy to use ebook manager
       short_description: Ebook server
-      source-link: https://github.com/kovidgoyal/calibre
+      sourcelink: https://github.com/kovidgoyal/calibre
       image: no
       implemented: no
 
-    cloud-torrent:
-      name: cloud-torrent
+    chevereto:
+      name: chevereto
+      ports: [8999]
+      web: [":8999"]
+      volumes: no
+      network: no
+      description: Open source image hosting software
+      short_description: Image hosting
+      sourcelink: https://github.com/Chevereto/CheveretoFree
+      image: no
+      implemented: no
+
+    cloudtorrent:
+      name: cloudtorrent
       ports: [6889]
       web: [":6889"]
       volumes: no
       network: no
-      description: A self-hosted remote torrent client
+      description: A selfhosted remote torrent client
       short_description: Remote torrent client
-      source-link: https://github.com/jpillora/cloud-torrent
+      sourcelink: https://github.com/jpillora/cloudtorrent
       image: no
       implemented: no
 
-    code-server:
-      name: code-server
+    codeserver:
+      name: codeserver
       ports: [8003]
       web: [":8003"]
       volumes: no
       network: no
       description: Run VS Code on a remote server
       short_description: VS Code on a remote server
-      source-link: https://github.com/cdr/code-server
+      sourcelink: https://github.com/cdr/codeserver
       image: no
       implemented: no
 
@@ -119,7 +143,7 @@ services:
       network: no
       description: Automatic Movie Downloading via NZBs & Torrents
       short_description: Automatic Movie Downloading
-      source-link: https://github.com/CouchPotato/CouchPotatoServer
+      sourcelink: https://github.com/CouchPotato/CouchPotatoServer
       image: no
       implemented: no
 
@@ -129,21 +153,33 @@ services:
       web: [":8004"]
       volumes: no
       network: no
-      description: The Cyber Swiss Army Knife - a web app for encryption, encoding, compression and data analysis
+      description: The Cyber Swiss Army Knife  a web app for encryption, encoding, compression and data analysis
       short_description: Web app for encryption, encoding, compression
-      source-link: https://github.com/gchq/CyberChef
+      sourcelink: https://github.com/gchq/CyberChef
+      image: no
+      implemented: no
+
+    dailynotes:
+      name: dailynotes
+      ports: [5000]
+      web: [":5000"]
+      volumes: no
+      network: no
+      description: App for taking notes and tracking tasks on a daily basis
+      short_description: Notes taking app
+      sourcelink: https://github.com/m0ngr31/DailyNotes
       image: no
       implemented: no
 
     deluge:
       name: deluge
-      ports: [6889]
-      web: [6889]
+      ports: []
+      web: []
       volumes: no
       network: no
       description: BitTorrent Client
       short_description: BitTorrent Client
-      source-link: https://github.com/deluge-torrent/deluge
+      sourcelink: https://github.com/delugetorrent/deluge
       image: no
       implemented: no
 
@@ -155,7 +191,7 @@ services:
       network: no
       description: Free online diagram software
       short_description: Diagram software
-      source-link: https://hub.docker.com/r/fjudith/draw.io
+      sourcelink: https://hub.docker.com/r/fjudith/draw.io
       image: no
       implemented: no
 
@@ -167,19 +203,19 @@ services:
       network: no
       description: Backup software to store encrypted backups
       short_description: Backup software to store encrypted backups
-      source-link: https://hub.docker.com/r/linuxserver/duplicati/
+      sourcelink: https://hub.docker.com/r/linuxserver/duplicati/
       image: no
       implemented: no
 
-    firefly-iii:
-      name: firefly-iii
+    fireflyiii:
+      name: fireflyiii
       ports: [8006]
       web: [":8006"]
       volumes: no
       network: no
       description: A free and open source personal finance manager
       short_description: Personal finance manager
-      source-link: https://www.firefly-iii.org/
+      sourcelink: https://www.fireflyiii.org/
       image: no
       implemented: no
 
@@ -189,9 +225,9 @@ services:
       web: [":8007"]
       volumes: no
       network: no
-      description: A free, self-hostable aggregator RSS
+      description: A free, selfhostable aggregator RSS
       short_description: RSS
-      source-link: https://hub.docker.com/r/linuxserver/freshrss
+      sourcelink: https://hub.docker.com/r/linuxserver/freshrss
       image: no
       implemented: no
 
@@ -201,21 +237,21 @@ services:
       web: [":8008"]
       volumes: no
       network: no
-      description: A painless self-hosted Git service
+      description: A painless selfhosted Git service
       short_description: Git service
-      source-link: https://gitea.io/en-us/
+      sourcelink: https://gitea.io/enus/
       image: no
       implemented: no
 
     gitlab:
       name: gitlab
-      ports: ["8009, 22222"]
+      ports: [8009, 22222]
       web: [":8009"]
       volumes: no
       network: no
-      description: Gitlab service self-hosted
+      description: Gitlab service selfhosted
       short_description: Gitlab service
-      source-link: https://hub.docker.com/r/gitlab/gitlab-ce/
+      sourcelink: https://hub.docker.com/r/gitlab/gitlabce/
       image: no
       implemented: no
 
@@ -225,9 +261,9 @@ services:
       web: []
       volumes: no
       network: no
-      description: Cross-platform system monitoring tool written in Python.
+      description: Crossplatform system monitoring tool written in Python.
       short_description: System monitoring tool
-      source-link: https://nicolargo.github.io/glances/
+      sourcelink: https://nicolargo.github.io/glances/
       image: no
       implemented: no
 
@@ -237,9 +273,9 @@ services:
       web: [":8011"]
       volumes: no
       network: no
-      description: the open source analytics and monitoring solution 
-      short_description: Analytics and monitoring solution 
-      source-link: https://grafana.com/
+      description: the open source analytics and monitoring solution
+      short_description: Analytics and monitoring solution
+      sourcelink: https://grafana.com/
       image: no
       implemented: no
 
@@ -251,7 +287,7 @@ services:
       network: no
       description: Free and open source log management
       short_description: log management
-      source-link: https://docs.graylog.org/en/3.1/pages/installation/docker.html
+      sourcelink: https://docs.graylog.org/en/3.1/pages/installation/docker.html
       image: no
       implemented: no
 
@@ -263,19 +299,19 @@ services:
       network: no
       description: Apache guacamole is clientless remote desktop gateway
       short_description: Clientless remote desktop gateway
-      source-link: https://github.com/oznu/docker-guacamole
+      sourcelink: https://github.com/oznu/dockerguacamole
       image: no
       implemented: no
 
     headphones:
       name: headphones
-      ports: [":8181"]
-      web: [8181]
+      ports: [8181]
+      web: [":8181"]
       volumes: no
       network: no
       description: Automated music downloader for NZB and Torrent, written in Python
       short_description: Automated Music Downloader
-      source-link: https://hub.docker.com/r/linuxserver/headphones/
+      sourcelink: https://hub.docker.com/r/linuxserver/headphones/
       image: no
       implemented: no
 
@@ -287,7 +323,19 @@ services:
       network: no
       description: An Application dashboard and launcher
       short_description: Application dashboard and launcher
-      source-link: https://hub.docker.com/r/linuxserver/heimdall/
+      sourcelink: https://hub.docker.com/r/linuxserver/heimdall/
+      image: no
+      implemented: no
+
+    htpcdownloadbox:
+      name: htpcdownloadbox
+      ports: []
+      web: []
+      volumes: no
+      network: no
+      description: Sonarr/Radarr/Jackett/NZBGet/Deluge/OpenVPN/Plex
+      short_description: All in one torrent downloader
+      sourcelink: https://github.com/sebgl/htpcdownloadbox
       image: no
       implemented: no
 
@@ -299,7 +347,7 @@ services:
       network: no
       description: Create agents that monitor and act on your behalf
       short_description: Create agents that monitor and act on your behalf
-      source-link: https://github.com/huginn/huginn
+      sourcelink: https://github.com/huginn/huginn
       image: no
       implemented: no
 
@@ -309,9 +357,9 @@ services:
       web: [":8014"]
       volumes: no
       network: no
-      description: Alternative front-end to YouTube
-      short_description: Alternative front-end to YouTube
-      source-link: https://github.com/omarroth/invidious
+      description: Alternative frontend to YouTube
+      short_description: Alternative frontend to YouTube
+      sourcelink: https://github.com/omarroth/invidious
       image: no
       implemented: no
 
@@ -323,7 +371,7 @@ services:
       network: no
       description: API Support for your favorite torrent trackers
       short_description: API Support for your favorite torrent trackers
-      source-link: https://github.com/Jackett/Jackett
+      sourcelink: https://github.com/Jackett/Jackett
       image: no
       implemented: no
 
@@ -333,21 +381,21 @@ services:
       web: [":8096"]
       volumes: no
       network: no
-      description:  Free Software Media System also alternative for plex
+      description: Free Software Media System also alternative for plex
       short_description: Software media system
-      source-link: https://jellyfin.org/
+      sourcelink: https://jellyfin.org/
       image: no
       implemented: no
 
     jenkins:
       name: jenkins
       ports: [8015, 50000]
-      web: [8015]
+      web: [":8015"]
       volumes: no
       network: no
       description: Open source automation server CI/CD
       short_description: Automation server
-      source-link: https://jenkins.io/
+      sourcelink: https://jenkins.io/
       image: no
       implemented: no
 
@@ -357,9 +405,9 @@ services:
       web: [":8028"]
       volumes: no
       network: no
-      description: Multi-user server for Jupyter notebooks
-      short_description: Multi-user server for Jupyter
-      source-link: https://github.com/jupyterhub/jupyterhub
+      description: Multiuser server for Jupyter notebooks
+      short_description: Multiuser server for Jupyter
+      sourcelink: https://github.com/jupyterhub/jupyterhub
       image: no
       implemented: no
 
@@ -369,9 +417,21 @@ services:
       web: [":8888"]
       volumes: no
       network: no
-      description: Single-user server for Jupyter notebooks
-      short_description: Single-user server for Jupyter
-      source-link: https://jupyterlab.readthedocs.io/en/stable/
+      description: Singleuser server for Jupyter notebooks
+      short_description: Singleuser server for Jupyter
+      sourcelink: https://jupyterlab.readthedocs.io/en/stable/
+      image: no
+      implemented: no
+
+    kdedocker:
+      name: kdedocker
+      ports: [8100,5900]
+      web: [":8100"]
+      volumes: no
+      network: no
+      description: So you can run KDE inside a browser
+      short_description: KDE in Browser 
+      sourcelink: https://github.com/msjpq/kdeindocker
       image: no
       implemented: no
 
@@ -382,8 +442,8 @@ services:
       volumes: no
       network: no
       description: Open source identity and access management
-      short_description: Identity and access management 
-      source-link: https://www.keycloak.org/
+      short_description: Identity and access management
+      sourcelink: https://www.keycloak.org/
       image: no
       implemented: no
 
@@ -395,7 +455,7 @@ services:
       network: no
       description: Media server for comics/mangas/BDs with API and OPDS support
       short_description: Media server for comics/mangas/BDs
-      source-link: https://github.com/gotson/komga
+      sourcelink: https://github.com/gotson/komga
       image: no
       implemented: no
 
@@ -407,7 +467,7 @@ services:
       network: no
       description: Recurrent donations platform like Patreon
       short_description: Recurrent donations platform
-      source-link: https://en.liberapay.com/
+      sourcelink: https://en.liberapay.com/
       image: no
       implemented: no
 
@@ -419,7 +479,19 @@ services:
       network: no
       description: An open source digital signage solution
       short_description: Digital signage solution
-      source-link: https://github.com/eerotal/LibreSignage
+      sourcelink: https://github.com/eerotal/LibreSignage
+      image: no
+      implemented: no
+
+    libresignage:
+      name: linkd
+      ports: [1336]
+      web: []
+      volumes: no
+      network: no
+      description: A simple but powerful selfhosted link shortener service
+      short_description: link shortener
+      sourcelink: https://github.com/HexF/linkd
       image: no
       implemented: no
 
@@ -429,9 +501,9 @@ services:
       web: [":8034"]
       volumes: no
       network: no
-      description: Personal Document Archiving (DMS, EDMS for Personal/Home Office use) 
+      description: Personal Document Archiving (DMS, EDMS for Personal/Home Office use)
       short_description: Personal document archiving
-      source-link: https://github.com/AnalogJ/lodestone
+      sourcelink: https://github.com/AnalogJ/lodestone
       image: no
       implemented: no
 
@@ -441,9 +513,9 @@ services:
       web: [":8035"]
       volumes: no
       network: no
-      description: A great looking and easy-to-use photo-management-system you can run on your server, to manage and share photos
+      description: A great looking and easytouse photomanagementsystem you can run on your server, to manage and share photos
       short_description: Photo management system
-      source-link: https://github.com/electerious/Lychee
+      sourcelink: https://github.com/electerious/Lychee
       image: no
       implemented: no
 
@@ -455,7 +527,7 @@ services:
       network: no
       description: Mailserver docker
       short_description: Mailserver docker
-      source-link: https://mailcow.email/
+      sourcelink: https://mailcow.email/
       image: no
       implemented: no
 
@@ -467,10 +539,9 @@ services:
       network: no
       description: Manga server and web reader
       short_description: Manga server
-      source-link: https://github.com/hkalexling/Mango
+      sourcelink: https://github.com/hkalexling/Mango
       image: no
       implemented: no
-
 
     mcmyadmin:
       name: mcmyadmin
@@ -480,7 +551,7 @@ services:
       network: no
       description: Minecraft admin system
       short_description: Minecraft admin system
-      source-link: https://www.mcmyadmin.com/
+      sourcelink: https://www.mcmyadmin.com/
       image: no
       implemented: no
 
@@ -492,7 +563,7 @@ services:
       network: no
       description: Automatic Video Library Manager for TV Shows
       short_description: Automatic video Library Manager for TV Shows
-      source-link: https://github.com/pymedusa/Medusa
+      sourcelink: https://github.com/pymedusa/Medusa
       image: no
       implemented: no
 
@@ -502,9 +573,9 @@ services:
       web: []
       volumes: no
       network: no
-      description: Minecraft Server 
-      short_description: Minecraft Server 
-      source-link: https://hub.docker.com/r/itzg/minecraft-server
+      description: Minecraft Server
+      short_description: Minecraft Server
+      sourcelink: https://hub.docker.com/r/itzg/minecraftserver
       image: no
       implemented: no
 
@@ -516,7 +587,7 @@ services:
       network: no
       description: Personal CRM. Remember everything about your friends and family
       short_description: Personal CRM
-      source-link: https://github.com/monicahq/monica
+      sourcelink: https://github.com/monicahq/monica
       image: no
       implemented: no
 
@@ -528,7 +599,7 @@ services:
       network: no
       description: Automated Comic Book downloader
       short_description: Comic Book downloader
-      source-link: https://github.com/monicahq/monica
+      sourcelink: https://github.com/monicahq/monica
       image: no
       implemented: no
 
@@ -540,7 +611,7 @@ services:
       network: no
       description: A self hosted virtual browser (rabb.it clone) that runs in docker.
       short_description: Virtual browser
-      source-link: https://github.com/nurdism/neko
+      sourcelink: https://github.com/nurdism/neko
       image: no
       implemented: no
 
@@ -550,9 +621,9 @@ services:
       web: [":19999"]
       volumes: no
       network: no
-      description: Real-time performance monitoring, done right! 
-      short_description: Real-time performance monitoring
-      source-link:  https://github.com/netdata/netdata
+      description: Realtime performance monitoring, done right!
+      short_description: Realtime performance monitoring
+      sourcelink: https://github.com/netdata/netdata
       image: no
       implemented: no
 
@@ -562,9 +633,9 @@ services:
       web: [6889]
       volumes: no
       network: no
-      description: On-premises file share and collaboration platform
+      description: Onpremises file share and collaboration platform
       short_description: File share and collaboration platform
-      source-link: https://github.com/nextcloud
+      sourcelink: https://github.com/nextcloud
       image: no
       implemented: no
 
@@ -576,19 +647,19 @@ services:
       network: no
       description: Media Manager and transcoding server
       short_description: Media manager and transcoding server
-      source-link: https://gitlab.com/olaris/olaris-server
+      sourcelink: https://gitlab.com/olaris/olarisserver
       image: no
       implemented: no
 
-    open-streaming-platform:
-      name: open-streaming-platform
+    openstreamingplatform:
+      name: openstreamingplatform
       ports: [1935, 8585, 8553]
       web: [":8585", ":8553"]
       volumes: no
       network: no
-      description: A Self-Hosted Video Streaming and Recording Server Using Python, Flask, Nginx-RTMP
+      description: A SelfHosted Video Streaming and Recording Server Using Python, Flask, NginxRTMP
       short_description: Video streaming and recording
-      source-link: https://gitlab.com/Deamos/flask-nginx-rtmp-manager
+      sourcelink: https://gitlab.com/Deamos/flasknginxrtmpmanager
       image: no
       implemented: no
 
@@ -600,7 +671,7 @@ services:
       network: no
       description: Open Source implementation of the Lightweight Directory Access Protocol.
       short_description: Ldap
-      source-link: https://github.com/osixia/docker-openldap
+      sourcelink: https://github.com/osixia/dockeropenldap
       image: no
       implemented: no
 
@@ -612,7 +683,19 @@ services:
       network: no
       description: Open Source VPN
       short_description: VPN
-      source-link: https://github.com/kylemanna/docker-openvpn
+      sourcelink: https://github.com/kylemanna/dockeropenvpn
+      image: no
+      implemented: no
+
+    osjs:
+      name: osjs
+      ports: [7999]
+      web: [":7999"]
+      volumes: no
+      network: no
+      description: JavaScript Web Desktop Platform 
+      short_description: Osjs
+      sourcelink: https://github.com/osjs/OS.js
       image: no
       implemented: no
 
@@ -624,7 +707,7 @@ services:
       network: no
       description: Scan, index, and archive all of your paper documents
       short_description: Archive all of your paper documents
-      source-link: https://github.com/the-paperless-project/paperless
+      sourcelink: https://github.com/thepaperlessproject/paperless
       image: no
       implemented: no
 
@@ -636,7 +719,7 @@ services:
       network: no
       description: Photo gallery software
       short_description: Photo gallery software
-      source-link: https://hub.docker.com/r/linuxserver/piwigo/
+      sourcelink: https://hub.docker.com/r/linuxserver/piwigo/
       image: no
       implemented: no
 
@@ -648,7 +731,7 @@ services:
       network: no
       description: Organize, beautify, stream, and share your personal collection of movies, TV, music, and photos anywhere, on all your devices
       short_description: Collection of movies, TV, music, and photos
-      source-link: https://www.plex.tv/fr/
+      sourcelink: https://www.plex.tv/fr/
       image: no
       implemented: no
 
@@ -660,7 +743,7 @@ services:
       network: no
       description: Build and manage your Docker environments with ease today
       short_description: Manage your Docker environments
-      source-link: https://www.portainer.io/
+      sourcelink: https://www.portainer.io/
       image: no
       implemented: no
 
@@ -671,8 +754,8 @@ services:
       volumes: no
       network: no
       description: A minimalist, open source online pastebin where the server has zero knowledge of pasted data
-      short_description: Pastebin 
-      source-link: https://privatebin.info/
+      short_description: Pastebin
+      sourcelink: https://privatebin.info/
       image: no
       implemented: no
 
@@ -684,47 +767,59 @@ services:
       network: no
       description: Open Source download manager and designed to be extremely lightweight, easily extensible and fully manageable via web
       short_description: Download manager
-      source-link: https://pyload.net/
+      sourcelink: https://pyload.net/
       image: no
       implemented: no
 
-    qbittorent-vpn:
-      name: qbittorent-vpn
+    qbittorentvpn:
+      name: qbittorentvpn
       ports: []
       web: []
       volumes: no
       network: no
-      description:  Open Source software alternative to µTorrent with VPN
+      description: Open Source software alternative to µTorrent with VPN
       short_description: qbittorent VPN
-      source-link: https://hub.docker.com/r/markusmcnugen/qbittorrentvpn/
+      sourcelink: https://hub.docker.com/r/markusmcnugen/qbittorrentvpn/
       image: no
       implemented: no
-        
+
+    radarr:
+      name: radarr
+      ports: [7878]
+      web: [":7878"]
+      volumes: no
+      network: no
+      description: Sonarr for movie
+      short_description: Sonarr for movie
+      sourcelink: https://radarr.video/
+      image: no
+      implemented: no
+
     recipes:
       name: recipes
-      ports: []
-      web: []
+      ports: [8055]
+      web: [":8055"]
       volumes: no
       network: no
       description: Django application for managing recipes
       short_description: Django application for managing recipes
-      source-link: https://github.com/vabene1111/recipes
+      sourcelink: https://github.com/vabene1111/recipes
       image: no
       implemented: no
 
     rocketchat:
       name: rocketchat
-      ports: []
-      web: []
+      ports: [8056,3001]
+      web: [":8056"]
       volumes: no
       network: no
-      description: Open Source Team Communication, replace email, HipChat & Slack 
-      short_description: Simple chat server 
-      source-link: https://rocket.chat/docs/installation/docker-containers/
+      description: Open Source Team Communication, replace email, HipChat & Slack
+      short_description: Simple chat server
+      sourcelink: https://rocket.chat/docs/installation/dockercontainers/
       image: no
       implemented: no
 
-    shiori:
+    goshiori:
       name: shiori
       ports: []
       web: []
@@ -732,31 +827,31 @@ services:
       network: no
       description: Simple bookmark manager built with Go
       short_description: Bookmark manager
-      source-link: https://github.com/go-shiori/shiori
+      sourcelink: https://github.com/goshiori/shiori
       image: no
       implemented: no
 
     sonarr:
       name: sonarr
-      ports: []
-      web: []
+      ports: [8989]
+      web: [":8989"]
       volumes: no
       network: no
       description: Smart PVR for newsgroup and bittorrent users.
       short_description: Smart PVR newsgroup and bittorrent users
-      source-link: https://github.com/smicallef/spiderfoot
+      sourcelink: https://github.com/smicallef/spiderfoot
       image: no
       implemented: no
 
     spiderfoot:
       name: spiderfoot
-      ports: []
-      web: []
+      ports: [5001]
+      web: [":5001"]
       volumes: no
       network: no
       description: open source intelligence (OSINT) automation tool. It integrates with just about every data source available and utilises a range of methods for data analysis
       short_description: Intelligence (OSINT) automation tool
-      source-link: https://github.com/smicallef/spiderfoot
+      sourcelink: https://github.com/smicallef/spiderfoot
       image: no
       implemented: no
 
@@ -768,7 +863,7 @@ services:
       network: no
       description: Status Page for monitoring your websites and applications with beautiful graphs, analytics, and plugins
       short_description: Status Page for monitoring your websites
-      source-link: https://github.com/hunterlong/statping
+      sourcelink: https://github.com/hunterlong/statping
       image: no
       implemented: no
 
@@ -780,7 +875,7 @@ services:
       network: no
       description: Open Source Continuous File Synchronization
       short_description: Alternative Google drive/Dropbox
-      source-link: https://github.com/syncthing/syncthing
+      sourcelink: https://github.com/syncthing/syncthing
       image: no
       implemented: no
 
@@ -792,19 +887,19 @@ services:
       network: no
       description: Monitor your Plex Media Server
       short_description: Monitor your Plex
-      source-link: https://github.com/HaveAGitGat/Tdarr
+      sourcelink: https://github.com/HaveAGitGat/Tdarr
       image: no
       implemented: no
 
     tdarr:
       name: tdarr
-      ports: []
-      web: []
+      ports: [8265]
+      web: [":8265"]
       volumes: no
       network: no
-      description: Tdarr Beta -Audio/Video library analytics + transcode automation using FFmpeg/HandBrake + video health checking
+      description: Tdarr Beta Audio/Video library analytics + transcode automation using FFmpeg/HandBrake + video health checking
       short_description: Audio/Video library analytics, transcode
-      source-link: https://github.com/HaveAGitGat/Tdarr
+      sourcelink: https://github.com/HaveAGitGat/Tdarr
       image: no
       implemented: no
 
@@ -816,11 +911,11 @@ services:
       network: no
       description: Voice Chat Application
       short_description: Voice chat application
-      source-link: https://github.com/solidnerd/docker-teamspeak
+      sourcelink: https://github.com/solidnerd/dockerteamspeak
       image: no
       implemented: no
 
-      traefik:
+    traefik:
       name: traefik
       ports: [80, 443, 8080]
       webport: [8080]
@@ -828,19 +923,19 @@ services:
       network: no
       description: Edge router simplify networking complexity/reverse proxy
       short_description: Edge router
-      source-link: https://docs.traefik.io/user-guides/docker-compose/basic-example/
+      sourcelink: https://docs.traefik.io/userguides/dockercompose/basicexample/
       image: no
       implemented: no
 
     ubuntuxrdp:
       name: ubuntuxrdp
-      ports: [3389,2232]
+      ports: [3389, 2232]
       web: []
       volumes: no
       network: no
       description: An Ubuntu Desktop with xrdp server can be use with Apache Guacamole
       short_description: Ubuntu desktop with xrdp server
-      source-link: https://github.com/danielguerra69/ubuntu-xrdp
+      sourcelink: https://github.com/danielguerra69/ubuntuxrdp
       image: no
       implemented: no
 
@@ -851,8 +946,8 @@ services:
       volumes: no
       network: no
       description: Save and classify articles, Read them later, Freely
-      short_description: Read-it-later 
-      source-link: https://github.com/wallabag/wallabag
+      short_description: Readitlater
+      sourcelink: https://github.com/wallabag/wallabag
       image: no
       implemented: no
 
@@ -864,6 +959,6 @@ services:
       network: no
       description: VPN Server
       short_description: VPN
-      source-link: https://github.com/WireGuard
+      sourcelink: https://github.com/WireGuard
       image: no
       implemented: no

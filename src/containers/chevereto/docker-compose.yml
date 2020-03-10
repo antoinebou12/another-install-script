@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  chevereto_db:
+    image: mariadb
+    container_name: chevereto_db
+    volumes:
+      - /home/udocker/volumes/chevereto/db:/var/lib/mysql:rw
+    environment:
+      - MYSQL_ROOT_PASSWORD=chevereto_root
+      - MYSQL_DATABASE=chevereto
+      - MYSQL_USER=chevereto
+      - MYSQL_PASSWORD=chevereto
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    expose:
+      - 3306
+    restart: unless-stopped
+
+  chevereto:
+    links:
+      - chevereto_db
+    depends_on:
+      - chevereto_db
+    image: nmtan/chevereto
+    networks:
+      - private
+    environment:
+      - CHEVERETO_DB_HOST=db
+      - CHEVERETO_DB_USERNAME=chevereto
+      - CHEVERETO_DB_PASSWORD=chevereto
+      - CHEVERETO_DB_NAME=chevereto
+      - CHEVERETO_DB_PREFIX:=chv_
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/chevereto:/var/www/html/images:rw
+    ports:
+      - 8999:80
+    restart: unless-stopped
+
+volumes:
+  database:
+  chevereto_images:

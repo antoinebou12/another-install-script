@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  openvpn:
+    image: kylemanna/openvpn
+    container_name: openvpn
+    cap_add:
+      - NET_ADMIN
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+    volumes:
+      - /home/udocker/volumes/openvpn/conf:/etc/openvpn
+    ports:
+      - "1194:1194/udp"
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=openvpn"

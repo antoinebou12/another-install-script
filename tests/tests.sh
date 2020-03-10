@@ -3,25 +3,26 @@
 # @file test.sh
 # @brief run bats test
 
+source "$(dirname "${BASH_SOURCE[0]}")/../src/utils.sh"
+
 install_bats(){
     if [[ ! $(command -v bats) ]]; then
-        if  [[ "$UID" -gt 0 ]]; then
-            sudo apt-get install bats
-        else
-            apt-get install bats
-        fi
+        aptinstall bats
     fi
     return 0
 }
 
 run_tests(){
     install_bats
-    bats "bats/utils.bats"
-    bats "bats/docker.bats"
+    bats "bats/config.bats"
     bats "bats/containers.bats"
+    bats "bats/docker.bats"
+    bats "bats/firewall.bats"
     bats "bats/install.bats"
     bats "bats/menu.bats"
-    unset CURRENT_DIR
+    bats "bats/utils.bats"
+    bats "bats/other.bats"
+    bats "bats/router.bats"
     return 0
 }
 

@@ -168,3 +168,5 @@ zsdoc/data
 */.vagrant
 vm/vagrant/*/*.log
 vm/vagrant/*/*.vagrant
+
+.vscode/

@@ -24,9 +24,9 @@ setup() {
     [ "$status" -eq 0 ]
 }
 
-@test "prune_images_volumes_all" {
+@test "prune_containers_volumes_all" {
     skip "check later"
-    prune_images_volumes_all
+    prune_containers_volumes_all
     [ "$status" -eq 0 ]
 }
 

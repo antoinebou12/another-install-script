@@ -1,10 +1,11 @@
 # another-install-script
 
+![GitHub top language](https://img.shields.io/github/languages/top/antoinebou13/another-install-script)
 [![Build Status](https://travis-ci.com/antoinebou13/another-install-script.svg?token=MUq69udyyqAR24bsXgRq&branch=master)](https://travis-ci.com/antoinebou13/another-install-script)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/another-install-script?style=flat)
-![Codecov](https://img.shields.io/codecov/c/github/antoinebou13/another-install-script?style=flat&token=FcTtxpEGhF)
-![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/another-install-script?style=flat)
-![GitHub](https://img.shields.io/github/license/antoinebou13/another-install-script?style=flat)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/another-install-script)
+[![codecov](https://codecov.io/gh/antoinebou13/another-install-script/branch/master/graph/badge.svg?token=FcTtxpEGhF)](https://codecov.io/gh/antoinebou13/another-install-script)
+![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/another-install-script)
+![GitHub](https://img.shields.io/github/license/antoinebou13/another-install-script)
 
 Another install Script is a W.I.P project/script to install docker container for my personal server
 
@@ -13,32 +14,39 @@ Another install Script is a W.I.P project/script to install docker container for
 ## The story behind the project
 
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.
-After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker. After learning more on docker and docker-compose to create bash project install script using Test-driven development and documented install script. Also, I found multiple repos that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack) and [sovereign](https://github.com/sovereign/sovereign) and [MediaServrDockerCompose](https://github.com/vaeyo/MediaServer-DockerComposeFiles). I am trying to do with this project is to make a simple, extensible and customizable script to add a lot of selfhosted services/servers to easy to install with a simple cli menu. The project is a super easy install script for beginner/intermediate linux power user that want to test quickly interesting docker images of server/service. The project isn't a highly configurable install script with a container orchestrator and general manager for multiple docker.
+After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker. After learning more on docker and docker-compose to create bash project install script using Test-driven development and documented install script. Also, I found multiple repos that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack) and [sovereign](https://github.com/sovereign/sovereign) and [MediaServerDockerCompose](https://github.com/vaeyo/MediaServer-DockerComposeFiles). I am trying to do with this project is to make a simple, extensible and customizable script to add a lot of selfhosted services/servers to easy to install with a simple cli menu. The project is a super easy install script for beginner/intermediate linux power user that want to test quickly interesting docker containers of server/service. The project isn't a highly configurable install script with a container orchestrator and general manager for multiple docker.
 
 ## How to install
 
-For now only work on ubuntu and only tested on ubuntu18.04
+For now only tested on ubuntu18.04
 
 ```bash
 git clone --recursive https://github.com/antoinebou13/another-install-script.git
 cd another-install-script
-sudo bash install.sh
+sudo bash setup.sh
 ```
 
 ### Uninstall
+
 ```bash
 cd another-install-script
-sudo bash install.sh
+sudo bash uninstall.sh
 ```
 
 ## List of the services/server
 
-Some services/servers cannot be installed at the same time
-Also more configuration needed for certain services/servers
+Around 80 containers/servers can be installed with this script.
+Go check the list below ⬇.
 
-Go to the [List](docs/SERVER_LIST.md)
+<details>
+<summary>List</summary>
+<br>
+Go to the <a href="https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-HfnRhwkce-/view?usp=sharing">Google Sheet</a>
+</details>
 
-Go to the [Google Sheet](https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-HfnRhwkce-/view?usp=sharing)
+### Notes
+
+Some services/servers cannot be installed at the same time. Also more configuration needed for certain services/servers
 
 ## List of other installed program
 
@@ -54,7 +62,6 @@ Go to the [Google Sheet](https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-
 - firefox
 - [vim](https://www.vim.org/)
 - [snapd](https://snapcraft.io/)
-- [nnn](https://github.com/jarun/nnn)
 - [nmap](https://nmap.org/)
 - [wget](https://www.gnu.org/software/wget/)
 - [curl](https://github.com/curl/curl)
@@ -64,7 +71,6 @@ Go to the [Google Sheet](https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-
 - [docker-compose](https://docs.docker.com/compose/)
 - [dry](https://github.com/moncho/dry)
 - [emojify](https://github.com/mrowa44/emojify)
-- [signal-cli](https://github.com/AsamK/signal-cli)
 
 ## Project Structure
 
@@ -79,26 +85,31 @@ A simple project overview to with the explaination of each important file
 +-- etc
 |   +-- ...
 +-- src
-|   +-- images
+|   +-- containers
 |   |   +-- $container_name
 |   |   |   |    +-- docker-compose.yml
 |   |   |   |    +-- $container_name.sh
 |   |   |   |    +-- ...
+|   +-- config.sh
+|   +-- config.yml
+|   +-- containers.sh
 |   +-- docker.sh
-|   +-- container.sh
+|   +-- firewall.sh
 |   +-- install.sh
 |   +-- menu.sh
+|   +-- other.sh
+|   +-- router.sh
 |   +-- utils.sh
 +-- setup.sh
 +-- uninstall.sh
 ```
 
-| Path                       |                           Explanation                            |
-| -------------------------- | :--------------------------------------------------------------: |
-| docs                       | The directory for the documentation for the code and the project |
-| docs/vendor                |         The vendor program to generate the documentation         |
-| src                        |              The path for the code for the project               |
-| src/images/$container_name |  The path for docker container with a script and docker-compose  |
+| Path                            |                           Explanation                            |
+| ------------------------------- | :--------------------------------------------------------------: |
+| docs                            | The directory for the documentation for the code and the project |
+| docs/vendor                     |         The vendor program to generate the documentation         |
+| src                             |              The path for the code for the project               |
+| src/containers/\$container_name |  The path for docker container with a script and docker-compose  |
 
 ## How to run coverage and tests
 
@@ -155,12 +166,12 @@ Go to [License](.github/LICENSE)
 
 ## Roadmap
 
-- [] auto vm creatation for ci and personnal use
+- [] Auto vm creation for ci and personnal use
 - [] Add traefik reverse proxy with subdomain for each docker container
 - [] Easier config file or adding yml file to individual folder
-- [] More docker container and images
-- [] Automatic docker compose and container update
-- [] Automatic backup
+- [] More docker containers
+- [] Automatic docker compose and containers update
+- [] Automatic backups
 - [] Automatic testing and better coverage
 - [] Versionning
 - [] Better cli menu

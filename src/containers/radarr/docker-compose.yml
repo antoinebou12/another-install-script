@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  sonarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    # user: udocker
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+      - UMASK_SET=022 #optional
+    ports:
+      - 7878:7878
+    volumes:
+      - /home/udocker/volumes/radarr/config:/config
+      - /home/udocker/volumes/radarr/movies:/movies
+      - /home/udocker/volumes/radarr/downloads:/downloads
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=radarr"
