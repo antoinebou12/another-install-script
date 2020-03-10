@@ -15,7 +15,7 @@ cd ..
 bash install.sh
 ```
 
-## Manuel Testing
+## Manual Testing
 
 [Download Ubuntu server](https://ubuntu.com/download/server)
 
@@ -42,7 +42,7 @@ vagrant up
 vagrant ssh
 git clone https://github.com/antoinebou13/another-install-script.git
 cd another-install-script
-sudo bash install.sh
+sudo bash setup.sh
 DISPLAY=localhost:10.0 firefox &
 ```
 
@@ -67,5 +67,5 @@ cd tests
 bash tests.sh
 cd ..
 
-bash install.sh
+bash setup.sh
 ```

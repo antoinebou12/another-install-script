@@ -1,11 +1,14 @@
 airsonic,Music and Podcast server
+ansible-semaphore,Ansible Front-end
 bitwarden,Password management
 bookstack,Ebook server
 calibre,Ebook server
+chevereto,Image hosting
 cloud-torrent,Remote torrent client
 code-server,VS Code on a remote server
 couchpotato,Automatic Movie Downloading
 cyberchef,Web app for encryption, encoding, compression
+dailynotes,Notes taking app
 deluge,BitTorrent Client
 drawio,Diagram software
 duplicati,Backup software to store encrypted backups
@@ -18,7 +21,7 @@ grafana,Analytics and monitoring solution
 graylog,log management
 guacamole,Clientless remote desktop gateway
 headphones,Automated Music Downloader
-heimdall,Application dashboard and launcher
+htpc-download-box,All in one torrent downloader
 huginn,Create agents that monitor and act on your behalf
 invidious,Alternative front-end to YouTube
 jackett,API Support for your favorite torrent trackers
@@ -26,10 +29,11 @@ jellyfin,Software media system
 jenkins,Automation server
 jupyterhub,Multi-user server for Jupyter
 jupyterlab,Single-user server for Jupyter
+kdedocker,KDE in Browser
 keycloak,Identity and access management
 komga,Media server for comics/mangas/BDs
 liberapay,Recurrent donations platform
-libresignage,Digital signage solution
+linkd,link shortener
 lodestone,Personal document archiving
 lychee,Photo management system
 mailcow,Mailserver docker
@@ -46,6 +50,7 @@ olaris,Media manager and transcoding server
 open-streaming-platform,Video streaming and recording
 openldap,Ldap
 openvpn,VPN
+osjs,Osjs
 paperless,Archive all of your paper documents
 piwigo,Photo gallery software
 plex,Collection of movies, TV, music, and photos
@@ -53,6 +58,7 @@ portainer,Manage your Docker environments
 privatebin,Pastebin
 pyload,Download manager
 qbittorent-vpn,qbittorent VPN
+radarr,Sonarr for movie
 recipes,Django application for managing recipes
 rocketchat,Simple chat server
 shiori,Bookmark manager

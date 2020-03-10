@@ -3,7 +3,8 @@
 # import
 import yaml
 
-#W.I.P
+# W.I.P
+
 
 class GeneratorAIS(object):
     def __init__(self, output_fname: str, config_fname: str, config_type="yaml", config_obj=None):
@@ -28,7 +29,8 @@ class GeneratorAIS(object):
         containers_list = []
         for i, container in self.config_obj['services']['containers'].items():
             print(i)
-            containers_list.append({'name': container['name'],'desc': container['short_description']})
+            containers_list.append(
+                {'name': container['name'], 'desc': container['short_description']})
         return containers_list
 
     def write_containers_list_text(self, output=None):
@@ -37,7 +39,8 @@ class GeneratorAIS(object):
             for i in containers_list:
                 f.write(f"{i['name']},{i['desc']}\n")
 
-if __name__ == "__main__":
-    generator = GeneratorAIS(output_fname="", config_fname="/home/antoine/Code/another-install-script/src/config.yml", config_type="yaml")
-    generator.write_containers_list_text('../../src/containers/containers.txt')
 
+if __name__ == "__main__":
+    generator = GeneratorAIS(
+        output_fname="", config_fname="/home/antoine/Code/another-install-script/src/config.yml", config_type="yaml")
+    generator.write_containers_list_text('../../src/containers/containers.txt')
