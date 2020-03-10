@@ -1,4 +1,5 @@
 system-config:
+  domain_nam: localhost
   ssl:
     enable: no
   reverse-proxy:
@@ -50,6 +51,18 @@ services:
       image: no
       implemented: no
 
+    ansible-semaphore:
+      name: ansible-semaphore
+      ports: [4000]
+      web: [":4000"]
+      volumes: no
+      network: no
+      description: Open Source alternative to Ansible Tower
+      short_description: Ansible Front-end
+      source-link: https://github.com/ansible-semaphore/semaphore
+      image: no
+      implemented: no
+
     bitwarden:
       name: bitwarden
       ports: [8000]
@@ -83,6 +96,18 @@ services:
       description: Powerful and easy to use e-book manager
       short_description: Ebook server
       source-link: https://github.com/kovidgoyal/calibre
+      image: no
+      implemented: no
+
+    chevereto:
+      name: chevereto
+      ports: [8999]
+      web: [":8999"]
+      volumes: no
+      network: no
+      description: Open source image hosting software
+      short_description: Image hosting
+      source-link: https://github.com/Chevereto/Chevereto-Free
       image: no
       implemented: no
 
@@ -131,6 +156,18 @@ services:
       description: The Cyber Swiss Army Knife - a web app for encryption, encoding, compression and data analysis
       short_description: Web app for encryption, encoding, compression
       source-link: https://github.com/gchq/CyberChef
+      image: no
+      implemented: no
+
+    dailynotes:
+      name: dailynotes
+      ports: [5000]
+      web: [":5000"]
+      volumes: no
+      network: no
+      description: App for taking notes and tracking tasks on a daily basis
+      short_description: Notes taking app
+      source-link: https://github.com/m0ngr31/DailyNotes
       image: no
       implemented: no
 
@@ -290,6 +327,18 @@ services:
       image: no
       implemented: no
 
+      htpc-download-box:
+      name: htpc-download-box
+      ports: []
+      web: []
+      volumes: no
+      network: no
+      description: Sonarr/Radarr/Jackett/NZBGet/Deluge/OpenVPN/Plex
+      short_description: All in one torrent downloader
+      source-link: https://github.com/sebgl/htpc-download-box
+      image: no
+      implemented: no
+
     huginn:
       name: huginn
       ports: [8013]
@@ -374,6 +423,18 @@ services:
       image: no
       implemented: no
 
+    kdedocker:
+      name: kdedocker
+      ports: [8100,5900]
+      web: [":8100"]
+      volumes: no
+      network: no
+      description: So you can run KDE inside a browser
+      short_description: KDE in Browser 
+      source-link: https://github.com/ms-jpq/kde-in-docker
+      image: no
+      implemented: no
+
     keycloak:
       name: keycloak
       ports: [8030]
@@ -419,6 +480,18 @@ services:
       description: An open source digital signage solution
       short_description: Digital signage solution
       source-link: https://github.com/eerotal/LibreSignage
+      image: no
+      implemented: no
+
+    libresignage:
+      name: linkd
+      ports: [1336]
+      web: []
+      volumes: no
+      network: no
+      description: A simple but powerful selfhosted link shortener service
+      short_description: link shortener
+      source-link: https://github.com/HexF/linkd
       image: no
       implemented: no
 
@@ -614,6 +687,18 @@ services:
       image: no
       implemented: no
 
+    osjs:
+      name: osjs
+      ports: [7999]
+      web: [":7999"]
+      volumes: no
+      network: no
+      description: JavaScript Web Desktop Platform 
+      short_description: Osjs
+      source-link: https://github.com/os-js/OS.js
+      image: no
+      implemented: no
+
     paperless:
       name: paperless
       ports: [8047]
@@ -698,10 +783,22 @@ services:
       image: no
       implemented: no
 
+    radarr:
+      name: radarr
+      ports: [7878]
+      web: [":7878"]
+      volumes: no
+      network: no
+      description: Sonarr for movie
+      short_description: Sonarr for movie
+      source-link: https://radarr.video/
+      image: no
+      implemented: no
+
     recipes:
       name: recipes
-      ports: []
-      web: []
+      ports: [8055]
+      web: [":8055"]
       volumes: no
       network: no
       description: Django application for managing recipes
@@ -712,8 +809,8 @@ services:
 
     rocketchat:
       name: rocketchat
-      ports: []
-      web: []
+      ports: [8056,3001]
+      web: [":8056"]
       volumes: no
       network: no
       description: Open Source Team Communication, replace email, HipChat & Slack
@@ -722,7 +819,7 @@ services:
       image: no
       implemented: no
 
-    shiori:
+    go-shiori:
       name: shiori
       ports: []
       web: []
@@ -736,8 +833,8 @@ services:
 
     sonarr:
       name: sonarr
-      ports: []
-      web: []
+      ports: [8989]
+      web: [":8989"]
       volumes: no
       network: no
       description: Smart PVR for newsgroup and bittorrent users.
@@ -748,8 +845,8 @@ services:
 
     spiderfoot:
       name: spiderfoot
-      ports: []
-      web: []
+      ports: [5001]
+      web: [":5001"]
       volumes: no
       network: no
       description: open source intelligence (OSINT) automation tool. It integrates with just about every data source available and utilises a range of methods for data analysis
@@ -796,8 +893,8 @@ services:
 
     tdarr:
       name: tdarr
-      ports: []
-      web: []
+      ports: [8265]
+      web: [":8265"]
       volumes: no
       network: no
       description: Tdarr Beta -Audio/Video library analytics + transcode automation using FFmpeg/HandBrake + video health checking

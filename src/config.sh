@@ -76,3 +76,14 @@ parse_yml_array() {
         return 1
     fi
 }
+
+# @description generate the container url on the server
+# @arg $1 container name
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+containers_url() {
+    local webport="$(parse_yml_array "$1""_web")"
+    local domain="$(read_config_yml "system-config_domain_name")"
+    printf -- "%s%s/n" "${domain}${webport}"
+    return 0
+}
