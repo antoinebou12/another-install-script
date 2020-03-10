@@ -13,14 +13,16 @@ source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_firewall() {
-    aptinstall ufw
-    exec_root ufw default deny incoming
-    exec_root ufw default allow outgoing
-    allow_port_in_firewall ssh
-    allow_port_in_firewall 2222
-    allow_port_in_firewall http
-    allow_port_in_firewall https
-    enable_firewall
+    if check_packages_install ufw; then
+        aptinstall ufw
+        exec_root ufw default deny incoming
+        exec_root ufw default allow outgoing
+        allow_port_in_firewall ssh
+        allow_port_in_firewall 2222
+        allow_port_in_firewall http
+        allow_port_in_firewall https
+        enable_firewall
+    fi
     return 0
 }
 
@@ -30,7 +32,7 @@ install_firewall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 uninstall_firewall() {
-    if [[ $(check_packages_install ufw) ]]; then
+    if check_packages_install ufw; then
         disable_firewall
         aptremove ufw
         return 0
@@ -45,7 +47,7 @@ uninstall_firewall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 enable_firewall() {
-    if [[ $(check_packages_install ufw) ]]; then
+    if check_packages_install ufw; then
         exec_root ufw enable
         return 0
     else
@@ -59,7 +61,7 @@ enable_firewall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 disable_firewall() {
-    if [[ $(check_packages_install ufw) ]]; then
+    if check_packages_install ufw; then
         exec_root ufw disable
         return 0
     else
@@ -73,7 +75,7 @@ disable_firewall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 allow_port_in_firewall() {
-    if [[ $(check_packages_install ufw) ]]; then
+    if check_packages_install ufw; then
         exec_root ufw allow "$1"
         return 0
     else
@@ -87,7 +89,7 @@ allow_port_in_firewall() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 deny_port_in_firewall() {
-    if [[ $(check_packages_install ufw) ]]; then
+    if check_packages_install ufw; then
         exec_root ufw deny "$1"
         return 0
     else
@@ -103,23 +105,23 @@ manage_firewall_ports_allow_list() {
 
     containers=()
     if [[ -f /home/udocker/config/containers.txt ]]; then
-        mapfile -t containers <<<"$(cat/home/udocker/config/containers.txt)"
+        mapfile -t containers <<<"$(cat /home/udocker/config/containers.txt)"
     elif [[ -f /tmp/containers.txt ]]; then
         mapfile -t containers <<<"$(cat /tmp/containers.txt)"
     fi
 
     for container_name in "${containers[@]}"; do
-        echo "$(parse_yml_array "$container_name""_ports")"
-        parse_yml_array "$container_name""_ports" >>/tmp/ports.txt
+        echo "$(parse_yml_array_ports "$container_name""_ports")"
+        parse_yml_array_ports "$container_name""_ports" >>/tmp/ports.txt
     done
 
     [ -d /home/udocker/ ] && cp /tmp/ports.txt /home/udocker/config/ports.txt
 
     ports=()
     if [[ -f /home/udocker/config/ports.txt ]]; then
-        mapfile -t ports <<<"$(cat/home/udocker/config/ports.txt)"
+        mapfile -t ports <<<"$(cat /home/udocker/config/ports.txt)"
     elif [[ -f /tmp/ports.txt ]]; then
-        mapfile -t ports <<<"$(cat/tmp/ports.txt)"
+        mapfile -t ports <<<"$(cat /tmp/ports.txt)"
     fi
 
     for port_numbers in "${ports[@]}"; do
@@ -128,6 +130,7 @@ manage_firewall_ports_allow_list() {
     done
 
     if [[ "$(read_config_yml "system-config_firewall")" == "on" ]]; then
+        install_firewall
         enable_firewall
     else
         disable_firewall

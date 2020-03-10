@@ -28,7 +28,7 @@ print_newline() {
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function dist_check() {
+dist_check() {
     DIST_CHECK="/etc/os-release"
     # shellcheck disable=SC1090
     if [ -e $DIST_CHECK ]; then
@@ -37,6 +37,8 @@ function dist_check() {
         DISTRO=$ID
         # shellcheck disable=SC2034
         VERSION=$VERSION_ID
+        export DISTRO
+        export VERSION
     else
         echo "Your distribution is not supported (yet)."
         exit
@@ -48,7 +50,7 @@ function dist_check() {
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-function virt_check() {
+virt_check() {
     if [[ $(command -v "systemd-detect-virt") ]]; then
         if systemd-detect-virt; then
             return 0

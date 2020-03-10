@@ -75,7 +75,6 @@ install_setup_menu() {
         "cockpit" "Install Cockpit web server management" "ON"
         "ansible" "Install Ansible systems automation" "ON"
         "emojify" "Emoji in the terminal" "ON"
-        "enable_firewall" "install firewall ufw" "OFF"
     )
 
     if [ $(tput lines) -lt 45 ]; then

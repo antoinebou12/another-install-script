@@ -45,8 +45,8 @@ import_all_sh() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 manage_exec_containers_list() {
-	echo "Containers"
 	print_newline
+	echo "Containers"
 	print_line
 
 	UDOCKER_USERID="$(id -u udocker)"

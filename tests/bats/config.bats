@@ -15,8 +15,15 @@ setup() {
   [ "$status" -eq 0 ]
 }
 
-@test "parse_yml_array" {
-    if [[ "$(parse_yml_array "airsonic_ports")" == "4040
+@test "parse_yml_array_ports" {
+    if [[ "$(parse_yml_array_ports "airsonic_ports")" == "4040
+1900" ]]; then return 0; else return 1; fi
+    [ "$status" -eq 0 ]
+}
+
+
+@test "parse_yml_array_webs" {
+    if [[ "$(parse_yml_array_webs "airsonic_web")" == "4040
 1900" ]]; then return 0; else return 1; fi
     [ "$status" -eq 0 ]
 }

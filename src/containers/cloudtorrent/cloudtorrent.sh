@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# @file cloud-torrent.sh
-# @brief to install docker cloud-torrent
+# @file cloudtorrent.sh
+# @brief to install docker cloudtorrent
 
 # @description create docker heimdall
 # https://github.com/jpillora/cloud-torrent
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-create_docker_cloud-torrent() {
+create_docker_cloudtorrent() {
     local USERNAME=${1:-"cloud-torrent"}
     local PASSWORD=${1:-"cloud-torrent"}
     udocker_create_dir "$PATH_DOWNLOAD"
@@ -25,7 +25,7 @@ create_docker_cloud-torrent() {
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-remove_docker_cloud-torrent() {
+remove_docker_cloudtorrent() {
     echo "not implemented"
     return 0
 }

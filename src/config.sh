@@ -61,13 +61,31 @@ config_get() {
     return 0
 }
 
-# @description get config var array into a list
+# @description get config var array into a list ports
 # @arg $1 the config file var array
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-parse_yml_array() {
+parse_yml_array_ports() {
     local ARRAY="$(read_config_yml $1)"
-    local ARRAY="${ARRAY//\"}"
+    local NEW_ARRAY="${ARRAY//\"}"
+    if [[ "$NEW_ARRAY" == *"["*"]"* ]]; then
+        local VALUES="$(echo "$NEW_ARRAY" | jq -c '.[]')"
+        printf -- "%s\n" "${VALUES}"
+        return 0
+    else
+        return 1
+    fi
+}
+
+# @description get config var array into a list web
+# @arg $1 the config file var array
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+parse_yml_array_webs() {
+    local ARRAY="$(read_config_yml $1)"
+    echo $ARRAY
+    local NEW_ARRAY="${ARRAY:1:${#ARRAY}-2}"
+    echo $NEW_ARRAY
     if [[ "$ARRAY" == *"["*"]"* ]]; then
         local VALUES="$(echo "$ARRAY" | jq -c '.[]')"
         printf -- "%s\n" "${VALUES}"
@@ -83,7 +101,7 @@ parse_yml_array() {
 # @exitcode 1 On failure
 containers_url() {
     local webport="$(parse_yml_array "$1""_web")"
-    local domain="$(read_config_yml "system-config_domain_name")"
+    local domain="$(read_config_yml "domain")"
     printf -- "%s%s/n" "${domain}${webport}"
     return 0
 }
