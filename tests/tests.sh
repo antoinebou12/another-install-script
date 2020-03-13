@@ -21,8 +21,8 @@ run_tests() {
     # bats "firewall.bats"
     # bats "install.bats"
     # bats "menu.bats"
-    bats "utils.bats"
-    bats "other.bats"
+    # bats "utils.bats"
+    # bats "other.bats"
     # bats "router.bats"
     popd || exit
     return 0
