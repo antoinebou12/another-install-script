@@ -22,8 +22,8 @@ setup() {
 }
 
 @test "parse_yml_array_web" {
-    if [[ "$(parse_yml_array_web "calibre")" == "\":8001\"
-\":8002\"" ]]; then return 0; else return 1; fi
+    if [[ "$(parse_yml_array_web "calibre")" == ":8001
+:8002" ]]; then return 0; else return 1; fi
     [ "$status" -eq 0 ]
 }
 

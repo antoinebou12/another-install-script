@@ -26,10 +26,10 @@ import_all_sh() {
 	find "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/containers" -name "*.sh" -execdir chmod u+x {} +
 	local names="$(find "$1" -name "$2")"
 
-	local SAVEIFS="$IFS" # Save current IFS
-	local IFS=$'\n'      # Change IFS to new line
+	local SAVEIFS="$IFS"   # Save current IFS
+	local IFS=$'\n'        # Change IFS to new line
 	local names=("$names") # split to array $names
-	local IFS="$SAVEIFS" # Restore IFS
+	local IFS="$SAVEIFS"   # Restore IFS
 
 	for ((i = 0; i < ${#names[@]}; i++)); do
 		echo "$i: ${names[$i]}"
@@ -73,7 +73,7 @@ manage_exec_containers_list() {
 	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/config/containers.txt
 
 	manage_firewall_ports_allow_list
-	
+
 	return 0
 	print_line
 }
@@ -109,16 +109,20 @@ generate_container_menu() {
 	while IFS=, read -r col1 col2; do
 		if [[ -f /home/udocker/containers.txt ]]; then
 			if grep -Fxq "$col1" /home/udocker/conf/containers.txt; then
-				echo 1
+				return 0
 			else
+				if [[ "$(read_config_yml "containers_""$col1""_implemented")" == "yes" ]]; then
+					CONTAINER_NAME_MENU+=("$col1")
+					CONTAINER_NAME_MENU+=("$col2")
+					CONTAINER_NAME_MENU+=("OFF")
+				fi
+			fi
+		else
+			if [[ "$(read_config_yml "containers_""$col1""_implemented")" == "yes" ]]; then
 				CONTAINER_NAME_MENU+=("$col1")
 				CONTAINER_NAME_MENU+=("$col2")
 				CONTAINER_NAME_MENU+=("OFF")
 			fi
-		else
-			CONTAINER_NAME_MENU+=("$col1")
-			CONTAINER_NAME_MENU+=("$col2")
-			CONTAINER_NAME_MENU+=("OFF")
 		fi
 	done <"$(dirname "${BASH_SOURCE[0]}")/containers/containers.txt"
 	IFS="$SAVEIFS" # Restore IFS
@@ -135,20 +139,19 @@ generate_docker_compose_yml() {
 	envsubst <"$1" >"$2"
 }
 
-
 # @description stop all container
 #
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 stop_containers_all() {
-    echo "Stop all Docker Containers"
-    print_line
+	echo "Stop all Docker Containers"
+	print_line
 
-    docker container stop "$(docker ps --filter "label=AIS.name" -aq)"
+	docker container stop "$(docker ps --filter "label=AIS.name" -aq)"
 
-    print_line
-    return 0
+	print_line
+	return 0
 }
 
 # @description stop all container
@@ -157,11 +160,11 @@ stop_containers_all() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 remove_containers_all() {
-    echo "Remove all Docker Containers"
-    print_line
+	echo "Remove all Docker Containers"
+	print_line
 
-    docker rm "$(docker ps --filter "label=AIS.name" -aq)"
+	docker rm "$(docker ps --filter "label=AIS.name" -aq)"
 
-    print_line
-    return 0
+	print_line
+	return 0
 }

@@ -152,7 +152,7 @@ help_setup_menu() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 main_setup_menu() {
-    if [[ "$(read_config_yml "system_bashmenu")" == "yes" ]]; then
+    if [[ $(read_config_yml system_bashmenu) == "yes" ]]; then
         SETUP_MENU=$(whiptail --clear --title "Another Install Script" --menu --notags "" 20 78 12 -- \
             "install" "Installation" \
             "add_container" "Add Container" \

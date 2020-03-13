@@ -3,13 +3,13 @@
 # @file vagrant.sh
 # @brief vagrant utils functions
 
-# @description start_ubuntu
+# @description start_create ubuntu vm
 #
 # @args $1 vagrant ubuntu code name xenial64/eaon64
 # @args $2 branch name
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-vagrant_ubuntu() {
+vagrant_create() {
     pushd "$1" || exit
     vagrant up && vagrant ssh <<EOF
 git clone https://github.com/antoinebou13/another-install-script.git
@@ -34,7 +34,7 @@ vagrant_destroy() {
 while [[ $# -gt 0 ]]; do
     case "$1" in
     create)
-        vagrant_ubuntu "$2" "$3"
+        vagrant_create "$2" "$3"
         exit 1
         ;;
     destroy)

@@ -24,7 +24,7 @@ services:
       short_description: Admin web for the server
       sourcelink: https://cockpitproject.org/
       image: no
-      implemented: no
+      implemented: yes
 
     ansible:
       name: ansible
@@ -36,7 +36,7 @@ services:
       short_description: Systems automation
       sourcelink: https://www.ansible.com
       image: no
-      implemented: no
+      implemented: yes
 
   containers:
     airsonic:
@@ -49,7 +49,7 @@ services:
       short_description: Music and Podcast server
       sourcelink: https://github.com/linuxserver/dockerairsonic
       image: no
-      implemented: no
+      implemented: yes
     
     ansiblesemaphore:
       name: ansiblesemaphore
@@ -61,7 +61,7 @@ services:
       short_description: Ansible Frontend
       sourcelink: https://github.com/ansiblesemaphore/semaphore
       image: no
-      implemented: no
+      implemented: yes
 
     bitwarden:
       name: bitwarden
@@ -73,7 +73,7 @@ services:
       short_description: Password management
       sourcelink: https://github.com/bitwarden
       image: no
-      implemented: no
+      implemented: yes
 
     bookstack:
       name: bookstack
@@ -85,7 +85,7 @@ services:
       short_description: Ebook server
       sourcelink: https://www.bookstackapp.com/
       image: no
-      implemented: no
+      implemented: yes
 
     calibre:
       name: calibre
@@ -97,7 +97,7 @@ services:
       short_description: Ebook server
       sourcelink: https://github.com/kovidgoyal/calibre
       image: no
-      implemented: no
+      implemented: yes
 
     chevereto:
       name: chevereto
@@ -109,7 +109,7 @@ services:
       short_description: Image hosting
       sourcelink: https://github.com/Chevereto/CheveretoFree
       image: no
-      implemented: no
+      implemented: yes
 
     cloudtorrent:
       name: cloudtorrent
@@ -121,7 +121,7 @@ services:
       short_description: Remote torrent client
       sourcelink: https://github.com/jpillora/cloudtorrent
       image: no
-      implemented: no
+      implemented: yes
 
     codeserver:
       name: codeserver
@@ -133,7 +133,7 @@ services:
       short_description: VS Code on a remote server
       sourcelink: https://github.com/cdr/codeserver
       image: no
-      implemented: no
+      implemented: yes
 
     couchpotato:
       name: couchpotato
@@ -145,7 +145,7 @@ services:
       short_description: Automatic Movie Downloading
       sourcelink: https://github.com/CouchPotato/CouchPotatoServer
       image: no
-      implemented: no
+      implemented: yes
 
     cyberchef:
       name: cyberchef
@@ -157,7 +157,7 @@ services:
       short_description: Web app for encryption, encoding, compression
       sourcelink: https://github.com/gchq/CyberChef
       image: no
-      implemented: no
+      implemented: yes
 
     dailynotes:
       name: dailynotes
@@ -169,7 +169,7 @@ services:
       short_description: Notes taking app
       sourcelink: https://github.com/m0ngr31/DailyNotes
       image: no
-      implemented: no
+      implemented: yes
 
     deluge:
       name: deluge
@@ -181,7 +181,7 @@ services:
       short_description: BitTorrent Client
       sourcelink: https://github.com/delugetorrent/deluge
       image: no
-      implemented: no
+      implemented: yes
 
     drawio:
       name: drawio
@@ -193,7 +193,7 @@ services:
       short_description: Diagram software
       sourcelink: https://hub.docker.com/r/fjudith/draw.io
       image: no
-      implemented: no
+      implemented: yes
 
     duplicati:
       name: duplicati
@@ -205,7 +205,7 @@ services:
       short_description: Backup software to store encrypted backups
       sourcelink: https://hub.docker.com/r/linuxserver/duplicati/
       image: no
-      implemented: no
+      implemented: yes
 
     fireflyiii:
       name: fireflyiii
@@ -217,7 +217,7 @@ services:
       short_description: Personal finance manager
       sourcelink: https://www.fireflyiii.org/
       image: no
-      implemented: no
+      implemented: yes
 
     freshrss:
       name: freshrss
@@ -229,7 +229,7 @@ services:
       short_description: RSS
       sourcelink: https://hub.docker.com/r/linuxserver/freshrss
       image: no
-      implemented: no
+      implemented: yes
 
     gitea:
       name: gitea
@@ -241,7 +241,7 @@ services:
       short_description: Git service
       sourcelink: https://gitea.io/enus/
       image: no
-      implemented: no
+      implemented: yes
 
     gitlab:
       name: gitlab
@@ -253,7 +253,7 @@ services:
       short_description: Gitlab service
       sourcelink: https://hub.docker.com/r/gitlab/gitlabce/
       image: no
-      implemented: no
+      implemented: yes
 
     glances:
       name: glances
@@ -265,7 +265,7 @@ services:
       short_description: System monitoring tool
       sourcelink: https://nicolargo.github.io/glances/
       image: no
-      implemented: no
+      implemented: yes
 
     grafana:
       name: grafana
@@ -277,7 +277,7 @@ services:
       short_description: Analytics and monitoring solution
       sourcelink: https://grafana.com/
       image: no
-      implemented: no
+      implemented: yes
 
     graylog:
       name: graylog
@@ -289,7 +289,7 @@ services:
       short_description: log management
       sourcelink: https://docs.graylog.org/en/3.1/pages/installation/docker.html
       image: no
-      implemented: no
+      implemented: yes
 
     guacamole:
       name: guacamole
@@ -301,7 +301,7 @@ services:
       short_description: Clientless remote desktop gateway
       sourcelink: https://github.com/oznu/dockerguacamole
       image: no
-      implemented: no
+      implemented: yes
 
     headphones:
       name: headphones
@@ -313,7 +313,7 @@ services:
       short_description: Automated Music Downloader
       sourcelink: https://hub.docker.com/r/linuxserver/headphones/
       image: no
-      implemented: no
+      implemented: yes
 
     heimdall:
       name: heimdall
@@ -325,7 +325,7 @@ services:
       short_description: Application dashboard and launcher
       sourcelink: https://hub.docker.com/r/linuxserver/heimdall/
       image: no
-      implemented: no
+      implemented: yes
 
     htpcdownloadbox:
       name: htpcdownloadbox
@@ -337,7 +337,7 @@ services:
       short_description: All in one torrent downloader
       sourcelink: https://github.com/sebgl/htpcdownloadbox
       image: no
-      implemented: no
+      implemented: yes
 
     huginn:
       name: huginn
@@ -349,7 +349,7 @@ services:
       short_description: Create agents that monitor and act on your behalf
       sourcelink: https://github.com/huginn/huginn
       image: no
-      implemented: no
+      implemented: yes
 
     invidious:
       name: invidious
@@ -361,7 +361,7 @@ services:
       short_description: Alternative frontend to YouTube
       sourcelink: https://github.com/omarroth/invidious
       image: no
-      implemented: no
+      implemented: yes
 
     jackett:
       name: jackett
@@ -373,7 +373,7 @@ services:
       short_description: API Support for your favorite torrent trackers
       sourcelink: https://github.com/Jackett/Jackett
       image: no
-      implemented: no
+      implemented: yes
 
     jellyfin:
       name: jellyfin
@@ -385,7 +385,7 @@ services:
       short_description: Software media system
       sourcelink: https://jellyfin.org/
       image: no
-      implemented: no
+      implemented: yes
 
     jenkins:
       name: jenkins
@@ -397,7 +397,7 @@ services:
       short_description: Automation server
       sourcelink: https://jenkins.io/
       image: no
-      implemented: no
+      implemented: yes
 
     jupyterhub:
       name: jupyterhub
@@ -409,7 +409,7 @@ services:
       short_description: Multiuser server for Jupyter
       sourcelink: https://github.com/jupyterhub/jupyterhub
       image: no
-      implemented: no
+      implemented: yes
 
     jupyterlab:
       name: jupyterlab
@@ -421,7 +421,7 @@ services:
       short_description: Singleuser server for Jupyter
       sourcelink: https://jupyterlab.readthedocs.io/en/stable/
       image: no
-      implemented: no
+      implemented: yes
 
     kdedocker:
       name: kdedocker
@@ -433,7 +433,7 @@ services:
       short_description: KDE in Browser 
       sourcelink: https://github.com/msjpq/kdeindocker
       image: no
-      implemented: no
+      implemented: yes
 
     keycloak:
       name: keycloak
@@ -445,7 +445,7 @@ services:
       short_description: Identity and access management
       sourcelink: https://www.keycloak.org/
       image: no
-      implemented: no
+      implemented: yes
 
     komga:
       name: komga
@@ -457,7 +457,7 @@ services:
       short_description: Media server for comics/mangas/BDs
       sourcelink: https://github.com/gotson/komga
       image: no
-      implemented: no
+      implemented: yes
 
     liberapay:
       name: liberapay
@@ -469,7 +469,7 @@ services:
       short_description: Recurrent donations platform
       sourcelink: https://en.liberapay.com/
       image: no
-      implemented: no
+      implemented: yes
 
     libresignage:
       name: libresignage
@@ -481,7 +481,7 @@ services:
       short_description: Digital signage solution
       sourcelink: https://github.com/eerotal/LibreSignage
       image: no
-      implemented: no
+      implemented: yes
 
     libresignage:
       name: linkd
@@ -493,7 +493,7 @@ services:
       short_description: link shortener
       sourcelink: https://github.com/HexF/linkd
       image: no
-      implemented: no
+      implemented: yes
 
     lodestone:
       name: lodestone
@@ -505,7 +505,7 @@ services:
       short_description: Personal document archiving
       sourcelink: https://github.com/AnalogJ/lodestone
       image: no
-      implemented: no
+      implemented: yes
 
     lychee:
       name: lychee
@@ -517,7 +517,7 @@ services:
       short_description: Photo management system
       sourcelink: https://github.com/electerious/Lychee
       image: no
-      implemented: no
+      implemented: yes
 
     mailcow:
       name: mailcow
@@ -529,7 +529,7 @@ services:
       short_description: Mailserver docker
       sourcelink: https://mailcow.email/
       image: no
-      implemented: no
+      implemented: yes
 
     mango:
       name: mango
@@ -541,7 +541,7 @@ services:
       short_description: Manga server
       sourcelink: https://github.com/hkalexling/Mango
       image: no
-      implemented: no
+      implemented: yes
 
     mcmyadmin:
       name: mcmyadmin
@@ -553,7 +553,7 @@ services:
       short_description: Minecraft admin system
       sourcelink: https://www.mcmyadmin.com/
       image: no
-      implemented: no
+      implemented: yes
 
     medusa:
       name: medusa
@@ -565,7 +565,7 @@ services:
       short_description: Automatic video Library Manager for TV Shows
       sourcelink: https://github.com/pymedusa/Medusa
       image: no
-      implemented: no
+      implemented: yes
 
     minecraft:
       name: minecraft
@@ -577,7 +577,7 @@ services:
       short_description: Minecraft Server
       sourcelink: https://hub.docker.com/r/itzg/minecraftserver
       image: no
-      implemented: no
+      implemented: yes
 
     monica:
       name: monica
@@ -589,7 +589,7 @@ services:
       short_description: Personal CRM
       sourcelink: https://github.com/monicahq/monica
       image: no
-      implemented: no
+      implemented: yes
 
     mylar:
       name: mylar
@@ -601,7 +601,7 @@ services:
       short_description: Comic Book downloader
       sourcelink: https://github.com/monicahq/monica
       image: no
-      implemented: no
+      implemented: yes
 
     neko:
       name: neko
@@ -613,7 +613,7 @@ services:
       short_description: Virtual browser
       sourcelink: https://github.com/nurdism/neko
       image: no
-      implemented: no
+      implemented: yes
 
     netdata:
       name: netdata
@@ -625,7 +625,7 @@ services:
       short_description: Realtime performance monitoring
       sourcelink: https://github.com/netdata/netdata
       image: no
-      implemented: no
+      implemented: yes
 
     nextcloud:
       name: nextcloud
@@ -637,7 +637,7 @@ services:
       short_description: File share and collaboration platform
       sourcelink: https://github.com/nextcloud
       image: no
-      implemented: no
+      implemented: yes
 
     olaris:
       name: olaris
@@ -649,7 +649,7 @@ services:
       short_description: Media manager and transcoding server
       sourcelink: https://gitlab.com/olaris/olarisserver
       image: no
-      implemented: no
+      implemented: yes
 
     openstreamingplatform:
       name: openstreamingplatform
@@ -661,7 +661,7 @@ services:
       short_description: Video streaming and recording
       sourcelink: https://gitlab.com/Deamos/flasknginxrtmpmanager
       image: no
-      implemented: no
+      implemented: yes
 
     openldap:
       name: openldap
@@ -673,7 +673,7 @@ services:
       short_description: Ldap
       sourcelink: https://github.com/osixia/dockeropenldap
       image: no
-      implemented: no
+      implemented: yes
 
     openvpn:
       name: openvpn
@@ -685,7 +685,7 @@ services:
       short_description: VPN
       sourcelink: https://github.com/kylemanna/dockeropenvpn
       image: no
-      implemented: no
+      implemented: yes
 
     osjs:
       name: osjs
@@ -697,7 +697,7 @@ services:
       short_description: Osjs
       sourcelink: https://github.com/osjs/OS.js
       image: no
-      implemented: no
+      implemented: yes
 
     paperless:
       name: paperless
@@ -709,7 +709,7 @@ services:
       short_description: Archive all of your paper documents
       sourcelink: https://github.com/thepaperlessproject/paperless
       image: no
-      implemented: no
+      implemented: yes
 
     piwigo:
       name: piwigo
@@ -721,7 +721,7 @@ services:
       short_description: Photo gallery software
       sourcelink: https://hub.docker.com/r/linuxserver/piwigo/
       image: no
-      implemented: no
+      implemented: yes
 
     plex:
       name: plex
@@ -733,7 +733,7 @@ services:
       short_description: Collection of movies, TV, music, and photos
       sourcelink: https://www.plex.tv/fr/
       image: no
-      implemented: no
+      implemented: yes
 
     portainer:
       name: portainer
@@ -745,7 +745,7 @@ services:
       short_description: Manage your Docker environments
       sourcelink: https://www.portainer.io/
       image: no
-      implemented: no
+      implemented: yes
 
     privatebin:
       name: privatebin
@@ -757,7 +757,7 @@ services:
       short_description: Pastebin
       sourcelink: https://privatebin.info/
       image: no
-      implemented: no
+      implemented: yes
 
     pyload:
       name: pyload
@@ -769,7 +769,7 @@ services:
       short_description: Download manager
       sourcelink: https://pyload.net/
       image: no
-      implemented: no
+      implemented: yes
 
     qbittorentvpn:
       name: qbittorentvpn
@@ -781,7 +781,7 @@ services:
       short_description: qbittorent VPN
       sourcelink: https://hub.docker.com/r/markusmcnugen/qbittorrentvpn/
       image: no
-      implemented: no
+      implemented: yes
 
     radarr:
       name: radarr
@@ -793,7 +793,7 @@ services:
       short_description: Sonarr for movie
       sourcelink: https://radarr.video/
       image: no
-      implemented: no
+      implemented: yes
 
     recipes:
       name: recipes
@@ -805,7 +805,7 @@ services:
       short_description: Django application for managing recipes
       sourcelink: https://github.com/vabene1111/recipes
       image: no
-      implemented: no
+      implemented: yes
 
     rocketchat:
       name: rocketchat
@@ -817,7 +817,7 @@ services:
       short_description: Simple chat server
       sourcelink: https://rocket.chat/docs/installation/dockercontainers/
       image: no
-      implemented: no
+      implemented: yes
 
     goshiori:
       name: shiori
@@ -829,7 +829,7 @@ services:
       short_description: Bookmark manager
       sourcelink: https://github.com/goshiori/shiori
       image: no
-      implemented: no
+      implemented: yes
 
     sonarr:
       name: sonarr
@@ -841,7 +841,7 @@ services:
       short_description: Smart PVR newsgroup and bittorrent users
       sourcelink: https://github.com/smicallef/spiderfoot
       image: no
-      implemented: no
+      implemented: yes
 
     spiderfoot:
       name: spiderfoot
@@ -853,7 +853,7 @@ services:
       short_description: Intelligence (OSINT) automation tool
       sourcelink: https://github.com/smicallef/spiderfoot
       image: no
-      implemented: no
+      implemented: yes
 
     statping:
       name: statping
@@ -865,7 +865,7 @@ services:
       short_description: Status Page for monitoring your websites
       sourcelink: https://github.com/hunterlong/statping
       image: no
-      implemented: no
+      implemented: yes
 
     syncthing:
       name: syncthing
@@ -877,7 +877,7 @@ services:
       short_description: Alternative Google drive/Dropbox
       sourcelink: https://github.com/syncthing/syncthing
       image: no
-      implemented: no
+      implemented: yes
 
     tautulli:
       name: tautulli
@@ -889,7 +889,7 @@ services:
       short_description: Monitor your Plex
       sourcelink: https://github.com/HaveAGitGat/Tdarr
       image: no
-      implemented: no
+      implemented: yes
 
     tdarr:
       name: tdarr
@@ -901,7 +901,7 @@ services:
       short_description: Audio/Video library analytics, transcode
       sourcelink: https://github.com/HaveAGitGat/Tdarr
       image: no
-      implemented: no
+      implemented: yes
 
     teamspeak:
       name: teamspeak
@@ -913,7 +913,7 @@ services:
       short_description: Voice chat application
       sourcelink: https://github.com/solidnerd/dockerteamspeak
       image: no
-      implemented: no
+      implemented: yes
 
     traefik:
       name: traefik
@@ -925,7 +925,7 @@ services:
       short_description: Edge router
       sourcelink: https://docs.traefik.io/userguides/dockercompose/basicexample/
       image: no
-      implemented: no
+      implemented: yes
 
     ubuntuxrdp:
       name: ubuntuxrdp
@@ -937,7 +937,7 @@ services:
       short_description: Ubuntu desktop with xrdp server
       sourcelink: https://github.com/danielguerra69/ubuntuxrdp
       image: no
-      implemented: no
+      implemented: yes
 
     wallabag:
       name: wallabag
@@ -949,7 +949,7 @@ services:
       short_description: Readitlater
       sourcelink: https://github.com/wallabag/wallabag
       image: no
-      implemented: no
+      implemented: yes
 
     wireguardweb:
       name: wireguardweb
@@ -961,4 +961,4 @@ services:
       short_description: VPN
       sourcelink: https://github.com/antoinebou13/wg-access-server/tree/update
       image: no
-      implemented: no
+      implemented: yes

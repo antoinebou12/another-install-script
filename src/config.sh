@@ -19,7 +19,7 @@ parse_yml() {
       for (i in vname) {if (i > indent) {delete vname[i]}}
       if (length($3) > 0) {
          vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-         printf("%s%s%s=\"%s\"\n", "'"$prefix"'",vn, $2, $3);
+         printf("%s%s%s=%s\n", "'"$prefix"'",vn, $2, $3);
       }
     }'
 }
@@ -88,11 +88,11 @@ parse_yml_array_web() {
     local ARRAY
     local NEW_ARRAY
     ARRAY="$(read_config_yml "$1""_web")"
-    NEW_ARRAY="${ARRAY:1:${#ARRAY}-2}"
-    NEW_ARRAY="${NEW_ARRAY:1:${#NEW_ARRAY}-2}"
+    NEW_ARRAY="${ARRAY//]/}"
+    NEW_ARRAY="${NEW_ARRAY//[/}"
     NEW_ARRAY="${NEW_ARRAY//,/
 }" # newline
-
+    NEW_ARRAY="${NEW_ARRAY//\"/}"
     printf -- "%s\n" "${NEW_ARRAY}"
     return 0
 }
@@ -106,7 +106,7 @@ container_url() {
     local DOMAIN
     WEBPORT="$(parse_yml_array_web "$1")"
     DOMAIN="$(read_config_yml "system_domain")"
-    printf "%s%s\n" "${DOMAIN//\"/}" "${WEBPORT//\"/}"
+    printf "%s%s\n" "$DOMAIN" "$WEBPORT"
     return 0
 }
 
