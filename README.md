@@ -6,6 +6,7 @@
 [![codecov](https://codecov.io/gh/antoinebou13/another-install-script/branch/master/graph/badge.svg?token=FcTtxpEGhF)](https://codecov.io/gh/antoinebou13/another-install-script)
 ![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/another-install-script)
 ![GitHub](https://img.shields.io/github/license/antoinebou13/another-install-script)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fantoinebou13%2Fanother-install-script.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fantoinebou13%2Fanother-install-script?ref=badge_shield)
 
 Another install Script is a W.I.P project/script to install docker container for my personal server
 
@@ -163,6 +164,9 @@ Go to [Changelog](docs/CHANGELOG.md)
 ## License
 
 Go to [License](.github/LICENSE)
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fantoinebou13%2Fanother-install-script.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fantoinebou13%2Fanother-install-script?ref=badge_large)
 
 ## Roadmap
 
