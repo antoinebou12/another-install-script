@@ -39,9 +39,6 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 uninstall() {
     dist_check
 
-    sed '/UDOCKER_USERID/d' /etc/environment
-    sed '/UDOCKER_GROUPID/d' /etc/environment
-
     echo "Uninstall"
     print_line
 
@@ -89,7 +86,7 @@ uninstall() {
     exec_root rm -rf /usr/local/bin/docker-compose
     exec_root rm -rf /usr/bin/docker-compose
 
-    exec_root userdel -f udocker > /dev/null
+    remove_docker_user
 
     print_line
     return 0

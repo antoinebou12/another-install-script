@@ -3,25 +3,25 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/antoinebou13/another-install-script)
 [![Build Status](https://travis-ci.com/antoinebou13/another-install-script.svg?token=MUq69udyyqAR24bsXgRq&branch=master)](https://travis-ci.com/antoinebou13/another-install-script)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/another-install-script)
-[![codecov](https://codecov.io/gh/antoinebou13/another-install-script/branch/master/graph/badge.svg?token=FcTtxpEGhF)](https://codecov.io/gh/antoinebou13/another-install-script)
+[![Codecov](https://codecov.io/gh/antoinebou13/another-install-script/branch/master/graph/badge.svg?token=FcTtxpEGhF)](https://codecov.io/gh/antoinebou13/another-install-script)
 ![GitHub repo size](https://img.shields.io/github/repo-size/antoinebou13/another-install-script)
 ![GitHub](https://img.shields.io/github/license/antoinebou13/another-install-script)
 
-Another install Script is a W.I.P project/script to install docker container for my personal server
+Another install Script is a W.I.P project/script to install multiple docker container with a super simple menu for my personal server
 
 ![Another install Script](docs/images/another-install-script.png)
 
 ## The story behind the project
 
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.
-After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker. After learning more on docker and docker-compose to create bash project install script using Test-driven development and documented install script. Also, I found multiple repos that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack) and [sovereign](https://github.com/sovereign/sovereign) and [MediaServerDockerCompose](https://github.com/vaeyo/MediaServer-DockerComposeFiles). I am trying to do with this project is to make a simple, extensible and customizable script to add a lot of selfhosted services/servers to easy to install with a simple cli menu. The project is a super easy install script for beginner/intermediate linux power user that want to test quickly interesting docker containers of server/service. The project isn't a highly configurable install script with a container orchestrator and general manager for multiple docker.
+After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker. Also, I found multiple repos that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack) and [sovereign](https://github.com/sovereign/sovereign) and [MediaServerDockerCompose](https://github.com/vaeyo/MediaServer-DockerComposeFiles). I am trying to do with this project is to make a simple, extensible and customizable script to add a lot of selfhosted services/servers to easy to install with a simple cli menu. The project is a super easy install script for beginner/intermediate linux power user that want to test quickly interesting docker containers of server/service. The project isn't a highly configurable install script with a container orchestrator and general manager for multiple docker.
 
 ## How to install
 
 For now only tested on ubuntu18.04
 
 ```bash
-git clone --recursive https://github.com/antoinebou13/another-install-script.git
+git clone https://github.com/antoinebou13/another-install-script.git
 cd another-install-script
 sudo bash setup.sh
 ```
@@ -70,6 +70,7 @@ Some services/servers cannot be installed at the same time. Also more configurat
 - [docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
 - [dry](https://github.com/moncho/dry)
+- [ctop](https://github.com/bcicen/ctop)
 - [emojify](https://github.com/mrowa44/emojify)
 
 ## Project Structure
@@ -153,6 +154,8 @@ Go to [Code of Conduct](.github/CODE_OF_CONDUCT.md)
 
 ## Contributing
 
+All pull request and suggestion is highly appreciated and encourage
+
 ![Please Contribute for Bernie](docs/images/contribution.png)
 
 Go to [Contributing](.github/CONTRIBUTING.md)
@@ -174,6 +177,6 @@ Go to [License](.github/LICENSE)
 - [] Automatic docker compose and containers update
 - [] Automatic backups
 - [] Automatic testing and better coverage
-- [] Versionning
+- [] Automatic Versioning
 - [] Better cli menu
 - [] Rewrite in python

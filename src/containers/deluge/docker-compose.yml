@@ -8,9 +8,10 @@ services:
             - PUID='${UDOCKER_USERID}'
             - PGID='${UDOCKER_GROUPID}'
             - TZ='${TZ}'
-            - UMASK_SET: 022
+            - UMASK_SET=022 #optional
             - DELUGE_LOGLEVEL=error #optional
-        network_mode: host
+        ports:
+            - 8112:8112 # port for deluge web UI to be reachable from local network
         volumes:
             - /home/udocker/volumes/deluge/config:/config
             - /home/udocker/volumes/deluge/downloads:/downloads

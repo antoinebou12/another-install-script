@@ -57,7 +57,7 @@ config_get() {
         # shellcheck disable=SC2086
         val="$(config_read_file config.cfg.defaults ${2})"
     fi
-    printf -- "%s" "${val}"
+    printf -- "%s\n" "${val}"
     return 0
 }
 

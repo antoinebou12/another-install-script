@@ -1,7 +1,5 @@
-
-version: '3.7'
+version: "3.7"
 services:
-
   vpn:
     container_name: vpn
     image: dperson/openvpn-client:latest
@@ -99,9 +97,9 @@ services:
       - /home/udocker/volumes/htpc-download-box/plex/transcode:/transcode # temp transcoded files
       - /home/udocker/volumes/htpc-download-box/plex/data:/data # media library
       - /home/udocker/volumes/htpc-download-box/plex/logs:/logs
-      labels:
-        - "AIS.traefik=false"
-        - "AIS.name=htpc-download-box-plex"
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=htpc-download-box-plex"
 
     tautulli:
       image: linuxserver/tautulli

@@ -18,8 +18,8 @@ services:
       name: cockpit
       ports: [9090]
       web: [9090]
-      volumes: no
-      network: local
+      volumes: yes
+      network: host
       description: Open webbased interface for your servers
       short_description: Admin web for the server
       sourcelink: https://cockpitproject.org/
@@ -30,8 +30,8 @@ services:
       name: ansible
       ports: no
       web: no
-      volumes: no
-      network: local
+      volumes: yes
+      network: host
       description: IT Systems automation
       short_description: Systems automation
       sourcelink: https://www.ansible.com
@@ -43,7 +43,7 @@ services:
       name: airsonic
       ports: [4040, 1900]
       web: [":4040"]
-      volumes: no
+      volumes: yes
       network: no
       description: Music and Podcast server
       short_description: Music and Podcast server
@@ -55,7 +55,7 @@ services:
       name: ansiblesemaphore
       ports: [4000]
       web: [":4000"]
-      volumes: no
+      volumes: yes
       network: no
       description: Open Source alternative to Ansible Tower
       short_description: Ansible Frontend
@@ -67,7 +67,7 @@ services:
       name: bitwarden
       ports: [8000]
       web: [":8000"]
-      volumes: no
+      volumes: yes
       network: no
       description: Open source password management
       short_description: Password management
@@ -79,7 +79,7 @@ services:
       name: bookstack
       ports: [6875]
       web: [":6875"]
-      volumes: no
+      volumes: yes
       network: no
       description: Simple, selfhosted, easytouse platform for organising and storing information
       short_description: Ebook server
@@ -91,7 +91,7 @@ services:
       name: calibre
       ports: [8001, 8002]
       web: [":8001",":8002"]
-      volumes: no
+      volumes: yes
       network: no
       description: Powerful and easy to use ebook manager
       short_description: Ebook server
@@ -103,7 +103,7 @@ services:
       name: chevereto
       ports: [8999]
       web: [":8999"]
-      volumes: no
+      volumes: yes
       network: no
       description: Open source image hosting software
       short_description: Image hosting
@@ -115,7 +115,7 @@ services:
       name: cloudtorrent
       ports: [6889]
       web: [":6889"]
-      volumes: no
+      volumes: yes
       network: no
       description: A selfhosted remote torrent client
       short_description: Remote torrent client
@@ -127,7 +127,7 @@ services:
       name: codeserver
       ports: [8003]
       web: [":8003"]
-      volumes: no
+      volumes: yes
       network: no
       description: Run VS Code on a remote server
       short_description: VS Code on a remote server
@@ -139,7 +139,7 @@ services:
       name: couchpotato
       ports: [5050]
       web: [":5050"]
-      volumes: no
+      volumes: yes
       network: no
       description: Automatic Movie Downloading via NZBs & Torrents
       short_description: Automatic Movie Downloading
@@ -151,7 +151,7 @@ services:
       name: cyberchef
       ports: [8004]
       web: [":8004"]
-      volumes: no
+      volumes: yes
       network: no
       description: The Cyber Swiss Army Knife  a web app for encryption, encoding, compression and data analysis
       short_description: Web app for encryption, encoding, compression
@@ -163,7 +163,7 @@ services:
       name: dailynotes
       ports: [5000]
       web: [":5000"]
-      volumes: no
+      volumes: yes
       network: no
       description: App for taking notes and tracking tasks on a daily basis
       short_description: Notes taking app
@@ -171,12 +171,24 @@ services:
       image: no
       implemented: yes
 
+    dashmachine:
+      name: dashmachine
+      ports: [5000]
+      web: [":5000"]
+      volumes: yes
+      network: no
+      description: Another web application bookmark dashboard, with fun features.
+      short_description: dashboard app
+      sourcelink: https://github.com/rmountjoy92/DashMachine
+      image: no
+      implemented: yes
+
     deluge:
       name: deluge
       ports: []
       web: []
-      volumes: no
-      network: no
+      volumes: yes
+      network: host
       description: BitTorrent Client
       short_description: BitTorrent Client
       sourcelink: https://github.com/delugetorrent/deluge
@@ -187,7 +199,7 @@ services:
       name: drawio
       ports: [8005]
       web: [":8005"]
-      volumes: no
+      volumes: yes
       network: no
       description: Free online diagram software
       short_description: Diagram software
@@ -199,7 +211,7 @@ services:
       name: duplicati
       ports: [8200]
       web: [":8200"]
-      volumes: no
+      volumes: yes
       network: no
       description: Backup software to store encrypted backups
       short_description: Backup software to store encrypted backups
@@ -211,8 +223,8 @@ services:
       name: fireflyiii
       ports: [8006]
       web: [":8006"]
-      volumes: no
-      network: no
+      volumes: yes
+      network: firefly_iii_net brige
       description: A free and open source personal finance manager
       short_description: Personal finance manager
       sourcelink: https://www.fireflyiii.org/
@@ -223,7 +235,7 @@ services:
       name: freshrss
       ports: [8007]
       web: [":8007"]
-      volumes: no
+      volumes: yes
       network: no
       description: A free, selfhostable aggregator RSS
       short_description: RSS
@@ -235,8 +247,8 @@ services:
       name: gitea
       ports: [8008, 222]
       web: [":8008"]
-      volumes: no
-      network: no
+      volumes: yes
+      network: gitea
       description: A painless selfhosted Git service
       short_description: Git service
       sourcelink: https://gitea.io/enus/
@@ -247,7 +259,7 @@ services:
       name: gitlab
       ports: [8009, 22222]
       web: [":8009"]
-      volumes: no
+      volumes: yes
       network: no
       description: Gitlab service selfhosted
       short_description: Gitlab service
@@ -255,23 +267,11 @@ services:
       image: no
       implemented: yes
 
-    glances:
-      name: glances
-      ports: []
-      web: []
-      volumes: no
-      network: no
-      description: Crossplatform system monitoring tool written in Python.
-      short_description: System monitoring tool
-      sourcelink: https://nicolargo.github.io/glances/
-      image: no
-      implemented: yes
-
     grafana:
       name: grafana
       ports: [8011]
       web: [":8011"]
-      volumes: no
+      volumes: yes
       network: no
       description: the open source analytics and monitoring solution
       short_description: Analytics and monitoring solution
@@ -279,15 +279,15 @@ services:
       image: no
       implemented: yes
 
-    graylog:
-      name: graylog
-      ports: [9000, 1514, 12201]
-      web: [":9000"]
-      volumes: no
+    grocy:
+      name: grocy
+      ports: [9283]
+      web: [":9283"]
+      volumes: yes
       network: no
-      description: Free and open source log management
-      short_description: log management
-      sourcelink: https://docs.graylog.org/en/3.1/pages/installation/docker.html
+      description: ERP system for your kitchen!
+      short_description: ERP system 
+      sourcelink: https://github.com/linuxserver/docker-grocy
       image: no
       implemented: yes
 
@@ -295,7 +295,7 @@ services:
       name: guacamole
       ports: [8012]
       web: [":8012"]
-      volumes: no
+      volumes: yes
       network: no
       description: Apache guacamole is clientless remote desktop gateway
       short_description: Clientless remote desktop gateway
@@ -307,7 +307,7 @@ services:
       name: headphones
       ports: [8181]
       web: [":8181"]
-      volumes: no
+      volumes: yes
       network: no
       description: Automated music downloader for NZB and Torrent, written in Python
       short_description: Automated Music Downloader
@@ -319,7 +319,7 @@ services:
       name: heimdall
       ports: [8080, 8443]
       web: [":8080", ":8443"]
-      volumes: no
+      volumes: yes
       network: no
       description: An Application dashboard and launcher
       short_description: Application dashboard and launcher
@@ -331,7 +331,7 @@ services:
       name: htpcdownloadbox
       ports: []
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Sonarr/Radarr/Jackett/NZBGet/Deluge/OpenVPN/Plex
       short_description: All in one torrent downloader
@@ -343,7 +343,7 @@ services:
       name: huginn
       ports: [8013]
       web: [":8013"]
-      volumes: no
+      volumes: yes
       network: no
       description: Create agents that monitor and act on your behalf
       short_description: Create agents that monitor and act on your behalf
@@ -355,7 +355,7 @@ services:
       name: invidious
       ports: [8014]
       web: [":8014"]
-      volumes: no
+      volumes: yes
       network: no
       description: Alternative frontend to YouTube
       short_description: Alternative frontend to YouTube
@@ -367,7 +367,7 @@ services:
       name: jackett
       ports: [9117]
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: API Support for your favorite torrent trackers
       short_description: API Support for your favorite torrent trackers
@@ -379,7 +379,7 @@ services:
       name: jellyfin
       ports: [8096, 8920]
       web: [":8096"]
-      volumes: no
+      volumes: yes
       network: no
       description: Free Software Media System also alternative for plex
       short_description: Software media system
@@ -391,7 +391,7 @@ services:
       name: jenkins
       ports: [8015, 50000]
       web: [":8015"]
-      volumes: no
+      volumes: yes
       network: no
       description: Open source automation server CI/CD
       short_description: Automation server
@@ -399,23 +399,11 @@ services:
       image: no
       implemented: yes
 
-    jupyterhub:
-      name: jupyterhub
-      ports: [8028]
-      web: [":8028"]
-      volumes: no
-      network: no
-      description: Multiuser server for Jupyter notebooks
-      short_description: Multiuser server for Jupyter
-      sourcelink: https://github.com/jupyterhub/jupyterhub
-      image: no
-      implemented: yes
-
     jupyterlab:
       name: jupyterlab
       ports: [8888]
       web: [":8888"]
-      volumes: no
+      volumes: yes
       network: no
       description: Singleuser server for Jupyter notebooks
       short_description: Singleuser server for Jupyter
@@ -427,7 +415,7 @@ services:
       name: kdedocker
       ports: [8100,5900]
       web: [":8100"]
-      volumes: no
+      volumes: yes
       network: no
       description: So you can run KDE inside a browser
       short_description: KDE in Browser 
@@ -439,7 +427,7 @@ services:
       name: keycloak
       ports: [8030]
       web: [":8030"]
-      volumes: no
+      volumes: yes
       network: no
       description: Open source identity and access management
       short_description: Identity and access management
@@ -451,7 +439,7 @@ services:
       name: komga
       ports: [8031]
       web: [":8031"]
-      volumes: no
+      volumes: yes
       network: no
       description: Media server for comics/mangas/BDs with API and OPDS support
       short_description: Media server for comics/mangas/BDs
@@ -463,7 +451,7 @@ services:
       name: liberapay
       ports: [8339]
       web: [":8339"]
-      volumes: no
+      volumes: yes
       network: no
       description: Recurrent donations platform like Patreon
       short_description: Recurrent donations platform
@@ -475,7 +463,7 @@ services:
       name: libresignage
       ports: [8030]
       web: [":8030"]
-      volumes: no
+      volumes: yes
       network: no
       description: An open source digital signage solution
       short_description: Digital signage solution
@@ -483,7 +471,7 @@ services:
       image: no
       implemented: yes
 
-    libresignage:
+    linkd:
       name: linkd
       ports: [1336]
       web: []
@@ -499,7 +487,7 @@ services:
       name: lodestone
       ports: [8034]
       web: [":8034"]
-      volumes: no
+      volumes: yes
       network: no
       description: Personal Document Archiving (DMS, EDMS for Personal/Home Office use)
       short_description: Personal document archiving
@@ -511,7 +499,7 @@ services:
       name: lychee
       ports: [8035]
       web: [":8035"]
-      volumes: no
+      volumes: yes
       network: no
       description: A great looking and easytouse photomanagementsystem you can run on your server, to manage and share photos
       short_description: Photo management system
@@ -523,7 +511,7 @@ services:
       name: mailcow
       ports: [8036]
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Mailserver docker
       short_description: Mailserver docker
@@ -535,7 +523,7 @@ services:
       name: mango
       ports: [8037]
       web: [8037]
-      volumes: no
+      volumes: yes
       network: no
       description: Manga server and web reader
       short_description: Manga server
@@ -547,7 +535,7 @@ services:
       name: mcmyadmin
       ports: [8037, 25565]
       web: [":8037"]
-      volumes: no
+      volumes: yes
       network: no
       description: Minecraft admin system
       short_description: Minecraft admin system
@@ -559,7 +547,7 @@ services:
       name: medusa
       ports: [8038]
       web: [8038]
-      volumes: no
+      volumes: yes
       network: no
       description: Automatic Video Library Manager for TV Shows
       short_description: Automatic video Library Manager for TV Shows
@@ -567,11 +555,23 @@ services:
       image: no
       implemented: yes
 
+    meshcentral:
+      name: meshcentral
+      ports: [8001,8002]
+      web: [":8001"]
+      volumes: yes
+      network: no
+      description: full computer management web site
+      short_description: Remote computer
+      sourcelink: https://www.meshcommander.com/meshcentral2
+      image: no
+      implemented: no
+
     minecraft:
       name: minecraft
       ports: [25565]
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Minecraft Server
       short_description: Minecraft Server
@@ -583,7 +583,7 @@ services:
       name: monica
       ports: [8039]
       web: [":8039"]
-      volumes: no
+      volumes: yes
       network: no
       description: Personal CRM. Remember everything about your friends and family
       short_description: Personal CRM
@@ -595,7 +595,7 @@ services:
       name: mylar
       ports: [8090]
       webport: [8090]
-      volumes: no
+      volumes: yes
       network: no
       description: Automated Comic Book downloader
       short_description: Comic Book downloader
@@ -607,7 +607,7 @@ services:
       name: neko
       ports: [8032]
       web: [":8032"]
-      volumes: no
+      volumes: yes
       network: no
       description: A self hosted virtual browser (rabb.it clone) that runs in docker.
       short_description: Virtual browser
@@ -631,7 +631,7 @@ services:
       name: nextcloud
       ports: [6889]
       web: [6889]
-      volumes: no
+      volumes: yes
       network: no
       description: Onpremises file share and collaboration platform
       short_description: File share and collaboration platform
@@ -643,7 +643,7 @@ services:
       name: olaris
       ports: [6889]
       web: [6889]
-      volumes: no
+      volumes: yes
       network: no
       description: Media Manager and transcoding server
       short_description: Media manager and transcoding server
@@ -655,7 +655,7 @@ services:
       name: openstreamingplatform
       ports: [1935, 8585, 8553]
       web: [":8585", ":8553"]
-      volumes: no
+      volumes: yes
       network: no
       description: A SelfHosted Video Streaming and Recording Server Using Python, Flask, NginxRTMP
       short_description: Video streaming and recording
@@ -667,7 +667,7 @@ services:
       name: openldap
       ports: [6889]
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Open Source implementation of the Lightweight Directory Access Protocol.
       short_description: Ldap
@@ -679,7 +679,7 @@ services:
       name: openvpn
       ports: [1194]
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Open Source VPN
       short_description: VPN
@@ -691,7 +691,7 @@ services:
       name: osjs
       ports: [7999]
       web: [":7999"]
-      volumes: no
+      volumes: yes
       network: no
       description: JavaScript Web Desktop Platform 
       short_description: Osjs
@@ -703,7 +703,7 @@ services:
       name: paperless
       ports: [8047]
       web: [":8047"]
-      volumes: no
+      volumes: yes
       network: no
       description: Scan, index, and archive all of your paper documents
       short_description: Archive all of your paper documents
@@ -715,7 +715,7 @@ services:
       name: piwigo
       ports: [8049]
       web: [":8049"]
-      volumes: no
+      volumes: yes
       network: no
       description: Photo gallery software
       short_description: Photo gallery software
@@ -727,7 +727,7 @@ services:
       name: plex
       ports: []
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Organize, beautify, stream, and share your personal collection of movies, TV, music, and photos anywhere, on all your devices
       short_description: Collection of movies, TV, music, and photos
@@ -739,7 +739,7 @@ services:
       name: portainer
       ports: []
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Build and manage your Docker environments with ease today
       short_description: Manage your Docker environments
@@ -751,7 +751,7 @@ services:
       name: privatebin
       ports: []
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: A minimalist, open source online pastebin where the server has zero knowledge of pasted data
       short_description: Pastebin
@@ -763,7 +763,7 @@ services:
       name: pyload
       ports: []
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Open Source download manager and designed to be extremely lightweight, easily extensible and fully manageable via web
       short_description: Download manager
@@ -775,7 +775,7 @@ services:
       name: qbittorentvpn
       ports: []
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Open Source software alternative to µTorrent with VPN
       short_description: qbittorent VPN
@@ -787,7 +787,7 @@ services:
       name: radarr
       ports: [7878]
       web: [":7878"]
-      volumes: no
+      volumes: yes
       network: no
       description: Sonarr for movie
       short_description: Sonarr for movie
@@ -799,7 +799,7 @@ services:
       name: recipes
       ports: [8055]
       web: [":8055"]
-      volumes: no
+      volumes: yes
       network: no
       description: Django application for managing recipes
       short_description: Django application for managing recipes
@@ -811,7 +811,7 @@ services:
       name: rocketchat
       ports: [8056,3001]
       web: [":8056"]
-      volumes: no
+      volumes: yes
       network: no
       description: Open Source Team Communication, replace email, HipChat & Slack
       short_description: Simple chat server
@@ -823,7 +823,7 @@ services:
       name: shiori
       ports: []
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Simple bookmark manager built with Go
       short_description: Bookmark manager
@@ -835,7 +835,7 @@ services:
       name: sonarr
       ports: [8989]
       web: [":8989"]
-      volumes: no
+      volumes: yes
       network: no
       description: Smart PVR for newsgroup and bittorrent users.
       short_description: Smart PVR newsgroup and bittorrent users
@@ -847,7 +847,7 @@ services:
       name: spiderfoot
       ports: [5001]
       web: [":5001"]
-      volumes: no
+      volumes: yes
       network: no
       description: open source intelligence (OSINT) automation tool. It integrates with just about every data source available and utilises a range of methods for data analysis
       short_description: Intelligence (OSINT) automation tool
@@ -859,7 +859,7 @@ services:
       name: statping
       ports: []
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: Status Page for monitoring your websites and applications with beautiful graphs, analytics, and plugins
       short_description: Status Page for monitoring your websites
@@ -871,7 +871,7 @@ services:
       name: syncthing
       ports: [8384, 22000]
       web: [":8384"]
-      volumes: no
+      volumes: yes
       network: no
       description: Open Source Continuous File Synchronization
       short_description: Alternative Google drive/Dropbox
@@ -883,7 +883,7 @@ services:
       name: tautulli
       ports: [8063]
       web: [":8063"]
-      volumes: no
+      volumes: yes
       network: no
       description: Monitor your Plex Media Server
       short_description: Monitor your Plex
@@ -895,7 +895,7 @@ services:
       name: tdarr
       ports: [8265]
       web: [":8265"]
-      volumes: no
+      volumes: yes
       network: no
       description: Tdarr Beta Audio/Video library analytics + transcode automation using FFmpeg/HandBrake + video health checking
       short_description: Audio/Video library analytics, transcode
@@ -919,7 +919,7 @@ services:
       name: traefik
       ports: [80, 443, 8080]
       webport: [8080]
-      volumes: no
+      volumes: yes
       network: no
       description: Edge router simplify networking complexity/reverse proxy
       short_description: Edge router
@@ -931,7 +931,7 @@ services:
       name: ubuntuxrdp
       ports: [3389, 2232]
       web: []
-      volumes: no
+      volumes: yes
       network: no
       description: An Ubuntu Desktop with xrdp server can be use with Apache Guacamole
       short_description: Ubuntu desktop with xrdp server
@@ -943,7 +943,7 @@ services:
       name: wallabag
       ports: [8899]
       web: [":8899"]
-      volumes: no
+      volumes: yes
       network: no
       description: Save and classify articles, Read them later, Freely
       short_description: Readitlater
@@ -955,7 +955,7 @@ services:
       name: wireguardweb
       ports: [7676,51820]
       web: [":7676"]
-      volumes: no
+      volumes: yes
       network: no
       description: VPN Server Web interface
       short_description: VPN

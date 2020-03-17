@@ -52,10 +52,10 @@ dist_check() {
 # @exitcode 1 On failure
 virt_check() {
     if [[ $(command -v "systemd-detect-virt") ]]; then
-        if systemd-detect-virt; then
-            return 0
-        else
+        if [[ $(systemd-detect-virt) == "none" ]]; then
             return 1
+        elif [[ $(systemd-detect-virt) == "wsl" ]] || [[ $(systemd-detect-virt) == "docker" ]]; then
+            return 0
         fi
     else
         return 1
@@ -67,29 +67,10 @@ virt_check() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 checkWSL() {
-    if [ -n "$WSL_DISTRO_NAME" ]; then
-        return 0
-    fi
-    return 1
-}
-
-# @description check if the os is debian or ubuntu
-#
-# @noargs
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-check_debian() {
-    if [[ "$OSTYPE" == "linux-gnu" ]]; then
-        # shellcheck source=/etc/os-release
-        # shellcheck disable=SC1091
-        source /etc/os-release
-        if [[ $ID_LIKE == "debian" ]]; then
-            return 0
-        fi
+    if [ -z "$WSL_DISTRO_NAME" ]; then
         return 1
     else
-        echo "Please use this project on an Ubuntu or Debian system tested on (Ubuntu18.04)"
-        return 1
+        return 0
     fi
 }
 
@@ -168,8 +149,15 @@ exec_root_func() {
 check_packages_install() {
     dist_check
     if [ "$DISTRO" == "ubuntu" ] || [ "$DISTRO" == "debian" ] || [ "$DISTRO" == "raspbian" ]; then
-        local output=$(dpkg-query -W -f='${Status}' "$1" | grep -q -P '^install ok installed$')
-        return $?
+        # Get the number of packages installed that match $1
+        local num=$(dpkg -l "$1" 2>/dev/null | egrep '^ii' | wc -l)
+        if [[ $num -eq 1 ]]; then
+            return 0
+        elif [[ $num -gt 1 ]]; then
+            return 0
+        else
+            return 1
+        fi
     else
         local output=$(which "$1")
         return $?
@@ -347,19 +335,18 @@ aptclean() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 get_timezones() {
-    TZ="$(cat /etc/timezone)"
-    echo TZ
-    export TZ
+    export TZ="$(cat /etc/timezone)"
+    echo "$TZ"
     return 0
 }
 
 # @description check if the port is used
 #
-# @noargs
+# @args $1 command
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 check_command_exist() {
-    if [[ $(command -v "$@") ]]; then
+    if [[ $(command -v "$1") ]]; then
         return 0
     else
         return 1

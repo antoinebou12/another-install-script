@@ -3,38 +3,48 @@
 # @file vagrant.sh
 # @brief vagrant utils functions
 
-# @description start_create ubuntu vm
+# @description start_create linux vm
 #
-# @args $1 vagrant ubuntu code name xenial64/eaon64
-# @args $2 branch name
+# @args $1 vagrant box code name 
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 vagrant_create() {
     pushd "$1" || exit
-    vagrant up && vagrant ssh <<EOF
-git clone https://github.com/antoinebou13/another-install-script.git
-cd another-install-script || exit
-git checkout $2
-EOF
+    vagrant up
     vagrant ssh
     popd || exit
 }
 
-# @description destroy vagrant
+# @description destroy vagrant vm
 #
-# @args $1 vagrantfile location
+# @args $1 vagrant box code name 
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-vagrant_destroy() {
+vagrant_ssh() {
     pushd "$1" || exit
     vagrant destroy -f
+    popd || exit
+}
+
+# @description ssh vagrant vm
+#
+# @args $1 vagrant box code name 
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+vagrant_ssh() {
+    pushd "$1" || exit
+    vagrant ssh
     popd || exit
 }
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
     create)
-        vagrant_create "$2" "$3"
+        vagrant_create "$2"
+        exit 1
+        ;;
+    destroy)
+        vagrant_ssh "$2"
         exit 1
         ;;
     destroy)

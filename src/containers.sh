@@ -78,6 +78,34 @@ manage_exec_containers_list() {
 	print_line
 }
 
+
+# @description remove containers
+#
+# @args $1 SETUP_CONTAINER_MENU
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_containers_list() {
+	print_newline
+	echo "Containers"
+	print_line
+
+	local FUNC_REMOVE="remove_docker_"
+	containers=()
+	mapfile -t containers <<<"$1"
+	for container_name in "${containers[@]}"; do
+		echo "$container_name"
+		print_line
+		source "$(dirname "${BASH_SOURCE[0]}")/containers/$container_name/$container_name.sh"
+		"$FUNC_REMOVE""$container_name"
+		print_line
+	done
+
+	manage_firewall_ports_deny_list
+
+	return 0
+	print_line
+}
+
 # @description list of the container
 #
 # @noargs

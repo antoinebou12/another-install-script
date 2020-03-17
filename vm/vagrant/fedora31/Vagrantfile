@@ -1,0 +1,19 @@
+$script = <<-SCRIPT
+dnf check-update -y
+dnf install -y git
+git clone https://github.com/antoinebou13/another-install-script
+SCRIPT
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "fedora/31-cloud-base"
+    config.vm.box_version = "31.20191023.0"
+    config.vm.provision "shell", inline: $script
+    config.ssh.forward_agent = true
+    config.ssh.forward_x11 = true
+  
+    config.vm.provider "virtualbox" do |v|
+      v.name = "fedora31_another-install-script"
+      v.memory = 4096
+      v.cpus = 2
+    end
+  end

@@ -3,6 +3,7 @@
 # @file linter.sh
 # @brief shellcheck for all the bash script
 
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../src/utils.sh"
 
 # @description install shellcheck
 # https://github.com/koalaman/shellcheck
@@ -11,11 +12,7 @@
 # @exitcode 1 On failure
 install_shellcheck(){
     if [[ ! $(command -v shellcheck) ]]; then
-        if  [[ "$UID" -gt 0 ]]; then
-            sudo apt-get install shellcheck
-        else
-            apt-get install shellcheck
-        fi
+        aptinstall shellcheck
     fi
     return 0
 }

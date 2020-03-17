@@ -10,38 +10,33 @@ test-func(){
 }
 
 @test "checkWSL" {
-  skip "check later"
-  checkWSL
-  [ "$status" -eq 1 ]
   WSL_DISTRO_NAME="wsltest"
+  if checkWSL; then return 0; else return 1; fi
   [ "$status" -eq 0 ]
   unset WSL_DISTRO_NAME
 }
 
 @test "check_packages_install" {
   # skip "check later"
-  check_packages_install nano
+  if check_packages_install nano; then return 0; else return 1; fi
   [ "$status" -eq 0 ]
-    check_packages_install dasdsad
+  if check_packages_install afdasv; then return 0; else return 1; fi
   [ "$status" -eq 1 ]
 }
 
 @test "aptupdate" {
   # skip
   aptupdate
-  [ "$status" -eq 0 ]
 }
 
-@test "aptupgrade" {
+@test "aptinstall and aptremove" {
   # skip
-  aptupgrade
+  aptinstall vim
+  if check_packages_install vim; then return 0; else return 1; fi
   [ "$status" -eq 0 ]
-}
-
-@test "aptclean" {
-  # skip
-  aptclean
-  [ "$status" -eq 0 ]
+  aptremove vim
+  if check_packages_install vim; then return 0; else return 1; fi
+  [ "$status" -eq 1 ]
 }
 
 @test "check_args-noargs" {
@@ -50,7 +45,7 @@ test-func(){
 }
 
 @test "check_args-args" {
-  if check_args "1" "2"; then return 0; else echo 1; fi
+  if check_args "1" "2"; then return 0; else return 1; fi
   [ "$status" -eq 0 ]
 }
 
@@ -82,29 +77,17 @@ test-func(){
   [ "$status" -eq 0 ]
 }
 
-@test "get_mimetype" {
-  skip "check later"
-  if [[ "$(get_mimetype src/install.sh)" = "text/x-shellscript" ]]; then  return 0; else return 1; fi
-  [ "$status" -eq 0 ]
-}
-
-@test "send_email" {
-  skip "check later"
-  if send_email "test" "$(config_get config_test.cfg email)" "Test" "Test" "config_test.cfg"; then  return 0; else echo 1; fi
-  [ "$status" -eq 0 ]
-}
-
 @test "get_timezones" {
   # skip "check later"
-  if [[ "$TZ" == "$(cat /etc/timezone)" ]]; then return 0; else return 1; fi
+  if [[ "$(get_timezones)" == "$(cat /etc/timezone)" ]]; then return 0; else return 1; fi
   [ "$status" -eq 0 ]
 }
 
 @test "check_command_exist" {
   # skip "check later"
-  check_command_exist ls
+  if check_command_exist ls; then return 0; else return 1; fi
   [ "$status" -eq 0 ]
-  check_command_exist afafafa
+  if check_command_exist afafafa; then return 0; else return 1; fi
   [ "$status" -eq 1 ]
 }
 
@@ -114,10 +97,4 @@ test-func(){
   [ "$status" -eq 0 ]
   check_port 1111
   [ "$status" -eq 1 ]
-}
-
-@test "check_debian" {
-  # skip "check later"
-  check_debian
-  [ "$status" -eq 0 ]
 }

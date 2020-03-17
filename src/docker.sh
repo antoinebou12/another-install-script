@@ -79,6 +79,9 @@ install_docker_extra() {
 
     curl -sSf https://moncho.github.io/dry/dryup.sh | exec_root sh
     exec_root "chmod 755 /usr/local/bin/dry"
+
+    sudo wget https://github.com/bcicen/ctop/releases/download/v0.7.3/ctop-0.7.3-linux-amd64 -O /usr/local/bin/ctop
+    sudo chmod +x /usr/local/bin/ctop
     print_line
 
     return 0
@@ -131,30 +134,51 @@ create_docker_user() {
         echo "The user $UDOCKER already exist"
     else
         exec_root "adduser --disabled-password --gecos '' $UDOCKER"
-        "$UDOCKER_PASSWORD" | exec_root passwd $UDOCKER --stdin
-        exec_root usermod -aG docker $UDOCKER
+        echo "$UDOCKER:$UDOCKER_PASSWORD" | exec_root chpasswd
+        exec_root usermod -aG docker "$UDOCKER"
         add_sudo "$UDOCKER"
         udocker_create_default_dir
-        echo "export UDOCKER=\"$UDOCKER\"" | tee -a /home/"$UDOCKER"/.bashrc
-        echo "export UDOCKER_USERID=\"$(id -u $UDOCKER)\"" | tee -a /home/"$UDOCKER"/.bashrc
-        echo "export UDOCKER_GROUPID=\"$(id -g $UDOCKER)\"" | tee -a /home/"$UDOCKER"/.bashrc
-        echo "export TZ=\"$(cat /etc/timezone)\"" | tee -a /home/"$UDOCKER"/.bashrc
-        echo "export UDOCKER_ROOT=\"/home/$UDOCKER/volumes\"" | tee -a /home/"$UDOCKER"/.bashrc
     fi
 
-    grep -qxF "UDOCKER=\"$UDOCKER\"" /etc/environment || echo "UDOCKER=\"$UDOCKER\"" >>/etc/environment
-    grep -qxF "UDOCKER_USERID=\"$(id -u $UDOCKER)\"" /etc/environment || echo "UDOCKER_USERID=\"$(id -u $UDOCKER)\"" >>/etc/environment
-    grep -qxF "UDOCKER_GROUPID=\"$(id -g $UDOCKER)\"" /etc/environment || echo "UDOCKER_GROUPID=\"$(id -g $UDOCKER)\"" >>/etc/environment
-    grep -qxF "TZ=\"$(cat /etc/timezone)\"" /etc/environment || echo "TZ=\"$(cat /etc/timezone)\"" >>/etc/environment
-    grep -qxF "UDOCKER_ROOT=\"/home/$UDOCKER/volumes\"" /etc/environment || echo "UDOCKER_ROOT=\"/home/$UDOCKER/volumes\"" >>/etc/environment
+    grep -qxF "UDOCKER=\"$UDOCKER\"" /etc/environment || echo "UDOCKER=\"$UDOCKER\"" | exec_root tee -a /etc/environment
+    grep -qxF "UDOCKER_ROOT=\"/home/$UDOCKER/volumes\"" /etc/environment || exec_root echo "UDOCKER_ROOT=\"/home/$UDOCKER/volumes\"" | exec_root tee -a /etc/environment
+    grep -qxF "UDOCKER_USERID=\"$(id -u $UDOCKER)\"" /etc/environment || exec_root echo "UDOCKER_USERID=\"$(id -u $UDOCKER)\"" | exec_root tee -a /etc/environment
+    grep -qxF "UDOCKER_GROUPID=\"$(id -g $UDOCKER)\"" /etc/environment || exec_root echo "UDOCKER_GROUPID=\"$(id -g $UDOCKER)\"" | exec_root tee -a /etc/environment
+    grep -qxF "TZ=\"$(cat /etc/timezone)\"" /etc/environment || exec_root echo "TZ=\"$(cat /etc/timezone)\"" | exec_root tee -a /etc/environment
 
+
+    print_line
+    return 0
+}
+
+# @description Remove docker user
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_docker_user() {
+    echo "Remove Docker User"
+    print_line
+    if read_config_yml system_udocker_username; then
+        local UDOCKER="$(read_config_yml system_udocker_username)"
+        local UDOCKER="${UDOCKER//\"/}"
+    else
+        local UDOCKER="udocker"
+    fi
+    if id -u "$UDOCKER" >/dev/null 2>&1; then
+        exec_root deluser --remove-home "$UDOCKER" >/dev/null
+        exec_root sed -i '/UDOCKER/d' /etc/environment
+    else
+        echo "The user $UDOCKER doesn't exist"
+    fi
     print_line
     return 0
 }
 
 # @description do as the docker user
 #
-# @args $1 command
+# @args $1 command or function with no argument
+# @args $1 function file location
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 do_as_udocker_user() {
@@ -162,21 +186,25 @@ do_as_udocker_user() {
     if read_config_yml system_udocker_username; then
         local UDOCKER="$(read_config_yml system_udocker_username)"
         local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER_PASSWORD="$(read_config_yml system_udocker_password)"
+        local UDOCKER_PASSWORD="${UDOCKER//\"/}"
     else
         local UDOCKER="udocker"
+        local UDOCKER_PASSWORD="udocker"
     fi
 
     if typeset -f "$1" >/dev/null; then
-        FUNC="$(declare -f "$1")"
-        echo "sudo -u $UDOCKER bash -c '$FUNC; $1'"
-        sudo -u "$UDOCKER" bash -c "$FUNC; $1"
+        export -f "$1"
+        echo "sudo su $UDOCKER -c \"bash -c $1\""
+        echo "$UDOCKER_PASSWORD" | su -l "$UDOCKER" -c "source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/$2";export -f $1; $1"
     else
-        local command="$*"
-        echo "sudo -u $UDOCKER $command"
-        sudo -u "$UDOCKER" "$command"
+        echo "su -l "$UDOCKER" $@"
+        echo "$UDOCKER_PASSWORD" | su -l "$UDOCKER" -c "$@"
     fi
     return 0
 }
+
+
 
 # @description create udocker dir
 #
@@ -192,7 +220,6 @@ udocker_create_dir() {
         exec_root chown udocker:udocker "$1"
     fi
 }
-
 
 # @description prune all the volumes and images
 #
