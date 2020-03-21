@@ -23,7 +23,7 @@ declare -a CONTAINER_NAME_MENU=()
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 import_all_sh() {
-	find "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/containers" -name "*.sh" -execdir chmod u+x {} +
+	find "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers" -name "*.sh" -execdir chmod u+x {} +
 	local names="$(find "$1" -name "$2")"
 
 	local SAVEIFS="$IFS"   # Save current IFS
@@ -57,6 +57,13 @@ manage_exec_containers_list() {
 	export UDOCKER_GROUPID
 	export TZ
 
+	if read_config_yml system_udocker_username; then
+        local UDOCKER="$(read_config_yml system_udocker_username)"
+        local UDOCKER="${UDOCKER//\"/}"
+    else
+        local UDOCKER="udocker"
+    fi
+
 	local FUNC_CREATE="create_docker_"
 	touch /tmp/containers.txt
 	containers=()
@@ -65,12 +72,12 @@ manage_exec_containers_list() {
 		echo "$container_name"
 		print_line
 		exec_root "$container_name" >>/tmp/containers.txt
-		source "$(dirname "${BASH_SOURCE[0]}")/containers/$container_name/$container_name.sh"
+		source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line
 	done
 
-	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/config/containers.txt
+	[ -d /home/"$UDOCKER"/ ] && cp /tmp/containers.txt /home/"$UDOCKER"/config/containers.txt
 
 	manage_firewall_ports_allow_list
 
@@ -95,7 +102,7 @@ remove_containers_list() {
 	for container_name in "${containers[@]}"; do
 		echo "$container_name"
 		print_line
-		source "$(dirname "${BASH_SOURCE[0]}")/containers/$container_name/$container_name.sh"
+		source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/$container_name/$container_name.sh"
 		"$FUNC_REMOVE""$container_name"
 		print_line
 	done
@@ -122,7 +129,7 @@ list_container() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 list_src_containers() {
-	echo ls -a1 "$(dirname "${BASH_SOURCE[0]}")/containers"
+	echo ls -a1 "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers"
 	return 0
 }
 
@@ -134,9 +141,21 @@ list_src_containers() {
 generate_container_menu() {
 	SAVEIFS="$IFS" # Save current IFS
 	IFS=,          # Change IFS to new line
+
+	if read_config_yml system_udocker_username; then
+        local UDOCKER="$(read_config_yml system_udocker_username)"
+        local UDOCKER="${UDOCKER//\"/}"
+    else
+        local UDOCKER="udocker"
+    fi
+	
+	if [[ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/containers.txt"  ]]; then 
+		python3 containers_list.py || python containers_list.py
+	fi
+	
 	while IFS=, read -r col1 col2; do
-		if [[ -f /home/udocker/containers.txt ]]; then
-			if grep -Fxq "$col1" /home/udocker/conf/containers.txt; then
+		if [[ -f /home/"$UDOCKER"/containers.txt ]]; then
+			if grep -Fxq "$col1" /home/"$UDOCKER"/conf/containers.txt; then
 				return 0
 			else
 				if [[ "$(read_config_yml "containers_""$col1""_implemented")" == "yes" ]]; then
@@ -152,19 +171,9 @@ generate_container_menu() {
 				CONTAINER_NAME_MENU+=("OFF")
 			fi
 		fi
-	done <"$(dirname "${BASH_SOURCE[0]}")/containers/containers.txt"
+	done < "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/containers.txt"
 	IFS="$SAVEIFS" # Restore IFS
 	return 0
-}
-
-# @description generate a real docker-compose.yml with the template.yml
-# and the env variable
-# @args $1 template
-# @args $2 output docker compose
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-generate_docker_compose_yml() {
-	envsubst <"$1" >"$2"
 }
 
 # @description stop all container
@@ -195,4 +204,14 @@ remove_containers_all() {
 
 	print_line
 	return 0
+}
+
+# @description generate a real docker-compose.yml with the template.yml
+# and the env variable
+# @args $1 template
+# @args $2 output docker compose
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+generate_docker_compose_yml() {
+	envsubst <"$1" >"$2"
 }

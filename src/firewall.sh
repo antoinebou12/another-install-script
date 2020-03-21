@@ -112,9 +112,16 @@ deny_port_in_firewall() {
 # @exitcode 1 On failure
 manage_firewall_ports_allow_list() {
 
+	if read_config_yml system_udocker_username; then
+        local UDOCKER="$(read_config_yml system_udocker_username)"
+        local UDOCKER="${UDOCKER//\"/}"
+    else
+        local UDOCKER="udocker"
+    fi
+
     containers=()
     if [[ -f /home/udocker/config/containers.txt ]]; then
-        mapfile -t containers <<<"$(cat /home/udocker/config/containers.txt)"
+        mapfile -t containers <<<"$(cat /home/$UDOCKER/config/containers.txt)"
     elif [[ -f /tmp/containers.txt ]]; then
         mapfile -t containers <<<"$(cat /tmp/containers.txt)"
     fi
@@ -124,11 +131,11 @@ manage_firewall_ports_allow_list() {
         parse_yml_array_ports "$container_name" >>/tmp/ports.txt
     done
 
-    [ -d /home/udocker/ ] && cp /tmp/ports.txt /home/udocker/config/ports.txt
+    [ -d /home/"$UDOCKER"/ ] && cp /tmp/ports.txt /home/"$UDOCKER"/config/ports.txt
 
     ports=()
     if [[ -f /home/udocker/config/ports.txt ]]; then
-        mapfile -t ports <<<"$(cat /home/udocker/config/ports.txt)"
+        mapfile -t ports <<<"$(cat /home/$UDOCKER/config/ports.txt)"
     elif [[ -f /tmp/ports.txt ]]; then
         mapfile -t ports <<<"$(cat /tmp/ports.txt)"
     fi
