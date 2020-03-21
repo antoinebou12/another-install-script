@@ -3,16 +3,16 @@
 # @file test.sh
 # @brief run bats test
 
-source "$(dirname "${BASH_SOURCE[0]}")/../src/utils.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../src/utils.sh"
 
-install_bats(){
+install_bats() {
     if [[ ! $(command -v bats) ]]; then
         aptinstall bats
     fi
     return 0
 }
 
-run_tests(){
+run_tests() {
     install_bats
     bats "bats/config.bats"
     bats "bats/containers.bats"

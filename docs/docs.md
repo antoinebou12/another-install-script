@@ -4,6 +4,66 @@ file containing the utils  for the project and other
 
 
 
+# uninstall.sh
+
+uninstall the project
+
+* [uninstall()](#uninstall)
+
+
+## uninstall()
+
+uninstall everything
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# coverage.sh
+
+file generate the code coverage for bats/bash
+
+* [install_kcov()](#installkcov)
+* [use_kcov()](#usekcov)
+* [bash_codecov()](#bashcodecov)
+
+
+## install_kcov()
+
+download the bin of kcov
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## use_kcov()
+
+generate coverage
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## bash_codecov()
+
+send to codecov coverage
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # test.sh
 
 run bats test
@@ -34,49 +94,9 @@ _Function has no arguments._
 
 use shellcheck on all bash script in project
 
-_Function has no arguments._
+### Arguments
 
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# coverage.sh
-
-file generate the code coverage for bats/bash
-
-* [use_kcov()](#usekcov)
-* [install_kcov()](#installkcov)
-* [bash_codecov()](#bashcodecov)
-
-
-## use_kcov()
-
-generate coverage
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## install_kcov()
-
-download the bin of kcov
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## bash_codecov()
-
-send to codecov coverage
-
-_Function has no arguments._
+* # @args $1
 
 ### Exit codes
 
@@ -114,24 +134,6 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
-# uninstall.sh
-
-uninstall the project
-
-* [uninstall()](#uninstall)
-
-
-## uninstall()
-
-uninstall everything
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 # menu.sh
 
 setup menu and logic
@@ -139,6 +141,8 @@ setup menu and logic
 * [password_dialog()](#passworddialog)
 * [install_setup_menu()](#installsetupmenu)
 * [add_container_setup_menu()](#addcontainersetupmenu)
+* [remove_container_menu()](#removecontainermenu)
+* [backup_setup_menu()](#backupsetupmenu)
 * [uninstall_setup_menu()](#uninstallsetupmenu)
 * [help_setup_menu()](#helpsetupmenu)
 * [main_setup_menu()](#mainsetupmenu)
@@ -165,6 +169,24 @@ whiptails install custom setup menu
 ## add_container_setup_menu()
 
 whiptails install add custom add container setup menu
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_container_menu()
+
+remove installed containers
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## backup_setup_menu()
+
+uninstall the user and all
 
 ### Exit codes
 
@@ -200,15 +222,2440 @@ _Function has no arguments._
 * **0**: If successfull.
 * **1**: On failure
 
+# config.sh
+
+file containing the utils  for the project and other
+
+* [parse_yml()](#parseyml)
+* [read_config_yml()](#readconfigyml)
+* [config_read_file()](#configreadfile)
+* [config_get()](#configget)
+* [parse_yml_array_ports()](#parseymlarrayports)
+* [parse_yml_array_web()](#parseymlarrayweb)
+* [container_url()](#containerurl)
+* [subdomain_container_url()](#subdomaincontainerurl)
+
+
+## parse_yml()
+
+Read YML file from Bash script
+https://gist.github.com/pkuczynski/8665367
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## read_config_yml()
+
+get value for yml
+
+### Arguments
+
+* # @args $1 variable path name
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## config_read_file()
+
+read config file
+https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
+
+### Arguments
+
+* **$1** (the): config fiel path
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## config_get()
+
+get config var from a spefic file
+https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
+
+### Arguments
+
+* **$1** (the): config file path
+* **$2** (the): config file var
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## parse_yml_array_ports()
+
+get config var array into a list ports
+
+### Arguments
+
+* **$1** (the): config file var array
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## parse_yml_array_web()
+
+get config var array into a list web
+
+### Arguments
+
+* **$1** (the): config file var array
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## container_url()
+
+generate the container url on the server
+
+### Arguments
+
+* **$1** (container): name
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## subdomain_container_url()
+
+generate the subdomain container url on the server
+
+### Arguments
+
+* **$1** (container): name
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# grocy.sh
+
+to install docker grocy
+
+* [create_docker_grocy()](#createdockergrocy)
+* [remove_docker_grocy()](#removedockergrocy)
+
+
+## create_docker_grocy()
+
+create docker grocy
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_grocy()
+
+remove docker grocy
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# plex.sh
+
+to install docker plex
+
+* [create_docker_plex()](#createdockerplex)
+* [remove_docker_plex()](#removedockerplex)
+
+
+## create_docker_plex()
+
+create docker plex
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_plex()
+
+remove docker plex
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# komga.sh
+
+to install docker komga
+
+* [create_docker_komga()](#createdockerkomga)
+* [remove_docker_komga()](#removedockerkomga)
+
+
+## create_docker_komga()
+
+create docker komga
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_komga()
+
+remove docker komga
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# freshrss.sh
+
+to install docker freshrss
+
+* [create_docker_freshrss()](#createdockerfreshrss)
+* [remove_docker_freshrss()](#removedockerfreshrss)
+
+
+## create_docker_freshrss()
+
+create docker freshrss
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_freshrss()
+
+remove docker freshrss
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# jupyterhub.sh
+
+to install docker jupyterhub
+
+* [create_docker_jupyterhub()](#createdockerjupyterhub)
+* [remove_docker_jupyterhub()](#removedockerjupyterhub)
+
+
+## create_docker_jupyterhub()
+
+create docker jupyterhub
+https://github.com/jupyterhub/jupyterhub-deploy-docker
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_jupyterhub()
+
+remove docker jupyterhub
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# grafana.sh
+
+to install docker grafana
+
+* [create_docker_grafana()](#createdockergrafana)
+* [remove_docker_grafana()](#removedockergrafana)
+
+
+## create_docker_grafana()
+
+create docker grafana
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_grafana()
+
+remove docker grafana
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# gitea.sh
+
+to install docker gitea
+
+* [create_docker_gitea()](#createdockergitea)
+* [remove_docker_gitea()](#removedockergitea)
+
+
+## create_docker_gitea()
+
+create docker gitea
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_gitea()
+
+remove docker gitea
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# radarr.sh
+
+to install docker radarr
+
+* [create_docker_radarr()](#createdockerradarr)
+* [remove_docker_radarr()](#removedockerradarr)
+
+
+## create_docker_radarr()
+
+create docker radarr
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_radarr()
+
+remove docker radarr
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# gitlab.sh
+
+to install docker gitlab
+
+* [create_docker_gitlab()](#createdockergitlab)
+* [remove_docker_gitlab()](#removedockergitlab)
+
+
+## create_docker_gitlab()
+
+create docker gitlab
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_gitlab()
+
+remove docker gitlab
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# monica.sh
+
+to install docker monica
+
+* [create_docker_monica()](#createdockermonica)
+* [remove_docker_monica()](#removedockermonica)
+
+
+## create_docker_monica()
+
+create docker monica
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_monica()
+
+remove docker monica
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# minecraft.sh
+
+to install docker minecraft
+
+* [create_docker_minecraft()](#createdockerminecraft)
+* [remove_docker_minecraft()](#removedockerminecraft)
+
+
+## create_docker_minecraft()
+
+create docker minecraft
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_minecraft()
+
+remove docker minecraft
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# keycloak.sh
+
+to install docker keycloak
+
+* [create_docker_keycloak()](#createdockerkeycloak)
+* [remove_docker_keycloak()](#removedockerkeycloak)
+
+
+## create_docker_keycloak()
+
+create docker keycloak
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_keycloak()
+
+remove docker keycloak
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# wallabag.sh
+
+to install docker wallabag
+
+* [create_docker_wallabag()](#createdockerwallabag)
+* [remove_docker_wallabag()](#removedockerwallabag)
+
+
+## create_docker_wallabag()
+
+create docker wallabag
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_wallabag()
+
+remove docker wallabag
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# statping.sh
+
+to install docker statping
+
+* [create_docker_statping()](#createdockerstatping)
+* [remove_docker_statping()](#removedockerstatping)
+
+
+## create_docker_statping()
+
+create docker statping
+https://github.com/hunterlong/statping/wiki/Docker
+
+### Arguments
+
+* # @args $1 PORT_WEB
+* # @args $2 PATH_STATPING
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_statping()
+
+remove docker statping
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# drawio.sh
+
+to install docker drawio
+
+* [create_docker_drawio()](#createdockerdrawio)
+* [remove_docker_drawio()](#removedockerdrawio)
+
+
+## create_docker_drawio()
+
+create docker drawio
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_drawio()
+
+remove docker drawio
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# piwigo.sh
+
+to install docker piwigo
+
+* [create_docker_piwigo()](#createdockerpiwigo)
+* [remove_docker_piwigo()](#removedockerpiwigo)
+
+
+## create_docker_piwigo()
+
+create docker piwigo
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_piwigo()
+
+remove docker piwigo
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# olaris.sh
+
+to install docker folaris
+
+* [create_docker_olaris()](#createdockerolaris)
+* [remove_docker_olaris()](#removedockerolaris)
+
+
+## create_docker_olaris()
+
+create docker olaris
+https://gitlab.com/olaris/olaris-server
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_olaris()
+
+remove docker olaris
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# teamspeak.sh
+
+to install docker teamspeak
+
+* [create_docker_teamspeak()](#createdockerteamspeak)
+* [remove_docker_teamspeak()](#removedockerteamspeak)
+
+
+## create_docker_teamspeak()
+
+create docker teamspeak
+https://github.com/recalbox/recalbox-docker-build
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_teamspeak()
+
+remove docker teamspeak
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# huginn.sh
+
+to install docker huginn
+
+* [create_docker_huginn()](#createdockerhuginn)
+* [remove_docker_huginn()](#removedockerhuginn)
+
+
+## create_docker_huginn()
+
+create docker huginn
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_huginn()
+
+remove docker huginn
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# nextcloud.sh
+
+to install docker nextcloud
+
+* [create_docker_nextcloud()](#createdockernextcloud)
+* [remove_docker_nextcloud()](#removedockernextcloud)
+
+
+## create_docker_nextcloud()
+
+create docker nextcloud
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_nextcloud()
+
+remove docker nextcloud
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# jellyfin.sh
+
+to install docker jellyfin
+
+* [create_docker_jellyfin()](#createdockerjellyfin)
+* [remove_docker_jellyfin()](#removedockerjellyfin)
+
+
+## create_docker_jellyfin()
+
+create docker jellyfin
+https://github.com/linuxserver/docker-jellyfin
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_jellyfin()
+
+remove docker jellyfin
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# lodestone.sh
+
+to install docker lodestone
+
+* [create_docker_lodestone()](#createdockerlodestone)
+* [remove_docker_lodestone()](#removedockerlodestone)
+
+
+## create_docker_lodestone()
+
+create docker lodestone
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_lodestone()
+
+remove docker lodestone
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# ansiblesemaphore.sh
+
+to install docker ansiblesemaphore
+
+* [create_docker_ansiblesemaphore()](#createdockeransiblesemaphore)
+* [remove_docker_ansiblesemaphore()](#removedockeransiblesemaphore)
+
+
+## create_docker_ansiblesemaphore()
+
+create docker ansiblesemaphore
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_ansiblesemaphore()
+
+remove docker ansiblesemaphore
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# mcmyadmin.sh
+
+to install docker mcmyadmin
+
+* [create_docker_mcmyadmin()](#createdockermcmyadmin)
+* [remove_docker_mcmyadmin()](#removedockermcmyadmin)
+
+
+## create_docker_mcmyadmin()
+
+create docker mcmyadmin
+https://github.com/linuxserver-archive/docker-mcmyadmin2
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_mcmyadmin()
+
+remove docker mcmyadmin
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# ubuntuxrdp.sh
+
+to install docker ubuntuxrdp
+
+* [create_docker_ubuntuxrdp()](#createdockerubuntuxrdp)
+* [remove_docker_ubuntuxrdp()](#removedockerubuntuxrdp)
+
+
+## create_docker_ubuntuxrdp()
+
+create docker ubuntuxrdp
+https://hub.docker.com/r/danielguerra/ubuntu-xrdp/
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_ubuntuxrdp()
+
+remove docker ubuntuxrdp
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# dashmachine.sh
+
+to install docker dashmachine
+
+* [create_docker_dashmachine()](#createdockerdashmachine)
+* [remove_docker_dashmachine()](#removedockerdashmachine)
+
+
+## create_docker_dashmachine()
+
+create docker dashmachine
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_dashmachine()
+
+remove docker dashmachine
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# lychee.sh
+
+to install docker lychee
+
+* [create_docker_lychee()](#createdockerlychee)
+* [remove_docker_lychee()](#removedockerlychee)
+
+
+## create_docker_lychee()
+
+create docker lychee
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_lychee()
+
+remove docker lychee
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# kdedocker.sh
+
+to install docker kdedocker
+
+* [create_docker_kdedocker()](#createdockerkdedocker)
+* [remove_docker_kdedocker()](#removedockerkdedocker)
+
+
+## create_docker_kdedocker()
+
+create docker kdedocker
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_kdedocker()
+
+remove docker kdedocker
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# meshcentral.sh
+
+to install docker meshcentral
+
+* [create_docker_meshcentral()](#createdockermeshcentral)
+* [remove_docker_meshcentral()](#removedockermeshcentral)
+
+
+## create_docker_meshcentral()
+
+create docker meshcentral
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_meshcentral()
+
+remove docker meshcentral
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# jenkins.sh
+
+to install docker jenkins
+
+* [create_docker_jenkins()](#createdockerjenkins)
+* [remove_docker_jenkins()](#removedockerjenkins)
+
+
+## create_docker_jenkins()
+
+create docker jenkins
+https://github.com/jenkinsci/docker
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_jenkins()
+
+remove docker jenkins
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# .template.sh
+
+to install docker .template
+
+
+
+# headphones.sh
+
+to install docker headphones
+
+* [create_docker_headphones()](#createdockerheadphones)
+* [remove_docker_headphones()](#removedockerheadphones)
+
+
+## create_docker_headphones()
+
+create docker headphones
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_headphones()
+
+remove docker headphones
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# airsonic.sh
+
+to install docker airsonic
+
+* [create_docker_airsonic()](#createdockerairsonic)
+* [remove_docker_airsonic()](#removedockerairsonic)
+
+
+## create_docker_airsonic()
+
+create docker airsonic
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_airsonic()
+
+remove docker airsonic
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# invidious.sh
+
+to install docker invidious
+
+* [create_docker_invidious()](#createdockerinvidious)
+* [remove_docker_invidious()](#removedockerinvidious)
+
+
+## create_docker_invidious()
+
+create docker invidious
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_invidious()
+
+remove docker invidious
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# firefly-iii.sh
+
+to install docker firefly-iii
+
+* [create_docker_firefly-iii()](#createdockerfirefly-iii)
+* [remove_docker_firefly-iii()](#removedockerfirefly-iii)
+
+
+## create_docker_firefly-iii()
+
+create docker firefly-iii
+https://github.com/firefly-iii/docker
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_firefly-iii()
+
+remove docker firefly-iii
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# heimdall.sh
+
+to install docker heimdall
+
+* [create_docker_heimdall()](#createdockerheimdall)
+* [remove_docker_heimdall()](#removedockerheimdall)
+
+
+## create_docker_heimdall()
+
+create docker heimdall
+https://hub.docker.com/r/linuxserver/heimdall/
+
+### Arguments
+
+* # @args $1 PATH_CONFIG
+* # @args $2 PORT_WEB
+* # @args $3 PORT_WEB_HTTPS
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_heimdall()
+
+remove docker heimdall
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# duplicati.sh
+
+to install docker duplicati
+
+* [create_docker_duplicati()](#createdockerduplicati)
+* [remove_docker_duplicati()](#removedockerduplicati)
+
+
+## create_docker_duplicati()
+
+create docker duplicati
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_duplicati()
+
+remove docker duplicati
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# tautulli.sh
+
+to install docker tautulli
+
+* [create_docker_tautulli()](#createdockertautulli)
+* [remove_docker_tautulli()](#removedockertautulli)
+
+
+## create_docker_tautulli()
+
+create docker tautulli
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_tautulli()
+
+remove docker tautulli
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# netdata.sh
+
+to install docker netdata
+
+* [create_docker_netdata()](#createdockernetdata)
+* [remove_docker_netdata()](#removedockernetdata)
+
+
+## create_docker_netdata()
+
+create docker netdata
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_netdata()
+
+remove docker netdata
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# cyberchef.sh
+
+to install docker cyberchef
+
+* [create_docker_cyberchef()](#createdockercyberchef)
+* [remove_docker_cyberchef()](#removedockercyberchef)
+
+
+## create_docker_cyberchef()
+
+create docker cyberchef
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_cyberchef()
+
+remove docker cyberchef
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# liberapay.sh
+
+to install docker liberapay
+
+* [create_docker_liberapay()](#createdockerliberapay)
+* [remove_docker_liberapay()](#removedockerliberapay)
+
+
+## create_docker_liberapay()
+
+create docker liberapay
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_liberapay()
+
+remove docker liberapay
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# cloudtorrent.sh
+
+to install docker cloudtorrent
+
+* [create_docker_cloudtorrent()](#createdockercloudtorrent)
+* [remove_docker_cloudtorrent()](#removedockercloudtorrent)
+
+
+## create_docker_cloudtorrent()
+
+create docker heimdall
+https://github.com/jpillora/cloud-torrent
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_cloudtorrent()
+
+remove docker cloud-torrent
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# paperless.sh
+
+to install docker paperless
+
+* [create_docker_paperless()](#createdockerpaperless)
+* [remove_docker_paperless()](#removedockerpaperless)
+
+
+## create_docker_paperless()
+
+create docker paperless
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_paperless()
+
+remove docker paperless
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# syncthing.sh
+
+to install docker syncthing
+
+* [create_docker_syncthing()](#createdockersyncthing)
+* [remove_docker_syncthing()](#removedockersyncthing)
+
+
+## create_docker_syncthing()
+
+create docker syncthing
+https://github.com/syncthing/syncthing
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_syncthing()
+
+remove docker syncthing
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# mailcow.sh
+
+to install dockermailcow
+
+* [create_docker_mailcow()](#createdockermailcow)
+* [remove_docker_mailcow()](#removedockermailcow)
+
+
+## create_docker_mailcow()
+
+create docker mailcow
+https://github.com/mailcow/mailcow-dockerized
+https://mailcow.github.io/mailcow-dockerized-docs/i_u_m_install/
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_mailcow()
+
+remove docker mailcow
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+
+
+
+# mylar.sh
+
+to install docker mylar
+
+* [create_docker_mylar()](#createdockermylar)
+* [remove_docker_mylar()](#removedockermylar)
+
+
+## create_docker_mylar()
+
+create docker mylar
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_mylar()
+
+remove docker mylar
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# privatebin.sh
+
+to install docker privatebin
+
+* [create_docker_privatebin()](#createdockerprivatebin)
+* [remove_docker_privatebin()](#removedockerprivatebin)
+
+
+## create_docker_privatebin()
+
+create docker privatebin
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_privatebin()
+
+remove docker privatebin
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# portainer.sh
+
+to install docker portainer
+
+* [create_docker_portainer()](#createdockerportainer)
+* [remove_docker_portainer()](#removedockerportainer)
+
+
+## create_docker_portainer()
+
+create docker portainer
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_portainer()
+
+remove docker portainer
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# libresignature.sh
+
+to install docker libresignature
+
+* [create_docker_libresignature()](#createdockerlibresignature)
+* [remove_docker_libresignage()](#removedockerlibresignage)
+
+
+## create_docker_libresignature()
+
+create docker libresignature
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_libresignage()
+
+remove docker libresignage
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# couchpotato.sh
+
+to install docker couchpotato
+
+* [create_docker_couchpotato()](#createdockercouchpotato)
+* [remove_docker_couchpotato()](#removedockercouchpotato)
+
+
+## create_docker_couchpotato()
+
+create docker couchpotato
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_couchpotato()
+
+remove docker couchpotato
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# qbittorrentvpn.sh
+
+to install docker qbittorrentvpn
+
+* [create_docker_qbittorrentvpn()](#createdockerqbittorrentvpn)
+* [remove_docker_qbittorrentvpn()](#removedockerqbittorrentvpn)
+
+
+## create_docker_qbittorrentvpn()
+
+create docker qbittorrentvpn
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_qbittorrentvpn()
+
+remove docker qbittorrentvpn
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# dailynotes.sh
+
+to install docker dailynotes
+
+* [create_docker_dailynotes()](#createdockerdailynotes)
+* [remove_docker_dailynotes()](#removedockerdailynotes)
+
+
+## create_docker_dailynotes()
+
+create docker dailynotes
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_dailynotes()
+
+remove docker dailynotes
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# jackett.sh
+
+to install docker jackett
+
+* [create_docker_jackett()](#createdockerjackett)
+* [remove_docker_jackett()](#removedockerjackett)
+
+
+## create_docker_jackett()
+
+create docker jackett
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_jackett()
+
+remove docker jackett
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# sonarr.sh
+
+to install docker sonarr
+
+* [create_docker_sonarr()](#createdockersonarr)
+* [remove_docker_sonarr()](#removedockersonarr)
+
+
+## create_docker_sonarr()
+
+create docker sonarr
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_sonarr()
+
+remove docker sonarr
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# template.sh
+
+to install docker template
+
+* [create_docker_cloud-torrent()](#createdockercloud-torrent)
+* [remove_docker_cloud-torrent()](#removedockercloud-torrent)
+* [help_docker_cloud-torrent()](#helpdockercloud-torrent)
+
+
+## create_docker_cloud-torrent()
+
+create docker template
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_cloud-torrent()
+
+remove docker .template
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## help_docker_cloud-torrent()
+
+help for the server and docker container
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# chevereto.sh
+
+to install docker chevereto
+
+* [create_docker_chevereto()](#createdockerchevereto)
+* [remove_docker_chevereto()](#removedockerchevereto)
+
+
+## create_docker_chevereto()
+
+create docker chevereto
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_chevereto()
+
+remove docker chevereto
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# code-server.sh
+
+to install docker code-server
+
+* [create_docker_code-server()](#createdockercode-server)
+* [remove_docker_bookstack()](#removedockerbookstack)
+
+
+## create_docker_code-server()
+
+create docker code-server
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_bookstack()
+
+remove docker bookstack
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# calibre.sh
+
+to install docker calibre
+
+* [create_docker_calibre()](#createdockercalibre)
+* [remove_docker_calibre()](#removedockercalibre)
+
+
+## create_docker_calibre()
+
+create docker calibre
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_calibre()
+
+remove docker calibre
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# jupyterlab.sh
+
+to install docker jupyterlab
+
+* [create_docker_jupyterlab()](#createdockerjupyterlab)
+* [remove_docker_jupyterlab()](#removedockerjupyterlab)
+
+
+## create_docker_jupyterlab()
+
+create docker jupyterlab
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_jupyterlab()
+
+remove docker jupyterlab
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# opentogethertube.sh
+
+to install docker opentogethertube
+
+* [create_docker_olaris()](#createdockerolaris)
+* [remove_docker_opentogethertube()](#removedockeropentogethertube)
+
+
+## create_docker_olaris()
+
+create docker opentogethertube
+https://github.com/antoinebou13/opentogethertube/tree/docker
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_opentogethertube()
+
+remove docker opentogethertube
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# openvpn.sh
+
+to install docker openvpn
+
+* [create_docker_openvpn()](#createdockeropenvpn)
+* [remove_docker_openvpn()](#removedockeropenvpn)
+
+
+## create_docker_openvpn()
+
+create docekr openvpn
+https://github.com/kylemanna/docker-openvpn
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_openvpn()
+
+remove docker openvpn
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# guacamole.sh
+
+to install docker guacamole
+
+* [create_docker_guacamole()](#createdockerguacamole)
+* [remove_docker_guacamole()](#removedockerguacamole)
+
+
+## create_docker_guacamole()
+
+create docker guacamole
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_guacamole()
+
+remove docker guacamole
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# mango.sh
+
+to install docker mango
+
+* [create_docker_mango()](#createdockermango)
+* [remove_docker_mango()](#removedockermango)
+
+
+## create_docker_mango()
+
+create docker mango
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_mango()
+
+remove docker mango
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# openstreamingplatform.sh
+
+to install docker openstreamingplatform
+
+* [create_docker_openstreamingplatform()](#createdockeropenstreamingplatform)
+* [remove_docker_openstreamingplatform()](#removedockeropenstreamingplatform)
+
+
+## create_docker_openstreamingplatform()
+
+create docker openstreamingplatform
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_openstreamingplatform()
+
+remove docker openstreamingplatform
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# traefik
+
+to install docker traefik
+
+* [create_docker_traefik()](#createdockertraefik)
+* [remove_docker_traefik()](#removedockertraefik)
+
+
+## create_docker_traefik()
+
+create docker traefik
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_traefik()
+
+remove docker traefik
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+
+
+
+# bookstack.sh
+
+to install docker bookstack
+
+* [create_docker_bookstack()](#createdockerbookstack)
+* [remove_docker_bookstack()](#removedockerbookstack)
+
+
+## create_docker_bookstack()
+
+create docker bookstack
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_bookstack()
+
+remove docker bookstack
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# htpcdownloadbox.sh
+
+to install docker htpcdownloadbox
+
+* [create_docker_htpcdownloadbox()](#createdockerhtpcdownloadbox)
+* [remove_docker_htpcdownloadbox()](#removedockerhtpcdownloadbox)
+
+
+## create_docker_htpcdownloadbox()
+
+create docker htpcdownloadbox
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_htpcdownloadbox()
+
+remove docker htpcdownloadbox
+link
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# shidori.sh
+
+to install docker shidori
+
+* [create_docker_go-shidori()](#createdockergo-shidori)
+* [remove_docker_go-shiori()](#removedockergo-shiori)
+
+
+## create_docker_go-shidori()
+
+create docker shidori
+not implemented yet
+https://github.com/MohammadAlHajj/shidori
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_go-shiori()
+
+remove docker go-shiori
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# neko.sh
+
+to install docker neko
+
+* [create_docker_neko()](#createdockerneko)
+* [remove_docker_neko()](#removedockerneko)
+
+
+## create_docker_neko()
+
+create docker neko
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_neko()
+
+remove docker neko
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# openldap.sh
+
+to install docker openldap
+
+* [create_docker_openldap()](#createdockeropenldap)
+* [remove_docker_openldap()](#removedockeropenldap)
+
+
+## create_docker_openldap()
+
+create docker openldap
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_openldap()
+
+remove docker openldap
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# linkd.sh
+
+to install docker linkd
+
+* [create_docker_linkd()](#createdockerlinkd)
+* [remove_docker_linkd()](#removedockerlinkd)
+
+
+## create_docker_linkd()
+
+create docker linkd
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_linkd()
+
+remove docker linkd
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# tdarr.sh
+
+to install docker tdarr
+
+* [create_docker_tdarr()](#createdockertdarr)
+* [remove_docker_tdarr()](#removedockertdarr)
+
+
+## create_docker_tdarr()
+
+create docker tdarr
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_tdarr()
+
+remove docker tdarr
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# bitwarden.sh
+
+to install docker bitwarden
+
+* [remove_docker_bitwarden()](#removedockerbitwarden)
+
+
+## remove_docker_bitwarden()
+
+remove docker bitwarden
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# deluge.sh
+
+to install docker deluge
+
+* [create_docker_deluge()](#createdockerdeluge)
+* [remove_docker_deluge()](#removedockerdeluge)
+
+
+## create_docker_deluge()
+
+create docker deluge
+not implemented yet
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_deluge()
+
+remove docker deluge
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# osjs.sh
+
+to install docker osjs
+
+* [create_docker_osjs()](#createdockerosjs)
+* [remove_docker_osjs()](#removedockerosjs)
+
+
+## create_docker_osjs()
+
+create docker osjs
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_osjs()
+
+remove docker osjs
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+
+
+
+# pyload.sh
+
+to install docker pyload
+
+* [create_docker_pyload()](#createdockerpyload)
+* [remove_docker_lychee()](#removedockerlychee)
+
+
+## create_docker_pyload()
+
+create docker syncthing
+https://github.com/linuxserver/docker-pyload/
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_lychee()
+
+remove docker lychee
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# medusa.sh
+
+to install docker medusa
+
+* [create_docker_medusa()](#createdockermedusa)
+* [remove_docker_medusa()](#removedockermedusa)
+
+
+## create_docker_medusa()
+
+create docker medusa
+https://github.com/linuxserver/docker-medusa
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_medusa()
+
+remove docker medusa
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# spiderfoot.sh
+
+to install docker spiderfoot
+
+* [create_docker_spiderfoot()](#createdockerspiderfoot)
+* [remove_docker_spiderfoot()](#removedockerspiderfoot)
+
+
+## create_docker_spiderfoot()
+
+create docker spiderfoot
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_docker_spiderfoot()
+
+remove docker spiderfoot
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# install.sh
+
+install my favirote packages for ubuntu18.04 and tested
+
+* [install_basic()](#installbasic)
+* [install_cockpit()](#installcockpit)
+* [install_ansible()](#installansible)
+* [install_emojify()](#installemojify)
+* [manage_exec_install_list()](#manageexecinstalllist)
+
+
+## install_basic()
+
+install the basic package to ubuntu I personnally like
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_cockpit()
+
+install the cockpit to web
+See your server in a web browser and perform system tasks with a mouse. It’s easy to start containers, administer storage, configure networks, and inspect logs.
+https://cockpit-project.org/
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_ansible()
+
+install ansible
+ https://www.ansible.com
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## install_emojify()
+
+install the cockpit to web
+
+https://github.com/mrowa44/emojify
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## manage_exec_install_list()
+
+manage install menu
+
+### Arguments
+
+* # @args $1 SETUP_INSTALL_MENU
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+# container.sh
+
+list of container and create/remove container and menu management
+
+* [import_all_sh()](#importallsh)
+* [manage_exec_containers_list()](#manageexeccontainerslist)
+* [remove_containers_list()](#removecontainerslist)
+* [list_container()](#listcontainer)
+* [list_src_containers()](#listsrccontainers)
+* [generate_container_menu()](#generatecontainermenu)
+* [generate_docker_compose_yml()](#generatedockercomposeyml)
+* [stop_containers_all()](#stopcontainersall)
+* [remove_containers_all()](#removecontainersall)
+
+
+## import_all_sh()
+
+import all the /containers/.../*.sh based on selected
+
+### Arguments
+
+* # @args $1 path of root of docker containers
+* # @args $2 name of the files
+* # @args $1
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## manage_exec_containers_list()
+
+manage exec containers sh in the containers src do_as_docker_user
+
+### Arguments
+
+* # @args $1 SETUP_CONTAINER_MENU
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_containers_list()
+
+remove containers
+
+### Arguments
+
+* # @args $1 SETUP_CONTAINER_MENU
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## list_container()
+
+list of the container
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## list_src_containers()
+
+show the list of src containers
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## generate_container_menu()
+
+create CONTAINER_NAME_MENU
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## generate_docker_compose_yml()
+
+generate a real docker-compose.yml with the template.yml
+and the env variable
+
+### Arguments
+
+* # @args $1 template
+* # @args $2 output docker compose
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## stop_containers_all()
+
+stop all container
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## remove_containers_all()
+
+stop all container
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
 # utils.sh
 
 file containing the utils  for the project and other
 
 * [print_line()](#printline)
+* [print_newline()](#printnewline)
 * [dist_check()](#distcheck)
 * [virt_check()](#virtcheck)
 * [checkWSL()](#checkwsl)
-* [check_debian()](#checkdebian)
 * [check_args()](#checkargs)
 * [check_root()](#checkroot)
 * [exec_root()](#execroot)
@@ -233,6 +2680,17 @@ file containing the utils  for the project and other
 ## print_line()
 
 print line ======
+
+_Function has no arguments._
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## print_newline()
+
+print newline
 
 _Function has no arguments._
 
@@ -268,17 +2726,6 @@ _Function has no arguments._
 ## checkWSL()
 
 check if the system is a WSL
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## check_debian()
-
-check if the os is debian or ubuntu
-
-_Function has no arguments._
 
 ### Exit codes
 
@@ -424,7 +2871,9 @@ _Function has no arguments._
 
 check if the port is used
 
-_Function has no arguments._
+### Arguments
+
+* # @args $1 command
 
 ### Exit codes
 
@@ -554,95 +3003,15 @@ add_subdomain
 * **0**: If successfull.
 * **1**: On failure
 
-# container.sh
+# backup.sh
 
-list of container and create/remove container and menu management
+backup list of fucntion
 
-* [import_all_sh()](#importallsh)
-* [manage_exec_containers_list()](#manageexeccontainerslist)
-* [list_container()](#listcontainer)
-* [list_src_containers()](#listsrccontainers)
-* [generate_container_menu()](#generatecontainermenu)
-* [generate_docker_compose_yml()](#generatedockercomposeyml)
 * [create_container_id_backup()](#createcontaineridbackup)
 * [create_container_name_backup()](#createcontainernamebackup)
+* [create_container_backup_all()](#createcontainerbackupall)
+* [full_backup_system()](#fullbackupsystem)
 
-
-## import_all_sh()
-
-import all the /containers/.../*.sh based on selected
-
-### Arguments
-
-* # @args $1 path of root of docker containers
-* # @args $2 name of the files
-* # @args $1
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## manage_exec_containers_list()
-
-manage exec containers sh in the containers src do_as_docker_user
-
-### Arguments
-
-* # @args $1 SETUP_CONTAINER_MENU
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## list_container()
-
-list of the container
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## list_src_containers()
-
-show the list of src containers
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## generate_container_menu()
-
-create CONTAINER_NAME_MENU
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## generate_docker_compose_yml()
-
-generate a real docker-compose.yml with the template.yml
-and the env variable
-
-### Arguments
-
-* # @args $1 template
-* # @args $2 output docker compose
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
 
 ## create_container_id_backup()
 
@@ -664,6 +3033,32 @@ create tar for running docker for a local backup
 ### Arguments
 
 * # @args $1 container container name
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## create_container_backup_all()
+
+make a backup of all the container
+
+### Arguments
+
+* # @args $# the backup of all the container names
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## full_backup_system()
+
+full backup of system
+
+### Arguments
+
+* # @args $1 location of the backup work with ssh
 
 ### Exit codes
 
@@ -783,2068 +3178,6 @@ https://8192.one/post/ssh_login_notification_signal/
 * **0**: If successfull.
 * **1**: On failure
 
-# code-server.sh
-
-to install docker code-server
-
-* [create_docker_code-server()](#createdockercode-server)
-* [remove_docker_bookstack()](#removedockerbookstack)
-
-
-## create_docker_code-server()
-
-create docker code-server
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_bookstack()
-
-remove docker bookstack
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# lychee.sh
-
-to install docker lychee
-
-* [create_docker_lychee()](#createdockerlychee)
-* [remove_docker_lychee()](#removedockerlychee)
-
-
-## create_docker_lychee()
-
-create docker lychee
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_lychee()
-
-remove docker lychee
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# lodestone.sh
-
-to install docker lodestone
-
-* [create_docker_lodestone()](#createdockerlodestone)
-* [remove_docker_lodestone()](#removedockerlodestone)
-
-
-## create_docker_lodestone()
-
-create docker lodestone
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_lodestone()
-
-remove docker lodestone
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# jackett.sh
-
-to install docker jackett
-
-* [create_docker_jackett()](#createdockerjackett)
-* [remove_docker_jackett()](#removedockerjackett)
-
-
-## create_docker_jackett()
-
-create docker jackett
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_jackett()
-
-remove docker jackett
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# netdata.sh
-
-to install docker netdata
-
-* [create_docker_netdata()](#createdockernetdata)
-* [remove_docker_netdata()](#removedockernetdata)
-
-
-## create_docker_netdata()
-
-create docker netdata
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_netdata()
-
-remove docker netdata
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# glances.sh
-
-to install docker glances
-
-* [create_docker_glances()](#createdockerglances)
-* [remove_docker_glances()](#removedockerglances)
-
-
-## create_docker_glances()
-
-create docker glances
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_glances()
-
-remove docker glances
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# jupyterhub.sh
-
-to install docker jupyterhub
-
-* [create_docker_jupyterhub()](#createdockerjupyterhub)
-* [remove_docker_jupyterhub()](#removedockerjupyterhub)
-
-
-## create_docker_jupyterhub()
-
-create docker jupyterhub
-https://github.com/jupyterhub/jupyterhub-deploy-docker
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_jupyterhub()
-
-remove docker jupyterhub
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# wallabag.sh
-
-to install docker wallabag
-
-* [create_docker_wallabag()](#createdockerwallabag)
-* [remove_docker_wallabag()](#removedockerwallabag)
-
-
-## create_docker_wallabag()
-
-create docker wallabag
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_wallabag()
-
-remove docker wallabag
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# wireguard.sh
-
-to install docker wireguard
-
-* [create_docker_wireguard()](#createdockerwireguard)
-* [remove_docker_wireguard()](#removedockerwireguard)
-
-
-## create_docker_wireguard()
-
-create docker ubuntuxrdp
-https://github.com/cmulk/wireguard-docker
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_wireguard()
-
-remove docker wireguard
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# guacamole.sh
-
-to install docker guacamole
-
-* [create_docker_guacamole()](#createdockerguacamole)
-* [remove_docker_guacamole()](#removedockerguacamole)
-
-
-## create_docker_guacamole()
-
-create docker guacamole
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_guacamole()
-
-remove docker guacamole
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# spiderfoot.sh
-
-to install docker spiderfoot
-
-* [create_docker_spiderfoot()](#createdockerspiderfoot)
-* [remove_docker_spiderfoot()](#removedockerspiderfoot)
-
-
-## create_docker_spiderfoot()
-
-create docker spiderfoot
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_spiderfoot()
-
-remove docker spiderfoot
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# radarr.sh
-
-to install docker radarr
-
-* [create_docker_radarr()](#createdockerradarr)
-* [remove_docker_radarr()](#removedockerradarr)
-
-
-## create_docker_radarr()
-
-create docker radarr
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_radarr()
-
-remove docker radarr
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-
-
-
-# bitwarden.sh
-
-to install docker bitwarden
-
-* [remove_docker_bitwarden()](#removedockerbitwarden)
-
-
-## remove_docker_bitwarden()
-
-remove docker bitwarden
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# graylog.sh
-
-to install docker graylog
-
-* [create_docker_graylog()](#createdockergraylog)
-* [remove_docker_graylog()](#removedockergraylog)
-
-
-## create_docker_graylog()
-
-create docker graylog
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_graylog()
-
-remove docker graylog
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# freshrss.sh
-
-to install docker freshrss
-
-* [create_docker_freshrss()](#createdockerfreshrss)
-* [remove_docker_freshrss()](#removedockerfreshrss)
-
-
-## create_docker_freshrss()
-
-create docker freshrss
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_freshrss()
-
-remove docker freshrss
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# qbittorrent-vpn.sh
-
-to install docker qbittorrent-vpn
-
-* [create_docker_qbittorrent-vpn()](#createdockerqbittorrent-vpn)
-* [remove_docker_qbittorrent-vpn()](#removedockerqbittorrent-vpn)
-
-
-## create_docker_qbittorrent-vpn()
-
-create docker qbittorrent-vpn
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_qbittorrent-vpn()
-
-remove docker qbittorrent-vpn
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# bookstack.sh
-
-to install docker bookstack
-
-* [create_docker_bookstack()](#createdockerbookstack)
-* [remove_docker_bookstack()](#removedockerbookstack)
-
-
-## create_docker_bookstack()
-
-create docker bookstack
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_bookstack()
-
-remove docker bookstack
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# komga.sh
-
-to install docker komga
-
-* [create_docker_komga()](#createdockerkomga)
-* [remove_docker_komga()](#removedockerkomga)
-
-
-## create_docker_komga()
-
-create docker komga
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_komga()
-
-remove docker komga
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# invidious.sh
-
-to install docker invidious
-
-* [create_docker_invidious()](#createdockerinvidious)
-* [remove_docker_invidious()](#removedockerinvidious)
-
-
-## create_docker_invidious()
-
-create docker invidious
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_invidious()
-
-remove docker invidious
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# tdarr.sh
-
-to install docker tdarr
-
-* [create_docker_tdarr()](#createdockertdarr)
-* [remove_docker_tdarr()](#removedockertdarr)
-
-
-## create_docker_tdarr()
-
-create docker tdarr
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_tdarr()
-
-remove docker tdarr
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# sonarr.sh
-
-to install docker sonarr
-
-* [create_docker_sonarr()](#createdockersonarr)
-* [remove_docker_sonarr()](#removedockersonarr)
-
-
-## create_docker_sonarr()
-
-create docker sonarr
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_sonarr()
-
-remove docker sonarr
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# duplicati.sh
-
-to install docker duplicati
-
-* [create_docker_duplicati()](#createdockerduplicati)
-* [remove_docker_duplicati()](#removedockerduplicati)
-
-
-## create_docker_duplicati()
-
-create docker duplicati
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_duplicati()
-
-remove docker duplicati
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# keycloak.sh
-
-to install docker keycloak
-
-* [create_docker_keycloak()](#createdockerkeycloak)
-* [remove_docker_keycloak()](#removedockerkeycloak)
-
-
-## create_docker_keycloak()
-
-create docker keycloak
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_keycloak()
-
-remove docker keycloak
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# jupyterlab.sh
-
-to install docker jupyterlab
-
-* [create_docker_jupyterlab()](#createdockerjupyterlab)
-* [remove_docker_jupyterlab()](#removedockerjupyterlab)
-
-
-## create_docker_jupyterlab()
-
-create docker jupyterlab
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_jupyterlab()
-
-remove docker jupyterlab
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# libresignature.sh
-
-to install docker libresignature
-
-* [create_docker_libresignature()](#createdockerlibresignature)
-* [remove_docker_libresignage()](#removedockerlibresignage)
-
-
-## create_docker_libresignature()
-
-create docker libresignature
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_libresignage()
-
-remove docker libresignage
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# cyberchef.sh
-
-to install docker cyberchef
-
-* [create_docker_cyberchef()](#createdockercyberchef)
-* [remove_docker_cyberchef()](#removedockercyberchef)
-
-
-## create_docker_cyberchef()
-
-create docker cyberchef
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_cyberchef()
-
-remove docker cyberchef
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# liberapay.sh
-
-to install docker liberapay
-
-* [create_docker_liberapay()](#createdockerliberapay)
-* [remove_docker_liberapay()](#removedockerliberapay)
-
-
-## create_docker_liberapay()
-
-create docker liberapay
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_liberapay()
-
-remove docker liberapay
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# ubuntuxrdp.sh
-
-to install docker ubuntuxrdp
-
-* [create_docker_ubuntuxrdp()](#createdockerubuntuxrdp)
-* [remove_docker_ubuntuxrdp()](#removedockerubuntuxrdp)
-
-
-## create_docker_ubuntuxrdp()
-
-create docker ubuntuxrdp
-https://hub.docker.com/r/danielguerra/ubuntu-xrdp/
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_ubuntuxrdp()
-
-remove docker ubuntuxrdp
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# piwigo.sh
-
-to install docker piwigo
-
-* [create_docker_piwigo()](#createdockerpiwigo)
-* [remove_docker_piwigo()](#removedockerpiwigo)
-
-
-## create_docker_piwigo()
-
-create docker piwigo
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_piwigo()
-
-remove docker piwigo
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# openvpn.sh
-
-to install docker openvpn
-
-* [create_docker_openvpn()](#createdockeropenvpn)
-* [remove_docker_openvpn()](#removedockeropenvpn)
-
-
-## create_docker_openvpn()
-
-create docekr openvpn
-https://github.com/kylemanna/docker-openvpn
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_openvpn()
-
-remove docker openvpn
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# deluge.sh
-
-to install docker deluge
-
-* [create_docker_deluge()](#createdockerdeluge)
-* [remove_docker_deluge()](#removedockerdeluge)
-
-
-## create_docker_deluge()
-
-create docker deluge
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_deluge()
-
-remove docker deluge
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# jellyfin.sh
-
-to install docker jellyfin
-
-* [create_docker_jellyfin()](#createdockerjellyfin)
-* [remove_docker_jellyfin()](#removedockerjellyfin)
-
-
-## create_docker_jellyfin()
-
-create docker jellyfin
-https://github.com/linuxserver/docker-jellyfin
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_jellyfin()
-
-remove docker jellyfin
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# heimdall.sh
-
-to install docker heimdall
-
-* [create_docker_heimdall()](#createdockerheimdall)
-* [remove_docker_heimdall()](#removedockerheimdall)
-
-
-## create_docker_heimdall()
-
-create docker heimdall
-https://hub.docker.com/r/linuxserver/heimdall/
-
-### Arguments
-
-* # @args $1 PATH_CONFIG
-* # @args $2 PORT_WEB
-* # @args $3 PORT_WEB_HTTPS
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_heimdall()
-
-remove docker heimdall
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# mcmyadmin.sh
-
-to install docker mcmyadmin
-
-* [create_docker_mcmyadmin()](#createdockermcmyadmin)
-* [remove_docker_mcmyadmin()](#removedockermcmyadmin)
-
-
-## create_docker_mcmyadmin()
-
-create docker mcmyadmin
-https://github.com/linuxserver-archive/docker-mcmyadmin2
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_mcmyadmin()
-
-remove docker mcmyadmin
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# shidori.sh
-
-to install docker shidori
-
-* [create_docker_go-shidori()](#createdockergo-shidori)
-* [remove_docker_go-shiori()](#removedockergo-shiori)
-
-
-## create_docker_go-shidori()
-
-create docker shidori
-not implemented yet
-https://github.com/MohammadAlHajj/shidori
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_go-shiori()
-
-remove docker go-shiori
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# calibre.sh
-
-to install docker calibre
-
-* [create_docker_calibre()](#createdockercalibre)
-* [remove_docker_calibre()](#removedockercalibre)
-
-
-## create_docker_calibre()
-
-create docker calibre
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_calibre()
-
-remove docker calibre
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-
-
-
-# template.sh
-
-to install docker template
-
-* [create_docker_cloud-torrent()](#createdockercloud-torrent)
-* [remove_docker_cloud-torrent()](#removedockercloud-torrent)
-* [help_docker_cloud-torrent()](#helpdockercloud-torrent)
-
-
-## create_docker_cloud-torrent()
-
-create docker template
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_cloud-torrent()
-
-remove docker .template
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## help_docker_cloud-torrent()
-
-help for the server and docker container
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# portainer.sh
-
-to install docker portainer
-
-* [create_docker_portainer()](#createdockerportainer)
-* [remove_docker_portainer()](#removedockerportainer)
-
-
-## create_docker_portainer()
-
-create docker portainer
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_portainer()
-
-remove docker portainer
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# tautulli.sh
-
-to install docker tautulli
-
-* [create_docker_tautulli()](#createdockertautulli)
-* [remove_docker_tautulli()](#removedockertautulli)
-
-
-## create_docker_tautulli()
-
-create docker tautulli
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_tautulli()
-
-remove docker tautulli
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# privatebin.sh
-
-to install docker privatebin
-
-* [create_docker_privatebin()](#createdockerprivatebin)
-* [remove_docker_privatebin()](#removedockerprivatebin)
-
-
-## create_docker_privatebin()
-
-create docker privatebin
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_privatebin()
-
-remove docker privatebin
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# medusa.sh
-
-to install docker medusa
-
-* [create_docker_medusa()](#createdockermedusa)
-* [remove_docker_medusa()](#removedockermedusa)
-
-
-## create_docker_medusa()
-
-create docker medusa
-https://github.com/linuxserver/docker-medusa
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_medusa()
-
-remove docker medusa
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# dailynotes.sh
-
-to install docker dailynotes
-
-* [create_docker_dailynotes()](#createdockerdailynotes)
-* [remove_docker_dailynotes()](#removedockerdailynotes)
-
-
-## create_docker_dailynotes()
-
-create docker dailynotes
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_dailynotes()
-
-remove docker dailynotes
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# airsonic.sh
-
-to install docker airsonic
-
-* [create_docker_airsonic()](#createdockerairsonic)
-* [remove_docker_airsonic()](#removedockerairsonic)
-
-
-## create_docker_airsonic()
-
-create docker airsonic
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_airsonic()
-
-remove docker airsonic
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# couchpotato.sh
-
-to install docker couchpotato
-
-* [create_docker_couchpotato()](#createdockercouchpotato)
-* [remove_docker_couchpotato()](#removedockercouchpotato)
-
-
-## create_docker_couchpotato()
-
-create docker couchpotato
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_couchpotato()
-
-remove docker couchpotato
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# minecraft.sh
-
-to install docker minecraft
-
-* [create_docker_minecraft()](#createdockerminecraft)
-* [remove_docker_minecraft()](#removedockerminecraft)
-
-
-## create_docker_minecraft()
-
-create docker minecraft
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_minecraft()
-
-remove docker minecraft
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# teamspeak.sh
-
-to install docker teamspeak
-
-* [create_docker_teamspeak()](#createdockerteamspeak)
-* [remove_docker_teamspeak()](#removedockerteamspeak)
-
-
-## create_docker_teamspeak()
-
-create docker teamspeak
-https://github.com/recalbox/recalbox-docker-build
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_teamspeak()
-
-remove docker teamspeak
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# firefly-iii.sh
-
-to install docker firefly-iii
-
-* [create_docker_firefly-iii()](#createdockerfirefly-iii)
-* [remove_docker_firefly-iii()](#removedockerfirefly-iii)
-
-
-## create_docker_firefly-iii()
-
-create docker firefly-iii
-https://github.com/firefly-iii/docker
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_firefly-iii()
-
-remove docker firefly-iii
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# syncthing.sh
-
-to install docker syncthing
-
-* [create_docker_syncthing()](#createdockersyncthing)
-* [remove_docker_syncthing()](#removedockersyncthing)
-
-
-## create_docker_syncthing()
-
-create docker syncthing
-https://github.com/syncthing/syncthing
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_syncthing()
-
-remove docker syncthing
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-
-
-
-# paperless.sh
-
-to install docker paperless
-
-* [create_docker_paperless()](#createdockerpaperless)
-* [remove_docker_paperless()](#removedockerpaperless)
-
-
-## create_docker_paperless()
-
-create docker paperless
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_paperless()
-
-remove docker paperless
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# drawio.sh
-
-to install docker drawio
-
-* [create_docker_drawio()](#createdockerdrawio)
-* [remove_docker_drawio()](#removedockerdrawio)
-
-
-## create_docker_drawio()
-
-create docker drawio
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_drawio()
-
-remove docker drawio
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# huginn.sh
-
-to install docker huginn
-
-* [create_docker_huginn()](#createdockerhuginn)
-* [remove_docker_huginn()](#removedockerhuginn)
-
-
-## create_docker_huginn()
-
-create docker huginn
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_huginn()
-
-remove docker huginn
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# opentogethertube.sh
-
-to install docker opentogethertube
-
-* [create_docker_olaris()](#createdockerolaris)
-* [remove_docker_opentogethertube()](#removedockeropentogethertube)
-
-
-## create_docker_olaris()
-
-create docker opentogethertube
-https://github.com/antoinebou13/opentogethertube/tree/docker
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_opentogethertube()
-
-remove docker opentogethertube
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# jenkins.sh
-
-to install docker jenkins
-
-* [create_docker_jenkins()](#createdockerjenkins)
-* [remove_docker_jenkins()](#removedockerjenkins)
-
-
-## create_docker_jenkins()
-
-create docker jenkins
-https://github.com/jenkinsci/docker
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_jenkins()
-
-remove docker jenkins
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# open-streaming-platform.sh
-
-to install docker open-streaming-platform
-
-* [create_docker_open-streaming-platform()](#createdockeropen-streaming-platform)
-* [remove_docker_open-streaming-platform()](#removedockeropen-streaming-platform)
-
-
-## create_docker_open-streaming-platform()
-
-create docker open-streaming-platform
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_open-streaming-platform()
-
-remove docker open-streaming-platform
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# mailcow.sh
-
-to install dockermailcow
-
-* [create_docker_mailcow()](#createdockermailcow)
-* [remove_docker_mailcow()](#removedockermailcow)
-
-
-## create_docker_mailcow()
-
-create docker mailcow
-https://github.com/mailcow/mailcow-dockerized
-https://mailcow.github.io/mailcow-dockerized-docs/i_u_m_install/
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_mailcow()
-
-remove docker mailcow
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# chevereto.sh
-
-to install docker chevereto
-
-* [create_docker_chevereto()](#createdockerchevereto)
-* [remove_docker_chevereto()](#removedockerchevereto)
-
-
-## create_docker_chevereto()
-
-create docker chevereto
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_chevereto()
-
-remove docker chevereto
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# .template.sh
-
-to install docker .template
-
-
-
-# mango.sh
-
-to install docker mango
-
-* [create_docker_mango()](#createdockermango)
-* [remove_docker_mango()](#removedockermango)
-
-
-## create_docker_mango()
-
-create docker mango
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_mango()
-
-remove docker mango
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-
-
-
-
-
-
-# pyload.sh
-
-to install docker pyload
-
-* [create_docker_pyload()](#createdockerpyload)
-* [remove_docker_lychee()](#removedockerlychee)
-
-
-## create_docker_pyload()
-
-create docker syncthing
-https://github.com/linuxserver/docker-pyload/
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_lychee()
-
-remove docker lychee
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# gitea.sh
-
-to install docker gitea
-
-* [create_docker_gitea()](#createdockergitea)
-* [remove_docker_gitea()](#removedockergitea)
-
-
-## create_docker_gitea()
-
-create docker gitea
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_gitea()
-
-remove docker gitea
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# mylar.sh
-
-to install docker mylar
-
-* [create_docker_mylar()](#createdockermylar)
-* [remove_docker_mylar()](#removedockermylar)
-
-
-## create_docker_mylar()
-
-create docker mylar
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_mylar()
-
-remove docker mylar
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# monica.sh
-
-to install docker monica
-
-* [create_docker_monica()](#createdockermonica)
-* [remove_docker_monica()](#removedockermonica)
-
-
-## create_docker_monica()
-
-create docker monica
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_monica()
-
-remove docker monica
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-
-
-# traefik
-
-to install docker traefik
-
-* [create_docker_traefik()](#createdockertraefik)
-* [remove_docker_traefik()](#removedockertraefik)
-
-
-## create_docker_traefik()
-
-create docker traefik
-link
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_traefik()
-
-remove docker traefik
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-
-
-
-# statping.sh
-
-to install docker statping
-
-* [create_docker_statping()](#createdockerstatping)
-* [remove_docker_statping()](#removedockerstatping)
-
-
-## create_docker_statping()
-
-create docker statping
-https://github.com/hunterlong/statping/wiki/Docker
-
-### Arguments
-
-* # @args $1 PORT_WEB
-* # @args $2 PATH_STATPING
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_statping()
-
-remove docker statping
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# openldap.sh
-
-to install docker openldap
-
-* [create_docker_openldap()](#createdockeropenldap)
-* [remove_docker_openldap()](#removedockeropenldap)
-
-
-## create_docker_openldap()
-
-create docker openldap
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_openldap()
-
-remove docker openldap
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# kdedocker.sh
-
-to install docker kdedocker
-
-* [create_docker_kdedocker()](#createdockerkdedocker)
-* [remove_docker_kdedocker()](#removedockerkdedocker)
-
-
-## create_docker_kdedocker()
-
-create docker kdedocker
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_kdedocker()
-
-remove docker kdedocker
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# nextcloud.sh
-
-to install docker nextcloud
-
-* [create_docker_nextcloud()](#createdockernextcloud)
-* [remove_docker_nextcloud()](#removedockernextcloud)
-
-
-## create_docker_nextcloud()
-
-create docker nextcloud
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_nextcloud()
-
-remove docker nextcloud
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# olaris.sh
-
-to install docker folaris
-
-* [create_docker_olaris()](#createdockerolaris)
-* [remove_docker_olaris()](#removedockerolaris)
-
-
-## create_docker_olaris()
-
-create docker olaris
-https://gitlab.com/olaris/olaris-server
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_olaris()
-
-remove docker olaris
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# plex.sh
-
-to install docker plex
-
-* [create_docker_plex()](#createdockerplex)
-* [remove_docker_plex()](#removedockerplex)
-
-
-## create_docker_plex()
-
-create docker plex
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_plex()
-
-remove docker plex
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# cloud-torrent.sh
-
-to install docker cloud-torrent
-
-* [create_docker_cloud-torrent()](#createdockercloud-torrent)
-* [remove_docker_cloud-torrent()](#removedockercloud-torrent)
-
-
-## create_docker_cloud-torrent()
-
-create docker heimdall
-https://github.com/jpillora/cloud-torrent
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_cloud-torrent()
-
-remove docker cloud-torrent
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# linkd.sh
-
-to install docker linkd
-
-* [create_docker_linkd()](#createdockerlinkd)
-* [remove_docker_linkd()](#removedockerlinkd)
-
-
-## create_docker_linkd()
-
-create docker linkd
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_linkd()
-
-remove docker linkd
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# gitlab.sh
-
-to install docker gitlab
-
-* [create_docker_gitlab()](#createdockergitlab)
-* [remove_docker_gitlab()](#removedockergitlab)
-
-
-## create_docker_gitlab()
-
-create docker gitlab
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_gitlab()
-
-remove docker gitlab
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# neko.sh
-
-to install docker neko
-
-* [create_docker_neko()](#createdockerneko)
-* [remove_docker_neko()](#removedockerneko)
-
-
-## create_docker_neko()
-
-create docker neko
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_neko()
-
-remove docker neko
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# grafana.sh
-
-to install docker grafana
-
-* [create_docker_grafana()](#createdockergrafana)
-* [remove_docker_grafana()](#removedockergrafana)
-
-
-## create_docker_grafana()
-
-create docker grafana
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_grafana()
-
-remove docker grafana
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# osjs.sh
-
-to install docker osjs
-
-* [create_docker_osjs()](#createdockerosjs)
-* [remove_docker_osjs()](#removedockerosjs)
-
-
-## create_docker_osjs()
-
-create docker osjs
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_osjs()
-
-remove docker osjs
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# headphones.sh
-
-to install docker headphones
-
-* [create_docker_headphones()](#createdockerheadphones)
-* [remove_docker_headphones()](#removedockerheadphones)
-
-
-## create_docker_headphones()
-
-create docker headphones
-not implemented yet
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_docker_headphones()
-
-remove docker headphones
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
 # docker.sh
 
 to install docker docker compose on ubuntu18.04
@@ -2852,14 +3185,11 @@ to install docker docker compose on ubuntu18.04
 * [install_docker()](#installdocker)
 * [install_docker_compose()](#installdockercompose)
 * [install_docker_extra()](#installdockerextra)
-* [prune_containers_volumes_all()](#prunecontainersvolumesall)
-* [stop_containers_all()](#stopcontainersall)
-* [remove_containers_all()](#removecontainersall)
 * [udocker_create_default_dir()](#udockercreatedefaultdir)
 * [create_docker_user()](#createdockeruser)
 * [do_as_udocker_user()](#doasudockeruser)
 * [udocker_create_dir()](#udockercreatedir)
-* [create_docker_backup_all()](#createdockerbackupall)
+* [prune_containers_volumes_all()](#prunecontainersvolumesall)
 
 
 ## install_docker()
@@ -2887,39 +3217,6 @@ _Function has no arguments._
 ## install_docker_extra()
 
 install the docker extra utils dry
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## prune_containers_volumes_all()
-
-prune all the volumes and images
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## stop_containers_all()
-
-stop all container
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## remove_containers_all()
-
-stop all container
 
 _Function has no arguments._
 
@@ -2976,91 +3273,11 @@ create udocker dir
 * **0**: If successfull.
 * **1**: On failure
 
-## create_docker_backup_all()
+## prune_containers_volumes_all()
 
-check if the port is used
-
-### Arguments
-
-* # @args $# the backup of all the container names
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-# config.sh
-
-file containing the utils  for the project and other
-
-* [parse_yml()](#parseyml)
-* [read_config_yml()](#readconfigyml)
-* [config_read_file()](#configreadfile)
-* [config_get()](#configget)
-* [parse_yml_array()](#parseymlarray)
-
-
-## parse_yml()
-
-Read YML file from Bash script
-https://gist.github.com/pkuczynski/8665367
+prune all the volumes and images
 
 _Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## read_config_yml()
-
-get value for yml
-
-### Arguments
-
-* # @args $1 variable path name
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## config_read_file()
-
-read config file
-https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
-
-### Arguments
-
-* **$1** (the): config fiel path
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## config_get()
-
-get config var from a spefic file
-https://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
-
-### Arguments
-
-* **$1** (the): config file path
-* **$2** (the): config file var
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## parse_yml_array()
-
-get config var array into a list
-
-### Arguments
-
-* **$1** (the): config file var array
 
 ### Exit codes
 
@@ -3078,6 +3295,7 @@ to manage the open port in the firewall
 * [allow_port_in_firewall()](#allowportinfirewall)
 * [deny_port_in_firewall()](#denyportinfirewall)
 * [manage_firewall_ports_allow_list()](#managefirewallportsallowlist)
+* [manage_firewall_ports_deny_list()](#managefirewallportsdenylist)
 
 
 ## install_firewall()
@@ -3154,82 +3372,62 @@ deny a port in the firewall
 
 manage allow port based on installed containers
 
-### Arguments
+### Exit codes
 
-* # @args $1 SETUP_CONTAINER_MENU
+* **0**: If successfull.
+* **1**: On failure
+
+## manage_firewall_ports_deny_list()
+
+manage deny port based on uninstalled containers
 
 ### Exit codes
 
 * **0**: If successfull.
 * **1**: On failure
 
-# install.sh
+# vagrant.sh
 
-install my favirote packages for ubuntu18.04 and tested
+vagrant utils functions
 
-* [install_basic()](#installbasic)
-* [install_cockpit()](#installcockpit)
-* [install_ansible()](#installansible)
-* [install_emojify()](#installemojify)
-* [manage_exec_install_list()](#manageexecinstalllist)
+* [vagrant_create()](#vagrantcreate)
+* [vagrant_ssh()](#vagrantssh)
+* [vagrant_ssh()](#vagrantssh)
 
 
-## install_basic()
+## vagrant_create()
 
-install the basic package to ubuntu I personnally like
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## install_cockpit()
-
-install the cockpit to web
-See your server in a web browser and perform system tasks with a mouse. It’s easy to start containers, administer storage, configure networks, and inspect logs.
-https://cockpit-project.org/
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## install_ansible()
-
-install ansible
- https://www.ansible.com
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## install_emojify()
-
-install the cockpit to web
-
-https://github.com/mrowa44/emojify
-
-_Function has no arguments._
-
-### Exit codes
-
-* **0**: If successfull.
-* **1**: On failure
-
-## manage_exec_install_list()
-
-manage install menu
+start_create linux vm
 
 ### Arguments
 
-* # @args $1 SETUP_INSTALL_MENU
+* # @args $1 vagrant box code name 
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## vagrant_ssh()
+
+destroy vagrant vm
+
+### Arguments
+
+* # @args $1 vagrant box code name 
+
+### Exit codes
+
+* **0**: If successfull.
+* **1**: On failure
+
+## vagrant_ssh()
+
+ssh vagrant vm
+
+### Arguments
+
+* # @args $1 vagrant box code name 
 
 ### Exit codes
 

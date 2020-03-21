@@ -1,30 +1,7 @@
+os: linux
+dist: bionic
+arch: amd64
 language: shell
-jobs:
-  include:
-    - os: linux
-      dist: trusty
-      arch: amd64
-    - os: linux
-      dist: trusty
-      arch: arm64
-    - os: linux
-      dist: xenial
-      arch: amd64
-    - os: linux
-      dist: xenial
-      arch: amd64
-    - os: linux
-      dist: bionic
-      arch: amd64
-    - os: linux
-      dist: bionic
-      arch: arm64
-
-cache:
-  directories:
-    - tests/bin
-    - tests/coverage
-
 addons:
   apt:
     update: true
@@ -43,20 +20,26 @@ addons:
       - bats
       - bc
       - ruby-full
+      - jq
+
+cache:
+  directories:
+    - tests/bin
+    - tests/coverage
 
 before_install:
   - gem install awesome_bot
-
+  
 script:
   - cd tests || exit 1
   - sudo bash linter.sh # linter shellcheck
-  # - sudo bash tests.sh # test
-  # - sudo bash coverage.sh # coverage kcov
+  - sudo bash tests.sh # test
+  - sudo bash coverage.sh # coverage kcov
   - cd .. || exit 1
   - cd docs/scripts || exit 1
   - bash generate_docs.sh ../docs.md # documentation shdoc
   - cd ../.. || exit 1
-  - awesome_bot README.md --allow-dupe --allow-redirect --allow-ssl --allow-timeout --allow 999,403,405,500,503,522
+  - awesome_bot README.md --allow-dupe --allow-redirect --allow-ssl --allow-timeout --allow 999,403,405,500,503,522 # check valid link
 
 notifications:
     email: false

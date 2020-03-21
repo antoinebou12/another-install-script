@@ -70,11 +70,11 @@ install_setup_menu() {
 
     declare -a SETUP_INSTALL_ITEMS=(
         "basic" "Basic packages install" "ON"
-        "docker" "install docker and docker-compose" "ON"
-        "docker_extra" "install dry utils for docker" "ON"
-        "cockpit" "Install Cockpit web server management" "ON"
-        "ansible" "Install Ansible systems automation" "ON"
-        "emojify" "Emoji in the terminal" "ON"
+        "docker" "Install docker and docker-compose" "ON"
+        "docker_extra" "Install dry and ctop for docker" "OFF"
+        "cockpit" "Install Cockpit web server management" "OFF"
+        "ansible" "Install Ansible systems automation" "OFF"
+        "emojify" "Emoji in the terminal" "OFF"
     )
 
     if [ $(tput lines) -lt 45 ]; then
@@ -129,12 +129,54 @@ add_container_setup_menu() {
     return 0
 }
 
+# @description remove installed containers
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_container_menu() {
+    generate_remove_container_menu
+    if [ $(tput lines) -lt 25 ]; then
+        local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 16))"
+    elif [ $(tput lines) -lt 35 ]; then
+        local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 12))"
+    elif [ $(tput lines) -lt 45 ]; then
+        local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 9))"
+    elif [ $(tput lines) -gt 50 ]; then
+        local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 6))"
+    else
+        local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 3))"
+    fi
+
+    REMOVE_CONTAINER_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${CONTAINER_INSTALLED_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
+
+    if [[ $? == 0 ]] && [[ ! -z "$REMOVE_CONTAINER_MENU" ]]; then
+        remove_containers_list "$REMOVE_CONTAINER_MENU"
+        return 0
+    else
+        echo "Error"
+        return 1
+    fi
+    return 0
+}
+
+
+
+# @description uninstall the user and all
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+backup_setup_menu() {
+    bash uninstall.sh
+    return 0
+}
+
 # @description uninstall the user and all
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 uninstall_setup_menu() {
     bash uninstall.sh
+    return 0
 }
 
 # @description show help for the setup script
@@ -152,35 +194,42 @@ help_setup_menu() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 main_setup_menu() {
+    if [[ $(read_config_yml system_bashmenu) == "yes" ]]; then
+        SETUP_MENU=$(whiptail --clear --title "Another Install Script" --menu --notags "" 20 78 12 -- \
+            "install" "Installation" \
+            "add_container" "Add Container" \
+            "remove_container" "Remove Container" \
+            "uninstall_all" "Uninstall" \
+            "backup" "Backup" \
+            "help" "Help" \
+            "exit" "Exit" \
+            3>&1 1>&2 2>&3)
 
-    SETUP_MENU=$(whiptail --clear --title "Another Install Script" --menu --notags "" 20 78 12 -- \
-        "install" "Installation" \
-        "add_container" "Add Container" \
-        "remove_container" "Remove Container" \
-        "uninstall_all" "Uninstall" \
-        "help" "Help" \
-        "exit" "Exit" \
-        3>&1 1>&2 2>&3)
-
-    case $SETUP_MENU in
-    "install")
-        install_setup_menu
-        ;;
-    "add_container")
-        add_container_setup_menu
-        ;;
-    "remove container")
-        remove_container_menu
-        ;;
-    "uninstall all")
-        uninstall_setup_menu
-        ;;
-    "help")
-        help_setup_menu
-        ;;
-    "exit")
-        exit 0
-        ;;
-    *) ;;
-    esac
+        case $SETUP_MENU in
+        "install")
+            install_setup_menu
+            ;;
+        "add_container")
+            add_container_setup_menu
+            ;;
+        "remove container")
+            remove_container_menu
+            ;;
+        "uninstall all")
+            uninstall_setup_menu
+            ;;
+        "backup")
+            backup_setup_menu
+            ;;
+        "help")
+            help_setup_menu
+            ;;
+        "exit")
+            exit 0
+            ;;
+        *) ;;
+        esac
+    else
+        echo "Error"
+    fi
 }

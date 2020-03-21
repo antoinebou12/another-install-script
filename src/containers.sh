@@ -23,13 +23,13 @@ declare -a CONTAINER_NAME_MENU=()
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 import_all_sh() {
-	find "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/containers" -name "*.sh" -execdir chmod u+x {} +
+	find "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers" -name "*.sh" -execdir chmod u+x {} +
 	local names="$(find "$1" -name "$2")"
 
-	local SAVEIFS="$IFS" # Save current IFS
-	local IFS=$'\n'      # Change IFS to new line
+	local SAVEIFS="$IFS"   # Save current IFS
+	local IFS=$'\n'        # Change IFS to new line
 	local names=("$names") # split to array $names
-	local IFS="$SAVEIFS" # Restore IFS
+	local IFS="$SAVEIFS"   # Restore IFS
 
 	for ((i = 0; i < ${#names[@]}; i++)); do
 		echo "$i: ${names[$i]}"
@@ -57,6 +57,13 @@ manage_exec_containers_list() {
 	export UDOCKER_GROUPID
 	export TZ
 
+	if read_config_yml system_udocker_username; then
+        local UDOCKER="$(read_config_yml system_udocker_username)"
+        local UDOCKER="${UDOCKER//\"/}"
+    else
+        local UDOCKER="udocker"
+    fi
+
 	local FUNC_CREATE="create_docker_"
 	touch /tmp/containers.txt
 	containers=()
@@ -65,15 +72,43 @@ manage_exec_containers_list() {
 		echo "$container_name"
 		print_line
 		exec_root "$container_name" >>/tmp/containers.txt
-		source "$(dirname "${BASH_SOURCE[0]}")/containers/$container_name/$container_name.sh"
+		source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line
 	done
 
-	[ -d /home/udocker/ ] && cp /tmp/containers.txt /home/udocker/config/containers.txt
+	[ -d /home/"$UDOCKER"/ ] && cp /tmp/containers.txt /home/"$UDOCKER"/config/containers.txt
 
 	manage_firewall_ports_allow_list
-	
+
+	return 0
+	print_line
+}
+
+
+# @description remove containers
+#
+# @args $1 SETUP_CONTAINER_MENU
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_containers_list() {
+	print_newline
+	echo "Containers"
+	print_line
+
+	local FUNC_REMOVE="remove_docker_"
+	containers=()
+	mapfile -t containers <<<"$1"
+	for container_name in "${containers[@]}"; do
+		echo "$container_name"
+		print_line
+		source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/$container_name/$container_name.sh"
+		"$FUNC_REMOVE""$container_name"
+		print_line
+	done
+
+	manage_firewall_ports_deny_list
+
 	return 0
 	print_line
 }
@@ -94,7 +129,7 @@ list_container() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 list_src_containers() {
-	echo ls -a1 "$(dirname "${BASH_SOURCE[0]}")/containers"
+	echo ls -a1 "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers"
 	return 0
 }
 
@@ -106,22 +141,68 @@ list_src_containers() {
 generate_container_menu() {
 	SAVEIFS="$IFS" # Save current IFS
 	IFS=,          # Change IFS to new line
+
+	if read_config_yml system_udocker_username; then
+        local UDOCKER="$(read_config_yml system_udocker_username)"
+        local UDOCKER="${UDOCKER//\"/}"
+    else
+        local UDOCKER="udocker"
+    fi
+	
+	if [[ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/containers.txt"  ]]; then 
+		python3 containers_list.py || python containers_list.py
+	fi
+	
 	while IFS=, read -r col1 col2; do
-		if [[ -f /home/udocker/containers.txt ]]; then
-			if grep -Fxq "$col1" /home/udocker/conf/containers.txt; then
-				echo 1
+		if [[ -f /home/"$UDOCKER"/containers.txt ]]; then
+			if grep -Fxq "$col1" /home/"$UDOCKER"/conf/containers.txt; then
+				return 0
 			else
+				if [[ "$(read_config_yml "containers_""$col1""_implemented")" == "yes" ]]; then
+					CONTAINER_NAME_MENU+=("$col1")
+					CONTAINER_NAME_MENU+=("$col2")
+					CONTAINER_NAME_MENU+=("OFF")
+				fi
+			fi
+		else
+			if [[ "$(read_config_yml "containers_""$col1""_implemented")" == "yes" ]]; then
 				CONTAINER_NAME_MENU+=("$col1")
 				CONTAINER_NAME_MENU+=("$col2")
 				CONTAINER_NAME_MENU+=("OFF")
 			fi
-		else
-			CONTAINER_NAME_MENU+=("$col1")
-			CONTAINER_NAME_MENU+=("$col2")
-			CONTAINER_NAME_MENU+=("OFF")
 		fi
-	done <"$(dirname "${BASH_SOURCE[0]}")/containers/containers.txt"
+	done < "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/containers.txt"
 	IFS="$SAVEIFS" # Restore IFS
+	return 0
+}
+
+# @description stop all container
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+stop_containers_all() {
+	echo "Stop all Docker Containers"
+	print_line
+
+	docker container stop "$(docker ps --filter "label=AIS.name" -aq)"
+
+	print_line
+	return 0
+}
+
+# @description stop all container
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+remove_containers_all() {
+	echo "Remove all Docker Containers"
+	print_line
+
+	docker rm "$(docker ps --filter "label=AIS.name" -aq)"
+
+	print_line
 	return 0
 }
 
@@ -133,49 +214,4 @@ generate_container_menu() {
 # @exitcode 1 On failure
 generate_docker_compose_yml() {
 	envsubst <"$1" >"$2"
-}
-
-# @description create tar for running docker for a local backup
-#
-# @args $1 container id
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-create_container_id_backup() {
-    echo "Create Docker Container Backup $1"
-    print_line
-
-    # shellcheck disable=SC2086,SC2143
-    if [ ! "$(docker ps -a | grep $1)" ]; then
-        container_name="$(docker ps | grep $1 | awk '{ print $2 }')"
-        date_id="$(date +'%m/%d/%Y_%s')"
-        container_backup="${container_name}_${date_id}_backup"
-        docker commit -p "$1" "$container_backup"
-        docker save -o /home/udocker/backups/"$container_backup".tar "$container_backup"
-    fi
-
-    print_line
-    return 0
-}
-
-# @description create tar for running docker for a local backup
-#
-# @args $1 container container name
-# @exitcode 0 If successfull.
-# @exitcode 1 On failure
-create_container_name_backup() {
-    echo "Create Docker Container Backup $1"
-    print_line
-
-    # shellcheck disable=SC2086,SC2143
-    if [ ! "$(docker ps -a | grep $1)" ]; then
-        # shellcheck disable=SC2086
-        container_name="$(docker ps | grep $1 | awk '{ print $1 }')"
-        date_id=$(date +'%m/%d/%Y_%s')
-        container_backup="${container_name}_${date_id}_backup"
-        docker commit -p "$1" "$container_backup"
-        docker save -o /home/udocker/backups/"$container_backup".tar "$container_backup"
-    fi
-
-    print_line
-    return 0
 }

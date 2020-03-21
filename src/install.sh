@@ -28,7 +28,7 @@ install_basic() {
 
     aptupdate
     aptupgrade
-    aptinstall nmap wget curl bats mlocate python python-pip python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools openssl firefox
+    aptinstall nmap wget curl bats mlocate python3 python3-pip wireless-tools wpasupplicant git cmake build-essential default-jre jq net-tools openssl firefox
 
     print_line
     return 0
@@ -46,7 +46,7 @@ install_cockpit() {
 
     aptupdate
     aptinstall cockpit cockpit-docker cockpit-machines cockpit-packagekit
-    if [[ "$(checkWSL arg)" != "0" ]]; then
+    if checkWSL && virt_check; then
         exec_root systemctl restart cockpit
     fi
 
@@ -68,7 +68,7 @@ install_ansible() {
     exec_root apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
     aptupdate
     aptinstall ansible software-properties-common
-    exec_root pip install ansible
+    exec_root pip3 install ansible
 
     print_line
     return 0

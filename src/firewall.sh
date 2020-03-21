@@ -17,7 +17,8 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 install_firewall() {
-    if check_packages_install ufw; then
+    if ! check_packages_install ufw; then
+    
         aptinstall ufw
         exec_root ufw default deny incoming
         exec_root ufw default allow outgoing
@@ -52,7 +53,9 @@ uninstall_firewall() {
 # @exitcode 1 On failure
 enable_firewall() {
     if check_packages_install ufw; then
-        exec_root ufw enable
+        if checkWSL && virt_check; then
+            exec_root ufw --force enable
+        fi
         return 0
     else
         return 1
@@ -66,7 +69,9 @@ enable_firewall() {
 # @exitcode 1 On failure
 disable_firewall() {
     if check_packages_install ufw; then
-        exec_root ufw disable
+        if checkWSL && virt_check; then
+            exec_root ufw disable
+        fi
         return 0
     else
         return 1
@@ -107,23 +112,30 @@ deny_port_in_firewall() {
 # @exitcode 1 On failure
 manage_firewall_ports_allow_list() {
 
+	if read_config_yml system_udocker_username; then
+        local UDOCKER="$(read_config_yml system_udocker_username)"
+        local UDOCKER="${UDOCKER//\"/}"
+    else
+        local UDOCKER="udocker"
+    fi
+
     containers=()
     if [[ -f /home/udocker/config/containers.txt ]]; then
-        mapfile -t containers <<<"$(cat /home/udocker/config/containers.txt)"
+        mapfile -t containers <<<"$(cat /home/$UDOCKER/config/containers.txt)"
     elif [[ -f /tmp/containers.txt ]]; then
         mapfile -t containers <<<"$(cat /tmp/containers.txt)"
     fi
 
     for container_name in "${containers[@]}"; do
-        echo "$(parse_yml_array_ports "$container_name")"
+        parse_yml_array_ports "$container_name"
         parse_yml_array_ports "$container_name" >>/tmp/ports.txt
     done
 
-    [ -d /home/udocker/ ] && cp /tmp/ports.txt /home/udocker/config/ports.txt
+    [ -d /home/"$UDOCKER"/ ] && cp /tmp/ports.txt /home/"$UDOCKER"/config/ports.txt
 
     ports=()
     if [[ -f /home/udocker/config/ports.txt ]]; then
-        mapfile -t ports <<<"$(cat /home/udocker/config/ports.txt)"
+        mapfile -t ports <<<"$(cat /home/$UDOCKER/config/ports.txt)"
     elif [[ -f /tmp/ports.txt ]]; then
         mapfile -t ports <<<"$(cat /tmp/ports.txt)"
     fi
@@ -133,13 +145,20 @@ manage_firewall_ports_allow_list() {
         allow_port_in_firewall "$port_numbers"
     done
 
-    if [[ "$(read_config_yml "system-config_firewall")" == "on" ]]; then
+    if [[ "$(read_config_yml "system_firewall")" == "yes" ]]; then
         install_firewall
-        enable_firewall
     else
         disable_firewall
     fi
 
     return 0
     print_line
+}
+
+# @description manage deny port based on uninstalled containers
+#
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+manage_firewall_ports_deny_list() {
+    return 1
 }
