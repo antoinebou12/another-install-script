@@ -20,31 +20,12 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 install_docker() {
     echo "Install Docker"
     print_line
-    # exec_root curl -sSL https://get.docker.com/ | CHANNEL=stable sh > /dev/null
     aptremove docker
     aptremove docker-engine
     aptremove docker.io
     aptremove containerd
     aptremove runc
-    aptinstall apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add -
-    exec_root apt-key fingerprint 0EBFCD88
-    if [[ "$(lsb_release -cs)" == "eoan" ]]; then
-        if [[ "$UID" -gt 0 ]]; then
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable" >/dev/null
-        else
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable" >/dev/null
-        fi
-    else
-        if [[ "$UID" -gt 0 ]]; then
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >/dev/null
-        else
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >/dev/null
-        fi
-    fi
-
-    aptupdate
-    aptinstall docker-ce docker-ce-cli containerd.io
+    curl https://get.docker.com/ | exec_root sh > /dev/null
     aptclean
 
     print_line
