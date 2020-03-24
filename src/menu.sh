@@ -69,11 +69,15 @@ password_dialog() {
 install_setup_menu() {
 
     declare -a SETUP_INSTALL_ITEMS=(
-        "basic" "Basic packages install" "ON"
-        "docker" "Install docker and docker-compose" "ON"
+        "basic" "Basic packages install (required)" "ON"
+        "docker" "Install docker and docker-compose (required)" "ON"
         "docker_extra" "Install dry and ctop for docker" "OFF"
         "cockpit" "Install Cockpit web server management" "OFF"
+        "kde" "Install KDE Desktop Environment" "OFF"
         "ansible" "Install Ansible systems automation" "OFF"
+        "dokku" "Install Dokku PaaS to your build applications" "OFF"
+        "lynk" "Install Lynk safely expose their TCP services to the internet" "OFF"
+        "vagrant" "Install Vagrant for VM utility" "OFF"
         "emojify" "Emoji in the terminal" "OFF"
     )
 

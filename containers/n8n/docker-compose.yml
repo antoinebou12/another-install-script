@@ -1,0 +1,43 @@
+  
+version: '3.7'
+services:
+  n8n_mongo:
+    image: mongo:4.0
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+      - MONGO_INITDB_ROOT_USERNAME=n8n_root
+      - MONGO_INITDB_ROOT_PASSWORD=n8n_root
+      - MONGO_INITDB_DATABASE=n8n
+      - MONGO_NON_ROOT_USERNAME=n8n
+      - MONGO_NON_ROOT_PASSWORD=n8n
+    volumes:
+      - ./init-data.sh:/docker-entrypoint-initdb.d/init-data.sh
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=n8n_db"
+
+  n8n:
+    image: n8nio/n8n
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+      - DB_TYPE=mongodb
+      - DB_MONGODB_CONNECTION_URL=mongodb://n8n:n8n@mongo:27017/n8n
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=n8n
+      - N8N_BASIC_AUTH_PASSWORD=n8n
+    ports:
+      - 5678:5678
+    links:
+      - mongo
+    volumes:
+      - ~/.n8n:/root/.n8n
+    command: /bin/sh -c "sleep 5; n8n start"
+    restart: unless-stopped
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=n8n"

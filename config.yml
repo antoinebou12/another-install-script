@@ -267,6 +267,30 @@ services:
       image: no
       implemented: yes
 
+    gogs:
+      name: gogs
+      ports: [10022,10080]
+      web: [":10080"]
+      volumes: yes
+      network: no
+      description: Gogs is a painless self-hosted Git service
+      short_description: Git service
+      sourcelink: https://github.com/gogs/gogs
+      image: no
+      implemented: yes
+
+    goshiori:
+      name: goshiori
+      ports: []
+      web: []
+      volumes: yes
+      network: no
+      description: Simple bookmark manager built with Go
+      short_description: Bookmark manager
+      sourcelink: https://github.com/goshiori/shiori
+      image: no
+      implemented: yes
+
     grafana:
       name: grafana
       ports: [8011]
@@ -346,7 +370,7 @@ services:
       volumes: yes
       network: no
       description: Create agents that monitor and act on your behalf
-      short_description: Create agents that monitor and act on your behalf
+      short_description: Create agents monitor and act
       sourcelink: https://github.com/huginn/huginn
       image: no
       implemented: yes
@@ -396,6 +420,18 @@ services:
       description: Open source automation server CI/CD
       short_description: Automation server
       sourcelink: https://jenkins.io/
+      image: no
+      implemented: yes
+
+    jitsi:
+      name: jitsi
+      ports: [80, 4444, 10000]
+      web: [":80"]
+      volumes: yes
+      network: no
+      description: Secure, Simple and Scalable Video Conference
+      short_description: Video Conference
+      sourcelink: https://github.com/jitsi/jitsi-meet/blob/master/doc/quick-install.md
       image: no
       implemented: yes
 
@@ -591,15 +627,39 @@ services:
       image: no
       implemented: yes
 
+    mumble:
+      name: mumble
+      ports: []
+      web: [":"]
+      volumes: yes
+      network: no
+      description: open source, low-latency, high quality voice chat software
+      short_description: voice chat
+      sourcelink: https://github.com/coppit/docker-mumble-server
+      image: no
+      implemented: yes
+
     mylar:
       name: mylar
       ports: [8090]
-      webport: [8090]
+      webport: [":8090"]
       volumes: yes
       network: no
       description: Automated Comic Book downloader
       short_description: Comic Book downloader
       sourcelink: https://github.com/monicahq/monica
+      image: no
+      implemented: yes
+
+    n8n:
+      name: n8n
+      ports: [5678]
+      webport: [":5678"]
+      volumes: yes
+      network: no
+      description: Workflow Automation Tool, Easily automate tasks across different services
+      short_description: Workflow Automation Tool
+      sourcelink: https://github.com/n8n-io/n8n
       image: no
       implemented: yes
 
@@ -627,10 +687,22 @@ services:
       image: no
       implemented: yes
 
+    newspipe:
+      name: newspipe
+      ports: [5003]
+      web: [":5003"]
+      volumes: no
+      network: no
+      description: Realtime performance monitoring, done right!
+      short_description: Realtime performance monitoring
+      sourcelink: https://github.com/netdata/netdata
+      image: no
+      implemented: yes
+
     nextcloud:
       name: nextcloud
       ports: [6889]
-      web: [6889]
+      web: [":6889"]
       volumes: yes
       network: no
       description: Onpremises file share and collaboration platform
@@ -639,15 +711,39 @@ services:
       image: no
       implemented: yes
 
-    olaris:
-      name: olaris
+    odoo:
+      name: odoo
       ports: [6889]
       web: [6889]
       volumes: yes
       network: no
+      description:  Open Source Apps for buiness management
+      short_description: Apps Buiness Management
+      sourcelink: https://github.com/odoo/odoo
+      image: no
+      implemented: yes
+
+    olaris:
+      name: olaris
+      ports: [8069]
+      web: [":8069"]
+      volumes: yes
+      network: no
       description: Media Manager and transcoding server
       short_description: Media manager and transcoding server
-      sourcelink: https://gitlab.com/olaris/olarisserver
+      sourcelink: https://github.com/odoo/odoo
+      image: no
+      implemented: yes
+
+    onlyoffice:
+      name: onlyoffice
+      ports: [80,5222]
+      web: [":80"]
+      volumes: yes
+      network: no
+      description: Collaborative system for managing documents, projects, customer relations and emails in one place
+      short_description: Collaborative system for projects
+      sourcelink: https://github.com/ONLYOFFICE/Docker-CommunityServer
       image: no
       implemented: yes
 
@@ -816,18 +912,6 @@ services:
       description: Open Source Team Communication, replace email, HipChat & Slack
       short_description: Simple chat server
       sourcelink: https://rocket.chat/docs/installation/dockercontainers/
-      image: no
-      implemented: yes
-
-    goshiori:
-      name: shiori
-      ports: []
-      web: []
-      volumes: yes
-      network: no
-      description: Simple bookmark manager built with Go
-      short_description: Bookmark manager
-      sourcelink: https://github.com/goshiori/shiori
       image: no
       implemented: yes
 

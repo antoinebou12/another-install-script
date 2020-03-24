@@ -1,4 +1,4 @@
-# another-install-script
+# Another Install Script
 
 ![GitHub top language](https://img.shields.io/github/languages/top/antoinebou13/another-install-script)
 [![Build Status](https://travis-ci.com/antoinebou13/another-install-script.svg?token=MUq69udyyqAR24bsXgRq&branch=master)](https://travis-ci.com/antoinebou13/another-install-script)
@@ -73,6 +73,8 @@ Some services/servers cannot be installed at the same time. Also more configurat
 - [dry](https://github.com/moncho/dry)
 - [ctop](https://github.com/bcicen/ctop)
 - [emojify](https://github.com/mrowa44/emojify)
+- [dokku](https://github.com/dokku/dokku)
+- [lynk](https://lynk.sh/docs)
 
 ## Project Structure
 
@@ -84,13 +86,12 @@ A simple project overview to with the explaination of each important file
 |       +-- ...
 |   +-- docs.md
 |   +-- generate_docs.md
-+-- etc
 |   +-- ...
-|   +-- containers
-|   |   +-- $container_name
-|   |   |   |    +-- docker-compose.yml
-|   |   |   |    +-- $container_name.sh
-|   |   |   |    +-- ...
++-- containers
+|   +-- $container_name
+|   |   |   +-- docker-compose.yml
+|   |   |   +-- $container_name.sh
+|   |   |   +-- ...
 +-- src
 |   +-- backup.sh
 |   +-- config.sh

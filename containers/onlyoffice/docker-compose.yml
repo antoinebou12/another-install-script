@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+    communityserver:
+        image: onlyoffice/communityserver
+        container_name: onlyoffice_communityserver
+        environment:
+            - PUID='${UDOCKER_USERID}'
+            - PGID='${UDOCKER_GROUPID}'
+            - TZ='${TZ}'
+            - DOCUMENT_SERVER_PORT_80_TCP_ADDR=onlyoffice_document
+        ports:
+            - '80:80'
+            - '5222:5222'
+        volumes:
+            - '/app/onlyoffice/CommunityServer/logs:/var/log/onlyoffice'
+            - '/app/onlyoffice/CommunityServer/data:/var/www/onlyoffice/Data'
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=onlyoffice"
+    documentserver:
+        image: onlyoffice/documentserver
+        container_name: onlyoffice_document
+        environment:
+            - PUID='${UDOCKER_USERID}'
+            - PGID='${UDOCKER_GROUPID}'
+            - TZ='${TZ}'
+        volumes:
+            - '/app/onlyoffice/DocumentServer/logs:/var/log/onlyoffice'
+            - '/app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data'
+            - '/app/onlyoffice/DocumentServer/fonts:/usr/share/fonts/truetype/custom'
+            - '/app/onlyoffice/DocumentServer/forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten'
+        restart: unless-stopped
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=onlyoffice_document"

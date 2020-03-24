@@ -57,11 +57,11 @@ manage_exec_containers_list() {
 	export UDOCKER_GROUPID
 	export TZ
 
-	if read_config_yml system_udocker_username; then
-        local UDOCKER="$(read_config_yml system_udocker_username)"
-        local UDOCKER="${UDOCKER//\"/}"
+	if read_config_yml system_udocker_username >/dev/null; then
+        local UDOCKER="$(read_config_yml system_udocker_username)" >/dev/null
+        local UDOCKER="${UDOCKER//\"/}" >/dev/null
     else
-        local UDOCKER="udocker"
+        local UDOCKER="udocker" >/dev/null
     fi
 
 	local FUNC_CREATE="create_docker_"
@@ -142,20 +142,21 @@ generate_container_menu() {
 	SAVEIFS="$IFS" # Save current IFS
 	IFS=,          # Change IFS to new line
 
-	if read_config_yml system_udocker_username; then
-        local UDOCKER="$(read_config_yml system_udocker_username)"
-        local UDOCKER="${UDOCKER//\"/}"
+	if read_config_yml system_udocker_username >/dev/null; then
+        local UDOCKER="$(read_config_yml system_udocker_username)" >/dev/null
+        local UDOCKER="${UDOCKER//\"/}" >/dev/null
     else
-        local UDOCKER="udocker"
+        local UDOCKER="udocker" >/dev/null
     fi
 	
-	if [[ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/containers.txt"  ]]; then 
-		python3 containers_list.py || python containers_list.py
+	if [[ ! -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/containers.txt"  ]]; then 
+		pip3 install pyyaml >/dev/null || pip install pyyaml >/dev/null
+		python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/containers_list.py" >/dev/null || python "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/containers_list.py" >/dev/null
 	fi
 	
 	while IFS=, read -r col1 col2; do
 		if [[ -f /home/"$UDOCKER"/containers.txt ]]; then
-			if grep -Fxq "$col1" /home/"$UDOCKER"/conf/containers.txt; then
+			if grep -Fxq "$col1" /home/"$UDOCKER"/conf/containers.txt >/dev/null; then
 				return 0
 			else
 				if [[ "$(read_config_yml "containers_""$col1""_implemented")" == "yes" ]]; then

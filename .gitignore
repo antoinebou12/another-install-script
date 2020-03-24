@@ -165,7 +165,7 @@ zsdoc/data
 
 #vargant 
 *.log
-*/.vagrant
+*.vagrant
 vm/vagrant/*/*.log
 vm/vagrant/*/*.vagrant
 

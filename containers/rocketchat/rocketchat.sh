@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
-# @file rocket.sh
-# @brief to install docker rocket
+# @file rocketchat.sh
+# @brief to install docker rocketchat
 
-# @description create docker rocket
+# @description create docker rocketchat
 # not implemented yet
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-create_docker_rocket() {
+create_docker_rocketchat() {
     echo "not implemented"
     return 0
 }
 
-# @description remove docker rocket
+# @description remove docker rocketchat
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-remove_docker_rocket() {
+remove_docker_rocketchat() {
     echo "not implemented"
     return 0
 }

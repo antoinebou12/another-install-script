@@ -1,0 +1,17 @@
+version: '3.6'
+services:
+    gogs:
+        image: gogs/gogs
+        container_name: gogs
+        environment:
+          - PUID='${UDOCKER_USERID}'
+          - PGID='${UDOCKER_GROUPID}'
+          - TZ='${TZ}'
+        ports:
+            - '10022:22'
+            - '10080:3000'
+        volumes:
+            - '/home/udocker/volumes/gogs:/data'
+        labels:
+            - "AIS.traefik=false"
+            - "AIS.name=.template"

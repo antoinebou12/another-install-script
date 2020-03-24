@@ -1,17 +1,15 @@
-version: "3.7"
+version: '3.7'
 services:
-  wg-access-server:
-    image: place1/wg-access-server
-    container_name: wg-access-server
-    cap_add:
-      - NET_ADMIN
+  wireguard-ui:
+    image: 'embarkstudios/wireguard-ui:latest'
+    privileged: true
+    entrypoint:
+        - /wireguard-ui
     volumes:
-      - "/home/udocker/volumes/wireguardweb/data:/data"
+        - '/home/udocker/volumes/wireguardweb:/data'
     ports:
-      - "7676:7676/tcp"
-      - "51820:51820/udp"
-    devices:
-      - "/dev/net/tun:/dev/net/tun"
+        - '8080:8080'
+        - '5555:5555'
     labels:
         - "AIS.traefik=false"
         - "AIS.name=wireguardweb"

@@ -34,6 +34,24 @@ install_basic() {
     return 0
 }
 
+
+# @description install Kde plasma Desktop Environment
+# https://kde.org/plasma-desktop
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+install_kde() {
+    echo "Install Kde"
+    print_line
+
+    aptupdate
+    aptinstall xorg openbox xauth || aptinstall  xorg-server xorg-xinit xf86-input-keyboard xorg-xkbcomp xorg-twm xorg-xclock xterm || aptinstall X Window system
+    aptinstall kubuntu-desktop || aptinstall kde || aptinstall @kde-desktop || aptinstall KDE
+
+    print_line
+    return 0
+}
+
 # @description install the cockpit to web
 # See your server in a web browser and perform system tasks with a mouse. It’s easy to start containers, administer storage, configure networks, and inspect logs.
 # https://cockpit-project.org/
@@ -83,14 +101,57 @@ install_ansible() {
 install_emojify() {
     echo "Install Emojify"
     print_line
-    if [[ "$UID" -gt 0 ]]; then
-        sudo sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
-    else
-        sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
-    fi
+    exec_root sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
     print_line
     return 0
 }
+
+# @description install the dokku
+#
+# https://github.com/dokku/dokku
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+install_dokku() {
+    echo "Install Dokku"
+    print_line
+    wget https://raw.githubusercontent.com/dokku/dokku/v0.20.0/bootstrap.sh
+    exec_root DOKKU_TAG=v0.20.0 bash bootstrap.sh
+    print_line
+    return 0
+}
+
+# @description install the lynk
+#
+# https://lynk.sh/docs
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+install_lynk() {
+    echo "Install lynk"
+    print_line
+    wget https://dl.loopholelabs.io/releases/lynk/linux/0.0.1-alpha/x64/lynk.zip -O lynk.zip && unzip lynk.zip && rm lynk.zip
+    exec_root mv lynk /usr/local/bin/lynk
+    print_line
+    return 0
+}
+
+# @description install the vagrant
+#
+# https://www.vagrantup.com/
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+install_vagrant() {
+    echo "Install vagrant"
+    print_line
+    wget https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_linux_amd64.zip -O vagrant.zip && unzip vagrant.zip && rm vagrant.zip
+    exec_root mv vagrant /usr/local/bin/vagrant
+    print_line
+    return 0
+}
+
+
 
 # @description manage install menu
 #

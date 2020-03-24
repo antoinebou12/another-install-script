@@ -1,0 +1,37 @@
+version: '3'
+services:
+  newspipe_db:
+    image: postgres:latest
+    hostname: newspipe_db
+    restart: always
+    environment:
+      - POSTGRES_USER=newspipe
+      - POSTGRES_PASSWORD=newspipe
+      - POSTGRES_DB=newspipe
+    expose:
+      - '5432'
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=newspip_db"
+
+  newspipe:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    tty: true
+    environment:
+        - Newspipe_CONFIG=/newspipe/instance/production.py
+    volumes:
+      - /udocker/:/newspipe:rw
+    ports:
+        - "5000:5000"
+    expose:
+      - '5000'
+    depends_on:
+      - db
+    command: "./wait-for-postgres.sh db"
+    labels:
+      - "AIS.traefik=false"
+      - "AIS.name=newspipe"
