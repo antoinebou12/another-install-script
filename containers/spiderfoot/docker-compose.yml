@@ -10,7 +10,6 @@ services:
       - TZ='${TZ}'
     ports:
       - "5001:5001"
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=spiderfoot"

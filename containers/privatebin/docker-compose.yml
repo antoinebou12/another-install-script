@@ -13,7 +13,6 @@ services:
         volumes:
             - '/home/udocker/volumes/privatebin/conf.php:/srv/cfg/conf.php:ro'
             - '/home/udocker/volumes/privatebin/data:/srv/data'
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=privatebin"

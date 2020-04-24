@@ -13,7 +13,6 @@ services:
             - '9987:9987/udp'
             - '10011:10011'
             - '30033:30033'
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=teamspeak"

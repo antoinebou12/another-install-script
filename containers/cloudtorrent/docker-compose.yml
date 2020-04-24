@@ -12,7 +12,6 @@ services:
             - /home/udocker/volumes/cloud-torrent/download:/downloads
         ports:
             - "6889:3000"
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=cloud-torrent"

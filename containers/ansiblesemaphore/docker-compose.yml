@@ -12,9 +12,8 @@ services:
       - "ansible-semaphore_db"
     depends_on:
       - "ansible-semaphore_db"
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-        - "AIS.traefik=false"
         - "AIS.name=ansible-semaphore"
 
  ansible-semaphore_gogs:
@@ -29,9 +28,8 @@ services:
       - "ansible-semaphore_db"
     depends_on:
       - "ansible-semaphore_db"
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-        - "AIS.traefik=false"
         - "AIS.name=ansible-semaphore_gogs"
     
 
@@ -44,7 +42,6 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     expose:
       - 3306
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-        - "AIS.traefik=false"
         - "AIS.name=ansible-semaphore_db"

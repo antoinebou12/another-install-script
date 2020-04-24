@@ -1,28 +1,24 @@
 version: "3.7"
 services:
   opentogethertube:
-    image: antoine13/opentogethertube
+    image: dyc3/opentogethertube
     container_name: opentogethertube
     environment:
-      - YOUTUBE_API_KEY=API_KEY_GOES_HERE # change me
-      # redis
       - REDIS_HOST=redis_db
       # postgres
       - POSTGRES_DB_USERNAME=opentogethertube
       - POSTGRES_DB_NAME=opentogethertube
       - POSTGRES_DB_HOST=postgres_db
       - POSTGRES_DB_PASSWORD=postgres
+    env_file: env/production.env # change the path to your env file
     ports:
-      - 6666:8080
+      - 8080:8080
     links:
       - redis_db
       - postgres_db
     depends_on:
       - redis_db
       - postgres_db
-    labels:
-      - "AIS.traefik=false"
-      - "AIS.name=opentogethertube"
 
   redis_db:
     container_name: opentogethertube_redis
@@ -32,11 +28,8 @@ services:
     expose:
       - 6379
     volumes:
-      - /home/udocker/opentogethertube/redis:/data
+      - db-data-redis:/data
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
-    labels:
-      - "AIS.traefik=false"
-      - "AIS.name=opentogethertube_redis"
 
   postgres_db:
     container_name: opentogethertube_postgres
@@ -51,8 +44,12 @@ services:
     expose:
       - 5432
     volumes:
-      - /home/udocker/opentogethertube/db:/var/lib/postgresql/data
+      - db-data-postgres:/var/lib/postgresql/data
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
-    labels:
-      - "AIS.traefik=false"
-      - "AIS.name=opentogethertube_postgres"
+
+# shared volume
+volumes:
+  db-data-redis:
+    driver: local
+  db-data-postgres:
+    driver: local

@@ -3,7 +3,7 @@ version: "3.5"
 services:
   web:
     image: ${docker_repo:-kopano}/kopano_web:${KWEB_VERSION:-latest}
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     ports:
       - "${CADDY:-2015}:2015"
       - "${HTTP:-80}:80"
@@ -31,7 +31,7 @@ services:
 
   ldap:
     image: ${docker_repo:-kopano}/${LDAP_CONTAINER:-kopano_ldap_demo}:${LDAP_VERSION:-latest}
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     container_name: ${COMPOSE_PROJECT_NAME}_ldap
     environment:
       - LDAP_ADMIN_PASSWORD=${LDAP_ADMIN_PASSWORD}
@@ -57,7 +57,7 @@ services:
 
   kopano_kustomer:
     image: kopano/kustomerd:${KUSTOMER_VERSION:-latest}
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     command: serve
     volumes:
       - /etc/machine-id:/etc/machine-id
@@ -67,7 +67,7 @@ services:
 
   kopano_grapi:
     image: ${docker_repo:-kopano}/kopano_core:${CORE_VERSION:-latest}
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     container_name: ${COMPOSE_PROJECT_NAME}_grapi
     volumes:
       - /etc/machine-id:/etc/machine-id
@@ -87,7 +87,7 @@ services:
 
   kopano_kapi:
     image: ${docker_repo:-kopano}/kopano_core:${CORE_VERSION:-latest}
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     container_name: ${COMPOSE_PROJECT_NAME}_kapi
     depends_on:
       - kopano_grapi
@@ -109,7 +109,7 @@ services:
 
   kopano_konnect:
     image: ${docker_repo:-kopano}/kopano_konnect:${KONNECT_VERSION:-latest}
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     depends_on:
       - kopano_ssl
       - web
@@ -146,7 +146,7 @@ services:
 
   kopano_kwmserver:
     image: ${docker_repo:-kopano}/kopano_kwmserver:${KWM_VERSION:-latest}
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     command: wrapper.sh
     depends_on:
       - kopano_kapi
@@ -168,7 +168,7 @@ services:
 
   kopano_meet:
     image: ${docker_repo:-kopano}/kopano_meet:${MEET_VERSION:-latest}
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     environment:
       - KCCONF_MEET_disableFullGAB=false
       - KCCONF_MEET_GRID_WEBAPP=no

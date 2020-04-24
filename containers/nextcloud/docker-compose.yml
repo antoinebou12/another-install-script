@@ -12,13 +12,12 @@ services:
       - 9321:80
     volumes:
       - /home/udocker/volumes/nextcloud:/var/www/html
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     depends_on: 
       - nextcloud_db
     links:
       - nextcloud_db
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=nextcloud"
 
   nextcloud_db:
@@ -35,7 +34,6 @@ services:
       - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/nextcloud/db:/config
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=nextcloud_db"

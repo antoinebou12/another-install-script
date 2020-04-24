@@ -3,11 +3,9 @@ services:
     mumble-server:
       image: coppit/mumble-server
       container_name: mumble
-      network_mode: host
       port:
        - '64738:64738'
       volumes:
           - '/home/udocker/volumes/mumble:/data'
       labels:
-      - "AIS.traefik=false"
       - "AIS.name=mumble"

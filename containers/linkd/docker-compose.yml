@@ -10,4 +10,4 @@ services:
       - TZ='${TZ}'
     ports:
       - "1336:1336"
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"

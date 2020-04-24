@@ -35,18 +35,18 @@ install_basic() {
 }
 
 
-# @description install Kde plasma Desktop Environment
+# @description install lxde-core Desktop Environment
 # https://kde.org/plasma-desktop
 # @noargs
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-install_kde() {
-    echo "Install Kde"
+install_lxde() {
+    echo "Install lxde"
     print_line
 
     aptupdate
-    aptinstall xorg openbox xauth || aptinstall  xorg-server xorg-xinit xf86-input-keyboard xorg-xkbcomp xorg-twm xorg-xclock xterm || aptinstall X Window system
-    aptinstall kubuntu-desktop || aptinstall kde || aptinstall @kde-desktop || aptinstall KDE
+    aptinstall xorg openbox xauth || aptinstall xorg-server xorg-xinit xf86-input-keyboard xorg-xkbcomp xorg-twm xorg-xclock xterm || aptinstall X Window system
+    aptinstall lxde-core
 
     print_line
     return 0
@@ -130,7 +130,7 @@ install_dokku() {
 install_lynk() {
     echo "Install lynk"
     print_line
-    wget https://dl.loopholelabs.io/releases/lynk/linux/0.0.1-alpha/x64/lynk.zip -O lynk.zip && unzip lynk.zip && rm lynk.zip
+    curl https://dl.loopholelabs.io/releases/lynk/linux/0.0.1-alpha/x64/lynk.zip -o /tmp/lynk.zip && unzip /tmp/lynk.zip && rm -rf /tmp/lynk.zip
     exec_root mv lynk /usr/local/bin/lynk
     print_line
     return 0
@@ -145,7 +145,7 @@ install_lynk() {
 install_vagrant() {
     echo "Install vagrant"
     print_line
-    wget https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_linux_amd64.zip -O vagrant.zip && unzip vagrant.zip && rm vagrant.zip
+    curl https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_linux_amd64.zip -o /tmp/vagrant.zip && unzip /tmp/vagrant.zip && rm -rf /tmp/vagrant.zip
     exec_root mv vagrant /usr/local/bin/vagrant
     print_line
     return 0

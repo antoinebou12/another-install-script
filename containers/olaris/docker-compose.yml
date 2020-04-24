@@ -14,7 +14,7 @@ services:
             - /home/udocker/volumes/olaris:/var/media
             - /home/udocker/volumes/olaris/config:/home/olaris/.config/olaris
             - /home/udocker/volumes/olaris/config/rclone:/home/olaris/.config/rclone
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
+            
             - "AIS.name=olaris"

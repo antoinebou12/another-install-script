@@ -14,7 +14,6 @@ services:
     ports:
       - 8053:8000
       - 7227:7227 #optional
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=pyload"

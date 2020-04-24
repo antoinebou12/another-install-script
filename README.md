@@ -49,7 +49,7 @@ Go to the <a href="https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-HfnRhw
 
 Some services/servers cannot be installed at the same time. Also more configuration needed for certain services/servers
 
-## List of other installed program
+## List of other installed program that you can chose to install 
 
 - build-essential
 - git
@@ -61,6 +61,7 @@ Some services/servers cannot be installed at the same time. Also more configurat
 - jq
 - net-tools
 - firefox
+- lxde
 - [vim](https://www.vim.org/)
 - [snapd](https://snapcraft.io/)
 - [nmap](https://nmap.org/)

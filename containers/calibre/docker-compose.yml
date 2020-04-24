@@ -13,7 +13,6 @@ services:
     ports:
       - 8001:8080
       - 8002:8081
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=calibre"

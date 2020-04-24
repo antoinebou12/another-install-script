@@ -14,9 +14,9 @@ services:
         volumes:
             - '/app/onlyoffice/CommunityServer/logs:/var/log/onlyoffice'
             - '/app/onlyoffice/CommunityServer/data:/var/www/onlyoffice/Data'
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
+            
             - "AIS.name=onlyoffice"
     documentserver:
         image: onlyoffice/documentserver
@@ -30,7 +30,7 @@ services:
             - '/app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data'
             - '/app/onlyoffice/DocumentServer/fonts:/usr/share/fonts/truetype/custom'
             - '/app/onlyoffice/DocumentServer/forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten'
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
+            
             - "AIS.name=onlyoffice_document"

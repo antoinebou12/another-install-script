@@ -15,7 +15,6 @@ services:
       - /home/udocker/volumes/couchpotato/movies:/movies
     ports:
       - 5050:5050
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-        - "AIS.traefik=false"
         - "AIS.name=couchpotato"

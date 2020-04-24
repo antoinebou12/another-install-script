@@ -15,7 +15,6 @@ services:
       - /home/udocker/volumes//tvseries:/tv
       - /home/udocker/volumes//movies:/movies
       - /home/udocker/volumes//plex/transcode:/transcode
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=plex"

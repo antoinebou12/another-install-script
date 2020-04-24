@@ -1,13 +1,12 @@
 $script = <<-SCRIPT
 yum check-update -y
 yum install git
-git clone https://github.com/antoinebou13/another-install-script
 SCRIPT
 
 Vagrant.configure("2") do |config|
     config.vm.box = "generic/rhel7"
     config.vm.provision "shell", inline: $script
-    config.ssh.forward_agent = true
+    # config.ssh.forward_agent = true
     config.ssh.forward_x11 = true
   
     config.vm.provider "virtualbox" do |v|

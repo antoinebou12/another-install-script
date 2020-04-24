@@ -13,7 +13,6 @@ services:
     volumes:
       - ./docker/postgres/data:/var/lib/postgresql/data
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=newspip_db"
 
   newspipe:
@@ -33,5 +32,4 @@ services:
       - db
     command: "./wait-for-postgres.sh db"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=newspipe"

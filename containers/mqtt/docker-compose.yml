@@ -12,7 +12,7 @@ services:
             - /home/udocker/volumes/mqtt/config:/mosquitto/config
             - /home/udocker/volumes/mqtt/data:/mosquitto/data
             - /home/udocker/volumes/mqtt/log:/mosquitto/log
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
+            
             - "AIS.name=mqtt"

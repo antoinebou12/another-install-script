@@ -27,9 +27,8 @@ services:
       - mongo
     ports:
       - 8056:8056
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=rocketchat"
 
   mongo:
@@ -44,9 +43,8 @@ services:
       - /home/udocker/volumes/rocket/db:/data/db
       - /home/udocker/volumes/rocket/dump:/dump
     command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=rocketchat_db"
 
   mongo-init-replica:
@@ -71,7 +69,6 @@ services:
     depends_on:
       - mongo
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=rocketchat_db_replica"
 
   hubot:
@@ -94,7 +91,6 @@ services:
       - /home/udocker/volumes/rocket/scripts:/home/hubot/scripts
     ports:
       - 3001:8080
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=rocketchat_hubot"

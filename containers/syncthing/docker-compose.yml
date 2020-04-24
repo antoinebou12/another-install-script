@@ -13,7 +13,6 @@ services:
             - '22000:22000'
         volumes:
             - '/home/udocker/volumes/syncthing:/var/syncthing'
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=udocker"

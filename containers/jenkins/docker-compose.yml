@@ -13,7 +13,6 @@ services:
             - 50000:50000
         volumes:
             - /home/udocker/volumes/jenkins:/var/jenkins_home
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=jenkins"

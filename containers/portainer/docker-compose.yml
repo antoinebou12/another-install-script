@@ -13,8 +13,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/udocker/volumes/portainer/data:/data
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=portainer"
 

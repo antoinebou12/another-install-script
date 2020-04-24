@@ -13,4 +13,4 @@ services:
     - /home/udocker/volumes/mylar/downloads:/downloads
   ports:
     - 8090:8090
-  restart: unless-stopped
+  restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"

@@ -12,9 +12,8 @@ services:
       - TZ='${TZ}'
     volumes:
       - postgresdata:/var/lib/postgresql/data
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=invidious_db"   
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
@@ -32,9 +31,8 @@ services:
       - 8014:3000
     depends_on:
       - postgres
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=invidious"    
 
 volumes:

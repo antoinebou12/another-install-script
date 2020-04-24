@@ -54,7 +54,6 @@ services:
       - nginx-proxy
     restart: always
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=nginx_recipes"
 
 networks:

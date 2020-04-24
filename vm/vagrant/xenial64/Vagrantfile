@@ -1,18 +1,18 @@
 $script = <<-SCRIPT
 apt-get update -y
 apt-get install -y git
-git clone https://github.com/antoinebou13/another-install-script
 SCRIPT
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.provision "shell", inline: $script
-  config.ssh.forward_agent = true
+  # config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
 
   config.vm.provider "virtualbox" do |v|
     v.name = "xenial64_another-install-script"
     config.vm.box_version = "20200320.0.0"
+    v.customize [ "modifyvm", :id, "--uartmode1", "file", File.join("C:/Users/Antoine/", "ubuntu-xenial-16.04-cloudimg-console.log") ]
     config.vm.synced_folder ".", "/vagrant", disabled: true
     v.memory = 4096
     v.cpus = 2

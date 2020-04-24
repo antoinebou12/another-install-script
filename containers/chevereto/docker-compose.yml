@@ -16,7 +16,7 @@ services:
       - TZ='${TZ}'
     expose:
       - 3306
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
 
   chevereto:
     links:
@@ -39,7 +39,7 @@ services:
       - /home/udocker/volumes/chevereto:/var/www/html/images:rw
     ports:
       - 8999:80
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
 
 volumes:
   database:

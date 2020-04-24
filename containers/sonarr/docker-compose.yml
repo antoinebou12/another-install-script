@@ -15,7 +15,6 @@ services:
             - /home/udocker/volumes/sonarr/config:/config
             - /home/udocker/volumes/sonarr/tv:/tv
             - /home/udocker/volumes/sonarr/downloads:/downloads
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=sonarr"

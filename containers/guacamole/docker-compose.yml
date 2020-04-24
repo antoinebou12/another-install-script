@@ -12,7 +12,6 @@ services:
             - 8012:8080
         volumes:
             - /home/udocker/volumes/guacamole/config:/configoznu/guacamole
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=guacamole"       

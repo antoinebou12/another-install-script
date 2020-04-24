@@ -13,12 +13,12 @@ services:
     ports:
       - 8112:8112 # port for deluge web UI to be reachable from local network
     command: '-f "" -r 192.168.1.0/24' # enable firewall and route local network traffic
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
 
   deluge:
     container_name: deluge
     image: linuxserver/deluge:latest
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     network_mode: service:vpn # run on the vpn network
     environment:
       - PUID='${UDOCKER_USERID}'
@@ -31,7 +31,7 @@ services:
   jackett:
     container_name: jackett
     image: linuxserver/jackett:latest
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     network_mode: host
     environment:
       - PUID='${UDOCKER_USERID}'
@@ -45,7 +45,7 @@ services:
   nzbget:
     container_name: nzbget
     image: linuxserver/nzbget:latest
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     network_mode: host
     environment:
       - PUID='${UDOCKER_USERID}'
@@ -58,7 +58,7 @@ services:
   sonarr:
     container_name: sonarr
     image: linuxserver/sonarr:latest
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     network_mode: host
     environment:
       - PUID='${UDOCKER_USERID}'
@@ -73,7 +73,7 @@ services:
   radarr:
     container_name: radarr
     image: linuxserver/radarr:latest
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     network_mode: host
     environment:
       - PUID='${UDOCKER_USERID}'
@@ -88,7 +88,7 @@ services:
   plex-server:
     container_name: plex-server
     image: plexinc/pms-docker:latest
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     environment:
       - TZ='${TZ}'
     network_mode: host
@@ -98,7 +98,6 @@ services:
       - /home/udocker/volumes/htpc-download-box/plex/data:/data # media library
       - /home/udocker/volumes/htpc-download-box/plex/logs:/logs
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=htpc-download-box-plex"
 
     tautulli:
@@ -114,7 +113,6 @@ services:
       network_mode: host
       ports:
         - 8063:8181
-      restart: unless-stopped
+      restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
       labels:
-        - "AIS.traefik=false"
         - "AIS.name=htpc-download-box-tautulli"

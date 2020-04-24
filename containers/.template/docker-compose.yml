@@ -12,7 +12,6 @@ services:
             - /home/udocker/volumes/.template:/home/template
         ports:
             - 8080:8080
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=.template"

@@ -12,7 +12,6 @@ services:
       - /home/udocker/volumes/freshrss/config:/config
     ports:
       - 8007:80
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=freshrss"

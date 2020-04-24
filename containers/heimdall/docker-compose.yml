@@ -13,7 +13,6 @@ services:
     ports:
       - 8080:80
       - 8443:443
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=heimdall"

@@ -14,9 +14,8 @@ services:
       - MONGO_NON_ROOT_PASSWORD=n8n
     volumes:
       - ./init-data.sh:/docker-entrypoint-initdb.d/init-data.sh
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=n8n_db"
 
   n8n:
@@ -37,7 +36,6 @@ services:
     volumes:
       - ~/.n8n:/root/.n8n
     command: /bin/sh -c "sleep 5; n8n start"
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=n8n"

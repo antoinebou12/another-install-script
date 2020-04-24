@@ -18,9 +18,8 @@ services:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=keycloak_db"
   keycloak:
     image: quay.io/keycloak/keycloak:latest
@@ -44,7 +43,6 @@ services:
       - 8050:8080
     depends_on:
       - postgres
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=keycloak"

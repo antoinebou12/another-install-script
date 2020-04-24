@@ -19,5 +19,4 @@ services:
       - /home/udocker/volumes/qbittorent-vpn/torrent:/config
       - /home/udocker/volumes/qbittorent-vpn/media:/downloads
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=qbittorent-vpn"

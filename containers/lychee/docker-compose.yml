@@ -14,7 +14,6 @@ services:
             - '/home/udocker/volumes/lycee/uploads:/uploads/'
             - '/home/udocker/volumes/lycee/data/:/data/'
             - '/home/udocker/volumes/lycee/mysql/:/mysql/'
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=lychee"

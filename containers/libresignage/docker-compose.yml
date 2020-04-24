@@ -12,7 +12,6 @@ services:
             - "8030:80"
         volumes:
             - "/home/udocker/volumes/libresignage:/var/www/html/data"
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-        - "AIS.traefik=false"
-        - "AIS.name=libresignage"
+            - "AIS.name=libresignage"

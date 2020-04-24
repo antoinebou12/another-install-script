@@ -23,9 +23,8 @@ services:
       - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/wallabag/logs:/var/log/nginx
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=wallabag"
 
   wallabag_db:
@@ -42,9 +41,8 @@ services:
       - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/wallabag/db:/var/lib/mysql
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=wallabag_db"
 
   wallabag_redis:
@@ -57,7 +55,6 @@ services:
         - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/wallabag/redis:/data
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=wallabag_redis"
