@@ -4,7 +4,6 @@ services:
     image: "rmountjoy/dashmachine:latest"
     container_name: dashmachine
     environment:
-      - CONTEXT_PATH=/home/udocker
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
