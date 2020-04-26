@@ -1,12 +1,5 @@
-$script = <<-SCRIPT
-pacman -Syy --noconfirm
-pacman -Syu --noconfirm git
-SCRIPT
-
-
 Vagrant.configure("2") do |config|
     config.vm.box = "archlinux/archlinux"
-    config.vm.provision "shell", inline: $script
     # config.ssh.forward_agent = true
     config.ssh.forward_x11 = true
   

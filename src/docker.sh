@@ -25,19 +25,11 @@ install_docker() {
     aptremove docker.io
     aptremove containerd
     aptremove runc
-    # curl https://get.docker.com/ | exec_root sh > /dev/null
-    aptinstall apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add -
-    exec_root apt-key fingerprint 0EBFCD88
-    if [[ "$(lsb_release -cs)" == "eoan" ]]; then
-        exec_root add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable" >/dev/null
-    else
-        exec_root add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >/dev/null
-    fi
     aptupdate
-    aptinstall docker-ce docker-ce-cli containerd.io
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+    rm -rf get-docker.sh
     aptclean
-
     print_line
     return 0
 }
