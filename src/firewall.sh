@@ -85,7 +85,7 @@ disable_firewall() {
 # @exitcode 1 On failure
 allow_port_in_firewall() {
     if check_packages_install ufw; then
-        exec_root ufw allow "$1"
+        exec_root ufw allow "$1" >/dev/null
         return 0
     else
         return 1
@@ -115,6 +115,7 @@ manage_firewall_ports_allow_list() {
 	if read_config_yml system_udocker_username; then
         local UDOCKER="$(read_config_yml system_udocker_username)"
         local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
     else
         local UDOCKER="udocker"
     fi
@@ -128,10 +129,10 @@ manage_firewall_ports_allow_list() {
 
     for container_name in "${containers[@]}"; do
         parse_yml_array_ports "$container_name"
-        parse_yml_array_ports "$container_name" >>/tmp/ports.txt
+        echo "$(parse_yml_array_ports "$container_name")" | exec_root tee -a /tmp/ports.txt
     done
 
-    [ -d /home/"$UDOCKER"/ ] && cp /tmp/ports.txt /home/"$UDOCKER"/config/ports.txt
+    [ -d /home/"$UDOCKER"/ ] && exec_root cp /tmp/ports.txt /home/"$UDOCKER"/config/ports.txt
 
     ports=()
     if [[ -f /home/udocker/config/ports.txt ]]; then

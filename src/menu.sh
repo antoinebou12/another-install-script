@@ -151,10 +151,10 @@ remove_container_menu() {
         local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 3))"
     fi
 
-    REMOVE_CONTAINER_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${CONTAINER_INSTALLED_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
+    REMOVE_CONTAINER_LIST_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${CONTAINER_INSTALLED_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
 
-    if [[ $? == 0 ]] && [[ ! -z "$REMOVE_CONTAINER_MENU" ]]; then
-        remove_containers_list "$REMOVE_CONTAINER_MENU"
+    if [[ $? == 0 ]] && [[ ! -z "$REMOVE_CONTAINER_LIST_MENU" ]]; then
+        remove_containers_list "$REMOVE_CONTAINER_LIST_MENU"
         return 0
     else
         echo "Error"
@@ -201,9 +201,9 @@ main_setup_menu() {
     if [[ $(read_config_yml system_bashmenu) == "yes" ]]; then
         SETUP_MENU=$(whiptail --clear --title "Another Install Script" --menu --notags "" 20 78 12 -- \
             "install" "Installation" \
-            "add_container" "Add Container" \
-            "remove_container" "Remove Container" \
-            "uninstall_all" "Uninstall" \
+            "addContainer" "Add Container" \
+            "removeContainer" "Remove Container" \
+            "uninstallAll" "Uninstall" \
             "backup" "Backup" \
             "help" "Help" \
             "exit" "Exit" \
@@ -213,13 +213,13 @@ main_setup_menu() {
         "install")
             install_setup_menu
             ;;
-        "add_container")
+        "addContainer")
             add_container_setup_menu
             ;;
-        "remove container")
+        "removeContainer")
             remove_container_menu
             ;;
-        "uninstall all")
+        "uninstallAll")
             uninstall_setup_menu
             ;;
         "backup")

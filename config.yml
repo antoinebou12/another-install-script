@@ -94,7 +94,7 @@ services:
 
     calibre:
       name: calibre
-      ports: [8001, 8002]
+      ports: [8001,8002]
       webport: [":8001",":8002"]
       volumes: yes
       network: no

@@ -25,10 +25,8 @@ install_docker() {
     aptremove docker.io
     aptremove containerd
     aptremove runc
+    aptinstall docker.io
     aptupdate
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sh get-docker.sh
-    rm -rf get-docker.sh
     aptclean
     print_line
     return 0
@@ -106,8 +104,10 @@ create_docker_user() {
     if read_config_yml system_udocker_username; then
         local UDOCKER="$(read_config_yml system_udocker_username)"
         local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
         local UDOCKER_PASSWORD="$(read_config_yml system_udocker_password)"
         local UDOCKER_PASSWORD="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
     else
         local UDOCKER="udocker"
         local UDOCKER_PASSWORD="udocker"
@@ -145,6 +145,7 @@ remove_docker_user() {
     if read_config_yml system_udocker_username; then
         local UDOCKER="$(read_config_yml system_udocker_username)"
         local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
     else
         local UDOCKER="udocker"
     fi
@@ -169,6 +170,7 @@ do_as_udocker_user() {
     if read_config_yml system_udocker_username; then
         local UDOCKER="$(read_config_yml system_udocker_username)"
         local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
         local UDOCKER_PASSWORD="$(read_config_yml system_udocker_password)"
         local UDOCKER_PASSWORD="${UDOCKER//\"/}"
     else
@@ -197,11 +199,14 @@ do_as_udocker_user() {
 udocker_create_dir() {
     exec_root mkdir -p "$1"
     exec_root chmod 755 "$1"
-    if read_config_yml system_udocker_username; then
-        exec_root chown "$(read_config_yml system_udocker_username)":"$(read_config_yml system_udocker_username)" "$1"
+        if read_config_yml system_udocker_username; then
+        local UDOCKER="$(read_config_yml system_udocker_username)"
+        local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
     else
-        exec_root chown udocker:udocker "$1"
+        local UDOCKER="udocker"
     fi
+    exec_root chown "$UDOCKER":udocker "$1"
 }
 
 # @description prune all the volumes and images

@@ -14,6 +14,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/firewall.s
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 
 declare -a CONTAINER_NAME_MENU=()
+declare -a CONTAINER_INSTALLED_NAME_MENU=()
 
 # @description import all the /containers/.../*.sh based on selected
 #
@@ -60,24 +61,25 @@ manage_exec_containers_list() {
 	if read_config_yml system_udocker_username >/dev/null; then
         local UDOCKER="$(read_config_yml system_udocker_username)" >/dev/null
         local UDOCKER="${UDOCKER//\"/}" >/dev/null
+		local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
     else
-        local UDOCKER="udocker" >/dev/null
+        local UDOCKER="udocker"
     fi
 
 	local FUNC_CREATE="create_docker_"
-	touch /tmp/containers.txt
+	exec_root touch /tmp/containers.txt
 	containers=()
 	mapfile -t containers <<<"$1"
 	for container_name in "${containers[@]}"; do
 		echo "$container_name"
 		print_line
-		exec_root "$container_name" >>/tmp/containers.txt
+		echo "$container_name" | exec_root  tee -a /tmp/containers.txt
 		source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/$container_name/$container_name.sh"
 		"$FUNC_CREATE""$container_name"
 		print_line
 	done
 
-	[ -d /home/"$UDOCKER"/ ] && cp /tmp/containers.txt /home/"$UDOCKER"/config/containers.txt
+	[ -d /home/"$UDOCKER"/ ] && exec_root cp /tmp/containers.txt /home/"$UDOCKER"/config/containers.txt
 
 	manage_firewall_ports_allow_list
 
@@ -98,7 +100,7 @@ remove_containers_list() {
 
 	local FUNC_REMOVE="remove_docker_"
 	containers=()
-	mapfile -t containers <<<"$1"
+	mapfile -t containers <<< "$1"
 	for container_name in "${containers[@]}"; do
 		echo "$container_name"
 		print_line
@@ -145,18 +147,19 @@ generate_container_menu() {
 	if read_config_yml system_udocker_username >/dev/null; then
         local UDOCKER="$(read_config_yml system_udocker_username)" >/dev/null
         local UDOCKER="${UDOCKER//\"/}" >/dev/null
+		local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
     else
         local UDOCKER="udocker" >/dev/null
     fi
 	
 	if [[ ! -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/containers.txt"  ]]; then 
 		pip3 install pyyaml >/dev/null || pip install pyyaml >/dev/null
-		python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/containers_list.py" >/dev/null || python "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/containers_list.py" >/dev/null
+		python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/src/containers_list.py" >/dev/null || python "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/src/containers_list.py" >/dev/null
 	fi
 	
 	while IFS=, read -r col1 col2; do
 		if [[ -f /home/"$UDOCKER"/containers.txt ]]; then
-			if grep -Fxq "$col1" /home/"$UDOCKER"/conf/containers.txt >/dev/null; then
+			if grep -Fxq "$col1" /home/"$UDOCKER"/config/containers.txt >/dev/null; then
 				return 0
 			else
 				if [[ "$(read_config_yml "containers_""$col1""_implemented")" == "yes" ]]; then
@@ -174,6 +177,31 @@ generate_container_menu() {
 		fi
 	done < "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../containers/containers.txt"
 	IFS="$SAVEIFS" # Restore IFS
+	return 0
+}
+
+# @description create CONTAINER_INSTALLED_NAME_MENU
+#
+# @noargs
+# @exitcode 0 If successfull.
+# @exitcode 1 On failure
+generate_remove_container_menu() {
+
+	if read_config_yml system_udocker_username >/dev/null; then
+        local UDOCKER="$(read_config_yml system_udocker_username)" >/dev/null
+        local UDOCKER="${UDOCKER//\"/}" >/dev/null
+		local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
+    else
+        local UDOCKER="udocker" >/dev/null
+    fi
+
+	mapfile -t installed_containers < /home/"$UDOCKER"/config/containers.txt
+	for installed_container in "${installed_containers[@]}"; do
+		echo "$installed_container"
+		CONTAINER_INSTALLED_NAME_MENU+=("$installed_container")
+		CONTAINER_INSTALLED_NAME_MENU+=("")
+		CONTAINER_INSTALLED_NAME_MENU+=("OFF")
+	done
 	return 0
 }
 
