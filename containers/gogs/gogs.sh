@@ -9,7 +9,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_gogs() {
-     echo "template"
+     docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" up -d
      return 0
 }
 
@@ -19,5 +19,6 @@ create_docker_gogs() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 remove_docker_gogs() {
+     docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" down
      return 0
 }

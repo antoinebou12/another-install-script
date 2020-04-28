@@ -9,6 +9,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_minecraft() {
+     docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" up -d
      return 0
 }
 
@@ -17,6 +18,6 @@ create_docker_minecraft() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 remove_docker_minecraft() {
-    echo "not implemented"
+    docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" down
     return 0
 }

@@ -19,6 +19,6 @@ create_docker_tdarr() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 remove_docker_tdarr() {
-    echo "not implemented"
+    docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" down
     return 0
 }

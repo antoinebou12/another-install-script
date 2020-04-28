@@ -81,7 +81,7 @@ install_setup_menu() {
         "emojify" "Emoji in the terminal" "OFF"
     )
     
-    if [ "${#SETUP_INSTALL_ITEMS[@]}" -lt 6 ]; then
+    if [ "${#SETUP_INSTALL_ITEMS[@]}" -lt 30 ]; then
         local NUM_ITEMS_SCALE="$((${#SETUP_INSTALL_ITEMS[@]} / 3))"
     elif [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#SETUP_INSTALL_ITEMS[@]} / 3))"
@@ -110,7 +110,7 @@ install_setup_menu() {
 # @exitcode 1 On failure
 add_container_setup_menu() {
     generate_container_menu
-    if [ "${#CONTAINER_NAME_MENU[@]}" -lt 6 ]; then
+    if [ "${#CONTAINER_NAME_MENU[@]}" -lt 30 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 3))"
     elif [ $(tput lines) -lt 25 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 16))"
@@ -142,8 +142,7 @@ add_container_setup_menu() {
 # @exitcode 1 On failure
 remove_container_menu() {
     generate_remove_container_menu
-    echo ${#CONTAINER_INSTALLED_NAME_MENU[@]}
-    if [ "${#CONTAINER_INSTALLED_NAME_MENU[@]}" -lt 6 ]; then
+    if [ "${#CONTAINER_INSTALLED_NAME_MENU[@]}" -lt 30 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 3))"
     elif [ $(tput lines) -lt 25 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 16))"

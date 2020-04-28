@@ -20,12 +20,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 install_docker() {
     echo "Install Docker"
     print_line
-    aptremove docker
-    aptremove docker-engine
-    aptremove docker.io
-    aptremove containerd
-    aptremove runc
-    aptinstall docker.io
+    
     aptupdate
     aptclean
     print_line

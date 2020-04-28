@@ -14,4 +14,4 @@ services:
             - 8000:8080
         restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.name=.template"
+            - "AIS.name=.bitwarden"
