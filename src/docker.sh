@@ -20,7 +20,50 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 install_docker() {
     echo "Install Docker"
     print_line
-    
+    dist_check
+    if [ "$DISTRO" == "debian" ]; then
+        # exec_root apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common 
+        # exec_root curl -fsSL https://download.docker.com/linux/debian/gpg | exec_root apt-key add - 
+        # exec_root apt-key fingerprint 0EBFCD88 
+        # exec_root add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" 
+        # aptupdate
+        # aptinstall docker-ce docker-ce-cli containerd.io
+        exec_root snap install docker
+    fi
+    if [ "$DISTRO" == "ubuntu" ]; then
+        exec_root apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common 
+        exec_root curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add - 
+        exec_root apt-key fingerprint 0EBFCD88 
+        exec_root add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" 
+        aptupdate
+        aptinstall apt-get install docker-ce docker-ce-cli containerd.io
+    fi
+    if [ "$DISTRO" == "raspbian" ]; then
+        exec_root apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+        exec_root curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add -
+        exec_root apt-key fingerprint 0EBFCD88
+        exec_root add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+        aptupdate
+        aptinstall apt-get install docker-ce docker-ce-cli containerd.io
+    fi
+    if [ "$DISTRO" == "arch" ]; then
+        exec_root sudo pacman -Syu
+        exec_root tee /etc/modules-load.d/loop.conf <<< "loop"
+        exec_root modprobe loop
+        exec_root pacman -S docker
+    fi
+    if [ "$DISTRO" = 'fedora' ]; then
+        exec_root dnf install -y dnf-plugins-core
+        exec_root dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+        exec_root dnf install docker-ce docker-ce-cli containerd.io >/dev/null
+        exec_root grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+        exec_root systemctl start docker
+    fi
+    if [ "$DISTRO" == "centos" ] || [ "$DISTRO" == "redhat" ]; then
+        exec_root yum install -y yum-utils
+        exec_root yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+        exec_root yum install docker-ce docker-ce-cli containerd.io
+    fi
     aptupdate
     aptclean
     print_line
