@@ -47,12 +47,12 @@ password_dialog() {
             local passphrase_repeat=$(whiptail --passwordbox "Please repeat the passphrase:" 20 78 3>&1 1>&2 2>&3)
             if [[ $? == 0 ]] && [[ ! -z "$passphrase_repeat" ]]; then
                 local passphrase_invalid_message="Passphrase too short, or not matching! "
-            elif [[ $? = 1 ]]; then
+                elif [[ $? = 1 ]]; then
                 break
             else
                 break
             fi
-        elif [[ $? = 1 ]]; then
+            elif [[ $? = 1 ]]; then
             break
         else
             break
@@ -67,7 +67,7 @@ password_dialog() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failur3
 install_setup_menu() {
-
+    
     declare -a SETUP_INSTALL_ITEMS=(
         "basic" "Basic packages install (required)" "ON"
         "docker" "Install docker and docker-compose (required)" "ON"
@@ -80,17 +80,19 @@ install_setup_menu() {
         "vagrant" "Install Vagrant for VM utility" "OFF"
         "emojify" "Emoji in the terminal" "OFF"
     )
-
-    if [ $(tput lines) -lt 45 ]; then
+    
+    if [ "${#SETUP_INSTALL_ITEMS[@]}" -lt 6 ]; then
+        local NUM_ITEMS_SCALE="$((${#SETUP_INSTALL_ITEMS[@]} / 3))"
+    elif [ $(tput lines) -lt 45 ]; then
         local NUM_ITEMS_SCALE="$((${#SETUP_INSTALL_ITEMS[@]} / 3))"
     elif [ $(tput lines) -gt 50 ]; then
         local NUM_ITEMS_SCALE="$((${#SETUP_INSTALL_ITEMS[@]} / 3))"
     else
         local NUM_ITEMS_SCALE=$((${#SETUP_INSTALL_ITEMS[@]} / 3))
     fi
-
+    
     local SETUP_INSTALL_MENU=$(whiptail --nocancel --clear --title "Install" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${SETUP_INSTALL_ITEMS[@]}" 3>&1 1>&2 2>&3)
-
+    
     if [[ $? == 0 ]] && [[ ! -z "$SETUP_INSTALL_MENU" ]]; then
         show_project_name
         manage_exec_install_list "$SETUP_INSTALL_MENU"
@@ -98,7 +100,7 @@ install_setup_menu() {
             add_container_setup_menu
         fi
     fi
-
+    
     return 0
 }
 
@@ -108,8 +110,9 @@ install_setup_menu() {
 # @exitcode 1 On failure
 add_container_setup_menu() {
     generate_container_menu
-
-    if [ $(tput lines) -lt 25 ]; then
+    if [ "${#CONTAINER_NAME_MENU[@]}" -lt 6 ]; then
+        local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 3))"
+    elif [ $(tput lines) -lt 25 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 16))"
     elif [ $(tput lines) -lt 35 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 12))"
@@ -120,9 +123,9 @@ add_container_setup_menu() {
     else
         local NUM_ITEMS_SCALE="$((${#CONTAINER_NAME_MENU[@]} / 3))"
     fi
-
+    
     SETUP_CONTAINER_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${CONTAINER_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
-
+    
     if [[ $? == 0 ]] && [[ ! -z "$SETUP_CONTAINER_MENU" ]]; then
         manage_exec_containers_list "$SETUP_CONTAINER_MENU"
         return 0
@@ -139,7 +142,10 @@ add_container_setup_menu() {
 # @exitcode 1 On failure
 remove_container_menu() {
     generate_remove_container_menu
-    if [ $(tput lines) -lt 25 ]; then
+    echo ${#CONTAINER_INSTALLED_NAME_MENU[@]}
+    if [ "${#CONTAINER_INSTALLED_NAME_MENU[@]}" -lt 6 ]; then
+        local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 3))"
+    elif [ $(tput lines) -lt 25 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 16))"
     elif [ $(tput lines) -lt 35 ]; then
         local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 12))"
@@ -150,9 +156,9 @@ remove_container_menu() {
     else
         local NUM_ITEMS_SCALE="$((${#CONTAINER_INSTALLED_NAME_MENU[@]} / 3))"
     fi
-
+    
     REMOVE_CONTAINER_LIST_MENU=$(whiptail --nocancel --clear --title "Container List" --checklist "Navigate with arrow and select with space" --separate-output "${WHIPTAIL_TEXT}" "${WHIPTAIL_HEIGHT}" "${NUM_ITEMS_SCALE}" -- "${CONTAINER_INSTALLED_NAME_MENU[@]}" 3>&1 1>&2 2>&3)
-
+    
     if [[ $? == 0 ]] && [[ ! -z "$REMOVE_CONTAINER_LIST_MENU" ]]; then
         remove_containers_list "$REMOVE_CONTAINER_LIST_MENU"
         return 0
@@ -207,31 +213,31 @@ main_setup_menu() {
             "backup" "Backup" \
             "help" "Help" \
             "exit" "Exit" \
-            3>&1 1>&2 2>&3)
-
+        3>&1 1>&2 2>&3)
+        
         case $SETUP_MENU in
-        "install")
-            install_setup_menu
+            "install")
+                install_setup_menu
             ;;
-        "addContainer")
-            add_container_setup_menu
+            "addContainer")
+                add_container_setup_menu
             ;;
-        "removeContainer")
-            remove_container_menu
+            "removeContainer")
+                remove_container_menu
             ;;
-        "uninstallAll")
-            uninstall_setup_menu
+            "uninstallAll")
+                uninstall_setup_menu
             ;;
-        "backup")
-            backup_setup_menu
+            "backup")
+                backup_setup_menu
             ;;
-        "help")
-            help_setup_menu
+            "help")
+                help_setup_menu
             ;;
-        "exit")
-            exit 0
+            "exit")
+                exit 0
             ;;
-        *) ;;
+            *) ;;
         esac
     else
         echo "Error"
