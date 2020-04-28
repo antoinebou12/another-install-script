@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
-# @file rocket.sh
-# @brief to install docker rocket
+# @file newspipe.sh
+# @brief to install docker newspipe
 
-# @description create docker rocket
+# @description create docker newspipe
 # not implemented yet
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-create_docker_rocket() {
+create_docker_newspipe() {
     echo "not implemented"
     return 0
 }
 
-# @description remove docker rocket
+# @description remove docker newspipe
 #
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-remove_docker_rocket() {
+remove_docker_newspipe() {
     echo "not implemented"
     return 0
 }

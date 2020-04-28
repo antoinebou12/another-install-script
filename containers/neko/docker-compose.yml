@@ -15,5 +15,5 @@ services:
       - "8032:8080"
     restart: always
     labels:
-        - "AIS.traefik=false"
+        
         - "AIS.name=neko"

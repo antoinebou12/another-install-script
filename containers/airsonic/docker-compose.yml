@@ -17,7 +17,6 @@ services:
     ports:
       - 4040:4040
       - 1900:1900
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=airsonic"

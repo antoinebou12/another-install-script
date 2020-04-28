@@ -15,7 +15,6 @@ services:
     volumes:
       - /home/udocker/volumes/code-server/project:/home/coder/project
       - /home/udocker/.local/share/code-server:/home/coder/.local/share/code-server
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-        - "AIS.traefik=false"
         - "AIS.name=code-server"

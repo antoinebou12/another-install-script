@@ -17,7 +17,6 @@ services:
           - /home/udocker/volumes/minecraft:/data
         tty: true
         stdin_open: true
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-          - "AIS.traefik=false"
           - "AIS.name=minecraft"

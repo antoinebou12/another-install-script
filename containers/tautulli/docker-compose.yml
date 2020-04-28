@@ -12,8 +12,8 @@ services:
       - /home/udocker/volumes/plex/logs:/logs
     ports:
       - 8063:8181
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-        - "AIS.traefik=false"
+        
         - "AIS.name=tautulli"
 

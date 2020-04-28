@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+    deezloaderrmx:
+        image: bocki/deezloaderrmx
+        container_name: deezldr
+        volumes:
+            - /home/udocker/volumes/deezldr/downloads:/downloads
+            - /home/udocker/volumes/deezldr/config:/config
+        environment:
+            - PUID='${UDOCKER_USERID}'
+            - PGID='${UDOCKER_GROUPID}'
+            - TZ='${TZ}'
+        ports:
+            - 1730:1730
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+        labels:
+            - "AIS.name=deezldr"

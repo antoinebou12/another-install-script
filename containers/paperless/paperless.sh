@@ -9,7 +9,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_paperless() {
-    exec_root docker-compose up -d
+    docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" up -d
     echo "not implemented yet"
     return 0
 }
@@ -19,6 +19,6 @@ create_docker_paperless() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 remove_docker_paperless() {
-    echo "not implemented"
+    docker-compose -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/docker-compose.yml" down
     return 0
 }

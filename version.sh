@@ -27,5 +27,6 @@ install_semver(){
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 use_semver(){
-    semver
+    semver bump $1 $(cat version)
 }
+use_semver $1

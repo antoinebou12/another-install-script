@@ -14,7 +14,6 @@ services:
       - /home/udocker/volumes/duplicati/source:/source
     ports:
       - 8200:8200
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-        - "AIS.traefik=false"
         - "AIS.name=duplicati"

@@ -10,7 +10,6 @@ services:
       - TZ='${TZ}'
     ports:
       - "7999:8000"
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=osjs"

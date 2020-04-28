@@ -17,6 +17,8 @@ fireflyiii,Personal finance manager
 freshrss,RSS
 gitea,Git service
 gitlab,Gitlab service
+gogs,Git service
+goshiori,Bookmark manager
 grafana,Analytics and monitoring solution
 grocy,ERP system
 guacamole,Clientless remote desktop gateway
@@ -28,6 +30,7 @@ invidious,Alternative frontend to YouTube
 jackett,API Support for your favorite torrent trackers
 jellyfin,Software media system
 jenkins,Automation server
+jitsi,Video Conference
 jupyterlab,Singleuser server for Jupyter
 kdedocker,KDE in Browser
 keycloak,Identity and access management
@@ -44,11 +47,16 @@ medusa,Automatic video Library Manager for TV Shows
 meshcentral,Remote computer
 minecraft,Minecraft Server
 monica,Personal CRM
+mumble,voice chat
 mylar,Comic Book downloader
+n8n,Workflow Automation Tool
 neko,Virtual browser
 netdata,Realtime performance monitoring
+newspipe,Realtime performance monitoring
 nextcloud,File share and collaboration platform
+odoo,Apps Buiness Management
 olaris,Media manager and transcoding server
+olaris,Collaborative system for projects
 openstreamingplatform,Video streaming and recording
 openldap,Ldap
 openvpn,VPN
@@ -63,7 +71,6 @@ qbittorentvpn,qbittorent VPN
 radarr,Sonarr for movie
 recipes,Django application for managing recipes
 rocketchat,Simple chat server
-shiori,Bookmark manager
 sonarr,Smart PVR newsgroup and bittorrent users
 spiderfoot,Intelligence (OSINT) automation tool
 statping,Status Page for monitoring your websites

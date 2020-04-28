@@ -14,9 +14,8 @@ services:
       - DB_HOST=mysql
     volumes:
       - /home/udocker/volumes/monica:/var/www/monica/storage
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=monica"
 
   mysql:
@@ -33,9 +32,8 @@ services:
       - TZ='${TZ}'
     volumes:
       - /home/udocker/volumes/monica/db:/var/lib/mysql
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=monica_db"
 
 volumes:

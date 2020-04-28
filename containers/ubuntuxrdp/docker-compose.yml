@@ -11,7 +11,6 @@ services:
       - "3389:3389"
       - "2232:22"
     image: danielguerra/ubuntu-xrdp
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=ubuntuxrdp"

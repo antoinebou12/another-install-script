@@ -16,7 +16,6 @@ services:
       - /home/udocker/volumes/gitlab/config:/etc/gitlab
       - /home/udocker/volumes/gitlab/logs:/var/log/gitlab
       - /home/udocker/volumes/gitlab/data:/var/opt/gitlab
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=gitlab"

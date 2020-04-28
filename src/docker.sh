@@ -20,33 +20,52 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/utils.sh"
 install_docker() {
     echo "Install Docker"
     print_line
-    # exec_root curl -sSL https://get.docker.com/ | CHANNEL=stable sh > /dev/null
-    aptremove docker
-    aptremove docker-engine
-    aptremove docker.io
-    aptremove containerd
-    aptremove runc
-    aptinstall apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add -
-    exec_root apt-key fingerprint 0EBFCD88
-    if [[ "$(lsb_release -cs)" == "eoan" ]]; then
-        if [[ "$UID" -gt 0 ]]; then
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable" >/dev/null
-        else
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable" >/dev/null
-        fi
-    else
-        if [[ "$UID" -gt 0 ]]; then
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >/dev/null
-        else
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >/dev/null
-        fi
+    dist_check
+    if [ "$DISTRO" == "debian" ]; then
+        # exec_root apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common 
+        # exec_root curl -fsSL https://download.docker.com/linux/debian/gpg | exec_root apt-key add - 
+        # exec_root apt-key fingerprint 0EBFCD88 
+        # exec_root add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" 
+        # aptupdate
+        # aptinstall docker-ce docker-ce-cli containerd.io
+        exec_root snap install docker
     fi
-
+    if [ "$DISTRO" == "ubuntu" ]; then
+        exec_root apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common 
+        exec_root curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add - 
+        exec_root apt-key fingerprint 0EBFCD88 
+        exec_root add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" 
+        aptupdate
+        aptinstall apt-get install docker-ce docker-ce-cli containerd.io
+    fi
+    if [ "$DISTRO" == "raspbian" ]; then
+        exec_root apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+        exec_root curl -fsSL https://download.docker.com/linux/ubuntu/gpg | exec_root apt-key add -
+        exec_root apt-key fingerprint 0EBFCD88
+        exec_root add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+        aptupdate
+        aptinstall apt-get install docker-ce docker-ce-cli containerd.io
+    fi
+    if [ "$DISTRO" == "arch" ]; then
+        exec_root sudo pacman -Syu
+        exec_root tee /etc/modules-load.d/loop.conf <<< "loop"
+        exec_root modprobe loop
+        exec_root pacman -S docker
+    fi
+    if [ "$DISTRO" = 'fedora' ]; then
+        exec_root dnf install -y dnf-plugins-core
+        exec_root dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+        exec_root dnf install docker-ce docker-ce-cli containerd.io >/dev/null
+        exec_root grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+        exec_root systemctl start docker
+    fi
+    if [ "$DISTRO" == "centos" ] || [ "$DISTRO" == "redhat" ]; then
+        exec_root yum install -y yum-utils
+        exec_root yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+        exec_root yum install docker-ce docker-ce-cli containerd.io
+    fi
     aptupdate
-    aptinstall docker-ce docker-ce-cli containerd.io
     aptclean
-
     print_line
     return 0
 }
@@ -123,8 +142,10 @@ create_docker_user() {
     if read_config_yml system_udocker_username; then
         local UDOCKER="$(read_config_yml system_udocker_username)"
         local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
         local UDOCKER_PASSWORD="$(read_config_yml system_udocker_password)"
         local UDOCKER_PASSWORD="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
     else
         local UDOCKER="udocker"
         local UDOCKER_PASSWORD="udocker"
@@ -162,6 +183,7 @@ remove_docker_user() {
     if read_config_yml system_udocker_username; then
         local UDOCKER="$(read_config_yml system_udocker_username)"
         local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
     else
         local UDOCKER="udocker"
     fi
@@ -186,6 +208,7 @@ do_as_udocker_user() {
     if read_config_yml system_udocker_username; then
         local UDOCKER="$(read_config_yml system_udocker_username)"
         local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
         local UDOCKER_PASSWORD="$(read_config_yml system_udocker_password)"
         local UDOCKER_PASSWORD="${UDOCKER//\"/}"
     else
@@ -214,11 +237,14 @@ do_as_udocker_user() {
 udocker_create_dir() {
     exec_root mkdir -p "$1"
     exec_root chmod 755 "$1"
-    if read_config_yml system_udocker_username; then
-        exec_root chown "$(read_config_yml system_udocker_username)":"$(read_config_yml system_udocker_username)" "$1"
+        if read_config_yml system_udocker_username; then
+        local UDOCKER="$(read_config_yml system_udocker_username)"
+        local UDOCKER="${UDOCKER//\"/}"
+        local UDOCKER=${UDOCKER//[[:blank:]]/} >/dev/null
     else
-        exec_root chown udocker:udocker "$1"
+        local UDOCKER="udocker"
     fi
+    exec_root chown "$UDOCKER":udocker "$1"
 }
 
 # @description prune all the volumes and images

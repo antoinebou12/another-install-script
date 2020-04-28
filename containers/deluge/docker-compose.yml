@@ -15,7 +15,6 @@ services:
         volumes:
             - /home/udocker/volumes/deluge/config:/config
             - /home/udocker/volumes/deluge/downloads:/downloads
-        restart: unless-stopped
+        restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            - "AIS.traefik=false"
             - "AIS.name=deluge"

@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 
 services:
   rocketchat:
@@ -20,7 +20,6 @@ services:
       - ROOT_URL=http://localhost:8056
       - MONGO_URL=mongodb://mongo:27017/rocketchat
       - MONGO_OPLOG_URL=mongodb://mongo:27017/local
-      - MAIL_URL=smtp://smtp.email
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
@@ -28,9 +27,8 @@ services:
       - mongo
     ports:
       - 8056:8056
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=rocketchat"
 
   mongo:
@@ -45,9 +43,8 @@ services:
       - /home/udocker/volumes/rocket/db:/data/db
       - /home/udocker/volumes/rocket/dump:/dump
     command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=rocketchat_db"
 
   mongo-init-replica:
@@ -72,7 +69,6 @@ services:
     depends_on:
       - mongo
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=rocketchat_db_replica"
 
   hubot:
@@ -92,10 +88,9 @@ services:
     depends_on:
       - rocketchat
     volumes:
-      - ./scripts:/home/hubot/scripts
+      - /home/udocker/volumes/rocket/scripts:/home/hubot/scripts
     ports:
       - 3001:8080
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=rocketchat_hubot"

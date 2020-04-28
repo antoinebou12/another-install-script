@@ -15,7 +15,6 @@ services:
       - 8001:8001
       - 8002:8002
     command: --notls --port 8001 --mpsport 8002
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=meshcentral"

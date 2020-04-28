@@ -1,23 +1,27 @@
+# system information important to the app
 system:
   domain: localhost
+  ip: 127.0.0.1
   ssl:
-    enable: no
+    enable: no  #not implemented
   reverseproxy:
     enable: no
-    provider: traefik_docker
+    incoming_port: 80
+    provider: nginx #not implemented
   firewall: yes
-  udocker:
+  udocker: # the user that contain the containers
     enable: yes
-    username: udocker
-    password: udocker
+    username: udocker 
+    password: udocker 
   bashmenu: yes
 
+# all service/web server installed locally
 services:
   local:
     cockpit:
       name: cockpit
       ports: [9090]
-      web: [9090]
+      webport: [9090]
       volumes: yes
       network: host
       description: Open webbased interface for your servers
@@ -29,7 +33,7 @@ services:
     ansible:
       name: ansible
       ports: no
-      web: no
+      webport: no
       volumes: yes
       network: host
       description: IT Systems automation
@@ -38,11 +42,12 @@ services:
       image: no
       implemented: yes
 
+  # installed docker container
   containers:
     airsonic:
       name: airsonic
       ports: [4040, 1900]
-      web: [":4040"]
+      webport: [":4040"]
       volumes: yes
       network: no
       description: Music and Podcast server
@@ -54,7 +59,7 @@ services:
     ansiblesemaphore:
       name: ansiblesemaphore
       ports: [4000]
-      web: [":4000"]
+      webport: [":4000"]
       volumes: yes
       network: no
       description: Open Source alternative to Ansible Tower
@@ -66,7 +71,7 @@ services:
     bitwarden:
       name: bitwarden
       ports: [8000]
-      web: [":8000"]
+      webport: [":8000"]
       volumes: yes
       network: no
       description: Open source password management
@@ -78,7 +83,7 @@ services:
     bookstack:
       name: bookstack
       ports: [6875]
-      web: [":6875"]
+      webport: [":6875"]
       volumes: yes
       network: no
       description: Simple, selfhosted, easytouse platform for organising and storing information
@@ -89,8 +94,8 @@ services:
 
     calibre:
       name: calibre
-      ports: [8001, 8002]
-      web: [":8001",":8002"]
+      ports: [8001,8002]
+      webport: [":8001",":8002"]
       volumes: yes
       network: no
       description: Powerful and easy to use ebook manager
@@ -102,7 +107,7 @@ services:
     chevereto:
       name: chevereto
       ports: [8999]
-      web: [":8999"]
+      webport: [":8999"]
       volumes: yes
       network: no
       description: Open source image hosting software
@@ -114,7 +119,7 @@ services:
     cloudtorrent:
       name: cloudtorrent
       ports: [6889]
-      web: [":6889"]
+      webport: [":6889"]
       volumes: yes
       network: no
       description: A selfhosted remote torrent client
@@ -126,7 +131,7 @@ services:
     codeserver:
       name: codeserver
       ports: [8003]
-      web: [":8003"]
+      webport: [":8003"]
       volumes: yes
       network: no
       description: Run VS Code on a remote server
@@ -138,7 +143,7 @@ services:
     couchpotato:
       name: couchpotato
       ports: [5050]
-      web: [":5050"]
+      webport: [":5050"]
       volumes: yes
       network: no
       description: Automatic Movie Downloading via NZBs & Torrents
@@ -150,7 +155,7 @@ services:
     cyberchef:
       name: cyberchef
       ports: [8004]
-      web: [":8004"]
+      webport: [":8004"]
       volumes: yes
       network: no
       description: The Cyber Swiss Army Knife  a web app for encryption, encoding, compression and data analysis
@@ -162,7 +167,7 @@ services:
     dailynotes:
       name: dailynotes
       ports: [5000]
-      web: [":5000"]
+      webport: [":5000"]
       volumes: yes
       network: no
       description: App for taking notes and tracking tasks on a daily basis
@@ -174,19 +179,20 @@ services:
     dashmachine:
       name: dashmachine
       ports: [5000]
-      web: [":5000"]
+      webport: [":5000"]
       volumes: yes
       network: no
       description: Another web application bookmark dashboard, with fun features.
       short_description: dashboard app
       sourcelink: https://github.com/rmountjoy92/DashMachine
+      default_server: no
       image: no
       implemented: yes
 
     deluge:
       name: deluge
       ports: []
-      web: []
+      webport: []
       volumes: yes
       network: host
       description: BitTorrent Client
@@ -198,7 +204,7 @@ services:
     drawio:
       name: drawio
       ports: [8005]
-      web: [":8005"]
+      webport: [":8005"]
       volumes: yes
       network: no
       description: Free online diagram software
@@ -210,7 +216,7 @@ services:
     duplicati:
       name: duplicati
       ports: [8200]
-      web: [":8200"]
+      webport: [":8200"]
       volumes: yes
       network: no
       description: Backup software to store encrypted backups
@@ -222,7 +228,7 @@ services:
     fireflyiii:
       name: fireflyiii
       ports: [8006]
-      web: [":8006"]
+      webport: [":8006"]
       volumes: yes
       network: firefly_iii_net brige
       description: A free and open source personal finance manager
@@ -234,7 +240,7 @@ services:
     freshrss:
       name: freshrss
       ports: [8007]
-      web: [":8007"]
+      webport: [":8007"]
       volumes: yes
       network: no
       description: A free, selfhostable aggregator RSS
@@ -246,7 +252,7 @@ services:
     gitea:
       name: gitea
       ports: [8008, 222]
-      web: [":8008"]
+      webport: [":8008"]
       volumes: yes
       network: gitea
       description: A painless selfhosted Git service
@@ -258,7 +264,7 @@ services:
     gitlab:
       name: gitlab
       ports: [8009, 22222]
-      web: [":8009"]
+      webport: [":8009"]
       volumes: yes
       network: no
       description: Gitlab service selfhosted
@@ -267,10 +273,34 @@ services:
       image: no
       implemented: yes
 
+    gogs:
+      name: gogs
+      ports: [10022,10080]
+      webport: [":10080"]
+      volumes: yes
+      network: no
+      description: Gogs is a painless self-hosted Git service
+      short_description: Git service
+      sourcelink: https://github.com/gogs/gogs
+      image: no
+      implemented: yes
+
+    goshiori:
+      name: goshiori
+      ports: []
+      webport: []
+      volumes: yes
+      network: no
+      description: Simple bookmark manager built with Go
+      short_description: Bookmark manager
+      sourcelink: https://github.com/goshiori/shiori
+      image: no
+      implemented: yes
+
     grafana:
       name: grafana
       ports: [8011]
-      web: [":8011"]
+      webport: [":8011"]
       volumes: yes
       network: no
       description: the open source analytics and monitoring solution
@@ -282,7 +312,7 @@ services:
     grocy:
       name: grocy
       ports: [9283]
-      web: [":9283"]
+      webport: [":9283"]
       volumes: yes
       network: no
       description: ERP system for your kitchen!
@@ -294,7 +324,7 @@ services:
     guacamole:
       name: guacamole
       ports: [8012]
-      web: [":8012"]
+      webport: [":8012"]
       volumes: yes
       network: no
       description: Apache guacamole is clientless remote desktop gateway
@@ -306,7 +336,7 @@ services:
     headphones:
       name: headphones
       ports: [8181]
-      web: [":8181"]
+      webport: [":8181"]
       volumes: yes
       network: no
       description: Automated music downloader for NZB and Torrent, written in Python
@@ -318,19 +348,20 @@ services:
     heimdall:
       name: heimdall
       ports: [8080, 8443]
-      web: [":8080", ":8443"]
+      webport: [":8080", ":8443"]
       volumes: yes
       network: no
       description: An Application dashboard and launcher
       short_description: Application dashboard and launcher
       sourcelink: https://hub.docker.com/r/linuxserver/heimdall/
+      default_server: no
       image: no
       implemented: yes
 
     htpcdownloadbox:
       name: htpcdownloadbox
       ports: []
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Sonarr/Radarr/Jackett/NZBGet/Deluge/OpenVPN/Plex
@@ -342,11 +373,11 @@ services:
     huginn:
       name: huginn
       ports: [8013]
-      web: [":8013"]
+      webport: [":8013"]
       volumes: yes
       network: no
       description: Create agents that monitor and act on your behalf
-      short_description: Create agents that monitor and act on your behalf
+      short_description: Create agents monitor and act
       sourcelink: https://github.com/huginn/huginn
       image: no
       implemented: yes
@@ -354,7 +385,7 @@ services:
     invidious:
       name: invidious
       ports: [8014]
-      web: [":8014"]
+      webport: [":8014"]
       volumes: yes
       network: no
       description: Alternative frontend to YouTube
@@ -366,7 +397,7 @@ services:
     jackett:
       name: jackett
       ports: [9117]
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: API Support for your favorite torrent trackers
@@ -378,7 +409,7 @@ services:
     jellyfin:
       name: jellyfin
       ports: [8096, 8920]
-      web: [":8096"]
+      webport: [":8096"]
       volumes: yes
       network: no
       description: Free Software Media System also alternative for plex
@@ -390,7 +421,7 @@ services:
     jenkins:
       name: jenkins
       ports: [8015, 50000]
-      web: [":8015"]
+      webport: [":8015"]
       volumes: yes
       network: no
       description: Open source automation server CI/CD
@@ -399,10 +430,22 @@ services:
       image: no
       implemented: yes
 
+    jitsi:
+      name: jitsi
+      ports: [80, 4444, 10000]
+      webport: [":80"]
+      volumes: yes
+      network: no
+      description: Secure, Simple and Scalable Video Conference
+      short_description: Video Conference
+      sourcelink: https://github.com/jitsi/jitsi-meet/blob/master/doc/quick-install.md
+      image: no
+      implemented: yes
+
     jupyterlab:
       name: jupyterlab
       ports: [8888]
-      web: [":8888"]
+      webport: [":8888"]
       volumes: yes
       network: no
       description: Singleuser server for Jupyter notebooks
@@ -414,7 +457,7 @@ services:
     kdedocker:
       name: kdedocker
       ports: [8100,5900]
-      web: [":8100"]
+      webport: [":8100"]
       volumes: yes
       network: no
       description: So you can run KDE inside a browser
@@ -426,7 +469,7 @@ services:
     keycloak:
       name: keycloak
       ports: [8030]
-      web: [":8030"]
+      webport: [":8030"]
       volumes: yes
       network: no
       description: Open source identity and access management
@@ -438,7 +481,7 @@ services:
     komga:
       name: komga
       ports: [8031]
-      web: [":8031"]
+      webport: [":8031"]
       volumes: yes
       network: no
       description: Media server for comics/mangas/BDs with API and OPDS support
@@ -450,7 +493,7 @@ services:
     liberapay:
       name: liberapay
       ports: [8339]
-      web: [":8339"]
+      webport: [":8339"]
       volumes: yes
       network: no
       description: Recurrent donations platform like Patreon
@@ -462,7 +505,7 @@ services:
     libresignage:
       name: libresignage
       ports: [8030]
-      web: [":8030"]
+      webport: [":8030"]
       volumes: yes
       network: no
       description: An open source digital signage solution
@@ -474,7 +517,7 @@ services:
     linkd:
       name: linkd
       ports: [1336]
-      web: []
+      webport: []
       volumes: no
       network: no
       description: A simple but powerful selfhosted link shortener service
@@ -486,7 +529,7 @@ services:
     lodestone:
       name: lodestone
       ports: [8034]
-      web: [":8034"]
+      webport: [":8034"]
       volumes: yes
       network: no
       description: Personal Document Archiving (DMS, EDMS for Personal/Home Office use)
@@ -498,7 +541,7 @@ services:
     lychee:
       name: lychee
       ports: [8035]
-      web: [":8035"]
+      webport: [":8035"]
       volumes: yes
       network: no
       description: A great looking and easytouse photomanagementsystem you can run on your server, to manage and share photos
@@ -510,7 +553,7 @@ services:
     mailcow:
       name: mailcow
       ports: [8036]
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Mailserver docker
@@ -522,7 +565,7 @@ services:
     mango:
       name: mango
       ports: [8037]
-      web: [8037]
+      webport: [8037]
       volumes: yes
       network: no
       description: Manga server and web reader
@@ -534,7 +577,7 @@ services:
     mcmyadmin:
       name: mcmyadmin
       ports: [8037, 25565]
-      web: [":8037"]
+      webport: [":8037"]
       volumes: yes
       network: no
       description: Minecraft admin system
@@ -546,7 +589,7 @@ services:
     medusa:
       name: medusa
       ports: [8038]
-      web: [8038]
+      webport: [":8038"]
       volumes: yes
       network: no
       description: Automatic Video Library Manager for TV Shows
@@ -558,7 +601,7 @@ services:
     meshcentral:
       name: meshcentral
       ports: [8001,8002]
-      web: [":8001"]
+      webport: [":8001"]
       volumes: yes
       network: no
       description: full computer management web site
@@ -570,7 +613,7 @@ services:
     minecraft:
       name: minecraft
       ports: [25565]
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Minecraft Server
@@ -582,7 +625,7 @@ services:
     monica:
       name: monica
       ports: [8039]
-      web: [":8039"]
+      webport: [":8039"]
       volumes: yes
       network: no
       description: Personal CRM. Remember everything about your friends and family
@@ -591,10 +634,22 @@ services:
       image: no
       implemented: yes
 
+    mumble:
+      name: mumble
+      ports: []
+      webport: [":"]
+      volumes: yes
+      network: no
+      description: open source, low-latency, high quality voice chat software
+      short_description: voice chat
+      sourcelink: https://github.com/coppit/docker-mumble-server
+      image: no
+      implemented: yes
+
     mylar:
       name: mylar
       ports: [8090]
-      webport: [8090]
+      webport: [":8090"]
       volumes: yes
       network: no
       description: Automated Comic Book downloader
@@ -603,10 +658,22 @@ services:
       image: no
       implemented: yes
 
+    n8n:
+      name: n8n
+      ports: [5678]
+      webport: [":5678"]
+      volumes: yes
+      network: no
+      description: Workflow Automation Tool, Easily automate tasks across different services
+      short_description: Workflow Automation Tool
+      sourcelink: https://github.com/n8n-io/n8n
+      image: no
+      implemented: yes
+
     neko:
       name: neko
       ports: [8032]
-      web: [":8032"]
+      webport: [":8032"]
       volumes: yes
       network: no
       description: A self hosted virtual browser (rabb.it clone) that runs in docker.
@@ -618,7 +685,19 @@ services:
     netdata:
       name: netdata
       ports: [19999]
-      web: [":19999"]
+      webport: [":19999"]
+      volumes: no
+      network: no
+      description: Realtime performance monitoring, done right!
+      short_description: Realtime performance monitoring
+      sourcelink: https://github.com/netdata/netdata
+      image: no
+      implemented: yes
+
+    newspipe:
+      name: newspipe
+      ports: [5003]
+      webport: [":5003"]
       volumes: no
       network: no
       description: Realtime performance monitoring, done right!
@@ -630,7 +709,7 @@ services:
     nextcloud:
       name: nextcloud
       ports: [6889]
-      web: [6889]
+      webport: [":6889"]
       volumes: yes
       network: no
       description: Onpremises file share and collaboration platform
@@ -639,22 +718,46 @@ services:
       image: no
       implemented: yes
 
+    odoo:
+      name: odoo
+      ports: [6889]
+      webport: [6889]
+      volumes: yes
+      network: no
+      description:  Open Source Apps for buiness management
+      short_description: Apps Buiness Management
+      sourcelink: https://github.com/odoo/odoo
+      image: no
+      implemented: yes
+
     olaris:
       name: olaris
-      ports: [6889]
-      web: [6889]
+      ports: [8069]
+      webport: [":8069"]
       volumes: yes
       network: no
       description: Media Manager and transcoding server
       short_description: Media manager and transcoding server
-      sourcelink: https://gitlab.com/olaris/olarisserver
+      sourcelink: https://github.com/odoo/odoo
+      image: no
+      implemented: yes
+
+    onlyoffice:
+      name: onlyoffice
+      ports: [80,5222]
+      webport: [":80"]
+      volumes: yes
+      network: no
+      description: Collaborative system for managing documents, projects, customer relations and emails in one place
+      short_description: Collaborative system for projects
+      sourcelink: https://github.com/ONLYOFFICE/Docker-CommunityServer
       image: no
       implemented: yes
 
     openstreamingplatform:
       name: openstreamingplatform
       ports: [1935, 8585, 8553]
-      web: [":8585", ":8553"]
+      webport: [":8585", ":8553"]
       volumes: yes
       network: no
       description: A SelfHosted Video Streaming and Recording Server Using Python, Flask, NginxRTMP
@@ -666,7 +769,7 @@ services:
     openldap:
       name: openldap
       ports: [6889]
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Open Source implementation of the Lightweight Directory Access Protocol.
@@ -678,7 +781,7 @@ services:
     openvpn:
       name: openvpn
       ports: [1194]
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Open Source VPN
@@ -690,7 +793,7 @@ services:
     osjs:
       name: osjs
       ports: [7999]
-      web: [":7999"]
+      webport: [":7999"]
       volumes: yes
       network: no
       description: JavaScript Web Desktop Platform 
@@ -702,7 +805,7 @@ services:
     paperless:
       name: paperless
       ports: [8047]
-      web: [":8047"]
+      webport: [":8047"]
       volumes: yes
       network: no
       description: Scan, index, and archive all of your paper documents
@@ -714,7 +817,7 @@ services:
     piwigo:
       name: piwigo
       ports: [8049]
-      web: [":8049"]
+      webport: [":8049"]
       volumes: yes
       network: no
       description: Photo gallery software
@@ -726,7 +829,7 @@ services:
     plex:
       name: plex
       ports: []
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Organize, beautify, stream, and share your personal collection of movies, TV, music, and photos anywhere, on all your devices
@@ -738,7 +841,7 @@ services:
     portainer:
       name: portainer
       ports: []
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Build and manage your Docker environments with ease today
@@ -750,7 +853,7 @@ services:
     privatebin:
       name: privatebin
       ports: []
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: A minimalist, open source online pastebin where the server has zero knowledge of pasted data
@@ -762,7 +865,7 @@ services:
     pyload:
       name: pyload
       ports: []
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Open Source download manager and designed to be extremely lightweight, easily extensible and fully manageable via web
@@ -774,7 +877,7 @@ services:
     qbittorentvpn:
       name: qbittorentvpn
       ports: []
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Open Source software alternative to µTorrent with VPN
@@ -786,7 +889,7 @@ services:
     radarr:
       name: radarr
       ports: [7878]
-      web: [":7878"]
+      webport: [":7878"]
       volumes: yes
       network: no
       description: Sonarr for movie
@@ -798,7 +901,7 @@ services:
     recipes:
       name: recipes
       ports: [8055]
-      web: [":8055"]
+      webport: [":8055"]
       volumes: yes
       network: no
       description: Django application for managing recipes
@@ -810,7 +913,7 @@ services:
     rocketchat:
       name: rocketchat
       ports: [8056,3001]
-      web: [":8056"]
+      webport: [":8056"]
       volumes: yes
       network: no
       description: Open Source Team Communication, replace email, HipChat & Slack
@@ -819,22 +922,10 @@ services:
       image: no
       implemented: yes
 
-    goshiori:
-      name: shiori
-      ports: []
-      web: []
-      volumes: yes
-      network: no
-      description: Simple bookmark manager built with Go
-      short_description: Bookmark manager
-      sourcelink: https://github.com/goshiori/shiori
-      image: no
-      implemented: yes
-
     sonarr:
       name: sonarr
       ports: [8989]
-      web: [":8989"]
+      webport: [":8989"]
       volumes: yes
       network: no
       description: Smart PVR for newsgroup and bittorrent users.
@@ -846,7 +937,7 @@ services:
     spiderfoot:
       name: spiderfoot
       ports: [5001]
-      web: [":5001"]
+      webport: [":5001"]
       volumes: yes
       network: no
       description: open source intelligence (OSINT) automation tool. It integrates with just about every data source available and utilises a range of methods for data analysis
@@ -858,7 +949,7 @@ services:
     statping:
       name: statping
       ports: []
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: Status Page for monitoring your websites and applications with beautiful graphs, analytics, and plugins
@@ -870,7 +961,7 @@ services:
     syncthing:
       name: syncthing
       ports: [8384, 22000]
-      web: [":8384"]
+      webport: [":8384"]
       volumes: yes
       network: no
       description: Open Source Continuous File Synchronization
@@ -882,7 +973,7 @@ services:
     tautulli:
       name: tautulli
       ports: [8063]
-      web: [":8063"]
+      webport: [":8063"]
       volumes: yes
       network: no
       description: Monitor your Plex Media Server
@@ -894,7 +985,7 @@ services:
     tdarr:
       name: tdarr
       ports: [8265]
-      web: [":8265"]
+      webport: [":8265"]
       volumes: yes
       network: no
       description: Tdarr Beta Audio/Video library analytics + transcode automation using FFmpeg/HandBrake + video health checking
@@ -906,7 +997,7 @@ services:
     teamspeak:
       name: teamspeak
       ports: [9987, 10011, 30033]
-      web: []
+      webport: []
       volumes: no
       network: no
       description: Voice Chat Application
@@ -930,7 +1021,7 @@ services:
     ubuntuxrdp:
       name: ubuntuxrdp
       ports: [3389, 2232]
-      web: []
+      webport: []
       volumes: yes
       network: no
       description: An Ubuntu Desktop with xrdp server can be use with Apache Guacamole
@@ -942,7 +1033,7 @@ services:
     wallabag:
       name: wallabag
       ports: [8899]
-      web: [":8899"]
+      webport: [":8899"]
       volumes: yes
       network: no
       description: Save and classify articles, Read them later, Freely
@@ -954,7 +1045,7 @@ services:
     wireguardweb:
       name: wireguardweb
       ports: [7676,51820]
-      web: [":7676"]
+      webport: [":7676"]
       volumes: yes
       network: no
       description: VPN Server Web interface

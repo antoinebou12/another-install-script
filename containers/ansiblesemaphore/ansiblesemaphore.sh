@@ -9,7 +9,7 @@
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 create_docker_ansiblesemaphore() {
-     echo "template"
+     echo "not implemented"
      return 0
 }
 
@@ -19,6 +19,7 @@ create_docker_ansiblesemaphore() {
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
 remove_docker_ansiblesemaphore() {
+     echo "not implemented"
      return 0
 }
 

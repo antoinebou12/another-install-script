@@ -23,9 +23,8 @@ services:
         hard: -1
     volumes:
       - /home/udocker/volumes/lodestone/elasticsearch:/usr/share/elasticsearch/data
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=lodestone_elasticsearch"
 
   processor:
@@ -56,9 +55,8 @@ services:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=lodestone_processor"
 
   webapp:
@@ -90,7 +88,6 @@ services:
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=lodestone"
 
   storage:
@@ -113,9 +110,8 @@ services:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=lodestone_storage"
 
   rabbitmq:
@@ -128,7 +124,7 @@ services:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
 
   tika:
     image: analogj/lodestone:tika
@@ -138,7 +134,6 @@ services:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=lodestone_tika"

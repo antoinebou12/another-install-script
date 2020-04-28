@@ -15,7 +15,6 @@ services:
         - /etc/timezone:/etc/timezone
     ports:
       - 8031:8080
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=komga"

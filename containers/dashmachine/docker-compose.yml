@@ -4,7 +4,6 @@ services:
     image: "rmountjoy/dashmachine:latest"
     container_name: dashmachine
     environment:
-      - CONTEXT_PATH=/home/udocker
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
       - TZ='${TZ}'
@@ -12,7 +11,6 @@ services:
       - "5000:5000"
     volumes:
       - "/home/udocker/volumes/dashmachine:/dashmachine/dashmachine/user_data"
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=dashmachine"

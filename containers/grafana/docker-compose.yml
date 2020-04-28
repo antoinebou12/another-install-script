@@ -13,7 +13,6 @@
     volumes:
       - /home/udocker/volumes/grafana/data:/var/lib/grafana
       - /home/udocker/volumes/grafana/log:/var/log/grafana
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=grafana"

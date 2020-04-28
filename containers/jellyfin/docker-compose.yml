@@ -15,7 +15,6 @@ services:
     # devices:
     #   - /dev/dri:/dev/dri #optional
     #   - /dev/vchiq:/dev/vchiq #optional
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=jellyfin"    

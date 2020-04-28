@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+    mumble-server:
+      image: coppit/mumble-server
+      container_name: mumble
+      port:
+       - '64738:64738'
+      volumes:
+          - '/home/udocker/volumes/mumble:/data'
+      labels:
+      - "AIS.name=mumble"

@@ -20,7 +20,7 @@ vagrant_create() {
 # @args $1 vagrant box code name 
 # @exitcode 0 If successfull.
 # @exitcode 1 On failure
-vagrant_ssh() {
+vagrant_destroy() {
     pushd "$1" || exit
     vagrant destroy -f
     popd || exit
@@ -43,7 +43,7 @@ while [[ $# -gt 0 ]]; do
         vagrant_create "$2"
         exit 1
         ;;
-    destroy)
+    ssh)
         vagrant_ssh "$2"
         exit 1
         ;;

@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  ombi:
+    image: linuxserver/ombi
+    container_name: ombi
+    environment:
+      - PUID='${UDOCKER_USERID}'
+      - PGID='${UDOCKER_GROUPID}'
+      - TZ='${TZ}'
+      # - BASE_URL=/ombi #optional
+    volumes:
+      - /home/udocker/volumes/config:/config
+    ports:
+      - 3579:3579
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    labels:
+      - "AIS.name=ombi"

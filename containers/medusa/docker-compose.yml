@@ -14,7 +14,6 @@ services:
       - /home/udocker/volumes/medusa/tv:/tv
     ports:
       - 8038:8081
-    restart: unless-stopped
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     labels:
-      - "AIS.traefik=false"
       - "AIS.name=medusa"
