@@ -177,12 +177,13 @@ Go to [License](.github/LICENSE)
 ## Roadmap
 
 - [] Auto vm creation for ci and personnal use
-- [] Add traefik reverse proxy with subdomain for each docker container
-- [] Easier config file or adding yml file to individual folder
+- [] Add nginx reverse proxy with subdomain for each docker container
+- [] Easier config file
 - [] More docker containers
 - [] Automatic docker compose and containers update
-- [] Automatic backups
-- [] Automatic testing and better coverage
+- [] Automatic setupfail2ban
+- [] Automatic ufw firewalll
+- [] Automatic backups option
+- [] Automatic testing for the install script and better coverage
 - [] Automatic Versioning
 - [] Better cli menu
-- [] Rewrite in python

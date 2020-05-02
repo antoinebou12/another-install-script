@@ -1,12 +1,12 @@
 version: '3.7'
 services:
     youtransfer:
-        volumes:
-            - '/home/udocker/volumes/youtransfer:/opt/youtransfer/uploads'
-            - '/home/udocker/volumes/youtransfer:/opt/youtransfer/config'
-        ports:
-            - '5000:5000'
         image: 'remie/youtransfer:stable'
+        volumes:
+            - '/home/udocker/volumes/youtransfer/config:/opt/youtransfer/config'
+            - '/home/udocker/volumes/youtransfer:/opt/youtransfer/uploads'
+        ports:
+            - '5004:5000'
         restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
             - "AIS.name=youtransfer"

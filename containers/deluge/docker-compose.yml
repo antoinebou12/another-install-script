@@ -11,6 +11,7 @@ services:
             - UMASK_SET=022 #optional
             - DELUGE_LOGLEVEL=error #optional
         ports:
+            - 58846:58846
             - 8112:8112 # port for deluge web UI to be reachable from local network
         volumes:
             - /home/udocker/volumes/deluge/config:/config

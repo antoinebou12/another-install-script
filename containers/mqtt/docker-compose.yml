@@ -14,5 +14,4 @@ services:
             - /home/udocker/volumes/mqtt/log:/mosquitto/log
         restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
         labels:
-            
             - "AIS.name=mqtt"

@@ -123,8 +123,6 @@ manage_firewall_ports_allow_list() {
     containers=()
     if [[ -f /home/udocker/config/containers.txt ]]; then
         mapfile -t containers <<<"$(cat /home/$UDOCKER/config/containers.txt)"
-    elif [[ -f /tmp/containers.txt ]]; then
-        mapfile -t containers <<<"$(cat /tmp/containers.txt)"
     fi
 
     for container_name in "${containers[@]}"; do
@@ -132,13 +130,9 @@ manage_firewall_ports_allow_list() {
         echo "$(parse_yml_array_ports "$container_name")" | exec_root tee -a /tmp/ports.txt
     done
 
-    [ -d /home/"$UDOCKER"/ ] && exec_root cp /tmp/ports.txt /home/"$UDOCKER"/config/ports.txt
-
     ports=()
     if [[ -f /home/udocker/config/ports.txt ]]; then
         mapfile -t ports <<<"$(cat /home/$UDOCKER/config/ports.txt)"
-    elif [[ -f /tmp/ports.txt ]]; then
-        mapfile -t ports <<<"$(cat /tmp/ports.txt)"
     fi
 
     for port_numbers in "${ports[@]}"; do
