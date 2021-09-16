@@ -1,5 +1,9 @@
 # Another Install Script
 
+#### Spiritual successor
+
+[DasherControl](https://github.com/antoinebou13/DasherControl)
+
 ![GitHub top language](https://img.shields.io/github/languages/top/antoinebou13/another-install-script)
 [![Build Status](https://travis-ci.com/antoinebou13/another-install-script.svg?token=MUq69udyyqAR24bsXgRq&branch=master)](https://travis-ci.com/antoinebou13/another-install-script)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/antoinebou13/another-install-script)
