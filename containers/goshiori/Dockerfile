@@ -1,4 +1,4 @@
-FROM golang:1.13-alpine as builder
+FROM golang:1.20-alpine as builder
 
 RUN apk update && apk --no-cache add git build-base
 RUN go get -u -v github.com/go-shiori/shiori
