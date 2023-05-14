@@ -12,18 +12,20 @@
 ![GitHub](https://img.shields.io/github/license/antoinebou13/another-install-script)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fantoinebou13%2Fanother-install-script.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fantoinebou13%2Fanother-install-script?ref=badge_shield)
 
-Another install Script is a W.I.P project/script to install multiple docker container with a super simple menu for my personal server
+Another Install Script is a W.I.P project/script aimed at simplifying the installation of multiple docker containers through an easy-to-use menu, primarily designed for personal servers. 
 
 ![Another install Script](docs/images/another-install-script.png)
 
 ## The story behind the project
 
+The desire to facilitate the installation of a variety of services/servers through Docker. The goal is to provide a simple, extensible, and customizable script to add numerous self-hosted services/servers that are easy to install with a simple CLI menu.
+
 I started working on the project because I just bought a VPS to host my TeamSpeak and Minecraft server.
-After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker. Also, I found multiple repos that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack) and [sovereign](https://github.com/sovereign/sovereign) and [MediaServerDockerCompose](https://github.com/vaeyo/MediaServer-DockerComposeFiles). I am trying to do with this project is to make a simple, extensible and customizable script to add a lot of selfhosted services/servers to easy to install with a simple cli menu. The project is a super easy install script for beginner/intermediate linux power user that want to test quickly interesting docker containers of server/service. The project isn't a highly configurable install script with a container orchestrator and general manager for multiple docker.
+After navigating [r/selfhosting](https://www.reddit.com/r/selfhosted), I saw the multiple of several services/servers that can be simply installed with docker. Also, I found multiple repos that tries to do the same thing with their favorite container [IOStack](https://github.com/gcgarner/IOTstack) and [sovereign](https://github.com/sovereign/sovereign) and [MediaServerDockerCompose](https://github.com/vaeyo/MediaServer-DockerComposeFiles). I am trying to do with this project is to make a simple, extensible and customizable script to add a lot of selfhosted services/servers to easy to install with a simple cli menu. The project is a super easy install script for beginner/intermediate linux power user that want to test quickly interesting docker containers of server/service. The project is a highly configurable install script with a container orchestrator and general manager for multiple docker.
 
 ## How to install
 
-For now only tested on ubuntu18.04
+Currently, the script has been tested only on Ubuntu 18.04. You can install it by:
 
 ```bash
 git clone https://github.com/antoinebou13/another-install-script.git
@@ -43,8 +45,9 @@ sudo bash uninstall.sh
 Around 80 containers/servers can be installed with this script.
 Go check the list below ⬇.
 
+
 <details>
-<summary>List</summary>
+<summary>Check the Google Sheet for the complete list.</summary>
 <br>
 Go to the <a href="https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-HfnRhwkce-/view?usp=sharing">Google Sheet</a>
 </details>
@@ -54,6 +57,7 @@ Go to the <a href="https://drive.google.com/file/d/1s2Il9qeJdZj-NYnzfveIW-HfnRhw
 Some services/servers cannot be installed at the same time. Also more configuration needed for certain services/servers
 
 ## List of other installed program that you can chose to install 
+This script also offers optional installation of several other programs including git, python3, docker, docker-compose, snapd, curl, vim, and more.
 
 - build-essential
 - git
@@ -180,13 +184,13 @@ Go to [License](.github/LICENSE)
 
 ## Roadmap
 
-- [] Auto vm creation for ci and personnal use
-- [] Add traefik reverse proxy with subdomain for each docker container
-- [] Easier config file or adding yml file to individual folder
-- [] More docker containers
-- [] Automatic docker compose and containers update
-- [] Automatic backups
-- [] Automatic testing and better coverage
-- [] Automatic Versioning
-- [] Better cli menu
-- [] Rewrite in python
+- [ ] Auto vm creation for ci and personnal use
+- [ ] Add traefik reverse proxy with subdomain for each docker container
+- [ ] Easier config file or adding yml file to individual folder
+- [ ] More docker containers
+- [ ] Automatic docker compose and containers update
+- [ ] Automatic backups
+- [ ] Automatic testing and better coverage
+- [ ] Automatic Versioning
+- [ ] Better cli menu
+- [ ] Rewrite in python
