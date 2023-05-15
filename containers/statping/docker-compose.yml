@@ -52,7 +52,7 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres:10
+    image: postgres:15
     restart: always
     networks:
       - database
