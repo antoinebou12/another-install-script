@@ -15,7 +15,7 @@ services:
             
             - "AIS.name=odoo"
     odoo_db:
-        image: postgres:10
+        image: postgres:15
         environment:
             - POSTGRES_PASSWORD=odoo
             - POSTGRES_USER=odoo
