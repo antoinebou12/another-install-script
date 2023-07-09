@@ -1,7 +1,7 @@
 version: '3.3'
 services:
     nginx-fpm-alpine:
-        image: 'privatebin/nginx-fpm-alpine:1.5.1'
+        image: 'privatebin/nginx-fpm-alpine:1.5.2'
         container_name: privatebin
         # user: udocker
         environment:
