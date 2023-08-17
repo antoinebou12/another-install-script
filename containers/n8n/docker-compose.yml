@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   n8n_mongo:
-    image: mongo:6.0
+    image: mongo:7.0
     environment:
       - PUID='${UDOCKER_USERID}'
       - PGID='${UDOCKER_GROUPID}'
