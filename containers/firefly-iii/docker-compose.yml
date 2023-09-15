@@ -23,7 +23,7 @@ services:
       - firefly_iii_export:/var/www/firefly-iii/storage/export
       - firefly_iii_upload:/var/www/firefly-iii/storage/upload
   firefly_iii_db: 
-    image: "postgres:15"
+    image: "postgres:16"
     container_name: firefly_iii_db
     # user: udocker
     environment:
