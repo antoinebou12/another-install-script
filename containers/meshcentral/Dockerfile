@@ -1,4 +1,4 @@
-FROM node:20.7-alpine
+FROM node:20.12-alpine
 
 ENV MC2_INSTALL_PATH /opt/meshcentral
 
