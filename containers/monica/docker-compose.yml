@@ -19,7 +19,7 @@ services:
       - "AIS.name=monica"
 
   mysql:
-    image: mysql:8.1
+    image: mysql:9.7
     container_name: monica_db
     # user: udocker
     environment:
